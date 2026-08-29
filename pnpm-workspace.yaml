@@ -1,0 +1,6 @@
+packages:
+  - "scripts/installer"
+
+allowBuilds:
+  electron: true
+  esbuild: true

@@ -1,0 +1,15 @@
+node_modules/
+dist/
+*.tgz
+*.log
+.DS_Store
+.vscode/
+.idea/
+coverage/
+
+# reporter çıktıları
+report.json
+report.md
+
+# yerel enjeksiyon durumu
+.inject-state.json

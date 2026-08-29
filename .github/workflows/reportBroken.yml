@@ -1,0 +1,113 @@
+name: Report Broken Patches
+
+# Saatlik patch doğrulama (plan §9.2) geçici olarak kapalı.
+#
+# Reporter, Puppeteer ile canlı Discord'a bağlanıp patch'leri doğruluyor ve
+# bunun için `DISCORD_TOKEN` secret'ına ihtiyaç duyuyor. O secret tanımlı
+# olmadığı sürece daha az modül yükleniyor, aramalar başarısız oluyor ve
+# "Fail if patches are broken" adımı job'ı kırmızıya düşürüyor — yani zamanlı
+# çalışma her seferinde depo sahibine başarısızlık maili gönderiyordu.
+#
+# Yeniden açmak için: DISCORD_TOKEN secret'ını tanımla, workflow'u elle
+# (Run workflow) bir kez çalıştır, yeşil geçtiğini gör, sonra aşağıdaki
+# `schedule` bloğunun yorumunu kaldır.
+#
+#  schedule:
+#    - cron: "0 * * * *"
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Hangi Discord dalı doğrulansın
+        type: choice
+        default: both
+        options:
+          - stable
+          - canary
+          - both
+
+concurrency:
+  group: report-broken
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Runner imajı Chrome/Chromium ile geliyor; apt'a hiç dokunmuyoruz.
+      # `apt-get update` tek bir deponun hatasında exit 100 veriyor ve
+      # runner'daki Microsoft depoları aralıklı olarak 403 dönüyor — bu adım
+      # o yüzden düşüyordu, projeyle ilgisi yoktu.
+      - name: Tarayıcıyı bul
+        run: |
+          set -euo pipefail
+          for candidate in \
+            "${CHROME_BIN:-}" \
+            /usr/bin/google-chrome \
+            /usr/bin/google-chrome-stable \
+            /usr/bin/chromium \
+            /usr/bin/chromium-browser
+          do
+            if [ -n "$candidate" ] && [ -x "$candidate" ]; then
+              echo "CHROMIUM_BIN=$candidate" >> "$GITHUB_ENV"
+              echo "Kullanılan tarayıcı: $candidate"
+              exit 0
+            fi
+          done
+          echo "::error::Runner imajında Chrome/Chromium bulunamadı."
+          exit 1
+
+      - name: Build reporter bundle
+        run: pnpm buildReporter
+
+      - name: Run reporter
+        id: reporter
+        continue-on-error: true
+        env:
+          CHROMIUM_BIN: ${{ env.CHROMIUM_BIN }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          CANARY_WEBHOOK_URL: ${{ secrets.CANARY_WEBHOOK_URL }}
+          WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
+        run: node scripts/generateReport.mjs --branch=${{ inputs.branch || 'both' }}
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: mcord-report
+          path: |
+            report.json
+            report.md
+
+      # Patch süresi zaman serisi commit'lenir (plan §9.3)
+      - name: Commit patch timings and eager list
+        if: github.ref == 'refs/heads/main'
+        run: |
+          if [ -n "$(git status --porcelain metrics/ src/webpack/eagerModules.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add metrics/ src/webpack/eagerModules.json
+            git commit -m "chore(metrics): patch süresi zaman serisi ve seçici eager listesi güncellendi [skip ci]"
+            git push
+          fi
+
+      - name: Fail if patches are broken
+        if: steps.reporter.outcome == 'failure'
+        run: |
+          echo "::error::Kırık patch veya arama tespit edildi — report.md'ye bak."
+          exit 1

@@ -1,0 +1,3 @@
+MCord, a Discord client modification
+Copyright (c) {year} {author}
+SPDX-License-Identifier: PolyForm-Strict-1.0.0

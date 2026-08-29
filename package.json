@@ -1,0 +1,49 @@
+{
+    "name": "mcord",
+    "private": true,
+    "version": "0.1.0",
+    "description": "MCord \u2014 a curated Discord client modification for Windows",
+    "license": "PolyForm-Strict-1.0.0",
+    "type": "module",
+    "engines": {
+        "node": ">=20"
+    },
+    "packageManager": "pnpm@11.24.0",
+    "scripts": {
+        "build": "node scripts/build.mjs",
+        "buildDev": "node scripts/build.mjs --dev",
+        "buildReporter": "node scripts/build.mjs --reporter --dev",
+        "packAsar": "node scripts/packAsar.mjs",
+        "dist": "pnpm build && pnpm packAsar",
+        "watch": "node scripts/build.mjs --watch --dev",
+        "inject": "node scripts/inject.mjs",
+        "uninject": "node scripts/inject.mjs --uninject",
+        "typecheck": "tsc --noEmit",
+        "lint": "eslint",
+        "lint:fix": "eslint --fix",
+        "test": "vitest run",
+        "generateReport": "node scripts/generateReport.mjs",
+        "smoke": "node scripts/build.mjs && node scripts/smokeTest.mjs"
+    },
+    "devDependencies": {
+        "@electron/asar": "^4.3.0",
+        "@stylistic/eslint-plugin": "^5.4.0",
+        "@types/diff": "^8.0.0",
+        "@types/node": "^24.5.2",
+        "@types/react": "^19.1.13",
+        "@types/react-dom": "^19.1.9",
+        "diff": "^8.0.2",
+        "electron": "^38.1.2",
+        "esbuild": "^0.25.10",
+        "eslint": "^9.36.0",
+        "eslint-plugin-simple-header": "^1.2.2",
+        "eslint-plugin-simple-import-sort": "^12.1.1",
+        "eslint-plugin-unused-imports": "^4.2.0",
+        "p-limit": "^7.3.1",
+        "puppeteer-core": "^24.22.0",
+        "type-fest": "^5.0.1",
+        "typescript": "^5.9.2",
+        "typescript-eslint": "^8.44.1",
+        "vitest": "^3.2.4"
+    }
+}

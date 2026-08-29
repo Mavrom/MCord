@@ -1,0 +1,21 @@
+{
+    "name": "mcord-installer",
+    "private": true,
+    "version": "0.1.0",
+    "description": "MCord installer for Windows",
+    "license": "PolyForm-Strict-1.0.0",
+    "type": "module",
+    "bin": {
+        "mcord-installer": "src/index.mjs"
+    },
+    "scripts": {
+        "start": "node src/index.mjs",
+        "package": "pkg src/index.mjs --targets node22-win-x64 --output ../../dist/MCordInstaller.exe"
+    },
+    "devDependencies": {
+        "@yao-pkg/pkg": "^6.9.0"
+    },
+    "pkg": {
+        "assets": ["../../dist/app.asar"]
+    }
+}

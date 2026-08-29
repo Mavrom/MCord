@@ -1,0 +1,6 @@
+{
+    "$comment": "Seçici eager patch listesi (plan §11.1). Reporter'ın patchTimings verisinden otomatik üretilir — `scripts/generateReport.mjs`. Elle düzenleme, CI üzerine yazar.",
+    "generatedAt": null,
+    "buildNumber": null,
+    "moduleIds": []
+}
