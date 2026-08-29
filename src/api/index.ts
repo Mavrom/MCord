@@ -10,6 +10,7 @@ export * from "./contextMenu";
 export * as DataStore from "./dataStore";
 export * from "./messageEvents";
 export * from "./net";
+export * from "./notices";
 export * from "./notifications";
 export * from "./PluginManager";
 export * from "./settings";
