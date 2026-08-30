@@ -15,6 +15,7 @@ export * from "./net";
 export * from "./notices";
 export * from "./notifications";
 export * from "./PluginManager";
+export * from "./serverList";
 export * from "./settings";
 export * from "./styles";
 export * from "./userSettings";
