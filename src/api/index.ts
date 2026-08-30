@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
+export * from "./badges";
 export * from "./chatComponents";
 export * from "./commands";
 export * from "./contextMenu";
