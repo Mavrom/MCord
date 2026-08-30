@@ -8,6 +8,7 @@ export * from "./chatComponents";
 export * from "./commands";
 export * from "./contextMenu";
 export * as DataStore from "./dataStore";
+export * from "./memberListDecorators";
 export * from "./messageEvents";
 export * from "./messageUpdater";
 export * from "./net";
