@@ -8,8 +8,9 @@
  * Pencere süreci. Core'u `webview.expose("core", …)` ile açar; ilerleme
  * satırlarını `webview.evaluateScript` ile UI'a iter.
  *
- * UI, `build.mjs`'in ürettiği tek HTML string'i — `mcord://` özel protokolüyle
- * servis edilir (data: URI boyut sınırından kaçınmak için).
+ * `startGui()` döner:
+ *   { opened: true }              — pencere açıldı ve kapandı
+ *   { opened: false, reason }     — açılamadı (çağıran CLI'a düşer)
  */
 
 import { tmpdir } from "node:os";
@@ -37,8 +38,7 @@ export async function startGui() {
     try {
         app = new Application();
     } catch (e) {
-        bailNoWebview(e);
-        return;
+        return fail(webview2Hint(e));
     }
 
     const window = app.createBrowserWindow({
@@ -52,19 +52,17 @@ export async function startGui() {
         new Response(UI_HTML, { headers: { "Content-Type": "text/html; charset=utf-8" } })
     );
 
-    // WebView2 kullanıcı-veri klasörü yazılabilir bir yerde olmalı; exe yanı
-    // (Program Files vb.) çoğu zaman engelli — E_ACCESSDENIED verir.
     let webContext = null;
     try {
         webContext = app.createWebContext({ dataDirectory: join(tmpdir(), "mcord-installer-webview") });
-    } catch { /* eski sürüm — varsayılan klasörle devam */ }
+    } catch { /* eski sürüm — varsayılan klasör */ }
 
     let webview;
     try {
         webview = window.createWebview({ url: "mcord://localhost/index.html", theme: Theme.Dark }, webContext);
     } catch (e) {
-        bailNoWebview(e);
-        return;
+        try { app.exit(); } catch { /* */ }
+        return fail(webview2Hint(e));
     }
 
     const push = line => {
@@ -92,27 +90,23 @@ export async function startGui() {
     await app.whenReady({ interval: 16, ref: true });
     await closed;
 
-    try {
-        app.exit();
-    } catch { /* zaten kapanıyor */ }
-    process.exit(0);
+    try { app.exit(); } catch { /* zaten kapanıyor */ }
+    return { opened: true };
 }
 
-function bailNoWebview(e) {
+function fail(reason) {
+    return { opened: false, reason };
+}
+
+function webview2Hint(e) {
     let runtime = "yüklü değil";
     try {
         const v = getWebviewVersion();
         if (v) runtime = `yüklü (${v})`;
     } catch { /* yüklü değil */ }
-
-    console.error(
-        "MCord Kurulum penceresi açılamadı.\n" +
-        `WebView2 çalışma zamanı: ${runtime}\n` +
-        `Yüklü değilse indir: ${WEBVIEW2_URL}\n` +
-        `Ayrıntı: ${e?.message ?? e}\n\n` +
-        "Alternatif: bu dosyayı komut satırından çalıştır:\n" +
-        "  MCordInstaller.exe --branch=stable --yes"
+    return (
+        `WebView2 penceresi açılamadı (çalışma zamanı: ${runtime}). ` +
+        (runtime === "yüklü değil" ? `Kur: ${WEBVIEW2_URL}. ` : "") +
+        `Ayrıntı: ${e?.message ?? e}`
     );
-    // Sert çıkış: webview'in native olay döngüsü süreci canlı tutabilir.
-    process.exit(1);
 }
