@@ -12,16 +12,15 @@ import { PluginCard } from "../PluginCard";
 import { RestartBanner } from "../RestartBanner";
 import { c, radius, s, space } from "../theme";
 
-type Category = "all" | "enabled" | "disabled" | "required";
+type Category = "all" | "enabled" | "disabled";
 
 const CATEGORIES: Array<{ id: Category; label: string }> = [
     { id: "all", label: "Tümü" },
     { id: "enabled", label: "Açık" },
-    { id: "disabled", label: "Kapalı" },
-    { id: "required", label: "Çekirdek" }
+    { id: "disabled", label: "Kapalı" }
 ];
 
-/** Sayaçlı segment kontrolü — dört ayrı düğme yerine tek bir grup. */
+/** Sayaçlı segment kontrolü — ayrı ayrı düğme yerine tek bir grup. */
 function Segmented({ value, onChange, counts }: {
     value: Category;
     onChange(next: Category): void;
@@ -89,16 +88,19 @@ export function PluginsTab() {
     const [restartNeeded, setRestartNeeded] = React.useState(false);
     const [focused, setFocused] = React.useState(false);
 
+    // Çekirdek plugin'ler (`required`) listelenmiyor: kapatılamıyorlar, ayarları
+    // yok ve kullanıcının onlarla bir işi olmuyor — arka planda çalışıyorlar.
     const all = React.useMemo(
-        () => Object.values(plugins).sort((a, b) => a.name.localeCompare(b.name, "tr")),
+        () => Object.values(plugins)
+            .filter(plugin => !plugin.required)
+            .sort((a, b) => a.name.localeCompare(b.name, "tr")),
         []
     );
 
     const counts = React.useMemo(() => ({
         all: all.length,
         enabled: all.filter(p => isPluginEnabled(p.name)).length,
-        disabled: all.filter(p => !isPluginEnabled(p.name)).length,
-        required: all.filter(p => p.required).length
+        disabled: all.filter(p => !isPluginEnabled(p.name)).length
     }), [all, restartNeeded]);
 
     const visible = all.filter(plugin => matches(plugin, query, category));
@@ -191,7 +193,6 @@ export function PluginsTab() {
 function matches(plugin: Plugin, query: string, category: Category): boolean {
     if (category === "enabled" && !isPluginEnabled(plugin.name)) return false;
     if (category === "disabled" && isPluginEnabled(plugin.name)) return false;
-    if (category === "required" && !plugin.required) return false;
 
     if (!query) return true;
 
