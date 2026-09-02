@@ -71,7 +71,12 @@ function makeButton(): HTMLButtonElement {
     button.addEventListener("click", event => {
         event.preventDefault();
         event.stopPropagation();
-        toggleSettings();
+        logger.info("MC butonuna tıklandı → ayarlar açılıyor");
+        try {
+            toggleSettings();
+        } catch (err) {
+            logger.error("toggleSettings patladı:", err);
+        }
     });
 
     return button;

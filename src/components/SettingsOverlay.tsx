@@ -10,9 +10,11 @@
  * (Canary'de `openModal` içeriği tıkta kapanıyordu).
  */
 
-import { getReactDOM, React } from "../webpack/react";
+import { Logger } from "../utils/logger";
+import { getReactDOMClient, React } from "../webpack/react";
 import { SettingsRoot, type TabId } from "./SettingsRoot";
 
+const logger = new Logger("SettingsOverlay", "#f4b8e4");
 const CONTAINER_ID = "mcord-settings-overlay";
 
 let root: { unmount(): void } | null = null;
@@ -95,40 +97,46 @@ function Overlay({ initialTab, onClose }: { initialTab: TabId; onClose(): void }
 }
 
 export function openSettingsOverlay(initialTab: TabId = "plugins"): void {
-    if (root != null) return;
-
-    const container = document.createElement("div");
-    container.id = CONTAINER_ID;
-    document.body.appendChild(container);
-
-    const close = () => {
-        root?.unmount();
-        root = null;
-    };
-
-    const ReactDOMClient = getReactDOM() as {
-        createRoot?: (el: Element) => { render(node: unknown): void; unmount(): void };
-        render?: (node: unknown, el: Element) => void;
-    };
-
-    if (typeof ReactDOMClient.createRoot === "function") {
-        const created = ReactDOMClient.createRoot(container);
-        created.render(<Overlay initialTab={initialTab} onClose={close} />);
-        root = {
-            unmount: () => {
-                created.unmount();
-                container.remove();
-            }
-        };
+    if (root != null) {
+        logger.debug("zaten açık");
         return;
     }
 
-    ReactDOMClient.render?.(<Overlay initialTab={initialTab} onClose={close} />, container);
-    root = { unmount: () => container.remove() };
+    let container = document.getElementById(CONTAINER_ID);
+    if (!container) {
+        container = document.createElement("div");
+        container.id = CONTAINER_ID;
+        document.body.appendChild(container);
+    }
+
+    const close = () => {
+        try {
+            root?.unmount();
+        } catch (err) {
+            logger.warn("unmount hatası:", err);
+        }
+        container?.remove();
+        root = null;
+    };
+
+    try {
+        const created = getReactDOMClient().createRoot(container);
+        created.render(<Overlay initialTab={initialTab} onClose={close} />);
+        root = { unmount: () => created.unmount() };
+        logger.info("açıldı");
+    } catch (err) {
+        logger.error("açılamadı:", err);
+        container.remove();
+        root = null;
+    }
 }
 
 export function closeSettingsOverlay(): void {
-    root?.unmount();
+    if (root == null) return;
+    try {
+        root.unmount();
+    } catch { /* zaten gitmiş */ }
+    document.getElementById(CONTAINER_ID)?.remove();
     root = null;
 }
 

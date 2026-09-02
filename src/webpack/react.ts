@@ -43,6 +43,30 @@ export function getReactDOM(): typeof ReactDOMNamespace {
     return cachedReactDOM;
 }
 
+/**
+ * React 18/19'da `createRoot` **`react-dom/client`** modülünde — `react-dom`'da
+ * değil. Kendi React kökümüzü kurmak için (overlay, notification host) bu şart.
+ * `getReactDOM().createRoot` `undefined` dönüyordu → hiçbir şey mount olmuyordu.
+ */
+let cachedReactDOMClient: { createRoot(el: Element): ReactRoot } | null = null;
+
+export interface ReactRoot {
+    render(node: unknown): void;
+    unmount(): void;
+}
+
+export function getReactDOMClient(): { createRoot(el: Element): ReactRoot } {
+    cachedReactDOMClient ??=
+        find(byKeys(["createRoot", "hydrateRoot"]), { silent: true })
+        ?? find(byKeys(["createRoot"]), { silent: true });
+
+    if (cachedReactDOMClient == null || typeof cachedReactDOMClient.createRoot !== "function") {
+        throw new Error("[MCord] Discord'un react-dom/client (createRoot) modülü bulunamadı.");
+    }
+
+    return cachedReactDOMClient;
+}
+
 /** Erişildiği anda çözülen React proxy'si — modül kapsamında kullanılabilir. */
 export const React: typeof ReactNamespace = new Proxy({} as typeof ReactNamespace, {
     get: (_t, prop, receiver) => Reflect.get(getReact(), prop, receiver),
@@ -98,4 +122,5 @@ export function getType(elementType: any): any {
 export function clearReactCache(): void {
     cachedReact = null;
     cachedReactDOM = null;
+    cachedReactDOMClient = null;
 }

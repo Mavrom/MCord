@@ -12,7 +12,7 @@ import { findByKeys } from "../../webpack/finder";
 const logger = new Logger("VolumeBooster", "#a6d189");
 
 /**
- * SCAFFOLD — referans'daki aynı adlı plugin'in davranışının MCord API'siyle
+ * SCAFFOLD — referans katalog aynı adlı plugin'in davranışının MCord API'siyle
  * yeniden yazımı. Kullanılan webpack aramaları ve patch noktaları canlı
  * Discord'da doğrulanmalı; Discord modülü yeniden adlandırdıysa `start`
  * sessizce uyarı basar ve plugin no-op olur (güvenli mod ilkesi).

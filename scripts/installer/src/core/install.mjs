@@ -21,7 +21,7 @@ export function sha256(path) {
 
 /**
  * MCord'a özel işaret dosyası (`resources/mcord.json`) belirleyici.
- * `_app.asar`'a bakmıyoruz — referans vb. de aynı yedeği oluşturuyor,
+ * `_app.asar`'a bakmıyoruz — referans katalog vb. de aynı yedeği oluşturuyor,
  * "MCord kurulu" derken aslında başka mod olabiliyordu.
  */
 export function getStatus(install) {

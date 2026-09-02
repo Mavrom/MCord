@@ -5,7 +5,7 @@
  */
 
 import { type ActiveNotification, subscribeToNotifications } from "../api/notifications";
-import { getReactDOM, React } from "../webpack/react";
+import { getReactDOMClient, React } from "../webpack/react";
 import { c, s } from "./theme";
 
 const CONTAINER_ID = "mcord-notifications";
@@ -88,17 +88,13 @@ export function mountNotificationHost(): void {
     container.id = CONTAINER_ID;
     document.body.appendChild(container);
 
-    const ReactDOMClient = getReactDOM() as any;
-
-    if (typeof ReactDOMClient.createRoot === "function") {
-        const created = ReactDOMClient.createRoot(container);
+    try {
+        const created = getReactDOMClient().createRoot(container);
         created.render(<NotificationList />);
         root = { unmount: () => { created.unmount(); container.remove(); } };
-        return;
+    } catch {
+        container.remove();
     }
-
-    ReactDOMClient.render?.(<NotificationList />, container);
-    root = { unmount: () => container.remove() };
 }
 
 export function unmountNotificationHost(): void {

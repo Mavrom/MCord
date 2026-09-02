@@ -13,7 +13,7 @@ function deletion(event: "MESSAGE_DELETE" | "MESSAGE_DELETE_BULK"): PatchReplace
     };
 }
 
-/** referans'da incelenen MessageStore sınırlarına MCord'a ait uyarlama. */
+/** referans katalog incelenen MessageStore sınırlarına MCord'a ait uyarlama. */
 export const messageLoggerPatches: PatchDefinition[] = [
     {
         find: '"MessageStore"',
