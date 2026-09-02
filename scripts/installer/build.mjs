@@ -5,15 +5,16 @@
  */
 
 /**
- * Üç aşama:
- *   1. src/gui/ui → dist-ui/index.html  (React UI, tek dosya, CSS+JS gömülü)
- *      + src/gui/ui.generated.mjs  (HTML string olarak; hem dev hem bundle kullanır)
- *   2. dist/app.asar → src/core/payload.generated.mjs  (base64 gömülü)
- *   3. src/index.mjs → dist-installer/installer.cjs  (pkg'ın yiyeceği tek CJS dosya)
- *      `@webviewjs/webview` external kalır — native .node'u pkg require izinden bulur.
+ * Dört aşama — hepsi exe'ye gömülür, pkg'ın dosya/asset çözümüne güvenilmez:
+ *   1. src/gui/ui → dist-ui/index.html + src/gui/ui.generated.mjs (HTML string)
+ *   2. dist/app.asar → src/core/payload.generated.mjs (base64)
+ *   3. @webviewjs/webview native .node → src/gui/webview-native.generated.mjs (base64)
+ *      runtime'da temp'e yazılıp NAPI_RS_NATIVE_LIBRARY_PATH ile yükletilir
+ *   4. src/index.mjs → dist-installer/installer.cjs (esbuild CJS bundle)
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -77,7 +78,21 @@ writeFileSync(
 );
 console.log(`[MCord] app.asar gömüldü — ${(asarB64.length / 1024).toFixed(1)} KB (base64)`);
 
-// ── 3. Installer bundle ──────────────────────────────────────────────────────
+// ── 3. webview native .node ──────────────────────────────────────────────────
+
+const nodeFile = findNativeNode();
+if (!nodeFile) {
+    console.error("[MCord] webview.win32-x64-msvc.node bulunamadı — `pnpm install` çalıştır.");
+    process.exit(1);
+}
+const nodeB64 = readFileSync(nodeFile).toString("base64");
+writeFileSync(
+    join(HERE, "src", "gui", "webview-native.generated.mjs"),
+    LICENSE_HEADER + `export const WEBVIEW_NODE_B64 = ${JSON.stringify(nodeB64)};\n`
+);
+console.log(`[MCord] webview .node gömüldü — ${(nodeB64.length / 1024).toFixed(1)} KB (base64)`);
+
+// ── 4. Installer bundle ──────────────────────────────────────────────────────
 
 await build({
     entryPoints: [join(HERE, "src", "index.mjs")],
@@ -90,3 +105,40 @@ await build({
     logLevel: "info"
 });
 console.log("[MCord] installer.cjs paketlendi");
+
+/**
+ * `webview.win32-x64-msvc.node`'u bul — pnpm/npm layout'undan bağımsız.
+ *   1. `@webviewjs/webview`'i installer'ın node_modules'ünden çöz, oradan da
+ *      optionalDependency `-win32-x64-msvc`'yi çöz (napi-rs platform paketinin
+ *      `main`'i doğrudan .node dosyası)
+ *   2. repo kökü + installer altındaki `.pnpm` store'larını tara
+ *   3. düz `node_modules/@webviewjs/...` yolunu dene
+ */
+function findNativeNode() {
+    const FILE = "webview.win32-x64-msvc.node";
+    const bases = [join(HERE, "build.mjs"), join(REPO, "package.json")];
+
+    for (const base of bases) {
+        try {
+            const reqBase = createRequire(base);
+            const webviewMain = reqBase.resolve("@webviewjs/webview");
+            return createRequire(webviewMain).resolve("@webviewjs/webview-win32-x64-msvc");
+        } catch { /* sıradaki */ }
+    }
+
+    for (const store of [join(REPO, "node_modules", ".pnpm"), join(HERE, "node_modules", ".pnpm")]) {
+        try {
+            for (const d of readdirSync(store)) {
+                if (!d.startsWith("@webviewjs+webview-win32-x64-msvc@")) continue;
+                const p = join(store, d, "node_modules", "@webviewjs", "webview-win32-x64-msvc", FILE);
+                if (existsSync(p)) return p;
+            }
+        } catch { /* yok */ }
+    }
+
+    for (const nm of [join(HERE, "node_modules"), join(REPO, "node_modules")]) {
+        const p = join(nm, "@webviewjs", "webview-win32-x64-msvc", FILE);
+        if (existsSync(p)) return p;
+    }
+    return null;
+}

@@ -53,6 +53,10 @@ async function main() {
         return;
     }
 
+    // @webviewjs/webview YÜKLENMEDEN önce native .node yolunu kur.
+    const { setupWebviewNative } = await import("./gui/native-setup.mjs");
+    setupWebviewNative();
+
     const { startGui } = await import("./gui/main.mjs");
     const result = await startGui();
     if (!result?.opened) await runInteractiveFallback(result?.reason);
