@@ -13,8 +13,9 @@ import {
 } from "../api/PluginManager";
 import type { Plugin } from "../utils/types";
 import { React } from "../webpack/react";
+import { IconChevronDown } from "./Icons";
 import { SettingsPanel } from "./SettingControls";
-import { c, motion, radius, s, shadow, space, tint } from "./theme";
+import { c, radius, s, space, tint } from "./theme";
 import { Toggle } from "./Toggle";
 
 export function PluginCard({ plugin, onRestartNeeded }: {
@@ -23,7 +24,6 @@ export function PluginCard({ plugin, onRestartNeeded }: {
 }) {
     const [enabled, setEnabled] = React.useState(() => isPluginEnabled(plugin.name));
     const [expanded, setExpanded] = React.useState(false);
-    const [hover, setHover] = React.useState(false);
 
     const needsRestart = pluginRequiresRestart(plugin);
     const hasSettings = plugin.settings != null;
@@ -45,19 +45,20 @@ export function PluginCard({ plugin, onRestartNeeded }: {
 
     return (
         <div
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
+            className="mcord-card"
             style={{
                 ...s.card,
                 height: "100%",
-                gap: space.sm,
-                borderColor: hover ? c.borderStrong : c.border,
-                boxShadow: hover ? shadow.mid : shadow.low,
-                // Açık plugin'ler soldaki ince şeritle ayrışıyor — rozet gürültüsü yok.
-                borderLeft: `3px solid ${enabled ? c.success : "transparent"}`
+                gap: "10px",
+                // Açık plugin'i renkle değil, hem şerit hem zeminle ayırıyoruz
+                // (renk tek başına anlam taşımasın).
+                borderLeft: `3px solid ${enabled ? c.success : "transparent"}`,
+                background: enabled
+                    ? `color-mix(in srgb, ${c.success} 5%, ${c.surfaceRaised})`
+                    : c.surfaceRaised
             }}
         >
-            <div style={{ ...s.spread, alignItems: "flex-start" }}>
+            <div style={{ ...s.spread, alignItems: "flex-start", gap: space.sm }}>
                 <div style={{ minWidth: 0 }}>
                     <div
                         style={{
@@ -72,23 +73,26 @@ export function PluginCard({ plugin, onRestartNeeded }: {
                     >
                         {plugin.name}
                     </div>
-                    {plugin.required && (
-                        <div style={{ ...s.faint, marginTop: "2px" }}>Çekirdek — kapatılamaz</div>
-                    )}
+                    <div style={{ ...s.faint, marginTop: "2px" }}>
+                        {plugin.authors.map(author => author.name).join(", ")}
+                    </div>
                 </div>
 
-                <Toggle
-                    checked={enabled}
-                    disabled={plugin.required}
-                    onChange={next => void toggle(next)}
-                    label={`${plugin.name} aç/kapa`}
-                />
+                {plugin.required
+                    ? <span style={{ ...s.badge, ...tint(c.accent), flex: "0 0 auto" }}>çekirdek</span>
+                    : (
+                        <Toggle
+                            checked={enabled}
+                            onChange={next => void toggle(next)}
+                            label={`${plugin.name} aç/kapa`}
+                        />
+                    )}
             </div>
 
-            <div
+            <p
                 style={{
                     ...s.muted,
-                    // Üç satırda kes: kartlar aynı hizada kalsın.
+                    margin: 0,
                     display: "-webkit-box",
                     WebkitLineClamp: 3,
                     WebkitBoxOrient: "vertical",
@@ -97,58 +101,65 @@ export function PluginCard({ plugin, onRestartNeeded }: {
                 title={plugin.description}
             >
                 {plugin.description}
-            </div>
+            </p>
 
             {needsRestart && (
-                <div style={{ ...s.badge, ...tint(c.warning), alignSelf: "flex-start" }}>
-                    yeniden başlatma gerektirir
-                </div>
+                <span style={{ ...s.badge, ...tint(c.warning), alignSelf: "flex-start" }}>
+                    yeniden başlatma gerekir
+                </span>
             )}
 
             {(plugin.tags?.length ?? 0) > 0 && (
-                <div style={{ ...s.row, flexWrap: "wrap", gap: space.xs }}>
+                <div style={{ ...s.row, flexWrap: "wrap", gap: "6px" }}>
                     {plugin.tags!.slice(0, 4).map(tag => (
                         <span key={tag} style={s.tag}>#{tag}</span>
                     ))}
                 </div>
             )}
 
-            {/* Alt satır her kartta aynı yerde: yazarlar solda, ayar düğmesi sağda. */}
-            <div style={{ ...s.spread, marginTop: "auto", paddingTop: space.xs }}>
-                <span style={{ ...s.faint, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                    {plugin.authors.map(author => author.name).join(", ")}
-                </span>
-
-                {hasSettings && (
+            {hasSettings && (
+                <>
+                    {/* Alt satır her kartta aynı yerde — kartlar hizada kalıyor. */}
                     <button
-                        style={{
-                            ...s.button,
-                            ...s.buttonGhost,
-                            padding: "4px 10px",
-                            fontSize: "12px",
-                            color: expanded ? c.text : c.muted,
-                            background: expanded ? c.surfaceActive : "transparent"
-                        }}
+                        className="mcord-btn mcord-ghost"
                         onClick={() => setExpanded(value => !value)}
                         aria-expanded={expanded}
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            gap: "6px",
+                            marginTop: "auto",
+                            padding: "7px 10px",
+                            borderRadius: radius.sm,
+                            border: `1px solid ${expanded ? c.borderStrong : c.border}`,
+                            background: expanded ? c.surfaceActive : "transparent",
+                            color: expanded ? c.text : c.muted,
+                            cursor: "pointer",
+                            fontFamily: "inherit",
+                            fontSize: "12px",
+                            fontWeight: 600
+                        }}
                     >
-                        Ayarlar {expanded ? "▲" : "▼"}
+                        Ayarlar
+                        <IconChevronDown
+                            size={14}
+                            style={{
+                                transform: expanded ? "rotate(180deg)" : "none",
+                                transition: "transform 140ms cubic-bezier(.2,.7,.3,1)"
+                            }}
+                        />
                     </button>
-                )}
-            </div>
 
-            {hasSettings && expanded && (
-                <div
-                    style={{
-                        marginTop: space.xs,
-                        paddingTop: space.md,
-                        borderTop: `1px solid ${c.border}`,
-                        borderRadius: radius.sm,
-                        transition: `opacity ${motion}`
-                    }}
-                >
-                    <SettingsPanel settings={plugin.settings!} />
-                </div>
+                    {expanded && (
+                        <div
+                            className="mcord-enter"
+                            style={{ paddingTop: space.sm, borderTop: `1px solid ${c.border}` }}
+                        >
+                            <SettingsPanel settings={plugin.settings!} />
+                        </div>
+                    )}
+                </>
             )}
         </div>
     );

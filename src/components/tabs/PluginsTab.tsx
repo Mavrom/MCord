@@ -7,9 +7,10 @@
 import { isPluginEnabled, plugins } from "../../api/PluginManager";
 import type { Plugin } from "../../utils/types";
 import { React } from "../../webpack/react";
+import { IconSearch, IconSearchOff } from "../Icons";
 import { PluginCard } from "../PluginCard";
 import { RestartBanner } from "../RestartBanner";
-import { c, motion, radius, s, space } from "../theme";
+import { c, radius, s, space } from "../theme";
 
 type Category = "all" | "enabled" | "disabled" | "required";
 
@@ -20,7 +21,7 @@ const CATEGORIES: Array<{ id: Category; label: string }> = [
     { id: "required", label: "Çekirdek" }
 ];
 
-/** Discord'un ayar menüsündeki gibi segment kontrolü — ayrı ayrı düğme yerine. */
+/** Sayaçlı segment kontrolü — dört ayrı düğme yerine tek bir grup. */
 function Segmented({ value, onChange, counts }: {
     value: Category;
     onChange(next: Category): void;
@@ -29,6 +30,7 @@ function Segmented({ value, onChange, counts }: {
     return (
         <div
             role="tablist"
+            aria-label="Plugin filtresi"
             style={{
                 display: "inline-flex",
                 padding: "3px",
@@ -43,11 +45,15 @@ function Segmented({ value, onChange, counts }: {
                 return (
                     <button
                         key={item.id}
+                        className="mcord-btn"
                         role="tab"
                         aria-selected={active}
                         onClick={() => onChange(item.id)}
                         style={{
-                            padding: "5px 12px",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: "6px",
+                            padding: "6px 12px",
                             borderRadius: radius.sm,
                             border: "none",
                             cursor: "pointer",
@@ -56,12 +62,18 @@ function Segmented({ value, onChange, counts }: {
                             fontWeight: 600,
                             color: active ? c.heading : c.muted,
                             background: active ? c.surfaceActive : "transparent",
-                            transition: `background ${motion}, color ${motion}`,
                             whiteSpace: "nowrap"
                         }}
                     >
                         {item.label}
-                        <span style={{ marginLeft: "6px", opacity: .55, fontWeight: 500 }}>
+                        <span
+                            style={{
+                                fontVariantNumeric: "tabular-nums",
+                                fontSize: "11px",
+                                fontWeight: 500,
+                                opacity: .6
+                            }}
+                        >
                             {counts[item.id]}
                         </span>
                     </button>
@@ -93,7 +105,7 @@ export function PluginsTab() {
 
     return (
         <div style={s.page}>
-            <header style={{ display: "flex", flexDirection: "column", gap: space.xs }}>
+            <header style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                 <h1 style={s.h1}>Pluginler</h1>
                 <p style={s.muted}>
                     Küratörlü kütüphane — üçüncü parti kurulum yok, her şey depoda.
@@ -103,28 +115,28 @@ export function PluginsTab() {
             {restartNeeded && <RestartBanner />}
 
             <div style={{ display: "flex", flexDirection: "column", gap: space.md }}>
-                <div style={{ position: "relative" }}>
+                <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
                     <span
-                        aria-hidden
                         style={{
                             position: "absolute",
                             left: "12px",
-                            top: "50%",
-                            transform: "translateY(-50%)",
-                            color: c.faint,
-                            fontSize: "13px",
-                            pointerEvents: "none"
+                            display: "flex",
+                            color: focused ? c.accent : c.faint,
+                            pointerEvents: "none",
+                            transition: "color 140ms cubic-bezier(.2,.7,.3,1)"
                         }}
                     >
-                        ⌕
+                        <IconSearch size={16} />
                     </span>
                     <input
                         style={{
                             ...s.input,
-                            paddingLeft: "32px",
-                            borderColor: focused ? c.accent : c.border
+                            paddingLeft: "38px",
+                            borderColor: focused ? c.accent : c.border,
+                            background: focused ? c.surfaceRaised : c.inputBg
                         }}
                         type="search"
+                        aria-label="Plugin ara"
                         placeholder="Plugin, açıklama veya #etiket ara…"
                         value={query}
                         onFocus={() => setFocused(true)}
@@ -135,7 +147,9 @@ export function PluginsTab() {
 
                 <div style={{ ...s.spread, flexWrap: "wrap", gap: space.sm }}>
                     <Segmented value={category} onChange={setCategory} counts={counts} />
-                    <span style={s.faint}>{visible.length} sonuç</span>
+                    <span style={{ ...s.faint, fontVariantNumeric: "tabular-nums" }}>
+                        {visible.length} sonuç
+                    </span>
                 </div>
             </div>
 
@@ -144,12 +158,19 @@ export function PluginsTab() {
                     <div
                         style={{
                             ...s.panel,
-                            textAlign: "center",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            gap: space.sm,
+                            padding: "48px 24px",
+                            borderStyle: "dashed",
                             color: c.muted,
-                            borderStyle: "dashed"
+                            textAlign: "center"
                         }}
                     >
-                        Eşleşen plugin yok.
+                        <IconSearchOff size={28} style={{ opacity: .5 }} />
+                        <div style={{ color: c.heading, fontWeight: 600 }}>Eşleşen plugin yok</div>
+                        <div style={s.faint}>Aramayı değiştir veya filtreyi “Tümü” yap.</div>
                     </div>
                 )
                 : (

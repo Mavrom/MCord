@@ -12,7 +12,10 @@
 
 import { Logger } from "../utils/logger";
 import { getReactDOMClient, React } from "../webpack/react";
+import { IconClose } from "./Icons";
 import { SettingsRoot, type TabId } from "./SettingsRoot";
+import { injectStyles } from "./styles";
+import { c, radius, shadow, space } from "./theme";
 
 const logger = new Logger("SettingsOverlay", "#f4b8e4");
 const CONTAINER_ID = "mcord-settings-overlay";
@@ -34,64 +37,68 @@ function Overlay({ initialTab, onClose }: { initialTab: TabId; onClose(): void }
 
     return (
         <div
+            className="mcord-root mcord-overlay"
             onMouseDown={onClose}
             style={{
                 position: "fixed",
                 inset: 0,
                 zIndex: 100000,
-                background: "rgba(0, 0, 0, .6)",
+                // Arka planı bulanıklaştırmak "arkası kapanır" mesajını veriyor.
+                background: "rgba(0, 0, 0, .55)",
+                backdropFilter: "blur(3px)",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center"
+                justifyContent: "center",
+                padding: space.xl
             }}
         >
             <div
+                className="mcord-panel"
+                role="dialog"
+                aria-modal="true"
+                aria-label="MCord ayarları"
                 onMouseDown={event => event.stopPropagation()}
                 onClick={event => event.stopPropagation()}
                 style={{
-                    background: "var(--background-primary, #313338)",
-                    color: "var(--text-normal, #dbdee1)",
-                    borderRadius: "8px",
-                    width: "min(1000px, 92vw)",
-                    height: "min(760px, 88vh)",
+                    position: "relative",
+                    background: c.surface,
+                    color: c.text,
+                    borderRadius: radius.lg,
+                    border: `1px solid ${c.border}`,
+                    width: "min(1020px, 100%)",
+                    height: "min(720px, 100%)",
                     display: "flex",
-                    flexDirection: "column",
                     overflow: "hidden",
-                    boxShadow: "0 16px 48px rgba(0, 0, 0, .4)"
+                    boxShadow: shadow.high
                 }}
             >
-                <div
+                <SettingsRoot initialTab={initialTab} />
+
+                <button
+                    className="mcord-btn mcord-ghost"
+                    onClick={onClose}
+                    aria-label="Kapat"
+                    title="Kapat (Esc)"
                     style={{
+                        position: "absolute",
+                        top: space.md,
+                        right: space.md,
                         display: "flex",
                         alignItems: "center",
-                        justifyContent: "space-between",
-                        padding: "12px 16px",
-                        borderBottom: "1px solid var(--background-modifier-accent, #3f4147)",
-                        flex: "0 0 auto"
+                        justifyContent: "center",
+                        width: "32px",
+                        height: "32px",
+                        padding: 0,
+                        borderRadius: radius.sm,
+                        border: "none",
+                        background: "transparent",
+                        color: c.muted,
+                        cursor: "pointer",
+                        zIndex: 1
                     }}
                 >
-                    <strong style={{ fontSize: "15px" }}>MCord</strong>
-                    <button
-                        onClick={onClose}
-                        aria-label="Kapat"
-                        style={{
-                            background: "none",
-                            border: 0,
-                            color: "inherit",
-                            fontSize: "20px",
-                            lineHeight: 1,
-                            cursor: "pointer",
-                            padding: "0 4px"
-                        }}
-                    >
-                        ×
-                    </button>
-                </div>
-
-                {/* Kaydırmayı SettingsRoot kendi içinde yönetiyor (kenar çubuğu sabit kalsın). */}
-                <div style={{ flex: 1, minHeight: 0, minWidth: 0, display: "flex" }}>
-                    <SettingsRoot initialTab={initialTab} />
-                </div>
+                    <IconClose size={18} />
+                </button>
             </div>
         </div>
     );
@@ -102,6 +109,8 @@ export function openSettingsOverlay(initialTab: TabId = "plugins"): void {
         logger.debug("zaten açık");
         return;
     }
+
+    injectStyles();
 
     let container = document.getElementById(CONTAINER_ID);
     if (!container) {

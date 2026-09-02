@@ -5,17 +5,19 @@
  */
 
 import { React } from "../webpack/react";
+import { IconDownload, IconInfo, IconPuzzle, IconSliders, LogoMark } from "./Icons";
+import { injectStyles } from "./styles";
 import { AboutTab } from "./tabs/AboutTab";
 import { GeneralTab } from "./tabs/GeneralTab";
 import { PluginsTab } from "./tabs/PluginsTab";
 import { UpdaterTab } from "./tabs/UpdaterTab";
-import { c, motion, radius, s, space } from "./theme";
+import { c, radius, space } from "./theme";
 
 export const TABS = [
-    { id: "plugins", label: "Pluginler", icon: "◧", Component: PluginsTab },
-    { id: "general", label: "Genel", icon: "⚙", Component: GeneralTab },
-    { id: "updater", label: "Güncelleme", icon: "↻", Component: UpdaterTab },
-    { id: "about", label: "Hakkında", icon: "◈", Component: AboutTab }
+    { id: "plugins", label: "Pluginler", Icon: IconPuzzle, Component: PluginsTab },
+    { id: "general", label: "Genel", Icon: IconSliders, Component: GeneralTab },
+    { id: "updater", label: "Güncelleme", Icon: IconDownload, Component: UpdaterTab },
+    { id: "about", label: "Hakkında", Icon: IconInfo, Component: AboutTab }
 ] as const;
 
 export type TabId = (typeof TABS)[number]["id"];
@@ -25,20 +27,19 @@ function NavItem({ tab, active, onSelect }: {
     active: boolean;
     onSelect(): void;
 }) {
-    const [hover, setHover] = React.useState(false);
+    const { Icon } = tab;
 
     return (
         <button
+            className="mcord-nav-item"
             onClick={onSelect}
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
             aria-current={active}
             style={{
                 display: "flex",
                 alignItems: "center",
-                gap: space.sm,
+                gap: "10px",
                 width: "100%",
-                padding: "9px 12px",
+                padding: "9px 10px",
                 borderRadius: radius.sm,
                 border: "none",
                 cursor: "pointer",
@@ -47,11 +48,10 @@ function NavItem({ tab, active, onSelect }: {
                 fontSize: "14px",
                 fontWeight: active ? 600 : 500,
                 color: active ? c.heading : c.muted,
-                background: active ? c.surfaceActive : hover ? c.surfaceHover : "transparent",
-                transition: `background ${motion}, color ${motion}`
+                background: active ? c.surfaceActive : "transparent"
             }}
         >
-            <span aria-hidden style={{ opacity: active ? 1 : .6, fontSize: "13px" }}>{tab.icon}</span>
+            <Icon size={18} style={{ opacity: active ? 1 : .75 }} />
             <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                 {tab.label}
             </span>
@@ -63,36 +63,56 @@ function NavItem({ tab, active, onSelect }: {
 export function SettingsRoot({ initialTab = "plugins" }: { initialTab?: TabId }) {
     const [active, setActive] = React.useState<TabId>(initialTab);
 
+    // Discord'un ayar sekmesi olarak gömüldüğünde overlay'den geçmiyoruz.
+    React.useEffect(() => injectStyles(), []);
+
     const Current = TABS.find(tab => tab.id === active)?.Component ?? PluginsTab;
 
     return (
         <div
+            className="mcord-root"
             style={{
                 display: "flex",
                 alignItems: "stretch",
-                height: "100%",
+                flex: 1,
                 minHeight: 0,
                 minWidth: 0,
                 color: c.text,
-                fontFamily: "var(--font-primary, 'gg sans', 'Segoe UI', system-ui, sans-serif)"
+                fontFamily: "var(--font-primary, 'gg sans', 'Segoe UI', system-ui, sans-serif)",
+                fontSize: "14px",
+                lineHeight: 1.45
             }}
         >
             <nav
                 style={{
                     flex: "0 0 auto",
-                    width: "184px",
-                    padding: space.md,
+                    width: "208px",
+                    padding: `${space.lg} ${space.md}`,
                     display: "flex",
                     flexDirection: "column",
                     gap: "2px",
                     borderRight: `1px solid ${c.border}`,
-                    background: c.surface,
+                    background: c.surfaceRaised,
                     overflowY: "auto"
                 }}
             >
-                <div style={{ ...s.faint, padding: "4px 12px 8px", letterSpacing: ".06em", textTransform: "uppercase" }}>
-                    MCord
+                <div
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        padding: `0 ${space.sm} ${space.lg}`
+                    }}
+                >
+                    <LogoMark size={26} />
+                    <div style={{ minWidth: 0 }}>
+                        <div style={{ color: c.heading, fontWeight: 700, fontSize: "15px", letterSpacing: "-.01em" }}>
+                            MCord
+                        </div>
+                        <div style={{ color: c.faint, fontSize: "11px" }}>v{VERSION}</div>
+                    </div>
                 </div>
+
                 {TABS.map(tab => (
                     <NavItem
                         key={tab.id}
@@ -103,7 +123,17 @@ export function SettingsRoot({ initialTab = "plugins" }: { initialTab?: TabId })
                 ))}
             </nav>
 
-            <div style={{ flex: 1, minWidth: 0, minHeight: 0, overflowY: "auto", padding: space.xl }}>
+            <div
+                key={active}
+                className="mcord-enter"
+                style={{
+                    flex: 1,
+                    minWidth: 0,
+                    minHeight: 0,
+                    overflowY: "auto",
+                    padding: `${space.xl} ${space.xl} 40px`
+                }}
+            >
                 <Current />
             </div>
         </div>
