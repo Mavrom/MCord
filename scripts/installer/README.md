@@ -1,45 +1,69 @@
 # MCord Installer
 
-Windows için tek dosya kurulum aracı (plan §12).
+Windows için pencereli kurulum aracı — `dist/MCordInstaller.exe`.
 
 ## Kullanım
 
+Çift tıkla → koyu temalı pencere açılır → Discord dalını seç →
+**Kur** / **Onar** / **Kaldır**.
+
+Komut satırı (CI / otomasyon / WebView2 yoksa):
+
 ```
-MCordInstaller.exe                      # etkileşimli kurulum
-MCordInstaller.exe --uninstall          # kaldırma
-MCordInstaller.exe --branch=stable --yes # etkileşimsiz
+MCordInstaller.exe --branch=stable --yes
+MCordInstaller.exe --uninstall
+MCordInstaller.exe --repair --branch=canary --yes
 ```
 
-`--branch` değerleri: `stable`, `ptb`, `canary`.
+`--branch`: `stable` | `ptb` | `canary` · `--yes` / `-y`: soru sorma
 
 ## Ne yapıyor
 
-1. `%LocalAppData%\Discord*\app-<sürüm>\resources` altındaki en yeni kurulumu bulur
-   (Stable / PTB / Canary ayrı ayrı; birden fazlaysa hangisine kurulacağını sorar)
-2. Discord çalışıyorsa **kullanıcı onayıyla** kapatır
-3. `app.asar` → `_app.asar` yeniden adlandırır
-4. MCord'un `app.asar`'ını yerine kopyalar
-5. **Boyut ve SHA-256** doğrulaması yapar
-6. İsteğe bağlı olarak Discord'u yeniden başlatır
+1. `%LocalAppData%\Discord*\app-<sürüm>\resources` altındaki en yeni kurulumu
+   bulur (Stable / PTB / Canary ayrı)
+2. Discord açıksa **onayla** kapatır, kapanmasını bekler
+3. `app.asar` → `_app.asar` yedekler, MCord'un `app.asar`'ını kopyalar
+4. **Boyut + SHA-256** doğrular
+5. İsteğe bağlı Discord'u başlatır (`Update.exe --processStart`)
 
-Kaldırma: `_app.asar` varsa geri adlandırır, bizimkini siler. Geliştirme
-enjeksiyonu (`resources/app/`) varsa o da temizlenir.
+Kaldırma: `_app.asar`'ı geri yükler, dev enjeksiyonu (`resources/app/`) temizler.
+Yönetici hakkı gerekmez — `%LocalAppData%` kullanıcı alanı.
 
-## Windows'a özel notlar (plan §12.2)
+## Mimari
 
-| Konu | Ele alınışı |
+| Yol | Sorumluluk |
 |---|---|
-| `original-fs` | Tüm asar işlemleri `original-fs` üzerinden; `fs` asar'ı klasör gibi gösterir |
-| Dosya kilidi | `tasklist` ile süreç kontrolü, `taskkill` ile onaylı kapatma, kapanma beklenir |
-| Yönetici hakkı | **Gerekmiyor** — `%LocalAppData%` kullanıcı alanı, UAC istenmez |
-| Birden fazla sürüm | Stable/PTB/Canary ayrı listelenir, seçim sorulur |
-| Antivirüs | `app.asar` değiştirmek bazı AV'lerde alarm verir; release pipeline'ında code signing adımı var (sertifika varsa) |
+| `src/core/` | UI'dan bağımsız mantık — keşif, süreç kontrolü, asar takası, doğrulama. `Result` döner, `throw` etmez. Vitest'lenir. |
+| `src/cli.mjs` | Komut satırı akışı (readline) |
+| `src/gui/main.mjs` | `@webviewjs/webview` penceresi — `mcord://` protokolü + `webview.expose("core", …)` |
+| `src/gui/ui/` | React arayüzü (esbuild → tek HTML string) |
+| `src/index.mjs` | Argüman varsa CLI, yoksa pencere |
 
-## Paketleme
+`node:fs` kullanılır — `original-fs` yalnızca Electron içinde vardır ve
+paketlenmiş exe'de bulunamaz.
 
-```bash
-pnpm --filter mcord-installer package
+## Derleme
+
+```
+pnpm --filter mcord-installer build      # UI + app.asar payload + installer.cjs
+pnpm --filter mcord-installer package    # + pkg → dist/MCordInstaller.exe
 ```
 
-`@yao-pkg/pkg` ile `dist/MCordInstaller.exe` üretir; `dist/app.asar` varlık
-olarak gömülür.
+`build.mjs` üç şey üretir (hepsi `.gitignore`'da):
+- `dist-ui/index.html` — gömülü CSS+JS'li tek dosya UI
+- `src/gui/ui.generated.mjs` — aynı HTML, string olarak (bundle + dev ortak)
+- `src/core/payload.generated.mjs` — `dist/app.asar` base64 gömülü
+
+`package` önce `pnpm dist` ister (repo kökünde `dist/app.asar`).
+
+## Windows notları
+
+| Konu | Ele alınış |
+|---|---|
+| WebView2 | Sistemdekini kullanır (Win11 hazır, Win10 otomatik). Yoksa pencere açılmaz → CLI'a düş, mesajda bootstrapper linki |
+| WebView2 veri klasörü | `%TEMP%\mcord-installer-webview` — exe yanı (Program Files) çoğu zaman engelli |
+| Dosya kilidi | Discord açıkken `app.asar` kilitli; `tasklist`/`taskkill` ile kontrollü kapatma |
+| `pkg` + ESM | `pkg` dinamik `import`/top-level await'i çalıştıramaz → önce esbuild ile tek CJS'e bundle edilir |
+| Antivirüs | İmzasız binary yanlış pozitif verebilir; release'de imzalama adımı (sertifika varsa) + `SHA256SUMS.txt` |
+
+Elle QA: [`docs/installer-manual-qa.md`](../../docs/installer-manual-qa.md)
