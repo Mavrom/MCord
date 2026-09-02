@@ -7,7 +7,7 @@
 import { execSync } from "node:child_process";
 import { readdirSync, readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
-import { dirname, join, relative } from "node:path";
+import { dirname, isAbsolute, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -141,7 +141,12 @@ export const makeAllPackagesExternalPlugin = {
     name: "make-all-packages-external",
     setup(build) {
         const filter = /^[^./]|^\.[^./]|^\.\.[^/]/;
-        build.onResolve({ filter }, args => ({ path: args.path, external: true }));
+        build.onResolve({ filter }, args => {
+            // Windows'ta giriş noktası mutlak yol (`C:\…`) filtreye takılıp
+            // "entry point cannot be marked as external" hatası veriyordu.
+            if (args.kind === "entry-point" || isAbsolute(args.path)) return null;
+            return { path: args.path, external: true };
+        });
     }
 };
 
