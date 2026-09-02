@@ -125,7 +125,7 @@ export function launchDiscord(branchId, deps = {}) {
     try {
         const { install: target, error } = findInstall(branchId, deps);
         if (error) return error;
-        launch(target.executable, deps);
+        launch(target, deps);
         return ok({});
     } catch (e) {
         return err(e.code ?? "INTERNAL", e.message);

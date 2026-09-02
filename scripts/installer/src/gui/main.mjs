@@ -8,14 +8,12 @@
  * Pencere süreci. Core'u `webview.expose("core", …)` ile açar; ilerleme
  * satırlarını `webview.evaluateScript` ile UI'a iter.
  *
- * UI, esbuild'in ürettiği tek `dist-ui/index.html` — `mcord://` özel
- * protokolüyle servis edilir (data: URI boyut sınırından kaçınmak için).
+ * UI, `build.mjs`'in ürettiği tek HTML string'i — `mcord://` özel protokolüyle
+ * servis edilir (data: URI boyut sınırından kaçınmak için).
  */
 
-import { existsSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 
 import { Application, getWebviewVersion, Theme } from "@webviewjs/webview";
 
@@ -27,46 +25,13 @@ import {
     repair as coreRepair,
     uninstall as coreUninstall
 } from "../core/index.mjs";
-import { resolveSourceAsar } from "../core/source.mjs";
-
-const HERE = dirname(fileURLToPath(import.meta.url));
+import { materializeAsar } from "../core/payload.mjs";
+import { UI_HTML } from "./ui.generated.mjs";
 
 const WEBVIEW2_URL = "https://go.microsoft.com/fwlink/p/?LinkId=2124703";
 
-function loadUiHtml() {
-    const candidates = [
-        join(HERE, "..", "..", "dist-ui", "index.html"),
-        join(dirname(process.execPath), "dist-ui", "index.html")
-    ];
-    for (const c of candidates) {
-        if (existsSync(c)) return readFileSync(c, "utf-8");
-    }
-    throw new Error("dist-ui/index.html bulunamadı — `pnpm --filter mcord-installer build` çalıştır.");
-}
-
-function sourceOrNull() {
-    try {
-        return resolveSourceAsar(join(HERE, "..", "core"));
-    } catch {
-        return null;
-    }
-}
-
-function missingSource() {
-    return { ok: false, code: "SOURCE_NOT_FOUND", message: "MCord paketi (app.asar) bulunamadı." };
-}
-
-async function main() {
-    let html;
-    try {
-        html = loadUiHtml();
-    } catch (e) {
-        console.error(e.message);
-        process.exitCode = 1;
-        return;
-    }
-
-    const source = sourceOrNull();
+export async function startGui() {
+    const source = materializeAsar();
 
     let app;
     try {
@@ -84,7 +49,7 @@ async function main() {
     });
 
     window.registerProtocol("mcord", () =>
-        new Response(html, { headers: { "Content-Type": "text/html; charset=utf-8" } })
+        new Response(UI_HTML, { headers: { "Content-Type": "text/html; charset=utf-8" } })
     );
 
     // WebView2 kullanıcı-veri klasörü yazılabilir bir yerde olmalı; exe yanı
@@ -112,8 +77,8 @@ async function main() {
 
     webview.expose("core", {
         detectInstalls: async () => detectInstalls(),
-        install: async id => (source ? coreInstall(id, source, push) : missingSource()),
-        repair: async id => (source ? coreRepair(id, source, push) : missingSource()),
+        install: async id => coreInstall(id, source, push),
+        repair: async id => coreRepair(id, source, push),
         uninstall: async id => coreUninstall(id, push),
         closeDiscord: async id => closeDiscord(id),
         launchDiscord: async id => coreLaunch(id)
@@ -148,10 +113,6 @@ function bailNoWebview(e) {
         "Alternatif: bu dosyayı komut satırından çalıştır:\n" +
         "  MCordInstaller.exe --branch=stable --yes"
     );
-    process.exitCode = 1;
+    // Sert çıkış: webview'in native olay döngüsü süreci canlı tutabilir.
+    process.exit(1);
 }
-
-main().catch(err => {
-    console.error(err);
-    process.exitCode = 1;
-});

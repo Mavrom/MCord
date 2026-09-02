@@ -12,7 +12,7 @@
         "start": "node src/index.mjs",
         "build": "node build.mjs",
         "typecheck": "tsc --noEmit -p tsconfig.json",
-        "package": "node build.mjs && pkg . --output ../../dist/MCordInstaller.exe"
+        "package": "node build.mjs && pkg dist-installer/installer.cjs --targets node22-win-x64 --output ../../dist/MCordInstaller.exe"
     },
     "dependencies": {
         "@webviewjs/webview": "0.4.4",
@@ -24,13 +24,9 @@
         "esbuild": "^0.25.10"
     },
     "pkg": {
-        "scripts": ["src/**/*.mjs"],
         "assets": [
-            "dist-ui/index.html",
-            "../../dist/app.asar",
-            "node_modules/@webviewjs/webview-*/**"
-        ],
-        "targets": ["node22-win-x64"],
-        "outputPath": "../../dist"
+            "../../node_modules/.pnpm/@webviewjs+webview@*/node_modules/@webviewjs/**/*",
+            "../../node_modules/.pnpm/@webviewjs+webview-win32-x64-msvc@*/node_modules/@webviewjs/**/*"
+        ]
     }
 }
