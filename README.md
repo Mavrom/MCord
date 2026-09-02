@@ -38,9 +38,10 @@ kullanın.
 ## Kurulum
 
 [Releases](https://github.com/Mavrom/MCord/releases) sayfasından
-`MCordInstaller.exe` indir ve çalıştır. Yönetici hakkı gerekmez.
+`MCordInstaller.exe` indir ve çift tıkla. Açılan pencerede Discord dalını seçip
+**Kur** de. Yönetici hakkı gerekmez.
 
-Kaldırmak için aynı dosyayı `--uninstall` ile çalıştır.
+Kaldırmak: aynı pencerede **Kaldır**, ya da `MCordInstaller.exe --uninstall`.
 
 Yayınlanan her dosyanın SHA-256 özeti `SHA256SUMS.txt` içinde; güncellemeler de
 uygulanmadan önce özetle doğrulanır.
