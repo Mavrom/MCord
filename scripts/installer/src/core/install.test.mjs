@@ -22,6 +22,7 @@ beforeEach(() => {
     install = {
         appAsar: join(resources, "app.asar"),
         backupAsar: join(resources, "_app.asar"),
+        markerFile: join(resources, "mcord.json"),
         devAppDir: join(resources, "app")
     };
     writeFileSync(install.appAsar, "ORIJINAL DISCORD");
@@ -52,6 +53,35 @@ describe("installAsar", () => {
     it("kaynak yoksa SOURCE_NOT_FOUND koduyla patlar", () => {
         expect(() => installAsar(install, join(root, "yok.asar")))
             .toThrowError(expect.objectContaining({ code: "SOURCE_NOT_FOUND" }));
+    });
+
+    it("mcord.json işaret dosyası yazar", () => {
+        installAsar(install, source("MCORD"));
+        expect(getStatus(install).installed).toBe(true);
+        const marker = JSON.parse(readFileSync(install.markerFile, "utf-8"));
+        expect(marker).toMatchObject({ size: 5 });
+        expect(marker.sha256).toMatch(/^[0-9a-f]{64}$/);
+    });
+});
+
+describe("getStatus", () => {
+    it("sadece _app.asar varsa (referans vb.) → otherMod, installed değil", () => {
+        writeFileSync(install.backupAsar, "GERÇEK DISCORD");
+        const s = getStatus(install);
+        expect(s.installed).toBe(false);
+        expect(s.otherMod).toBe(true);
+    });
+
+    it("mcord.json varsa → installed, otherMod değil", () => {
+        writeFileSync(install.backupAsar, "GERÇEK DISCORD");
+        writeFileSync(install.markerFile, "{}");
+        const s = getStatus(install);
+        expect(s.installed).toBe(true);
+        expect(s.otherMod).toBe(false);
+    });
+
+    it("hiçbiri yoksa → temiz", () => {
+        expect(getStatus(install)).toMatchObject({ installed: false, otherMod: false });
     });
 });
 

@@ -13,15 +13,23 @@
  */
 
 import { createHash } from "node:crypto";
-import { copyFileSync, existsSync, readFileSync, renameSync, rmSync, statSync } from "node:fs";
+import { copyFileSync, existsSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from "node:fs";
 
 export function sha256(path) {
     return createHash("sha256").update(readFileSync(path)).digest("hex");
 }
 
+/**
+ * MCord'a özel işaret dosyası (`resources/mcord.json`) belirleyici.
+ * `_app.asar`'a bakmıyoruz — referans vb. de aynı yedeği oluşturuyor,
+ * "MCord kurulu" derken aslında başka mod olabiliyordu.
+ */
 export function getStatus(install) {
+    const backup = existsSync(install.backupAsar);
+    const marker = existsSync(install.markerFile);
     return {
-        installed: existsSync(install.backupAsar),
+        installed: marker,
+        otherMod: backup && !marker,
         hasDevInjection: existsSync(install.devAppDir)
     };
 }
@@ -33,7 +41,7 @@ export function getStatus(install) {
  * Doğrulama başarısızsa `throw` (çağıran `Result`'a çevirir).
  */
 export function installAsar(install, sourceAsar) {
-    const { backupAsar, appAsar } = install;
+    const { backupAsar, appAsar, markerFile } = install;
 
     if (!existsSync(sourceAsar)) {
         const e = new Error(`Kaynak paket bulunamadı: ${sourceAsar}`);
@@ -67,13 +75,16 @@ export function installAsar(install, sourceAsar) {
         throw e;
     }
 
+    writeFileSync(markerFile, JSON.stringify({ sha256: actualHash, size: actualSize, at: Date.now() }, null, 2));
+
     return { size: actualSize, sha256: actualHash };
 }
 
-/** `_app.asar` varsa geri adlandır, bizimkini sil; dev enjeksiyonu da temizle. */
+/** `_app.asar` varsa geri adlandır, bizimkini sil; işaret dosyası + dev enjeksiyonu temizle. */
 export function uninstallAsar(install) {
-    const { backupAsar, appAsar, devAppDir } = install;
+    const { backupAsar, appAsar, devAppDir, markerFile } = install;
 
+    rmSync(markerFile, { force: true });
     if (existsSync(devAppDir)) {
         rmSync(devAppDir, { recursive: true, force: true });
     }

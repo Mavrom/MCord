@@ -6,44 +6,43 @@
 
 /**
  * Giriş noktası.
- *   - Argüman varsa → CLI
- *   - Argüman yoksa (çift tıklama) → pencere; açılamazsa metin tabanlı kuruluma düş
+ *   - Argüman varsa → CLI (metin)
+ *   - Argüman yoksa (çift tıklama) → pencere
  *
- * Her durumda: beklenmeyen hata `%TEMP%\mcord-installer-hata.log`'a yazılır ve
- * çift tıklamada konsol "Enter" beklenmeden kapanmaz (yoksa hata okunamaz).
+ * Exe GUI subsystem'e patch'lendiği için çift tıklamada terminal AÇILMAZ.
+ * Pencere açılamazsa: hata `%TEMP%\mcord-installer-hata.log`'a yazılır ve
+ * bir Windows mesaj kutusu gösterilir (konsol olmadığı için).
  */
 
+import { spawn } from "node:child_process";
 import { appendFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { createInterface } from "node:readline/promises";
 
 const argv = process.argv.slice(2);
 const wantsCli = argv.some(a => a.startsWith("-"));
-
-async function pause(text) {
-    if (wantsCli || !process.stdin.isTTY) return;
-    const rl = createInterface({ input: process.stdin, output: process.stdout });
-    await rl.question(`\n${text ?? "Kapatmak için Enter'a bas…"}`);
-    rl.close();
-}
+const LOG = join(tmpdir(), "mcord-installer-hata.log");
 
 function logError(err) {
-    const line = `[${new Date().toISOString()}] ${err?.stack ?? err}\n`;
     try {
-        appendFileSync(join(tmpdir(), "mcord-installer-hata.log"), line);
+        appendFileSync(LOG, `[${new Date().toISOString()}] ${err?.stack ?? err}\n`);
     } catch { /* log yazılamıyorsa sorun değil */ }
 }
 
-async function runInteractiveFallback(reason) {
-    console.error("\n" + "─".repeat(48));
-    console.error("Pencere açılamadı — metin tabanlı kuruluma geçiliyor.");
-    if (reason) console.error(`Sebep: ${reason}`);
-    console.error("─".repeat(48) + "\n");
-
-    const { runCli } = await import("./cli.mjs");
-    await runCli([]);
-    await pause();
+/** GUI subsystem'de konsol yok — hatayı mesaj kutusuyla göster. */
+function messageBox(text) {
+    try {
+        const escaped = String(text).replace(/'/g, "''");
+        spawn(
+            "powershell",
+            [
+                "-NoProfile", "-WindowStyle", "Hidden", "-Command",
+                "Add-Type -AssemblyName PresentationFramework;" +
+                `[System.Windows.MessageBox]::Show('${escaped}','MCord Kurulum')`
+            ],
+            { detached: true, stdio: "ignore", windowsHide: true }
+        ).unref();
+    } catch { /* powershell yoksa sadece log kalır */ }
 }
 
 async function main() {
@@ -59,12 +58,28 @@ async function main() {
 
     const { startGui } = await import("./gui/main.mjs");
     const result = await startGui();
-    if (!result?.opened) await runInteractiveFallback(result?.reason);
+
+    if (!result?.opened) {
+        logError(result?.reason ?? "bilinmeyen");
+        messageBox(
+            "MCord Kurulum penceresi açılamadı.\n\n" +
+            `${result?.reason ?? ""}\n\n` +
+            "Komut satırından dene:\n" +
+            "MCordInstaller.exe --branch=stable --yes\n\n" +
+            `Log: ${LOG}`
+        );
+        process.exit(1);
+    }
+
+    // Pencere kapandı — webview'in native döngüsü handle sızdırabilir, sert çık.
+    process.exit(0);
 }
 
-main().catch(async err => {
+main().catch(err => {
     console.error(`\n✘ ${err?.message ?? err}`);
     logError(err);
+    if (!wantsCli) {
+        messageBox(`MCord Kurulum hata verdi:\n\n${err?.message ?? err}\n\nLog: ${LOG}`);
+    }
     process.exitCode = 1;
-    await pause();
 });
