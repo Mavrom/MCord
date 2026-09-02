@@ -20,12 +20,16 @@ import {
 } from "./chatComponents";
 import { registerCommand, unregisterCommand } from "./commands";
 import { addContextMenuPatch, removeContextMenuPatch } from "./contextMenu";
+import { addMessageAccessory, removeMessageAccessory } from "./messageAccessories";
 import {
+    addMessageClickListener,
     addMessagePreEditListener,
     addMessagePreSendListener,
+    removeMessageClickListener,
     removeMessagePreEditListener,
     removeMessagePreSendListener
 } from "./messageEvents";
+import { addMessagePopoverButton, removeMessagePopoverButton } from "./messagePopover";
 import { Settings } from "./settings";
 import { disableStyle, enableStyle } from "./styles";
 
@@ -35,6 +39,11 @@ export const plugins = pluginDefs as unknown as Record<string, Plugin>;
 
 /** Adı → plugin, başlatma sırasına göre. */
 const startOrder: Plugin[] = [];
+const messageEventBindings = new WeakMap<Plugin, {
+    click?: (...args: any[]) => void;
+    edit?: (...args: any[]) => void | Promise<void>;
+    send?: (...args: any[]) => void | Promise<void>;
+}>();
 
 function getFluxDispatcher(): any {
     return find(byKeys(["dispatch", "subscribe", "_subscriptions"]), { silent: true });
@@ -171,15 +180,34 @@ export async function startPlugin(plugin: Plugin): Promise<boolean> {
 
         if (plugin.managedStyle) enableStyle(name, plugin.managedStyle);
 
+        const eventBindings: {
+            click?: (...args: any[]) => void;
+            edit?: (...args: any[]) => void | Promise<void>;
+            send?: (...args: any[]) => void | Promise<void>;
+        } = {};
+
         if (plugin.onBeforeMessageSend) {
-            addMessagePreSendListener(plugin.onBeforeMessageSend.bind(plugin) as any);
+            eventBindings.send = plugin.onBeforeMessageSend.bind(plugin);
+            addMessagePreSendListener(eventBindings.send as any);
         }
 
         if (plugin.onBeforeMessageEdit) {
-            addMessagePreEditListener(plugin.onBeforeMessageEdit.bind(plugin) as any);
+            eventBindings.edit = plugin.onBeforeMessageEdit.bind(plugin);
+            addMessagePreEditListener(eventBindings.edit as any);
         }
 
+        if (plugin.onMessageClick) {
+            eventBindings.click = plugin.onMessageClick.bind(plugin);
+            addMessageClickListener(eventBindings.click as any);
+        }
+
+        if (Object.keys(eventBindings).length) messageEventBindings.set(plugin, eventBindings);
+
         if (plugin.chatBarButton) addChatBarButton(name, plugin.chatBarButton.bind(plugin));
+        if (plugin.messagePopoverButton) addMessagePopoverButton(name, plugin.messagePopoverButton.bind(plugin));
+        if (plugin.renderMessageAccessory) {
+            addMessageAccessory(name, plugin.renderMessageAccessory.bind(plugin), plugin.messageAccessoryPosition);
+        }
         if (plugin.renderMessageDecoration) {
             addMessageDecoration(name, plugin.renderMessageDecoration.bind(plugin));
         }
@@ -227,15 +255,15 @@ export async function stopPlugin(plugin: Plugin): Promise<boolean> {
 
         if (plugin.managedStyle) disableStyle(name);
 
-        if (plugin.onBeforeMessageSend) {
-            removeMessagePreSendListener(plugin.onBeforeMessageSend as any);
-        }
-
-        if (plugin.onBeforeMessageEdit) {
-            removeMessagePreEditListener(plugin.onBeforeMessageEdit as any);
-        }
+        const eventBindings = messageEventBindings.get(plugin);
+        if (eventBindings?.send) removeMessagePreSendListener(eventBindings.send as any);
+        if (eventBindings?.edit) removeMessagePreEditListener(eventBindings.edit as any);
+        if (eventBindings?.click) removeMessageClickListener(eventBindings.click as any);
+        messageEventBindings.delete(plugin);
 
         if (plugin.chatBarButton) removeChatBarButton(name);
+        if (plugin.messagePopoverButton) removeMessagePopoverButton(name);
+        if (plugin.renderMessageAccessory) removeMessageAccessory(name);
         if (plugin.renderMessageDecoration) removeMessageDecoration(name);
 
         // Framework hallediyor, plugin yazarının sorumluluğunda değil (plan §5.3).

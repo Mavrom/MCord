@@ -114,7 +114,7 @@ class BrowserWindow {
 }
 module.exports = {
     app: {
-        on: () => {}, getPath: () => "${join(root, "userdata").replaceAll("\\\\", "/")}",
+        on: () => {}, getPath: () => ${JSON.stringify(join(root, "userdata"))},
         setAppPath: () => {},
         commandLine: { appendSwitch: () => {} },
         relaunch() {}, exit() {}

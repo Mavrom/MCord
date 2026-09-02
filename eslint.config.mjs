@@ -14,7 +14,7 @@ import mcord from "./scripts/eslint/requirePatchReason.mjs";
 
 export default tseslint.config(
     {
-        ignores: ["dist/**", "node_modules/**", "browser/**"]
+        ignores: ["dist/**", "node_modules/**", "browser/**", ".claude/**"]
     },
     {
         files: ["src/**/*.{ts,tsx,mts,mjs,js,jsx}", "scripts/**/*.{ts,mjs,js}", "eslint.config.mjs"],

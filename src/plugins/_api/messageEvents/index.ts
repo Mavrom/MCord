@@ -6,8 +6,12 @@
 
 import { _handleClick, _handlePreEdit, _handlePreSend } from "../../../api/messageEvents";
 import { Devs } from "../../../utils/constants";
+import { Logger } from "../../../utils/logger";
 import { definePlugin } from "../../../utils/types";
-import { findByKeys } from "../../../webpack/finder";
+import { byKeys } from "../../../webpack/filters";
+import { waitFor, waitForStore } from "../../../webpack/lazy";
+
+const logger = new Logger("MessageEventsAPI", "#f4b8e4");
 
 export default definePlugin({
     name: "MessageEventsAPI",
@@ -15,36 +19,49 @@ export default definePlugin({
     authors: [Devs.MCord],
     required: true,
 
-    // Kod patch'i yok: hepsi fonksiyon patch'i ile çözülüyor (plan §5.1).
     start() {
-        const MessageActions = findByKeys("sendMessage", "editMessage");
-        if (!MessageActions) {
-            throw new Error("MessageActions modülü bulunamadı.");
-        }
+        this.cancelActionsWait = waitFor(byKeys(["sendMessage", "editMessage"]), MessageActions => {
+            if (typeof MessageActions?.sendMessage !== "function" || typeof MessageActions?.editMessage !== "function") {
+                logger.warn("MessageActions bulundu ancak beklenen fonksiyonlar eksik; patch atlandı.");
+                return;
+            }
 
-        this.patcher.instead(MessageActions, "sendMessage", (self, args, original) => {
-            const [channelId, message] = args;
-            return Promise.resolve(_handlePreSend(channelId, message, args[2]))
-                .then(() => original.apply(self, args));
+            this.patcher.instead(MessageActions, "sendMessage", (self, args, original) => {
+                const [channelId, message] = args;
+                return Promise.resolve(_handlePreSend(channelId, message, args[2]))
+                    .then(() => original.apply(self, args));
+            });
+
+            this.patcher.instead(MessageActions, "editMessage", (self, args, original) => {
+                const [channelId, messageId, message] = args;
+                return Promise.resolve(_handlePreEdit(channelId, messageId, message))
+                    .then(() => original.apply(self, args));
+            });
         });
 
-        this.patcher.instead(MessageActions, "editMessage", (self, args, original) => {
-            const [channelId, messageId, message] = args;
-            return Promise.resolve(_handlePreEdit(channelId, messageId, message))
-                .then(() => original.apply(self, args));
-        });
-
-        const MessageStore = findByKeys("getMessage", "getMessages");
-        if (MessageStore) this.messageStore = MessageStore;
+        this.cancelMessageStoreWait = waitForStore("MessageStore", store => { this.messageStore = store; });
+        this.cancelChannelStoreWait = waitForStore("ChannelStore", store => { this.channelStore = store; });
 
         document.addEventListener("click", this.onDocumentClick, true);
     },
 
     stop() {
         document.removeEventListener("click", this.onDocumentClick, true);
+        this.cancelActionsWait?.();
+        this.cancelMessageStoreWait?.();
+        this.cancelChannelStoreWait?.();
+        this.cancelActionsWait = undefined;
+        this.cancelMessageStoreWait = undefined;
+        this.cancelChannelStoreWait = undefined;
+        this.messageStore = null;
+        this.channelStore = null;
     },
 
+    cancelActionsWait: undefined as (() => void) | undefined,
+    cancelMessageStoreWait: undefined as (() => void) | undefined,
+    cancelChannelStoreWait: undefined as (() => void) | undefined,
     messageStore: null as any,
+    channelStore: null as any,
 
     onDocumentClick(event: MouseEvent) {
         const target = event.target as HTMLElement | null;
@@ -57,6 +74,10 @@ export default definePlugin({
         const channelId = parts.at(-2);
         if (!messageId || !channelId) return;
 
-        _handleClick({ id: messageId }, { id: channelId }, event);
+        const message = this.messageStore?.getMessage?.(channelId, messageId);
+        const channel = this.channelStore?.getChannel?.(channelId);
+        if (!message || !channel) return;
+
+        _handleClick(message, channel, event);
     }
 });

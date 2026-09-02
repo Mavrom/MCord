@@ -158,7 +158,12 @@ function wrapFactory(moduleId: PropertyKey, originalFactory: ModuleFactory): Mod
 
     if (shouldEagerPatch(moduleId)) ensurePatched(record);
 
+    const originalSource = String(originalFactory);
     const proxy = new Proxy(originalFactory, moduleFactoryHandler);
+    Object.defineProperty(proxy, "toString", {
+        value: () => originalSource,
+        configurable: true
+    });
     factoryRecords.set(proxy, record);
 
     return proxy;
