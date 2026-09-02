@@ -7,6 +7,12 @@ Windows için pencereli kurulum aracı — `dist/MCordInstaller.exe`.
 Çift tıkla → koyu temalı pencere açılır → Discord dalını seç →
 **Kur** / **Onar** / **Kaldır**.
 
+İmzasız exe olduğu için ilk çalıştırmada **SmartScreen** "Windows bilgisayarınızı
+korudu" diyebilir → **Ek bilgi → Yine de çalıştır**.
+
+Pencere açılamazsa (WebView2 sorunu vb.) araç otomatik olarak aynı konsolda
+**metin tabanlı kuruluma** düşer; hata `%TEMP%\mcord-installer-hata.log`'a yazılır.
+
 Komut satırı (CI / otomasyon / WebView2 yoksa):
 
 ```
