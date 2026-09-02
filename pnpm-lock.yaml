@@ -67,10 +67,23 @@ importers:
         version: 3.2.7(@types/node@24.13.3)(supports-color@7.2.0)
 
   scripts/installer:
+    dependencies:
+      '@webviewjs/webview':
+        specifier: 0.4.4
+        version: 0.4.4
+      react:
+        specifier: ^19.2.8
+        version: 19.2.8
+      react-dom:
+        specifier: ^19.2.8
+        version: 19.2.8(react@19.2.8)
     devDependencies:
       '@yao-pkg/pkg':
         specifier: ^6.9.0
         version: 6.22.0(supports-color@7.2.0)
+      esbuild:
+        specifier: ^0.25.10
+        version: 0.25.12
 
 packages:
 
@@ -810,6 +823,86 @@ packages:
 
   '@vitest/utils@3.2.7':
     resolution: {integrity: sha512-x6BDOd7dyo3PFLY3I9/HJ25X/6OurhGXk2/B9gOZNPF7XDVjeBK4k01lQE5uvDpbuheErh91qYuE1E2OEjK3Rw==}
+
+  '@webviewjs/webview-android-arm-eabi@0.4.4':
+    resolution: {integrity: sha512-WjYIvytpcg7f/0hGN5bIFGCLPGn61ev7N0+m+4+DoD68NkT39uGv2wxgfnVCCK7xWqdhV3o+OZMsfvXnUMvaFA==}
+    engines: {node: '>= 24'}
+    cpu: [arm]
+    os: [android]
+
+  '@webviewjs/webview-android-arm64@0.4.4':
+    resolution: {integrity: sha512-E/UGj49RpkP1XcPExUjNi3LPvP2vAx9u/uQT1qPueLMx13ODmAJSyBiJn55ekWBQR2I9Qnfwaj1xsU6h08lUgA==}
+    engines: {node: '>= 24'}
+    cpu: [arm64]
+    os: [android]
+
+  '@webviewjs/webview-darwin-arm64@0.4.4':
+    resolution: {integrity: sha512-hXwrRy5+c6IESmQgPUOX6Qc1o6QV9LgxVpG8BVC7zNOy9pwkXPc8OXi2Tzq80VVzZa22zzZnW2N3gkbhWampAQ==}
+    engines: {node: '>= 24'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@webviewjs/webview-darwin-x64@0.4.4':
+    resolution: {integrity: sha512-cPLoZKldAKyZGC8d0+t0kM3Igy4Ldlu2T/qDIn2WIWfTglomJlfsYfLmgqfxYvxE0lG0a1qpWogNbAtxFomrKw==}
+    engines: {node: '>= 24'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@webviewjs/webview-freebsd-x64@0.4.4':
+    resolution: {integrity: sha512-CKw+uXORqdOyMUi3bfCanm3usI7fA84dQnZUUtjEL3nLH6rU9JHV4FMfxwxtxyAADUuiwYbRJjY8xt86xNVXog==}
+    engines: {node: '>= 24'}
+    cpu: [x64]
+    os: [freebsd]
+
+  '@webviewjs/webview-linux-arm-gnueabihf@0.4.4':
+    resolution: {integrity: sha512-jpGZ5Ek8DHr0TL6z7apnUoNli4K5AqODNwfwHqiMU9PCpMLF9aD6vW8nKi1N1fxyLBTuCD13oubrp9nI9y0L4Q==}
+    engines: {node: '>= 24'}
+    cpu: [arm]
+    os: [linux]
+
+  '@webviewjs/webview-linux-arm64-gnu@0.4.4':
+    resolution: {integrity: sha512-OOv93yxYr/JxNNifCfTkdE9l71C2YWNyPToUBVjRWAUJYYthmfdxuvVBxg872LdzjHa9+mj4pD6ygZG6VGtuHQ==}
+    engines: {node: '>= 24'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@webviewjs/webview-linux-ia32-gnu@0.4.4':
+    resolution: {integrity: sha512-RgNgQqiUvi3Lx5YkuK4cYALVtpJlwTzxkUDsT1NBvl5FPb9xgf8WD2veYYZ1fEsAzDi1I6VMh+0kCZTal8I+Vg==}
+    engines: {node: '>= 24'}
+    cpu: [ia32]
+    os: [linux]
+    libc: [glibc]
+
+  '@webviewjs/webview-linux-x64-gnu@0.4.4':
+    resolution: {integrity: sha512-xPCcIQG/fmcHTPj8+N5kNrVpS326QaN8JaZQmFB1keg+12jVePbY6gVE4fRU0mrnHn+3fV8XTFiVfNymUWy+BQ==}
+    engines: {node: '>= 24'}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@webviewjs/webview-win32-arm64-msvc@0.4.4':
+    resolution: {integrity: sha512-6LtkGP0C7ZpfJyta7+4IlACA3If6EgRpXbGvsMAo1Y9wL1yQ6NX1PA6p0sPcSOPMMvKs0Te8xrf4CP26i2yDeQ==}
+    engines: {node: '>= 24'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@webviewjs/webview-win32-ia32-msvc@0.4.4':
+    resolution: {integrity: sha512-0G5lznNoMmS1gNjw3EuSyX/VaxPjhwu+0bkNMC3c1lPL3DYF/yac2SoTQLxLohgqg47xaQ/tmqOzBVunnycGdQ==}
+    engines: {node: '>= 24'}
+    cpu: [ia32]
+    os: [win32]
+
+  '@webviewjs/webview-win32-x64-msvc@0.4.4':
+    resolution: {integrity: sha512-RnJhNxChdXE44VjUCkFV04uK3Zoe6Vyvgs00xnE6TpDG7n2RHv2eh5v0IpZ3eTdhRxyRvLrYz7WqAaRxsKg/5g==}
+    engines: {node: '>= 24'}
+    cpu: [x64]
+    os: [win32]
+
+  '@webviewjs/webview@0.4.4':
+    resolution: {integrity: sha512-sbAPVFn69U3kBhbFJXA6EnJ7gI6WW0ggml5WRJKe0axvqr8UWFF9Obpo0aLNWfrVdGuQ/n7WY7msS6/Tx5JmpA==}
+    engines: {node: '>= 24'}
+    hasBin: true
 
   '@yao-pkg/pkg-fetch@3.6.5':
     resolution: {integrity: sha512-Sd1Hff7imsF2rcZ2GLQuIzVm2fc3Za+nE4KSWPTwIYegN/r90UFg3bq0MLSugbWQaVht72zzxV0MiKE0wvT1zA==}
@@ -1656,6 +1749,15 @@ packages:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
 
+  react-dom@19.2.8:
+    resolution: {integrity: sha512-rVprimfGBG3DR+Tq0IQG2DT5PxKth1WIGDmj5yPmlzr4YBe7uyE+Du4oVqTDXZSHGGGXRtTJEGSSePyQCMBglQ==}
+    peerDependencies:
+      react: ^19.2.8
+
+  react@19.2.8:
+    resolution: {integrity: sha512-PWaYA1L/q9u2u7xYQi+Y3L3Yfnie7XyLeaJICV1MGD6LprsBxcAqGjYyr0eY3p+QdsA+x/Irkt4Qif8D63+Sbw==}
+    engines: {node: '>=0.10.0'}
+
   readable-stream@2.3.8:
     resolution: {integrity: sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA==}
 
@@ -1700,6 +1802,9 @@ packages:
 
   safe-buffer@5.2.1:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
+
+  scheduler@0.27.0:
+    resolution: {integrity: sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q==}
 
   semver-compare@1.0.0:
     resolution: {integrity: sha512-YM3/ITh2MJ5MtzaM429anh+x2jiLVjqILF4m4oyQB18W7Ggea7BfqdH/wGMK7dDiMghv/6WG7znWMwUDzJiXow==}
@@ -2671,6 +2776,57 @@ snapshots:
       loupe: 3.2.1
       tinyrainbow: 2.0.0
 
+  '@webviewjs/webview-android-arm-eabi@0.4.4':
+    optional: true
+
+  '@webviewjs/webview-android-arm64@0.4.4':
+    optional: true
+
+  '@webviewjs/webview-darwin-arm64@0.4.4':
+    optional: true
+
+  '@webviewjs/webview-darwin-x64@0.4.4':
+    optional: true
+
+  '@webviewjs/webview-freebsd-x64@0.4.4':
+    optional: true
+
+  '@webviewjs/webview-linux-arm-gnueabihf@0.4.4':
+    optional: true
+
+  '@webviewjs/webview-linux-arm64-gnu@0.4.4':
+    optional: true
+
+  '@webviewjs/webview-linux-ia32-gnu@0.4.4':
+    optional: true
+
+  '@webviewjs/webview-linux-x64-gnu@0.4.4':
+    optional: true
+
+  '@webviewjs/webview-win32-arm64-msvc@0.4.4':
+    optional: true
+
+  '@webviewjs/webview-win32-ia32-msvc@0.4.4':
+    optional: true
+
+  '@webviewjs/webview-win32-x64-msvc@0.4.4':
+    optional: true
+
+  '@webviewjs/webview@0.4.4':
+    optionalDependencies:
+      '@webviewjs/webview-android-arm-eabi': 0.4.4
+      '@webviewjs/webview-android-arm64': 0.4.4
+      '@webviewjs/webview-darwin-arm64': 0.4.4
+      '@webviewjs/webview-darwin-x64': 0.4.4
+      '@webviewjs/webview-freebsd-x64': 0.4.4
+      '@webviewjs/webview-linux-arm-gnueabihf': 0.4.4
+      '@webviewjs/webview-linux-arm64-gnu': 0.4.4
+      '@webviewjs/webview-linux-ia32-gnu': 0.4.4
+      '@webviewjs/webview-linux-x64-gnu': 0.4.4
+      '@webviewjs/webview-win32-arm64-msvc': 0.4.4
+      '@webviewjs/webview-win32-ia32-msvc': 0.4.4
+      '@webviewjs/webview-win32-x64-msvc': 0.4.4
+
   '@yao-pkg/pkg-fetch@3.6.5':
     dependencies:
       picocolors: 1.1.1
@@ -3583,6 +3739,13 @@ snapshots:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
 
+  react-dom@19.2.8(react@19.2.8):
+    dependencies:
+      react: 19.2.8
+      scheduler: 0.27.0
+
+  react@19.2.8: {}
+
   readable-stream@2.3.8:
     dependencies:
       core-util-is: 1.0.3
@@ -3663,6 +3826,8 @@ snapshots:
   safe-buffer@5.1.2: {}
 
   safe-buffer@5.2.1: {}
+
+  scheduler@0.27.0: {}
 
   semver-compare@1.0.0:
     optional: true

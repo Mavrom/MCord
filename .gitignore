@@ -1,5 +1,6 @@
 node_modules/
 dist/
+scripts/installer/dist-ui/
 *.tgz
 *.log
 .DS_Store

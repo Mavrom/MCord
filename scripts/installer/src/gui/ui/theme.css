@@ -1,0 +1,81 @@
+/*
+ * MCord, a Discord client modification
+ * Copyright (c) 2026 Mavrom
+ * SPDX-License-Identifier: PolyForm-Strict-1.0.0
+ */
+
+:root {
+    --bg: #313338;
+    --bg-alt: #2b2d31;
+    --card: #383a40;
+    --text: #f2f3f5;
+    --text-muted: #b5bac1;
+    --accent: #5865f2;
+    --accent-hover: #4752c4;
+    --danger: #da373c;
+    --ok: #23a55a;
+    --border: #1e1f22;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.45 "gg sans", "Segoe UI", system-ui, sans-serif;
+    padding: 20px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+h1 { font-size: 18px; margin-bottom: 4px; }
+p.sub { color: var(--text-muted); margin-bottom: 16px; font-size: 12px; }
+
+button {
+    font: inherit;
+    border: 0;
+    border-radius: 4px;
+    padding: 10px 16px;
+    cursor: pointer;
+    color: #fff;
+    background: var(--accent);
+}
+button:hover { background: var(--accent-hover); }
+button:disabled { opacity: .5; cursor: default; }
+button.secondary { background: var(--card); }
+button.danger { background: var(--danger); }
+
+.branch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+.branch.selected { border-color: var(--accent); }
+.branch .meta { flex: 1; }
+.branch .badge { font-size: 11px; color: var(--text-muted); }
+.branch .badge.ok { color: var(--ok); }
+
+.actions { display: flex; gap: 8px; margin-top: 12px; }
+
+.log {
+    background: var(--bg-alt);
+    border-radius: 6px;
+    padding: 10px;
+    font-family: "Consolas", monospace;
+    font-size: 12px;
+    height: 220px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+}
+
+.center { text-align: center; padding-top: 40px; }
+.center .icon { font-size: 40px; }
+.center.ok .icon { color: var(--ok); }
+.center.err .icon { color: var(--danger); }
+.hash { font-family: monospace; font-size: 11px; color: var(--text-muted); word-break: break-all; margin-top: 8px; }

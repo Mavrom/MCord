@@ -18,7 +18,7 @@
         "watch": "node scripts/build.mjs --watch --dev",
         "inject": "node scripts/inject.mjs",
         "uninject": "node scripts/inject.mjs --uninject",
-        "typecheck": "tsc --noEmit",
+        "typecheck": "tsc --noEmit && pnpm --filter mcord-installer typecheck",
         "lint": "eslint",
         "lint:fix": "eslint --fix",
         "test": "vitest run",
