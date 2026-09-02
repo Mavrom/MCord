@@ -40,3 +40,42 @@ jobs:
         with:
           name: mcord-dist
           path: dist/
+
+  installer:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck installer
+        run: pnpm --filter mcord-installer typecheck
+
+      - name: Build app.asar
+        run: pnpm dist
+
+      - name: Package installer
+        working-directory: scripts/installer
+        run: pnpm package
+
+      - name: Duman testi — CLI (Discord kurulu değil)
+        shell: pwsh
+        run: |
+          $p = Start-Process ./dist/MCordInstaller.exe -ArgumentList '--branch=stable','--yes' `
+            -Wait -PassThru -NoNewWindow -RedirectStandardOutput out.txt
+          Get-Content out.txt
+          if ($p.ExitCode -ne 1) { throw "Discord yokken exit 1 bekleniyordu, gelen: $($p.ExitCode)" }
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: mcord-installer-exe
+          path: dist/MCordInstaller.exe

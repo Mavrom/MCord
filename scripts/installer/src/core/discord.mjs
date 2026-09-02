@@ -11,7 +11,7 @@
  * Süreç çağrıları `run` üzerinden enjekte edilebilir (test için mock'lanır).
  */
 
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawn } from "node:child_process";
 import { existsSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 
@@ -22,7 +22,14 @@ export const BRANCHES = [
 ];
 
 export function defaultRun(file, args) {
-    return execFileSync(file, args, { encoding: "utf-8", windowsHide: true });
+    // stdout dışında her şey kapalı + timeout: `tasklist`/`taskkill` çıktısını
+    // alırız ama torun süreçler stdio pipe'ını miras alıp bizi asamaz.
+    return execFileSync(file, args, {
+        encoding: "utf-8",
+        windowsHide: true,
+        stdio: ["ignore", "pipe", "ignore"],
+        timeout: 15_000
+    });
 }
 
 export function assertWindows(platform = process.platform) {
@@ -60,7 +67,9 @@ export function discoverInstalls({ localAppData = process.env.LOCALAPPDATA } = {
             appAsar: join(resources, "app.asar"),
             backupAsar: join(resources, "_app.asar"),
             devAppDir: join(resources, "app"),
-            executable: join(branchPath, branch.exe)
+            // Squirrel launcher (kök) + sürümlü gerçek exe (yedek).
+            updateExe: join(branchPath, "Update.exe"),
+            appExe: join(branchPath, latest, branch.exe)
         });
     }
 
@@ -85,13 +94,23 @@ export function killDiscord(exeName, { run = defaultRun } = {}) {
     }
 }
 
-export function launchDiscord(executable, { run = defaultRun } = {}) {
-    try {
-        run("cmd", ["/c", "start", "", executable]);
-        return true;
-    } catch {
-        return false;
+export function launchDiscord(install, { spawnFn = spawn } = {}) {
+    // Önce Squirrel launcher (`Update.exe --processStart Discord.exe`), yoksa
+    // sürümlü exe. Tamamen ayrık başlat — yoksa Discord stdio'yu miras alıp asar.
+    const attempts = existsSync(install.updateExe)
+        ? [[install.updateExe, ["--processStart", install.exe]], [install.appExe, []]]
+        : [[install.appExe, []]];
+
+    for (const [file, args] of attempts) {
+        if (!existsSync(file)) continue;
+        try {
+            const child = spawnFn(file, args, { detached: true, stdio: "ignore" });
+            child.on("error", () => {});
+            child.unref();
+            return true;
+        } catch { /* sıradaki */ }
     }
+    return false;
 }
 
 function safeIsDirectory(path) {
