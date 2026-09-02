@@ -17,3 +17,5 @@ report.md
 
 # yerel enjeksiyon durumu
 .inject-state.json
+
+scripts/installer/src/gui/webview-native.generated.mjs

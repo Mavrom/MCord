@@ -1,7 +1,7 @@
 {
     "name": "mcord-installer",
     "private": true,
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "MCord installer for Windows",
     "license": "PolyForm-Strict-1.0.0",
     "type": "module",
@@ -22,11 +22,5 @@
     "devDependencies": {
         "@yao-pkg/pkg": "^6.9.0",
         "esbuild": "^0.25.10"
-    },
-    "pkg": {
-        "assets": [
-            "../../node_modules/.pnpm/@webviewjs+webview@*/node_modules/@webviewjs/**/*",
-            "../../node_modules/.pnpm/@webviewjs+webview-win32-x64-msvc@*/node_modules/@webviewjs/**/*"
-        ]
     }
 }
