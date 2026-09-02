@@ -12,7 +12,7 @@ const src = (p: string) => fileURLToPath(new URL(`./src/${p}`, import.meta.url))
 
 export default defineConfig({
     test: {
-        include: ["src/**/*.test.ts"],
+        include: ["src/**/*.test.ts", "scripts/installer/src/**/*.test.mjs"],
         passWithNoTests: true,
         environment: "node"
     },
