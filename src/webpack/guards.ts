@@ -65,16 +65,33 @@ export function wrapModuleFilter(filter: ModuleFilter): ModuleFilter {
  * DOM nesneleri, typed array'ler ve Discord'un loader sarmalayıcıları arama
  * sırasında sonsuz özyinelemeye veya DOM sızıntısına yol açıyor.
  */
+/**
+ * Sorulan **her** anahtara değer döndüren nesneler (Discord'un ve bizim proxy
+ * katmanımızın ürettiği "catch-all"lar) her filtreyle eşleşip aramayı zehirliyor.
+ * Var olmayan bir anahtarla test edip eliyoruz — referans katalog `PROXY_CHECK`
+ * yaklaşımının aynısı.
+ */
+const PROXY_CHECK = "$$mcordIsProxy";
+
+function isCatchAllProxy(exports: ModuleExports): boolean {
+    try {
+        return exports[PROXY_CHECK] !== undefined;
+    } catch {
+        return false;
+    }
+}
+
 export function shouldSkipModule(exports: ModuleExports): boolean {
     if (!(typeof exports === "object" || typeof exports === "function")) return true;
     if (!exports) return true;
-    if (exports.TypedArray) return true;
     if (exports === window) return true;
-    if (exports === document.documentElement) return true;
+    if (exports === document || exports === document.documentElement) return true;
     if (exports[Symbol.toStringTag] === "DOMTokenList") return true;
+    if (exports[Symbol.toStringTag] === "IntlMessagesProxy") return true;
     if (exports === Symbol) return true;
     if (exports instanceof Window) return true;
     if (exports instanceof TypedArray) return true;
+    if (isCatchAllProxy(exports)) return true;
     if ((exports.$$loader && exports.$$baseObject) || (exports.Z?.$$loader && exports.Z?.$$baseObject)) return true;
     return false;
 }

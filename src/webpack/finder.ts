@@ -14,8 +14,8 @@ import {
     byStrings,
     describeFilter
 } from "./filters";
-import { getDefaultKey, shouldSkipModule, wrapModuleFilter } from "./guards";
-import { cache, wreq } from "./intercept";
+import { shouldSkipModule, wrapModuleFilter } from "./guards";
+import { allWebpackInstances, cache, wreq } from "./intercept";
 import type { Module, ModuleExports, ModuleFilter } from "./types";
 
 const logger = new Logger("Webpack:Finder", "#8caaee");
@@ -27,24 +27,33 @@ export interface FindOptions {
     raw?: boolean;
 }
 
-/** Bir modülün aranabilir export'ları: ham export ve varsayılan export. */
+/**
+ * Bir modülün aranabilir export'ları: ham export + **tüm** iç içe export'lar.
+ *
+ * Sadece `A`/`Ay`/`default` anahtarlarına bakmak yetmiyor — Discord modülleri
+ * `Z`, `ZP`, `n` gibi rastgele mangle'lı anahtarlar altında export ediyor ve
+ * o modüller hiç bulunamıyordu. referans katalog da tüm anahtarları geziyor.
+ */
 function* searchableExports(module: Module): Generator<ModuleExports> {
     const { exports } = module;
     if (exports == null) return;
 
     if (!shouldSkipModule(exports)) yield exports;
 
-    const defaultKey = getDefaultKey(module);
-    if (defaultKey == null) return;
+    // İç içe gezinme sadece düz nesnelerde anlamlı; fonksiyon/sınıf export'ları
+    // zaten yukarıda denendi.
+    if (typeof exports !== "object") return;
 
-    let defaultExport: ModuleExports;
-    try {
-        defaultExport = exports[defaultKey];
-    } catch {
-        return;
+    for (const key in exports) {
+        let nested: ModuleExports;
+        try {
+            nested = exports[key];
+        } catch {
+            continue;
+        }
+
+        if (nested != null && !shouldSkipModule(nested)) yield nested;
     }
-
-    if (defaultExport != null && !shouldSkipModule(defaultExport)) yield defaultExport;
 }
 
 /**
@@ -117,17 +126,22 @@ export function findModuleId(filter: ModuleFilter, options: FindOptions = {}): P
  * üzerinde geziyoruz çünkü modül hiç require edilmemiş olabilir (plan §4.4).
  */
 export function findModuleIdBySource(...strings: string[]): PropertyKey | null {
-    if (wreq?.m == null) return null;
+    // Tek `wreq` yetmiyor: Discord'da birden fazla webpack instance'ı var ve
+    // aradığımız modül başka bir instance'ın fabrika listesinde olabilir.
+    for (const instance of new Set([wreq, ...allWebpackInstances])) {
+        const factories = instance?.m;
+        if (factories == null) continue;
 
-    for (const moduleId in wreq.m) {
-        let source: string;
-        try {
-            source = String(wreq.m[moduleId]);
-        } catch {
-            continue;
+        for (const moduleId in factories) {
+            let source: string;
+            try {
+                source = String(factories[moduleId]);
+            } catch {
+                continue;
+            }
+
+            if (strings.every(str => source.includes(str))) return moduleId;
         }
-
-        if (strings.every(str => source.includes(str))) return moduleId;
     }
 
     logger.warn(`Kaynakta bulunamadı: ${strings.join(", ")}`);

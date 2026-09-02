@@ -7,7 +7,7 @@
 import { Logger } from "../utils/logger";
 import { byCode, byStoreName, describeFilter } from "./filters";
 import { find, type FindOptions } from "./finder";
-import { getDefaultKey, shouldSkipModule, wrapModuleFilter } from "./guards";
+import { shouldSkipModule, wrapModuleFilter } from "./guards";
 import { cache, lazyWebpackSearchHistory, moduleListeners } from "./intercept";
 import type { Module, ModuleExports, ModuleFilter } from "./types";
 
@@ -75,23 +75,24 @@ export function waitFor(
     };
 }
 
+/** `finder.ts`'teki `searchableExports` ile aynı: ham export + tüm iç içe export'lar. */
 function* candidates(module: Module): Generator<ModuleExports> {
     const { exports } = module;
     if (exports == null) return;
 
     if (!shouldSkipModule(exports)) yield exports;
+    if (typeof exports !== "object") return;
 
-    const defaultKey = getDefaultKey(module);
-    if (defaultKey == null) return;
+    for (const key in exports) {
+        let nested: ModuleExports;
+        try {
+            nested = exports[key];
+        } catch {
+            continue;
+        }
 
-    let defaultExport: ModuleExports;
-    try {
-        defaultExport = exports[defaultKey];
-    } catch {
-        return;
+        if (nested != null && !shouldSkipModule(nested)) yield nested;
     }
-
-    if (defaultExport != null && !shouldSkipModule(defaultExport)) yield defaultExport;
 }
 
 /** Modül yüklenene kadar bekleyen Promise sürümü. */
