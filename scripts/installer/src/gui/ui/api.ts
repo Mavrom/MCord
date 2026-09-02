@@ -9,6 +9,7 @@ export type BranchStatus = {
     name: string;
     version: string;
     installed: boolean;
+    otherMod: boolean;
     hasDevInjection: boolean;
     running: boolean;
 };

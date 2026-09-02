@@ -26,7 +26,13 @@ export function BranchList({ branches, selected, onSelect }: Props) {
                         <div className="badge">{b.version.replace("app-", "v")}</div>
                     </div>
                     <div className={`badge${b.installed ? " ok" : ""}`}>
-                        {b.installed ? "MCord kurulu" : b.hasDevInjection ? "dev enjeksiyon" : "kurulu değil"}
+                        {b.installed
+                            ? "MCord kurulu"
+                            : b.hasDevInjection
+                                ? "dev enjeksiyon"
+                                : b.otherMod
+                                    ? "başka mod kurulu"
+                                    : "kurulu değil"}
                         {b.running ? " · açık" : ""}
                     </div>
                 </div>
