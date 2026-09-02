@@ -76,7 +76,6 @@ const buildConfigs = [
         entryPoints: [join(SRC, "renderer.ts")],
         outfile: join(DIST, "renderer.js"),
         format: "iife",
-        globalName: "Mcord",
         target: ["esnext"],
         footer: { js: "//# sourceURL=file:///McordRenderer\n" },
         plugins: [globPlugins(), ...commonOpts.plugins],

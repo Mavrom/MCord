@@ -86,8 +86,13 @@ export function shouldSkipModule(exports: ModuleExports): boolean {
  * yeni harf gelebilir. **Tek bir yerde tut, dağıtma** (plan §4.5).
  */
 export function getDefaultKey(module: Module): string | undefined {
-    if ("A" in module.exports) return "A";
-    if ("Ay" in module.exports) return "Ay";
-    if (module.exports.__esModule && "default" in module.exports) return "default";
+    const { exports } = module;
+    if (exports == null || (typeof exports !== "object" && typeof exports !== "function")) {
+        return undefined;
+    }
+
+    if ("A" in exports) return "A";
+    if ("Ay" in exports) return "Ay";
+    if (exports.__esModule && "default" in exports) return "default";
     return undefined;
 }

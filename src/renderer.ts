@@ -61,7 +61,7 @@ const Mcord = {
     buildTimestamp: BUILD_TIMESTAMP
 };
 
-Object.defineProperty(window, "Mcord", { value: Mcord, configurable: true, writable: true });
+Object.assign(window, { Mcord });
 
 if (IS_REPORTER) captureConsoleErrors();
 

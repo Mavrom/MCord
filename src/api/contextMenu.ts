@@ -5,6 +5,7 @@
  */
 
 import { Logger } from "../utils/logger";
+import { React } from "../webpack/react";
 
 const logger = new Logger("Api:ContextMenu", "#f4b8e4");
 
@@ -47,17 +48,26 @@ export function removeGlobalContextMenuPatch(patch: ContextMenuPatch): boolean {
 /** `ContextMenuAPI` plugin'i tarafından çağrılır. */
 export function _patchContextMenu(props: Record<string, any>): void {
     const navId = props.navId;
+    const children = props.children;
+    if (!Array.isArray(children)) {
+        logger.warn(`"${String(navId)}" bağlam menüsünün çocukları dizi değil; patch atlandı.`);
+        return;
+    }
+
+    const menuItemType = findMenuItemType(children);
 
     for (const patch of globalPatches) {
-        runPatch(patch, props.children, props, "global");
+        runPatch(patch, children, props, "global");
     }
 
     const set = patches.get(navId);
-    if (!set) return;
-
-    for (const patch of set) {
-        runPatch(patch, props.children, props, navId);
+    if (set) {
+        for (const patch of set) {
+            runPatch(patch, children, props, navId);
+        }
     }
+
+    materializeMenuItems(children, menuItemType, navId);
 }
 
 function runPatch(patch: ContextMenuPatch, children: any[], props: Record<string, any>, navId: string): void {
@@ -65,5 +75,55 @@ function runPatch(patch: ContextMenuPatch, children: any[], props: Record<string
         patch(children, props);
     } catch (err) {
         logger.error(`"${navId}" bağlam menüsü patch'inde hata:\n`, err);
+    }
+}
+
+function findMenuItemType(children: any[]): any {
+    for (const child of children) {
+        if (Array.isArray(child)) {
+            const type = findMenuItemType(child);
+            if (type) return type;
+            continue;
+        }
+
+        const props = child?.props;
+        if (props?.id != null && props?.label != null && typeof props?.action === "function") {
+            return child.type;
+        }
+
+        const nested = props?.children;
+        if (Array.isArray(nested)) {
+            const type = findMenuItemType(nested);
+            if (type) return type;
+        } else if (nested?.props) {
+            const type = findMenuItemType([nested]);
+            if (type) return type;
+        }
+    }
+}
+
+function materializeMenuItems(children: any[], menuItemType: any, navId: string): void {
+    for (let index = children.length - 1; index >= 0; index--) {
+        const child = children[index];
+        if (child?.$$typeof) {
+            const nested = child.props?.children;
+            if (Array.isArray(nested)) materializeMenuItems(nested, menuItemType, navId);
+            else if (nested?.props) materializeMenuItems([nested], menuItemType, navId);
+            continue;
+        }
+
+        if (typeof child?.type !== "string" || !child.type.startsWith("mcord-")) continue;
+
+        if (menuItemType == null) {
+            logger.warn(`"${navId}" bağlam menüsü için MenuItem bileşeni bulunamadı; öğe atlandı.`);
+            children.splice(index, 1);
+            continue;
+        }
+
+        const { type: _type, ...itemProps } = child;
+        if (Array.isArray(itemProps.children)) {
+            materializeMenuItems(itemProps.children, menuItemType, navId);
+        }
+        children[index] = React.createElement(menuItemType, { ...itemProps, key: itemProps.id });
     }
 }
