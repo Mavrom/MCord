@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /*
  * MCord, a Discord client modification
  * Copyright (c) 2026 Mavrom
