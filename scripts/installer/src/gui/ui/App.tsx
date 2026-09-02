@@ -107,6 +107,12 @@ export function App() {
                         selected={screen.selected}
                         onSelect={id => setScreen({ ...screen, selected: id })}
                     />
+                    {sel?.otherMod && (
+                        <p className="sub" style={{ color: "var(--danger)", marginTop: 8 }}>
+                            Bu Discord'da başka bir mod (Vencord vb.) kurulu görünüyor.
+                            "Kur" dersen üzerine yazılır; orijinal app.asar yedeği korunur.
+                        </p>
+                    )}
                     {sel && (
                         <ActionBar
                             disabled={!screen.selected}

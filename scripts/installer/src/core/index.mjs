@@ -38,6 +38,7 @@ export function detectInstalls(deps = {}) {
                 name: i.name,
                 version: i.version,
                 installed: s.installed,
+                otherMod: s.otherMod,
                 hasDevInjection: s.hasDevInjection,
                 running: isRunning(i.exe, deps)
             };

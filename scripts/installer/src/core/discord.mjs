@@ -66,6 +66,7 @@ export function discoverInstalls({ localAppData = process.env.LOCALAPPDATA } = {
             resources,
             appAsar: join(resources, "app.asar"),
             backupAsar: join(resources, "_app.asar"),
+            markerFile: join(resources, "mcord.json"),
             devAppDir: join(resources, "app"),
             // Squirrel launcher (kök) + sürümlü gerçek exe (yedek).
             updateExe: join(branchPath, "Update.exe"),
