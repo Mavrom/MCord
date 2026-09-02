@@ -14,7 +14,8 @@ import {
 import type { Plugin } from "../utils/types";
 import { React } from "../webpack/react";
 import { SettingsPanel } from "./SettingControls";
-import { c, s } from "./theme";
+import { c, motion, radius, s, shadow, space, tint } from "./theme";
+import { Toggle } from "./Toggle";
 
 export function PluginCard({ plugin, onRestartNeeded }: {
     plugin: Plugin;
@@ -22,13 +23,12 @@ export function PluginCard({ plugin, onRestartNeeded }: {
 }) {
     const [enabled, setEnabled] = React.useState(() => isPluginEnabled(plugin.name));
     const [expanded, setExpanded] = React.useState(false);
+    const [hover, setHover] = React.useState(false);
 
     const needsRestart = pluginRequiresRestart(plugin);
     const hasSettings = plugin.settings != null;
 
-    const toggle = async () => {
-        const next = !enabled;
-
+    const toggle = async (next: boolean) => {
         setPluginEnabled(plugin.name, next);
         setEnabled(next);
 
@@ -44,52 +44,111 @@ export function PluginCard({ plugin, onRestartNeeded }: {
     };
 
     return (
-        <div style={s.card}>
-            <div style={s.spread}>
-                <div style={s.row}>
-                    <span style={{ color: c.heading, fontWeight: 600 }}>{plugin.name}</span>
-                    {needsRestart && (
-                        <span style={{ ...s.badge, background: c.warning, color: "#000" }}>
-                            yeniden başlat
-                        </span>
-                    )}
+        <div
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            style={{
+                ...s.card,
+                height: "100%",
+                gap: space.sm,
+                borderColor: hover ? c.borderStrong : c.border,
+                boxShadow: hover ? shadow.mid : shadow.low,
+                // Açık plugin'ler soldaki ince şeritle ayrışıyor — rozet gürültüsü yok.
+                borderLeft: `3px solid ${enabled ? c.success : "transparent"}`
+            }}
+        >
+            <div style={{ ...s.spread, alignItems: "flex-start" }}>
+                <div style={{ minWidth: 0 }}>
+                    <div
+                        style={{
+                            color: c.heading,
+                            fontWeight: 600,
+                            fontSize: "14px",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap"
+                        }}
+                        title={plugin.name}
+                    >
+                        {plugin.name}
+                    </div>
                     {plugin.required && (
-                        <span style={{ ...s.badge, background: c.border, color: c.muted }}>
-                            zorunlu
-                        </span>
+                        <div style={{ ...s.faint, marginTop: "2px" }}>Çekirdek — kapatılamaz</div>
                     )}
                 </div>
 
-                <input
-                    type="checkbox"
+                <Toggle
                     checked={enabled}
                     disabled={plugin.required}
-                    onChange={() => void toggle()}
-                    aria-label={`${plugin.name} aç/kapa`}
+                    onChange={next => void toggle(next)}
+                    label={`${plugin.name} aç/kapa`}
                 />
             </div>
 
-            <div style={s.muted}>{plugin.description}</div>
-
-            <div style={{ ...s.row, flexWrap: "wrap" }}>
-                {plugin.authors.map(author => (
-                    <span key={author.name} style={s.tag}>{author.name}</span>
-                ))}
-                {plugin.tags?.map(tag => (
-                    <span key={tag} style={s.tag}>#{tag}</span>
-                ))}
+            <div
+                style={{
+                    ...s.muted,
+                    // Üç satırda kes: kartlar aynı hizada kalsın.
+                    display: "-webkit-box",
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden"
+                }}
+                title={plugin.description}
+            >
+                {plugin.description}
             </div>
 
-            {hasSettings && (
-                <>
+            {needsRestart && (
+                <div style={{ ...s.badge, ...tint(c.warning), alignSelf: "flex-start" }}>
+                    yeniden başlatma gerektirir
+                </div>
+            )}
+
+            {(plugin.tags?.length ?? 0) > 0 && (
+                <div style={{ ...s.row, flexWrap: "wrap", gap: space.xs }}>
+                    {plugin.tags!.slice(0, 4).map(tag => (
+                        <span key={tag} style={s.tag}>#{tag}</span>
+                    ))}
+                </div>
+            )}
+
+            {/* Alt satır her kartta aynı yerde: yazarlar solda, ayar düğmesi sağda. */}
+            <div style={{ ...s.spread, marginTop: "auto", paddingTop: space.xs }}>
+                <span style={{ ...s.faint, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    {plugin.authors.map(author => author.name).join(", ")}
+                </span>
+
+                {hasSettings && (
                     <button
-                        style={{ ...s.button, ...s.buttonSecondary, alignSelf: "flex-start" }}
+                        style={{
+                            ...s.button,
+                            ...s.buttonGhost,
+                            padding: "4px 10px",
+                            fontSize: "12px",
+                            color: expanded ? c.text : c.muted,
+                            background: expanded ? c.surfaceActive : "transparent"
+                        }}
                         onClick={() => setExpanded(value => !value)}
+                        aria-expanded={expanded}
                     >
-                        {expanded ? "Ayarları Gizle" : "Ayarlar"}
+                        Ayarlar {expanded ? "▲" : "▼"}
                     </button>
-                    {expanded && <SettingsPanel settings={plugin.settings!} />}
-                </>
+                )}
+            </div>
+
+            {hasSettings && expanded && (
+                <div
+                    style={{
+                        marginTop: space.xs,
+                        paddingTop: space.md,
+                        borderTop: `1px solid ${c.border}`,
+                        borderRadius: radius.sm,
+                        transition: `opacity ${motion}`
+                    }}
+                >
+                    <SettingsPanel settings={plugin.settings!} />
+                </div>
             )}
         </div>
     );

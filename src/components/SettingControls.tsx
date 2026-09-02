@@ -13,7 +13,8 @@ import {
     type SliderSetting
 } from "../utils/types";
 import { React } from "../webpack/react";
-import { c, s } from "./theme";
+import { c, s, tint } from "./theme";
+import { Toggle } from "./Toggle";
 
 /**
  * Ayar UI'ı `definePluginSettings` tanımından **otomatik üretiliyor** —
@@ -66,7 +67,7 @@ function SettingRow(props: { settings: DefinedSettings; settingKey: string; sett
                     <div style={s.muted}>{setting.description}</div>
                 </div>
                 {setting.restartNeeded && (
-                    <span style={{ ...s.badge, background: c.warning, color: "#000" }}>
+                    <span style={{ ...s.badge, ...tint(c.warning) }}>
                         yeniden başlat
                     </span>
                 )}
@@ -90,15 +91,15 @@ function Control(props: {
     switch (setting.type) {
         case OptionType.BOOLEAN:
             return (
-                <label style={{ ...s.row, cursor: disabled ? "default" : "pointer" }}>
-                    <input
-                        type="checkbox"
+                <div style={s.row}>
+                    <Toggle
                         checked={value === true}
                         disabled={disabled}
-                        onChange={event => onChange(event.currentTarget.checked)}
+                        onChange={next => onChange(next)}
+                        label={setting.description ?? "Ayar"}
                     />
                     <span style={s.muted}>{value === true ? "Açık" : "Kapalı"}</span>
-                </label>
+                </div>
             );
 
         case OptionType.SELECT: {

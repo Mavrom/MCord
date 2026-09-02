@@ -88,7 +88,8 @@ function Overlay({ initialTab, onClose }: { initialTab: TabId; onClose(): void }
                     </button>
                 </div>
 
-                <div style={{ flex: 1, overflow: "auto", minHeight: 0 }}>
+                {/* Kaydırmayı SettingsRoot kendi içinde yönetiyor (kenar çubuğu sabit kalsın). */}
+                <div style={{ flex: 1, minHeight: 0, minWidth: 0, display: "flex" }}>
                     <SettingsRoot initialTab={initialTab} />
                 </div>
             </div>
