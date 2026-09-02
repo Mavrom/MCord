@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
-import { mkdirSync, mkdtempSync, rmSync } from "node:fs";
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
-import { discoverInstalls, isRunning } from "./discord.mjs";
+import { discoverInstalls, isRunning, launchDiscord } from "./discord.mjs";
 
 let root;
 
@@ -60,5 +60,35 @@ describe("isRunning", () => {
     it("run patlarsa false", () => {
         const run = () => { throw new Error("boom"); };
         expect(isRunning("Discord.exe", { run })).toBe(false);
+    });
+});
+
+describe("launchDiscord", () => {
+    it("Update.exe varsa Squirrel launcher'ı ayrık başlatır", () => {
+        const dir = mkdtempSync(join(tmpdir(), "mcord-launch-"));
+        const updateExe = join(dir, "Update.exe");
+        writeFileSync(updateExe, "");
+        const calls = [];
+        const spawnFn = (file, args, opts) => {
+            calls.push({ file, args, opts });
+            return { on() {}, unref() {} };
+        };
+        const ok = launchDiscord(
+            { updateExe, appExe: join(dir, "app-1", "Discord.exe"), exe: "Discord.exe" },
+            { spawnFn }
+        );
+        rmSync(dir, { recursive: true, force: true });
+        expect(ok).toBe(true);
+        expect(calls[0].file).toBe(updateExe);
+        expect(calls[0].args).toEqual(["--processStart", "Discord.exe"]);
+        expect(calls[0].opts).toMatchObject({ detached: true, stdio: "ignore" });
+    });
+
+    it("hiçbir exe yoksa false", () => {
+        const ok = launchDiscord(
+            { updateExe: "/yok/Update.exe", appExe: "/yok/Discord.exe", exe: "Discord.exe" },
+            { spawnFn: () => { throw new Error("olmamalı"); } }
+        );
+        expect(ok).toBe(false);
     });
 });

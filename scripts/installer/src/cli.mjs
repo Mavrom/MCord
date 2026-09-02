@@ -11,9 +11,7 @@
  *   MCordInstaller.exe --repair --branch=canary --yes
  */
 
-import { dirname, join } from "node:path";
 import { createInterface } from "node:readline/promises";
-import { fileURLToPath } from "node:url";
 
 import {
     closeDiscord,
@@ -23,9 +21,7 @@ import {
     repair,
     uninstall
 } from "./core/index.mjs";
-import { resolveSourceAsar } from "./core/source.mjs";
-
-const HERE = dirname(fileURLToPath(import.meta.url));
+import { materializeAsar } from "./core/payload.mjs";
 
 export async function runCli(argv = process.argv.slice(2)) {
     const UNINSTALL = argv.includes("--uninstall");
@@ -61,7 +57,7 @@ export async function runCli(argv = process.argv.slice(2)) {
             else if (choice !== targets.length + 1) throw new Error("Geçersiz seçim.");
         }
 
-        const source = UNINSTALL ? null : resolveSourceAsar(join(HERE, "core"));
+        const source = UNINSTALL ? null : materializeAsar();
 
         for (const target of targets) {
             const label = UNINSTALL ? "kaldırılıyor" : REPAIR ? "onarılıyor" : "kuruluyor";
@@ -82,6 +78,11 @@ export async function runCli(argv = process.argv.slice(2)) {
                     console.log("  atlandı.");
                     continue;
                 }
+            }
+
+            if (!res.ok && res.code === "NOT_INSTALLED") {
+                console.log("  MCord kurulu değil, atlandı.");
+                continue;
             }
 
             if (!res.ok) {

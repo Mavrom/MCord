@@ -1,6 +1,9 @@
 node_modules/
 dist/
 scripts/installer/dist-ui/
+scripts/installer/dist-installer/
+scripts/installer/src/gui/ui.generated.mjs
+scripts/installer/src/core/payload.generated.mjs
 *.tgz
 *.log
 .DS_Store
