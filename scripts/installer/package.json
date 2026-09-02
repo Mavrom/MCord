@@ -1,7 +1,7 @@
 {
     "name": "mcord-installer",
     "private": true,
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "MCord installer for Windows",
     "license": "PolyForm-Strict-1.0.0",
     "type": "module",
