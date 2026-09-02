@@ -51,7 +51,9 @@ export function _initWebpack(instance: WebpackRequire): void {
 }
 
 const define: typeof Object.defineProperty = (target, prop, descriptor) =>
-    Object.defineProperty(target, prop, { configurable: true, writable: true, ...descriptor });
+    Object.defineProperty(target, prop, "get" in descriptor || "set" in descriptor
+        ? { configurable: true, ...descriptor }
+        : { configurable: true, writable: true, ...descriptor });
 
 /**
  * Discord içinde birden fazla webpack instance'ı var (Sentry, libdiscore,

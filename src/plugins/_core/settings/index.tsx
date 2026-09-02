@@ -5,12 +5,12 @@
  */
 
 import { mountNotificationHost, unmountNotificationHost } from "../../../components/NotificationHost";
-import { SettingsRoot, type TabId,TABS } from "../../../components/SettingsRoot";
+import { closeSettingsOverlay, isSettingsOverlayOpen, openSettingsOverlay } from "../../../components/SettingsOverlay";
+import { SettingsRoot, type TabId, TABS } from "../../../components/SettingsRoot";
 import { Devs } from "../../../utils/constants";
 import { Logger } from "../../../utils/logger";
 import { definePlugin, StartAt } from "../../../utils/types";
-import { byKeys } from "../../../webpack/filters";
-import { find, findByKeys } from "../../../webpack/finder";
+import { findByKeys, findBySource } from "../../../webpack/finder";
 
 const logger = new Logger("Settings", "#f4b8e4");
 
@@ -19,7 +19,7 @@ const SECTION_PREFIX = "mcord-";
 
 export default definePlugin({
     name: "Settings",
-    description: "MCord ayar arayüzünü Discord'un ayarlar menüsüne ekler",
+    description: "MCord ayar arayüzünü açar (toolbar butonu, kısayol, Discord ayar sekmesi)",
     authors: [Devs.MCord],
     required: true,
     startAt: StartAt.DOMContentLoaded,
@@ -32,31 +32,37 @@ export default definePlugin({
 
     stop() {
         unmountNotificationHost();
+        closeSettingsOverlay();
         document.removeEventListener("keydown", this.onKeyDown, true);
     },
 
     /**
-     * Discord'un ayar bölümü listesine sekmelerimizi ekliyoruz.
-     *
-     * Kod patch'i değil fonksiyon patch'i: bölüm listesini üreten fonksiyon
-     * webpack'ten bulunabiliyor, dolayısıyla `eval`'e gerek yok (plan §5.1).
-     * Bulunamazsa kısayol ve modal yedeği devrede kalır.
+     * Discord'un ayar bölümü listesine sekmelerimizi ekliyoruz. Bulunamazsa
+     * toolbar butonu + Ctrl+Alt+M yedeği devrede kalır (Canary'de bu yol
+     * çoğu sürümde kırık).
      */
     injectSettingsSections() {
-        const SectionsModule = findByKeys("useDefaultUserSettingsSections")
-            ?? findByKeys("getUserSettingsSections");
+        const SectionsModule =
+            findByKeys("useDefaultUserSettingsSections")
+            ?? findByKeys("getUserSettingsSections")
+            ?? findBySource("useDefaultUserSettingsSections")
+            ?? findBySource("getUserSettingsSections");
 
-        if (!SectionsModule) {
+        const methodName = SectionsModule && (
+            typeof SectionsModule.useDefaultUserSettingsSections === "function"
+                ? "useDefaultUserSettingsSections"
+                : typeof SectionsModule.getUserSettingsSections === "function"
+                    ? "getUserSettingsSections"
+                    : null
+        );
+
+        if (!SectionsModule || !methodName) {
             logger.warn(
                 "Discord'un ayar bölümü modülü bulunamadı — sekme enjeksiyonu atlandı. "
-                + "Ayarlara Ctrl+Alt+M ile ulaşabilirsin."
+                + "MCord'a toolbar'daki MC butonu veya Ctrl+Alt+M ile ulaşabilirsin."
             );
             return;
         }
-
-        const methodName = typeof SectionsModule.useDefaultUserSettingsSections === "function"
-            ? "useDefaultUserSettingsSections"
-            : "getUserSettingsSections";
 
         this.patcher.after(SectionsModule, methodName, (_self, _args, returnValue) => {
             if (!Array.isArray(returnValue)) return returnValue;
@@ -89,33 +95,23 @@ export default definePlugin({
 
         event.preventDefault();
         event.stopPropagation();
-        openSettingsModal();
+        toggleSettings();
     },
 
-    openSettingsModal
+    openSettings: openSettingsOverlay,
+    openSettingsModal: openSettingsOverlay
 });
 
-/** Ayarları bağımsız bir modalda açar. */
-export function openSettingsModal(initialTab: TabId = "plugins"): void {
-    const ModalActions = find(byKeys(["openModal", "closeModal"]), { silent: true });
-
-    if (!ModalActions?.openModal) {
-        logger.error("Discord'un modal sistemi bulunamadı, ayarlar açılamıyor.");
-        return;
+/** Açıksa kapat, kapalıysa aç — kısayol ve toolbar butonu bunu kullanıyor. */
+export function toggleSettings(initialTab: TabId = "plugins"): void {
+    if (isSettingsOverlayOpen()) {
+        closeSettingsOverlay();
+    } else {
+        openSettingsOverlay(initialTab);
     }
+}
 
-    ModalActions.openModal((props: any) => (
-        <div
-            style={{
-                background: "var(--background-primary, #313338)",
-                borderRadius: "8px",
-                maxHeight: "80vh",
-                width: "min(920px, 90vw)",
-                overflow: "auto"
-            }}
-            {...props}
-        >
-            <SettingsRoot initialTab={initialTab} />
-        </div>
-    ));
+/** Geriye dönük uyumluluk — eski çağıranlar (recovery vb.) için. */
+export function openSettingsModal(initialTab: TabId = "plugins"): void {
+    openSettingsOverlay(initialTab);
 }

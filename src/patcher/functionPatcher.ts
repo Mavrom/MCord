@@ -43,6 +43,7 @@ let nextPatchId = 0;
 class Patch {
     readonly children: ChildPatch[] = [];
     readonly originalFunction: AnyFunction;
+    readonly originalDescriptor: PropertyDescriptor | undefined;
     proxyFunction: AnyFunction | null = null;
 
     constructor(
@@ -50,11 +51,16 @@ class Patch {
         readonly functionName: string,
         readonly displayName: string
     ) {
+        this.originalDescriptor = Object.getOwnPropertyDescriptor(module, functionName);
         this.originalFunction = module[functionName];
     }
 
     revert(): void {
-        this.module[this.functionName] = this.originalFunction;
+        if (this.originalDescriptor) {
+            Object.defineProperty(this.module, this.functionName, this.originalDescriptor);
+        } else {
+            this.module[this.functionName] = this.originalFunction;
+        }
         this.proxyFunction = null;
     }
 
@@ -176,7 +182,18 @@ function makePatch(patch: Patch): void {
 
     const override = patch.makeOverride();
     patch.proxyFunction = override;
-    patch.module[patch.functionName] = override;
+
+    const descriptor = Object.getOwnPropertyDescriptor(patch.module, patch.functionName);
+    if (descriptor?.configurable && (descriptor.get || descriptor.writable === false)) {
+        Object.defineProperty(patch.module, patch.functionName, {
+            configurable: descriptor.configurable,
+            enumerable: descriptor.enumerable,
+            writable: true,
+            value: override
+        });
+    } else {
+        patch.module[patch.functionName] = override;
+    }
 
     // ── Üç kimlik koruma satırı (plan §5.2) ──────────────────────────────────
     // `toString` override'ı kritik: Discord'un kendi kodu bazı yerlerde fonksiyon

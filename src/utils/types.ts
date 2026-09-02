@@ -216,6 +216,12 @@ export interface PluginDef {
     onMessageClick?(message: any, channel: any, event: any): void;
     /** Sohbet çubuğuna düğme ekler — `PluginManager` kaydı/silmeyi üstlenir (plan §6.5). */
     chatBarButton?: (props: Record<string, any>) => any;
+    /** Mesaj hover araç çubuğuna düğme tanımı üretir. */
+    messagePopoverButton?: (message: any) => ({ label: string; icon: any } & Record<string, any>) | null;
+    /** Mesaj gövdesinin altına aksesuar ekler. */
+    renderMessageAccessory?: (props: Record<string, any>) => any;
+    /** Aksesuarın Discord'un kendi öğeleri arasındaki konumu. */
+    messageAccessoryPosition?: number;
     /** Mesajlara süsleme ekler — `PluginManager` kaydı/silmeyi üstlenir (plan §6.5). */
     renderMessageDecoration?: (props: Record<string, any>) => any;
 
