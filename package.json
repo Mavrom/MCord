@@ -1,7 +1,7 @@
 {
     "name": "mcord",
     "private": true,
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "MCord \u2014 a curated Discord client modification for Windows",
     "license": "PolyForm-Strict-1.0.0",
     "type": "module",
