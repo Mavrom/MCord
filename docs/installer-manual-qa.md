@@ -35,6 +35,10 @@ Sürüm öncesi Windows'ta elle geçilir.
 - [ ] `MCordInstaller.exe --uninstall --yes` → geri yükler, çıkış kodu 0
 - [ ] Discord kurulu değilken → anlaşılır mesaj, çıkış kodu 1
 
-## WebView2 yok (opsiyonel — eski Win10 VM)
-- [ ] Çift tıkla → pencere açılmaz; konsolda "WebView2 çalışma zamanı: yüklü değil"
-      + bootstrapper linki + CLI önerisi, çıkış kodu 1
+## SmartScreen (imzasız exe)
+- [ ] İlk çift tıkla → "Windows bilgisayarınızı korudu" → **Ek bilgi → Yine de çalıştır** → araç açılır
+
+## Pencere açılamazsa (fallback)
+- [ ] WebView2 bozuk/yoksa: çift tıkla → konsolda "Pencere açılamadı — metin tabanlı
+      kuruluma geçiliyor" → interaktif metin kurulumu çalışır → sonunda Enter bekler
+- [ ] `%TEMP%\mcord-installer-hata.log` oluştu (hata detayı)
