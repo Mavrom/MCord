@@ -88,6 +88,17 @@ const CSS = `
 
 .mcord-ghost:hover { background: var(--background-modifier-hover, rgba(255, 255, 255, .05)) !important; }
 
+/* ── Etiket çipleri ─────────────────────────────────────────────────────── */
+.mcord-tag:hover {
+    filter: none;
+    color: var(--header-primary, #f2f3f5);
+    border-color: var(--border-normal, rgba(255, 255, 255, .16)) !important;
+    background: var(--background-modifier-hover, rgba(255, 255, 255, .06)) !important;
+}
+
+/* Ayarı olan kartın başlığında hover'da dişli ipucu */
+.mcord-card [role="button"]:hover { color: var(--header-primary, #f2f3f5); }
+
 /* ── Giriş animasyonları ────────────────────────────────────────────────── */
 @keyframes mcord-overlay-in { from { opacity: 0 } to { opacity: 1 } }
 @keyframes mcord-panel-in {

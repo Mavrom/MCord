@@ -10,14 +10,16 @@ import { c, radius, s, space, tint } from "./theme";
 import { Toggle } from "./Toggle";
 import { usePluginToggle } from "./usePluginToggle";
 
-export function PluginCard({ plugin, onChanged, onOpenSettings }: {
+export function PluginCard({ plugin, onChanged, onOpenSettings, onPickTag }: {
     plugin: Plugin;
     onChanged(): void;
     onOpenSettings(plugin: Plugin): void;
+    onPickTag(tag: string): void;
 }) {
     const { enabled, toggle } = usePluginToggle(plugin, onChanged);
 
     const hasSettings = plugin.settings != null;
+    const openSettings = () => hasSettings && onOpenSettings(plugin);
 
     return (
         <div
@@ -26,8 +28,6 @@ export function PluginCard({ plugin, onChanged, onOpenSettings }: {
                 ...s.card,
                 height: "100%",
                 gap: "10px",
-                // Açık plugin'i renkle değil, hem şerit hem zeminle ayırıyoruz
-                // (renk tek başına anlam taşımasın).
                 borderLeft: `3px solid ${enabled ? c.success : "transparent"}`,
                 background: enabled
                     ? `color-mix(in srgb, ${c.success} 5%, ${c.surfaceRaised})`
@@ -35,7 +35,22 @@ export function PluginCard({ plugin, onChanged, onOpenSettings }: {
             }}
         >
             <div style={{ ...s.spread, alignItems: "flex-start", gap: space.sm }}>
-                <div style={{ minWidth: 0 }}>
+                <div
+                    role={hasSettings ? "button" : undefined}
+                    tabIndex={hasSettings ? 0 : undefined}
+                    onClick={openSettings}
+                    onKeyDown={hasSettings ? (event => {
+                        if (event.key === "Enter" || event.key === " ") {
+                            event.preventDefault();
+                            openSettings();
+                        }
+                    }) : undefined}
+                    style={{
+                        minWidth: 0,
+                        flex: 1,
+                        cursor: hasSettings ? "pointer" : "default"
+                    }}
+                >
                     <div
                         style={{
                             color: c.heading,
@@ -58,7 +73,7 @@ export function PluginCard({ plugin, onChanged, onOpenSettings }: {
                             {hasSettings && (
                                 <button
                                     className="mcord-btn mcord-ghost"
-                                    onClick={() => onOpenSettings(plugin)}
+                                    onClick={openSettings}
                                     aria-label={`${plugin.name} ayarları`}
                                     title="Ayarlar"
                                     style={{
@@ -88,9 +103,11 @@ export function PluginCard({ plugin, onChanged, onOpenSettings }: {
             </div>
 
             <p
+                onClick={openSettings}
                 style={{
                     ...s.muted,
                     margin: 0,
+                    cursor: hasSettings ? "pointer" : "default",
                     display: "-webkit-box",
                     WebkitLineClamp: 3,
                     WebkitBoxOrient: "vertical",
@@ -102,9 +119,21 @@ export function PluginCard({ plugin, onChanged, onOpenSettings }: {
             </p>
 
             {(plugin.tags?.length ?? 0) > 0 && (
-                <div style={{ ...s.row, flexWrap: "wrap", gap: "6px" }}>
+                <div style={{ ...s.row, flexWrap: "wrap", gap: "6px", marginTop: "auto" }}>
                     {plugin.tags!.slice(0, 4).map(tag => (
-                        <span key={tag} style={s.tag}>#{tag}</span>
+                        <button
+                            key={tag}
+                            className="mcord-btn mcord-tag"
+                            onClick={() => onPickTag(tag)}
+                            style={{
+                                ...s.tag,
+                                border: `1px solid ${c.border}`,
+                                cursor: "pointer",
+                                fontFamily: "inherit"
+                            }}
+                        >
+                            #{tag}
+                        </button>
                     ))}
                 </div>
             )}

@@ -7,90 +7,118 @@
 import { isPluginEnabled, plugins } from "../../api/PluginManager";
 import type { Plugin } from "../../utils/types";
 import { React } from "../../webpack/react";
-import { IconSearch, IconSearchOff } from "../Icons";
+import { IconClose, IconSearch, IconSearchOff } from "../Icons";
 import { PluginCard } from "../PluginCard";
 import { PluginSettingsPopover } from "../PluginSettingsPopover";
 import { c, radius, s, space } from "../theme";
 
-type Category = "all" | "enabled" | "disabled";
+type Status = "all" | "enabled" | "disabled";
 
-const CATEGORIES: Array<{ id: Category; label: string }> = [
-    { id: "all", label: "Tümü" },
-    { id: "enabled", label: "Açık" },
-    { id: "disabled", label: "Kapalı" }
+/**
+ * Küratörlü kategoriler — plugin `tags`'lerinin üstüne insanca bir katman.
+ * Etiketler tutarsız (eglence/eğlence, ui'ın her yerde olması) olduğu için
+ * burada elle grupluyoruz; bir kategori birden çok etiketi kapsayabilir.
+ */
+const CATEGORIES: Array<{ id: string; label: string; tags: string[] }> = [
+    { id: "appearance", label: "Görünüm", tags: ["görünüm", "ui", "özelleştirme", "profil", "tema"] },
+    { id: "messages", label: "Mesajlar", tags: ["mesaj", "bahsetme", "reaksiyon", "alıntı"] },
+    { id: "commands", label: "Komutlar", tags: ["komut"] },
+    { id: "media", label: "Medya & GIF", tags: ["medya", "gif", "emoji", "çıkartma", "sticker", "resim", "dosya"] },
+    { id: "fun", label: "Eğlence", tags: ["eglence", "eğlence"] },
+    { id: "server", label: "Sunucu & Rol", tags: ["sunucu", "rol", "izin"] },
+    { id: "voice", label: "Ses & Arama", tags: ["ses", "arama", "yayın", "aktivite", "durum"] },
+    { id: "privacy", label: "Gizlilik", tags: ["gizlilik", "güvenlik"] },
+    { id: "qol", label: "Kalite yaşam", tags: ["kalite-yasam", "kullanışlılık", "kısayol", "yardımcı", "bildirim", "arkadaşlar"] },
+    { id: "dev", label: "Geliştirici", tags: ["geliştirici", "gelistirici", "konsol", "performans"] }
 ];
 
-/** Sayaçlı segment kontrolü — ayrı ayrı düğme yerine tek bir grup. */
-function Segmented({ value, onChange, counts }: {
-    value: Category;
-    onChange(next: Category): void;
-    counts: Record<Category, number>;
-}) {
+const CATEGORY_BY_TAG = new Map<string, string>();
+for (const cat of CATEGORIES) {
+    for (const tag of cat.tags) CATEGORY_BY_TAG.set(tag, cat.id);
+}
+
+/** Yatay kaydırılabilir, seçilebilir çip satırı. */
+function Chips({ children }: { children: React.ReactNode }) {
     return (
         <div
-            role="tablist"
-            aria-label="Plugin filtresi"
             style={{
-                display: "inline-flex",
-                padding: "3px",
-                gap: "2px",
-                borderRadius: radius.md,
-                background: c.inputBg,
-                border: `1px solid ${c.border}`
+                display: "flex",
+                gap: "6px",
+                overflowX: "auto",
+                paddingBottom: "2px",
+                scrollbarWidth: "none",
+                WebkitMaskImage: "linear-gradient(90deg, #000 calc(100% - 24px), transparent)"
             }}
         >
-            {CATEGORIES.map(item => {
-                const active = value === item.id;
-                return (
-                    <button
-                        key={item.id}
-                        className="mcord-btn"
-                        role="tab"
-                        aria-selected={active}
-                        onClick={() => onChange(item.id)}
-                        style={{
-                            display: "inline-flex",
-                            alignItems: "center",
-                            gap: "6px",
-                            padding: "6px 12px",
-                            borderRadius: radius.sm,
-                            border: "none",
-                            cursor: "pointer",
-                            fontFamily: "inherit",
-                            fontSize: "12px",
-                            fontWeight: 600,
-                            color: active ? c.heading : c.muted,
-                            background: active ? c.surfaceActive : "transparent",
-                            whiteSpace: "nowrap"
-                        }}
-                    >
-                        {item.label}
-                        <span
-                            style={{
-                                fontVariantNumeric: "tabular-nums",
-                                fontSize: "11px",
-                                fontWeight: 500,
-                                opacity: .6
-                            }}
-                        >
-                            {counts[item.id]}
-                        </span>
-                    </button>
-                );
-            })}
+            {children}
         </div>
+    );
+}
+
+function Chip({ active, onClick, children, count }: {
+    active: boolean;
+    onClick(): void;
+    children: React.ReactNode;
+    count?: number;
+}) {
+    return (
+        <button
+            className="mcord-btn"
+            aria-pressed={active}
+            onClick={onClick}
+            style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+                flex: "0 0 auto",
+                padding: "6px 12px",
+                borderRadius: radius.pill,
+                border: `1px solid ${active ? "transparent" : c.border}`,
+                cursor: "pointer",
+                fontFamily: "inherit",
+                fontSize: "12px",
+                fontWeight: 600,
+                whiteSpace: "nowrap",
+                color: active ? c.onAccent : c.muted,
+                background: active ? c.accent : "transparent"
+            }}
+        >
+            {children}
+            {count != null && (
+                <span style={{ fontVariantNumeric: "tabular-nums", opacity: active ? .8 : .55, fontWeight: 500 }}>
+                    {count}
+                </span>
+            )}
+        </button>
     );
 }
 
 export function PluginsTab() {
     const [query, setQuery] = React.useState("");
-    const [category, setCategory] = React.useState<Category>("all");
+    const [status, setStatus] = React.useState<Status>("all");
+    const [category, setCategory] = React.useState<string | null>(null);
     const [tick, bump] = React.useReducer((n: number) => n + 1, 0);
     const [focused, setFocused] = React.useState(false);
     const [detail, setDetail] = React.useState<Plugin | null>(null);
 
-    // Çekirdek plugin'ler (`required`) listelenmiyor: kapatılamıyorlar, ayarları
-    // yok ve kullanıcının onlarla bir işi olmuyor — arka planda çalışıyorlar.
+    const inputRef = React.useRef<HTMLInputElement>(null);
+
+    // "/" ile aramaya odaklan — bir şey yazarken değilken.
+    React.useEffect(() => {
+        const onKey = (event: KeyboardEvent) => {
+            const target = event.target as HTMLElement | null;
+            const typing = target?.tagName === "INPUT" || target?.tagName === "TEXTAREA";
+            if (event.key === "/" && !typing) {
+                event.preventDefault();
+                inputRef.current?.focus();
+            }
+        };
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    }, []);
+
+    // Çekirdek plugin'ler (`required`) listelenmiyor: kapatılamıyor, ayarları
+    // yok — arka planda çalışıyorlar.
     const all = React.useMemo(
         () => Object.values(plugins)
             .filter(plugin => !plugin.required)
@@ -98,24 +126,65 @@ export function PluginsTab() {
         []
     );
 
-    const counts = React.useMemo(() => ({
-        all: all.length,
-        enabled: all.filter(p => isPluginEnabled(p.name)).length,
-        disabled: all.filter(p => !isPluginEnabled(p.name)).length
-    }), [all, tick]);
+    const enabledCount = React.useMemo(
+        () => all.filter(p => isPluginEnabled(p.name)).length,
+        [all, tick]
+    );
 
-    const visible = all.filter(plugin => matches(plugin, query, category));
+    const categoryCounts = React.useMemo(() => {
+        const counts = new Map<string, number>();
+        for (const plugin of all) {
+            const seen = new Set<string>();
+            for (const tag of plugin.tags ?? []) {
+                const id = CATEGORY_BY_TAG.get(tag);
+                if (id && !seen.has(id)) {
+                    seen.add(id);
+                    counts.set(id, (counts.get(id) ?? 0) + 1);
+                }
+            }
+        }
+        return counts;
+    }, [all]);
+
+    const visible = all.filter(plugin => matches(plugin, query, status, category));
+
+    const clearFilters = () => {
+        setQuery("");
+        setStatus("all");
+        setCategory(null);
+    };
+
+    const filtered = query !== "" || status !== "all" || category != null;
 
     return (
         <div style={s.page}>
             <header style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                <h1 style={s.h1}>Pluginler</h1>
+                <div style={{ ...s.spread, alignItems: "baseline" }}>
+                    <h1 style={s.h1}>Pluginler</h1>
+                    <span style={{ ...s.faint, fontVariantNumeric: "tabular-nums" }}>
+                        {enabledCount} açık · {all.length} plugin
+                    </span>
+                </div>
                 <p style={s.muted}>
-                    Küratörlü kütüphane — üçüncü parti kurulum yok, her şey depoda.
+                    Beğendiğini aç, gerisini keşfet. Hepsi elden geçti — üçüncü parti kurulum yok.
                 </p>
             </header>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: space.md }}>
+            {/* Kaydırırken tepede kalan araç çubuğu */}
+            <div
+                style={{
+                    position: "sticky",
+                    top: 0,
+                    zIndex: 5,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: space.sm,
+                    margin: `0 -${space.xl}`,
+                    padding: `${space.sm} ${space.xl} ${space.md}`,
+                    background: c.surface,
+                    borderBottom: `1px solid ${c.border}`
+                }}
+            >
                 <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
                     <span
                         style={{
@@ -130,28 +199,67 @@ export function PluginsTab() {
                         <IconSearch size={16} />
                     </span>
                     <input
+                        ref={inputRef}
                         style={{
                             ...s.input,
                             paddingLeft: "38px",
+                            paddingRight: query ? "38px" : "12px",
                             borderColor: focused ? c.accent : c.border,
                             background: focused ? c.surfaceRaised : c.inputBg
                         }}
                         type="search"
                         aria-label="Plugin ara"
-                        placeholder="Plugin, açıklama veya #etiket ara…"
+                        placeholder="Ne arıyorsun?  ( / )"
                         value={query}
                         onFocus={() => setFocused(true)}
                         onBlur={() => setFocused(false)}
                         onChange={event => setQuery(event.currentTarget.value)}
                     />
+                    {query && (
+                        <button
+                            className="mcord-btn mcord-ghost"
+                            onClick={() => { setQuery(""); inputRef.current?.focus(); }}
+                            aria-label="Aramayı temizle"
+                            style={{
+                                position: "absolute",
+                                right: "6px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "26px",
+                                height: "26px",
+                                padding: 0,
+                                border: "none",
+                                borderRadius: radius.sm,
+                                background: "transparent",
+                                color: c.muted,
+                                cursor: "pointer"
+                            }}
+                        >
+                            <IconClose size={14} />
+                        </button>
+                    )}
                 </div>
 
-                <div style={{ ...s.spread, flexWrap: "wrap", gap: space.sm }}>
-                    <Segmented value={category} onChange={setCategory} counts={counts} />
-                    <span style={{ ...s.faint, fontVariantNumeric: "tabular-nums" }}>
-                        {visible.length} sonuç
-                    </span>
-                </div>
+                <Chips>
+                    <Chip active={category == null && status === "all"} onClick={clearFilters}>
+                        Tümü
+                    </Chip>
+                    <Chip active={status === "enabled"} onClick={() => setStatus(status === "enabled" ? "all" : "enabled")}>
+                        Açıklar
+                    </Chip>
+                    <span style={{ flex: "0 0 auto", width: "1px", background: c.border, margin: "4px 2px" }} />
+                    {CATEGORIES.map(cat => (
+                        <Chip
+                            key={cat.id}
+                            active={category === cat.id}
+                            count={categoryCounts.get(cat.id) ?? 0}
+                            onClick={() => setCategory(category === cat.id ? null : cat.id)}
+                        >
+                            {cat.label}
+                        </Chip>
+                    ))}
+                </Chips>
             </div>
 
             {visible.length === 0
@@ -170,8 +278,17 @@ export function PluginsTab() {
                         }}
                     >
                         <IconSearchOff size={28} style={{ opacity: .5 }} />
-                        <div style={{ color: c.heading, fontWeight: 600 }}>Eşleşen plugin yok</div>
-                        <div style={s.faint}>Aramayı değiştir veya filtreyi “Tümü” yap.</div>
+                        <div style={{ color: c.heading, fontWeight: 600 }}>Buna uyan plugin yok</div>
+                        <div style={s.faint}>Aramayı ya da kategoriyi biraz gevşet.</div>
+                        {filtered && (
+                            <button
+                                className="mcord-btn"
+                                onClick={clearFilters}
+                                style={{ ...s.button, ...s.buttonSecondary, marginTop: space.sm }}
+                            >
+                                Filtreleri temizle
+                            </button>
+                        )}
                     </div>
                 )
                 : (
@@ -182,6 +299,11 @@ export function PluginsTab() {
                                 plugin={plugin}
                                 onChanged={bump}
                                 onOpenSettings={setDetail}
+                                onPickTag={tag => {
+                                    const catId = CATEGORY_BY_TAG.get(tag);
+                                    if (catId) setCategory(catId);
+                                    else setQuery(`#${tag}`);
+                                }}
                             />
                         ))}
                     </div>
@@ -198,13 +320,20 @@ export function PluginsTab() {
     );
 }
 
-function matches(plugin: Plugin, query: string, category: Category): boolean {
-    if (category === "enabled" && !isPluginEnabled(plugin.name)) return false;
-    if (category === "disabled" && isPluginEnabled(plugin.name)) return false;
+function matches(plugin: Plugin, query: string, status: Status, category: string | null): boolean {
+    if (status === "enabled" && !isPluginEnabled(plugin.name)) return false;
+    if (status === "disabled" && isPluginEnabled(plugin.name)) return false;
+
+    if (category != null) {
+        const cat = CATEGORIES.find(entry => entry.id === category);
+        if (cat && !(plugin.tags ?? []).some(tag => cat.tags.includes(tag))) return false;
+    }
 
     if (!query) return true;
 
-    const needle = query.toLowerCase().replace(/^#/, "");
+    const needle = query.toLowerCase().replace(/^#/, "").trim();
+    if (!needle) return true;
+
     return plugin.name.toLowerCase().includes(needle)
         || plugin.description.toLowerCase().includes(needle)
         || (plugin.tags ?? []).some(tag => tag.toLowerCase().includes(needle));
