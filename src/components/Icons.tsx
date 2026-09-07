@@ -91,6 +91,36 @@ export const IconClose = (p: IconProps) => (
     </Svg>
 );
 
+// ── Platform göstergeleri ──────────────────────────────────────────────────
+
+export const IconPlatformDesktop = (p: IconProps) => (
+    <Svg {...p}>
+        <rect x="3" y="4" width="18" height="12" rx="1.5" />
+        <path d="M8 20h8M12 16v4" />
+    </Svg>
+);
+
+export const IconPlatformMobile = (p: IconProps) => (
+    <Svg {...p}>
+        <rect x="7" y="3" width="10" height="18" rx="2.5" />
+        <path d="M11 18h2" />
+    </Svg>
+);
+
+export const IconPlatformWeb = (p: IconProps) => (
+    <Svg {...p}>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M3.5 12h17M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
+    </Svg>
+);
+
+export const IconPlatformConsole = (p: IconProps) => (
+    <Svg {...p}>
+        <path d="M6 8h12a4 4 0 0 1 4 4v3a2.5 2.5 0 0 1-4.6 1.4L15.5 15h-7l-1.9 2.4A2.5 2.5 0 0 1 2 16v-4a4 4 0 0 1 4-4Z" />
+        <path d="M7 12h2M8 11v2M15 11.5h.01M17.5 13h.01" />
+    </Svg>
+);
+
 export const IconGear = (p: IconProps) => (
     <Svg {...p}>
         <circle cx="12" cy="12" r="3" />
