@@ -65,3 +65,15 @@ export const ContextMenuApi = mapMangledModuleLazy('type:"CONTEXT_MENU_OPEN', {
 });
 
 export const transitionTo = findByCodeLazy("transitionTo - Transitioning to");
+
+/**
+ * Discord'un istemci içi yönlendiricisi. `transitionTo("/channels/...")` bir
+ * kanalı ekranda açar (sese katılmadan). Property adları mangle'lı — kaynak
+ * string'inden çözülüyor (referans katalog `NavigationRouter`).
+ */
+export const NavigationRouter = mapMangledModuleLazy("Transitioning to ", {
+    transitionTo: byCode("transitionTo -"),
+    transitionToGuild: byCode("transitionToGuild -"),
+    back: byCode("goBack()"),
+    forward: byCode("goForward()")
+});

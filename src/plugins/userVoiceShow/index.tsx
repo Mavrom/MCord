@@ -10,7 +10,7 @@ import { IconVoice } from "../../components/Icons";
 import { Tooltip } from "../../components/Tooltip";
 import { Devs } from "../../utils/constants";
 import { definePlugin, OptionType } from "../../utils/types";
-import { ChannelStore, transitionTo } from "../../webpack/common";
+import { ChannelStore, GuildStore, NavigationRouter } from "../../webpack/common";
 import { findStoreLazy } from "../../webpack/lazy";
 import { React } from "../../webpack/react";
 
@@ -40,26 +40,32 @@ function VoiceIndicator({ userId, small }: { userId: string; small?: boolean }) 
     const channel = voiceState?.channelId ? ChannelStore?.getChannel?.(voiceState.channelId) : null;
     if (!channel) return null;
 
+    const guild = channel.guild_id ? GuildStore?.getGuild?.(channel.guild_id) : null;
+    const guildIcon = guild?.icon
+        ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${String(guild.icon).startsWith("a_") ? "gif" : "webp"}?size=24`
+        : null;
+
     const showName = settings.store.showChannelName;
-    const label = `${channel.name} ses kanalında`;
+    const where = guild?.name ?? "Özel arama";
+    const label = `${channel.name} — ${where}`;
 
     return (
         <Tooltip text={label}>
             <button
                 type="button"
-                aria-label={`${channel.name} kanalını aç`}
+                aria-label={`${channel.name} kanalını aç (${where})`}
                 onClick={event => {
                     event.preventDefault();
                     event.stopPropagation();
                     // Yalnızca kanalı ekranda aç — sese katılma.
-                    transitionTo?.(`/channels/${channel.guild_id ?? "@me"}/${channel.id}`);
+                    NavigationRouter?.transitionTo?.(`/channels/${channel.guild_id ?? "@me"}/${channel.id}`);
                 }}
                 style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "3px",
+                    gap: "4px",
                     marginLeft: "4px",
-                    padding: showName ? "1px 6px 1px 4px" : "1px 3px",
+                    padding: showName ? "1px 6px 1px 3px" : "1px 3px",
                     border: 0,
                     borderRadius: "4px",
                     cursor: "pointer",
@@ -72,6 +78,15 @@ function VoiceIndicator({ userId, small }: { userId: string; small?: boolean }) 
                     color: "var(--brand-500, #5865f2)"
                 }}
             >
+                {guildIcon && (
+                    <img
+                        src={guildIcon}
+                        alt=""
+                        width={small ? 13 : 14}
+                        height={small ? 13 : 14}
+                        style={{ borderRadius: "50%", flex: "0 0 auto", objectFit: "cover" }}
+                    />
+                )}
                 <IconVoice size={small ? 12 : 13} color="currentColor" strokeWidth={2.4} />
                 {showName && (
                     <span style={{ maxWidth: "160px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
