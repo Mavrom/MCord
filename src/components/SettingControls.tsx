@@ -14,6 +14,7 @@ import {
 } from "../utils/types";
 import { React } from "../webpack/react";
 import { markRestartNeeded } from "./restartState";
+import { Segmented } from "./Segmented";
 import { c, s } from "./theme";
 import { Toggle } from "./Toggle";
 
@@ -103,21 +104,12 @@ function Control(props: {
         case OptionType.SELECT: {
             const select = setting as SelectSetting;
             return (
-                <select
-                    style={s.input}
-                    value={String(value)}
+                <Segmented
+                    value={value}
                     disabled={disabled}
-                    onChange={event => {
-                        const chosen = select.options.find(o => String(o.value) === event.currentTarget.value);
-                        onChange(chosen?.value);
-                    }}
-                >
-                    {select.options.map(option => (
-                        <option key={String(option.value)} value={String(option.value)}>
-                            {option.label}
-                        </option>
-                    ))}
-                </select>
+                    options={select.options.map(option => ({ label: option.label, value: option.value }))}
+                    onChange={onChange}
+                />
             );
         }
 

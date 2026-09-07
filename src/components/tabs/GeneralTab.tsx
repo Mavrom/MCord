@@ -8,6 +8,7 @@ import { flushSettings, Settings } from "../../api/settings";
 import { DefaultMainSettings, type MainSettings, type WindowsMaterial } from "../../shared/settingsTypes";
 import { React } from "../../webpack/react";
 import { markRestartNeeded } from "../restartState";
+import { Segmented } from "../Segmented";
 import { c, s } from "../theme";
 
 const MATERIALS: Array<{ value: WindowsMaterial; label: string }> = [
@@ -88,16 +89,14 @@ export function GeneralTab() {
 
             <div style={s.card}>
                 <div style={{ color: c.heading, fontWeight: 500 }}>Windows arka plan materyali</div>
-                <div style={s.muted}>Windows 11'de pencere arka planına mica/acrylic efekti uygular.</div>
-                <select
-                    style={s.input}
+                <div style={{ ...s.muted, marginBottom: "4px" }}>
+                    Windows 11'de pencere arka planına mica/acrylic efekti uygular.
+                </div>
+                <Segmented
                     value={main.windowsMaterial}
-                    onChange={event => update("windowsMaterial", event.currentTarget.value)}
-                >
-                    {MATERIALS.map(material => (
-                        <option key={material.value} value={material.value}>{material.label}</option>
-                    ))}
-                </select>
+                    options={MATERIALS}
+                    onChange={next => update("windowsMaterial", next)}
+                />
             </div>
 
             <h2 style={s.h2}>Gelişmiş</h2>
