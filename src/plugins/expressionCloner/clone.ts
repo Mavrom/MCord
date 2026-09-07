@@ -7,15 +7,26 @@
 import { showNotification } from "../../api/notifications";
 import { Logger } from "../../utils/logger";
 import { getFluxDispatcher, GuildStore, PermissionStore, UserStore } from "../../webpack/common";
-import { findByKeys } from "../../webpack/finder";
+import { find } from "../../webpack/finder";
 
 export const logger = new Logger("ExpressionCloner", "#f4b8e4");
 
-/** Discord'un REST istemcisi — `getAPIBaseURL` ona özgü işaret. */
+/**
+ * Discord'un gerçek RestAPI'sı. `{get,post,put,patch,del}` şartına iki modül
+ * uyuyor: gerçek RestAPI (metotları JS sarmalayıcı) ve düşük seviye HTTP
+ * (metotları `.bind`'li → `[native code]`). Sarmalayıcı olanı seçiyoruz;
+ * o Promise<{status, body}> döndürüyor.
+ */
 function getRest(): any {
-    const api = findByKeys<any>("getAPIBaseURL")
-        ?? findByKeys<any>("get", "post", "put", "patch", "del");
-    return api?.default ?? api;
+    return find<any>(module =>
+        module
+        && typeof module === "object"
+        && typeof module.get === "function"
+        && typeof module.post === "function"
+        && typeof module.put === "function"
+        && typeof module.del === "function"
+        && !Function.prototype.toString.call(module.post).includes("native code")
+    );
 }
 
 /** İzin biti: CREATE_GUILD_EXPRESSIONS = 1 << 43. */
