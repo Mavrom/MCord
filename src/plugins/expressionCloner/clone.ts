@@ -111,21 +111,38 @@ export function safeEmojiName(raw: string): string {
     return cleaned.length >= 2 ? cleaned.slice(0, 32) : `emoji_${cleaned}`.slice(0, 32);
 }
 
+/** İstek 20 sn'de bitmezse (ör. 429 backoff) elle iptal — modal donmasın. */
+function withTimeout<T>(promise: Promise<T>, ms = 20_000): Promise<T> {
+    return Promise.race([
+        promise,
+        new Promise<T>((_, reject) =>
+            setTimeout(() => reject(new Error("İstek zaman aşımına uğradı (muhtemelen rate limit)")), ms))
+    ]);
+}
+
 async function cloneEmoji(guildId: string, emoji: EmojiData): Promise<void> {
-    const dataUrl = await blobToDataUrl(await fetchBlob(emoji));
+    logger.info("1/4 medya çekiliyor…");
+    const blob = await fetchBlob(emoji);
+    logger.info("2/4 blob", blob.size, "bayt", blob.type);
+
+    const dataUrl = await blobToDataUrl(blob);
 
     const rest = getRest();
+    logger.info("3/4 RestAPI:", typeof rest?.post);
     if (typeof rest?.post !== "function") throw new Error("Discord REST istemcisi bulunamadı");
 
-    // Sadece POST — Discord'un gateway'i oluşturulan emojiyi kendi push'luyor.
-    const response = await rest.post({
+    const response: any = await withTimeout(rest.post({
         url: `/guilds/${guildId}/emojis`,
         body: { name: safeEmojiName(emoji.name), image: dataUrl, roles: [] }
-    });
+    }));
 
-    logger.info("emoji POST →", response?.status, response?.body);
+    logger.info("4/4 yanıt →", response?.status, response?.body);
+
+    if (response?.status === 429) {
+        throw new Error("Rate limit — Discord çok fazla istek dedi, biraz bekle");
+    }
     if (!response?.body?.id) {
-        throw new Error(`Discord emojiyi oluşturmadı (yanıt: ${JSON.stringify(response?.body ?? response)})`);
+        throw new Error(`Discord emojiyi oluşturmadı (${response?.status}): ${JSON.stringify(response?.body ?? response)}`);
     }
 }
 
