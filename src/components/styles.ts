@@ -88,16 +88,29 @@ const CSS = `
 
 .mcord-ghost:hover { background: var(--background-modifier-hover, rgba(255, 255, 255, .05)) !important; }
 
-/* ── Etiket çipleri ─────────────────────────────────────────────────────── */
+/* ── Kategori çipleri ───────────────────────────────────────────────────── */
+.mcord-chip { transition: background var(--mc-fast) var(--mc-ease), color var(--mc-fast) var(--mc-ease), transform var(--mc-fast) var(--mc-ease); }
+.mcord-chip:not(.is-active):hover {
+    filter: none;
+    color: var(--header-primary, #f2f3f5) !important;
+    background: var(--background-modifier-selected, rgba(255, 255, 255, .09)) !important;
+}
+.mcord-chip:active { transform: scale(.96); }
+
+/* ── Etiket çipleri (kart içi) ──────────────────────────────────────────── */
 .mcord-tag:hover {
     filter: none;
-    color: var(--header-primary, #f2f3f5);
-    border-color: var(--border-normal, rgba(255, 255, 255, .16)) !important;
-    background: var(--background-modifier-hover, rgba(255, 255, 255, .06)) !important;
+    color: var(--text-default, #dbdee1) !important;
+    background: var(--background-modifier-selected, rgba(255, 255, 255, .1)) !important;
 }
 
-/* Ayarı olan kartın başlığında hover'da dişli ipucu */
-.mcord-card [role="button"]:hover { color: var(--header-primary, #f2f3f5); }
+/* Kart dişlisi — hover'da belirginleşir */
+.mcord-card-gear:hover { color: var(--header-primary, #f2f3f5) !important; background: var(--background-modifier-hover, rgba(255, 255, 255, .06)) !important; }
+.mcord-card:hover .mcord-card-gear { color: var(--text-muted, #949ba4); }
+
+/* Ayarı olan kartın adına hover ipucu */
+.mcord-card-name { transition: color var(--mc-fast) var(--mc-ease); }
+.mcord-card [role="button"]:hover .mcord-card-name { color: var(--brand-500, #5865f2); }
 
 /* ── Giriş animasyonları ────────────────────────────────────────────────── */
 @keyframes mcord-overlay-in { from { opacity: 0 } to { opacity: 1 } }

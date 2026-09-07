@@ -158,8 +158,7 @@ export function SettingsRoot({ initialTab = "plugins" }: { initialTab?: TabId })
                     flex: 1,
                     minWidth: 0,
                     minHeight: 0,
-                    overflowY: "auto",
-                    padding: `${space.xl} ${space.xl} 40px`
+                    overflowY: "auto"
                 }}
             >
                 <Current />

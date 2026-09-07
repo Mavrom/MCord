@@ -21,10 +21,12 @@ export default definePlugin({
     managedStyle: style,
 
     patches: [{
-        find: "GUILD_COMMUNICATION_DISABLED_ICON_TOOLTIP_BODY",
+        find: "#{intl::GUILD_COMMUNICATION_DISABLED_ICON_TOOLTIP_BODY}",
         reason: "Mesaj yazar dekorasyonları başlık bileşeninin yerel children dizisinde oluşturuluyor.",
         replacement: {
-            match: /GUILD_COMMUNICATION_DISABLED_BOTTOM_SHEET_TITLE.+?renderPopout:.+?(?=\])/,
+            // Discord artık intl anahtarlarını hash'liyor — ham string bundle'da
+            // yok, `#{intl::…}` işaretçisiyle canonicalize edilmeli (referans katalog ile aynı).
+            match: /#{intl::GUILD_COMMUNICATION_DISABLED_BOTTOM_SHEET_TITLE}.+?renderPopout:.+?(?=\])/,
             replace: "$&,$self.render(arguments[0])"
         }
     }],

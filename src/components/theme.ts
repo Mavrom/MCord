@@ -61,6 +61,8 @@ export const s = {
         display: "flex",
         flexDirection: "column",
         gap: space.lg,
+        padding: `${space.xl} ${space.xl} 40px`,
+        minHeight: "100%",
         color: c.text,
         fontFamily: "var(--font-primary, 'gg sans', 'Segoe UI', system-ui, sans-serif)",
         fontSize: "14px",

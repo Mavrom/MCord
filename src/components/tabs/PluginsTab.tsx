@@ -63,7 +63,7 @@ function Chip({ active, onClick, children, count }: {
 }) {
     return (
         <button
-            className="mcord-btn"
+            className={`mcord-chip${active ? " is-active" : ""}`}
             aria-pressed={active}
             onClick={onClick}
             style={{
@@ -71,21 +71,32 @@ function Chip({ active, onClick, children, count }: {
                 alignItems: "center",
                 gap: "6px",
                 flex: "0 0 auto",
-                padding: "6px 12px",
+                padding: "7px 13px",
                 borderRadius: radius.pill,
-                border: `1px solid ${active ? "transparent" : c.border}`,
+                border: "1px solid transparent",
                 cursor: "pointer",
                 fontFamily: "inherit",
-                fontSize: "12px",
+                fontSize: "12.5px",
                 fontWeight: 600,
                 whiteSpace: "nowrap",
                 color: active ? c.onAccent : c.muted,
-                background: active ? c.accent : "transparent"
+                background: active ? c.accent : c.surfaceRaised,
+                boxShadow: active ? `0 4px 14px color-mix(in srgb, ${c.accent} 45%, transparent)` : "none"
             }}
         >
             {children}
-            {count != null && (
-                <span style={{ fontVariantNumeric: "tabular-nums", opacity: active ? .8 : .55, fontWeight: 500 }}>
+            {count != null && count > 0 && (
+                <span
+                    style={{
+                        fontVariantNumeric: "tabular-nums",
+                        fontWeight: 600,
+                        fontSize: "11px",
+                        padding: "1px 6px",
+                        borderRadius: radius.pill,
+                        background: active ? "rgba(255,255,255,.22)" : c.surfaceActive,
+                        color: active ? c.onAccent : c.faint
+                    }}
+                >
                     {count}
                 </span>
             )}
@@ -157,8 +168,15 @@ export function PluginsTab() {
     const filtered = query !== "" || status !== "all" || category != null;
 
     return (
-        <div style={s.page}>
-            <header style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+        <div style={{ ...s.page, paddingTop: 0 }}>
+            <header
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "6px",
+                    paddingTop: space.xl
+                }}
+            >
                 <div style={{ ...s.spread, alignItems: "baseline" }}>
                     <h1 style={s.h1}>Pluginler</h1>
                     <span style={{ ...s.faint, fontVariantNumeric: "tabular-nums" }}>
@@ -180,7 +198,7 @@ export function PluginsTab() {
                     flexDirection: "column",
                     gap: space.sm,
                     margin: `0 -${space.xl}`,
-                    padding: `${space.sm} ${space.xl} ${space.md}`,
+                    padding: `${space.md} ${space.xl}`,
                     background: c.surface,
                     borderBottom: `1px solid ${c.border}`
                 }}
