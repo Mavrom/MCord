@@ -9,7 +9,7 @@ import type { Plugin } from "../../utils/types";
 import { React } from "../../webpack/react";
 import { IconSearch, IconSearchOff } from "../Icons";
 import { PluginCard } from "../PluginCard";
-import { PluginDetail } from "../PluginDetail";
+import { PluginSettingsPopover } from "../PluginSettingsPopover";
 import { c, radius, s, space } from "../theme";
 
 type Category = "all" | "enabled" | "disabled";
@@ -106,16 +106,6 @@ export function PluginsTab() {
 
     const visible = all.filter(plugin => matches(plugin, query, category));
 
-    if (detail != null) {
-        return (
-            <PluginDetail
-                plugin={detail}
-                onBack={() => setDetail(null)}
-                onChanged={bump}
-            />
-        );
-    }
-
     return (
         <div style={s.page}>
             <header style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
@@ -196,6 +186,14 @@ export function PluginsTab() {
                         ))}
                     </div>
                 )}
+
+            {detail != null && (
+                <PluginSettingsPopover
+                    plugin={detail}
+                    onClose={() => setDetail(null)}
+                    onChanged={bump}
+                />
+            )}
         </div>
     );
 }

@@ -25,11 +25,12 @@ let root: { unmount(): void } | null = null;
 function Overlay({ initialTab, onClose }: { initialTab: TabId; onClose(): void }) {
     React.useEffect(() => {
         const onKey = (event: KeyboardEvent) => {
-            if (event.key === "Escape") {
-                event.preventDefault();
-                event.stopPropagation();
-                onClose();
-            }
+            if (event.key !== "Escape") return;
+            // Açık bir plugin ayar balonu varsa Esc önce onu kapatsın.
+            if (document.getElementById("mcord-plugin-popover")) return;
+            event.preventDefault();
+            event.stopPropagation();
+            onClose();
         };
         window.addEventListener("keydown", onKey, true);
         return () => window.removeEventListener("keydown", onKey, true);
