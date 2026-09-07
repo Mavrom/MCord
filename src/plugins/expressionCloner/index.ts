@@ -10,15 +10,15 @@ import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin } from "../../utils/types";
 import { getFluxDispatcher, GuildStore, PermissionStore, UserStore } from "../../webpack/common";
-import { byKeys } from "../../webpack/filters";
-import { findStore } from "../../webpack/finder";
-import { findByCodeLazy, findLazy } from "../../webpack/lazy";
+import { findByKeys, findStore } from "../../webpack/finder";
 
 const logger = new Logger("ExpressionCloner", "#f4b8e4");
 
-const RestAPI = findLazy<any>(byKeys(["get", "post", "patch", "put"]));
-/** Discord'un emoji yükleme aksiyon üreticisi (referans katalog ile aynı imza). */
-const uploadEmoji = findByCodeLazy<any>(".GUILD_EMOJIS(", "EMOJI_UPLOAD_START");
+/** Discord'un REST istemcisi — çağrı anında çözülüyor (yükleme anı finder'dan güvenli). */
+function getRest(): any {
+    return findByKeys<any>("getAPIBaseURL", "get", "post")
+        ?? findByKeys<any>("get", "post", "patch", "put");
+}
 
 /** İzin biti: CREATE_GUILD_EXPRESSIONS = 1 << 43. */
 const CREATE_GUILD_EXPRESSIONS = 1n << 43n;
@@ -80,16 +80,34 @@ function blobToDataUrl(blob: Blob): Promise<string> {
     });
 }
 
+/** Emoji adı `[A-Za-z0-9_]`, 2–32 karakter olmalı. */
+function safeEmojiName(raw: string): string {
+    const cleaned = raw.split("~")[0].replace(/[^A-Za-z0-9_]/g, "");
+    return cleaned.length >= 2 ? cleaned.slice(0, 32) : `emoji_${cleaned}`.slice(0, 32);
+}
+
 async function cloneEmoji(guildId: string, emoji: EmojiData): Promise<void> {
     const dataUrl = await blobToDataUrl(await fetchBlob(emoji));
-    await uploadEmoji({
+
+    const rest = getRest();
+    if (typeof rest?.post !== "function") throw new Error("Discord REST istemcisi bulunamadı");
+
+    const { body } = await rest.post({
+        url: `/guilds/${guildId}/emojis`,
+        body: { name: safeEmojiName(emoji.name), image: dataUrl, roles: [] }
+    });
+
+    getFluxDispatcher()?.dispatch?.({
+        type: "GUILD_EMOJIS_UPDATE",
         guildId,
-        name: emoji.name.split("~")[0],
-        image: dataUrl
+        emojis: [body]
     });
 }
 
 async function cloneSticker(guildId: string, sticker: StickerData): Promise<void> {
+    const rest = getRest();
+    if (typeof rest?.post !== "function") throw new Error("Discord REST istemcisi bulunamadı");
+
     const form = new FormData();
     form.append("name", sticker.name);
     form.append("tags", sticker.tags || "🙂");
@@ -100,7 +118,7 @@ async function cloneSticker(guildId: string, sticker: StickerData): Promise<void
         `${sticker.name}.${STICKER_EXT[sticker.format_type ?? 1] ?? "png"}`
     );
 
-    const { body } = await RestAPI.post({ url: `/guilds/${guildId}/stickers`, body: form });
+    const { body } = await rest.post({ url: `/guilds/${guildId}/stickers`, body: form });
 
     getFluxDispatcher()?.dispatch?.({
         type: "GUILD_STICKERS_CREATE_SUCCESS",
