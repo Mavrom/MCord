@@ -26,14 +26,15 @@ export function PluginCard({ plugin, onChanged, onOpenSettings, onPickTag }: {
             className="mcord-card"
             style={{
                 ...s.card,
-                height: "100%",
-                minHeight: "126px",
+                width: "100%",
                 gap: space.sm,
                 padding: space.md,
-                borderLeft: `3px solid ${enabled ? c.success : c.danger}`,
+                borderLeft: `3px solid ${enabled
+                    ? c.success
+                    : `color-mix(in srgb, ${c.danger} 55%, transparent)`}`,
                 background: enabled
                     ? `color-mix(in srgb, ${c.success} 6%, ${c.surfaceRaised})`
-                    : `color-mix(in srgb, ${c.danger} 5%, ${c.surfaceRaised})`
+                    : `color-mix(in srgb, ${c.danger} 4%, ${c.surfaceRaised})`
             }}
         >
             <div style={{ display: "flex", alignItems: "flex-start", gap: space.sm }}>
@@ -132,7 +133,7 @@ export function PluginCard({ plugin, onChanged, onOpenSettings, onPickTag }: {
             </p>
 
             {(plugin.tags?.length ?? 0) > 0 && (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "5px", marginTop: "auto", paddingTop: "2px" }}>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "5px", paddingTop: "2px" }}>
                     {plugin.tags!.slice(0, 3).map(tag => (
                         <button
                             key={tag}

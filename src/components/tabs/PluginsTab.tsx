@@ -383,16 +383,44 @@ export function PluginsTab() {
                         </div>
                     )
                     : (
-                        <div style={s.grid}>
-                            {visible.map(plugin => {
+                        <div style={{ ...s.grid, alignItems: "start" }}>
+                            {visible.map((plugin, index) => {
                                 const letter = plugin.name[0]?.toUpperCase() ?? "";
                                 const isLeader = letterLeaders[letter] === plugin.name;
                                 return (
-                                    <div
-                                        key={plugin.name}
-                                        data-letter={isLeader ? letter : undefined}
-                                        style={{ display: "flex", scrollMarginTop: "116px" }}
-                                    >
+                                    <React.Fragment key={plugin.name}>
+                                        {isLeader && (
+                                            <div
+                                                data-letter={letter}
+                                                style={{
+                                                    gridColumn: "1 / -1",
+                                                    scrollMarginTop: "112px",
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    gap: space.md,
+                                                    margin: index === 0 ? 0 : "6px 0 2px",
+                                                    height: index === 0 ? 0 : "auto"
+                                                }}
+                                            >
+                                                {index > 0 && (
+                                                    <>
+                                                        <span style={{ width: "44px", height: "1px", background: c.border }} />
+                                                        <span
+                                                            style={{
+                                                                color: c.faint,
+                                                                fontSize: "11px",
+                                                                fontWeight: 700,
+                                                                letterSpacing: ".1em"
+                                                            }}
+                                                        >
+                                                            {letter}
+                                                        </span>
+                                                        <span style={{ width: "44px", height: "1px", background: c.border }} />
+                                                    </>
+                                                )}
+                                            </div>
+                                        )}
                                         <PluginCard
                                             plugin={plugin}
                                             onChanged={bump}
@@ -403,7 +431,7 @@ export function PluginsTab() {
                                                 else setQuery(`#${tag}`);
                                             }}
                                         />
-                                    </div>
+                                    </React.Fragment>
                                 );
                             })}
                         </div>
