@@ -5,7 +5,8 @@
  */
 
 import { React } from "../webpack/react";
-import { IconDownload, IconInfo, IconPuzzle, IconSliders, LogoMark } from "./Icons";
+import { IconDownload, IconInfo, IconPuzzle, IconRestart, IconSliders, LogoMark } from "./Icons";
+import { relaunchDiscord, useRestartNeeded } from "./restartState";
 import { injectStyles } from "./styles";
 import { AboutTab } from "./tabs/AboutTab";
 import { GeneralTab } from "./tabs/GeneralTab";
@@ -62,6 +63,7 @@ function NavItem({ tab, active, onSelect }: {
 /** Tek başına açılabilen ayar kabuğu — overlay ve Discord sekmesi ikisi de kullanıyor. */
 export function SettingsRoot({ initialTab = "plugins" }: { initialTab?: TabId }) {
     const [active, setActive] = React.useState<TabId>(initialTab);
+    const restartNeeded = useRestartNeeded();
 
     // Discord'un ayar sekmesi olarak gömüldüğünde overlay'den geçmiyoruz.
     React.useEffect(() => injectStyles(), []);
@@ -111,6 +113,32 @@ export function SettingsRoot({ initialTab = "plugins" }: { initialTab?: TabId })
                         </div>
                         <div style={{ color: c.faint, fontSize: "11px" }}>v{VERSION}</div>
                     </div>
+
+                    {restartNeeded && (
+                        <button
+                            className="mcord-btn"
+                            onClick={relaunchDiscord}
+                            title="Bir plugin için yeniden başlatma gerekiyor — tıkla"
+                            aria-label="Discord'u yeniden başlat"
+                            style={{
+                                marginLeft: "auto",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: "28px",
+                                height: "28px",
+                                flex: "0 0 auto",
+                                padding: 0,
+                                borderRadius: radius.sm,
+                                border: `1px solid ${c.warning}`,
+                                background: `color-mix(in srgb, ${c.warning} 14%, transparent)`,
+                                color: c.warning,
+                                cursor: "pointer"
+                            }}
+                        >
+                            <IconRestart size={15} />
+                        </button>
+                    )}
                 </div>
 
                 {TABS.map(tab => (

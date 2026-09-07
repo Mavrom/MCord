@@ -14,13 +14,14 @@ import {
 import type { Plugin } from "../utils/types";
 import { React } from "../webpack/react";
 import { IconChevronDown } from "./Icons";
+import { markRestartNeeded } from "./restartState";
 import { SettingsPanel } from "./SettingControls";
 import { c, radius, s, space, tint } from "./theme";
 import { Toggle } from "./Toggle";
 
-export function PluginCard({ plugin, onRestartNeeded }: {
+export function PluginCard({ plugin, onChanged }: {
     plugin: Plugin;
-    onRestartNeeded(): void;
+    onChanged(): void;
 }) {
     const [enabled, setEnabled] = React.useState(() => isPluginEnabled(plugin.name));
     const [expanded, setExpanded] = React.useState(false);
@@ -31,11 +32,13 @@ export function PluginCard({ plugin, onRestartNeeded }: {
     const toggle = async (next: boolean) => {
         setPluginEnabled(plugin.name, next);
         setEnabled(next);
+        onChanged();
 
         if (needsRestart) {
             // Kod patch'i olan plugin'ler modül yüklenirken uygulandığı için
-            // sonradan geri alınamıyor (plan §7.3).
-            onRestartNeeded();
+            // sonradan geri alınamıyor (plan §7.3). Sol üstteki başlıkta yeniden
+            // başlat butonu belirir.
+            markRestartNeeded();
             return;
         }
 
@@ -102,12 +105,6 @@ export function PluginCard({ plugin, onRestartNeeded }: {
             >
                 {plugin.description}
             </p>
-
-            {needsRestart && (
-                <span style={{ ...s.badge, ...tint(c.warning), alignSelf: "flex-start" }}>
-                    yeniden başlatma gerekir
-                </span>
-            )}
 
             {(plugin.tags?.length ?? 0) > 0 && (
                 <div style={{ ...s.row, flexWrap: "wrap", gap: "6px" }}>

@@ -9,7 +9,6 @@ import type { Plugin } from "../../utils/types";
 import { React } from "../../webpack/react";
 import { IconSearch, IconSearchOff } from "../Icons";
 import { PluginCard } from "../PluginCard";
-import { RestartBanner } from "../RestartBanner";
 import { c, radius, s, space } from "../theme";
 
 type Category = "all" | "enabled" | "disabled";
@@ -85,7 +84,7 @@ function Segmented({ value, onChange, counts }: {
 export function PluginsTab() {
     const [query, setQuery] = React.useState("");
     const [category, setCategory] = React.useState<Category>("all");
-    const [restartNeeded, setRestartNeeded] = React.useState(false);
+    const [tick, bump] = React.useReducer((n: number) => n + 1, 0);
     const [focused, setFocused] = React.useState(false);
 
     // Çekirdek plugin'ler (`required`) listelenmiyor: kapatılamıyorlar, ayarları
@@ -101,7 +100,7 @@ export function PluginsTab() {
         all: all.length,
         enabled: all.filter(p => isPluginEnabled(p.name)).length,
         disabled: all.filter(p => !isPluginEnabled(p.name)).length
-    }), [all, restartNeeded]);
+    }), [all, tick]);
 
     const visible = all.filter(plugin => matches(plugin, query, category));
 
@@ -113,8 +112,6 @@ export function PluginsTab() {
                     Küratörlü kütüphane — üçüncü parti kurulum yok, her şey depoda.
                 </p>
             </header>
-
-            {restartNeeded && <RestartBanner />}
 
             <div style={{ display: "flex", flexDirection: "column", gap: space.md }}>
                 <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
@@ -181,7 +178,7 @@ export function PluginsTab() {
                             <PluginCard
                                 key={plugin.name}
                                 plugin={plugin}
-                                onRestartNeeded={() => setRestartNeeded(true)}
+                                onChanged={bump}
                             />
                         ))}
                     </div>

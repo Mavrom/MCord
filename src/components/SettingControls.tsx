@@ -13,7 +13,8 @@ import {
     type SliderSetting
 } from "../utils/types";
 import { React } from "../webpack/react";
-import { c, s, tint } from "./theme";
+import { markRestartNeeded } from "./restartState";
+import { c, s } from "./theme";
 import { Toggle } from "./Toggle";
 
 /**
@@ -57,6 +58,8 @@ function SettingRow(props: { settings: DefinedSettings; settingKey: string; sett
         setError(null);
         (settings.store as any)[settingKey] = newValue;
         setValueState(newValue);
+
+        if (setting.restartNeeded) markRestartNeeded();
     };
 
     return (
@@ -66,11 +69,6 @@ function SettingRow(props: { settings: DefinedSettings; settingKey: string; sett
                     <div style={{ color: c.heading, fontWeight: 500 }}>{settingKey}</div>
                     <div style={s.muted}>{setting.description}</div>
                 </div>
-                {setting.restartNeeded && (
-                    <span style={{ ...s.badge, ...tint(c.warning) }}>
-                        yeniden başlat
-                    </span>
-                )}
             </div>
 
             <Control setting={setting} value={value} disabled={disabled} onChange={commit} />

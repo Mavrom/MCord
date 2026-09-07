@@ -7,7 +7,7 @@
 import { flushSettings, Settings } from "../../api/settings";
 import { DefaultMainSettings, type MainSettings, type WindowsMaterial } from "../../shared/settingsTypes";
 import { React } from "../../webpack/react";
-import { RestartBanner } from "../RestartBanner";
+import { markRestartNeeded } from "../restartState";
 import { c, s } from "../theme";
 
 const MATERIALS: Array<{ value: WindowsMaterial; label: string }> = [
@@ -52,7 +52,6 @@ const TOGGLES: Array<{ key: keyof MainSettings; label: string; description: stri
 ];
 
 export function GeneralTab() {
-    const [restartNeeded, setRestartNeeded] = React.useState(false);
     const [, forceRender] = React.useReducer((n: number) => n + 1, 0);
 
     const main = { ...DefaultMainSettings, ...(Settings.main as Partial<MainSettings>) };
@@ -60,7 +59,7 @@ export function GeneralTab() {
     const update = (key: keyof MainSettings, value: unknown) => {
         (Settings.main as Record<string, unknown>)[key] = value;
         flushSettings();
-        setRestartNeeded(true);
+        markRestartNeeded();
         forceRender();
     };
 
@@ -68,8 +67,6 @@ export function GeneralTab() {
         <div style={s.page}>
             <h1 style={s.h1}>Genel</h1>
             <div style={s.muted}>Pencere ve başlangıç ayarları. Hepsi yeniden başlatma gerektirir.</div>
-
-            {restartNeeded && <RestartBanner />}
 
             <h2 style={s.h2}>Pencere</h2>
 
@@ -117,7 +114,7 @@ export function GeneralTab() {
                         onChange={event => {
                             Settings.safeMode = event.currentTarget.checked;
                             flushSettings();
-                            setRestartNeeded(true);
+                            markRestartNeeded();
                             forceRender();
                         }}
                     />
@@ -138,7 +135,7 @@ export function GeneralTab() {
                         onChange={event => {
                             Settings.eagerPatches = event.currentTarget.checked;
                             flushSettings();
-                            setRestartNeeded(true);
+                            markRestartNeeded();
                             forceRender();
                         }}
                     />

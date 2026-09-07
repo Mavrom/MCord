@@ -91,6 +91,13 @@ export const IconClose = (p: IconProps) => (
     </Svg>
 );
 
+export const IconRestart = (p: IconProps) => (
+    <Svg {...p}>
+        <path d="M3.5 12a8.5 8.5 0 1 0 2.5-6" />
+        <path d="M4 4v4h4" />
+    </Svg>
+);
+
 export const IconAlert = (p: IconProps) => (
     <Svg {...p}>
         <path d="M10.3 4.3 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 4.3a2 2 0 0 0-3.4 0Z" />
