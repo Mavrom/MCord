@@ -5,7 +5,7 @@
  */
 
 import type { Plugin } from "../utils/types";
-import { IconGear, IconInfo } from "./Icons";
+import { IconGear } from "./Icons";
 import { c, radius, s, space, tint } from "./theme";
 import { Toggle } from "./Toggle";
 import { usePluginToggle } from "./usePluginToggle";
@@ -97,27 +97,16 @@ export function PluginCard({ plugin, onChanged, onOpenDetail, onPickTag }: {
                 {plugin.required
                     ? <span style={{ ...s.badge, ...tint(c.accent), flex: "0 0 auto" }}>çekirdek</span>
                     : (
-                        <div style={{ display: "flex", alignItems: "center", gap: "2px", flex: "0 0 auto" }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: "4px", flex: "0 0 auto" }}>
                             <button
                                 className="mcord-btn mcord-ghost mcord-card-gear"
                                 onClick={openDetail}
-                                aria-label={`${plugin.name} hakkında`}
-                                title="Bilgi"
+                                aria-label={`${plugin.name} — bilgi ve ayarlar`}
+                                title={hasSettings ? "Bilgi ve ayarlar" : "Bilgi"}
                                 style={iconButtonStyle}
                             >
-                                <IconInfo size={15} />
+                                <IconGear size={15} />
                             </button>
-                            {hasSettings && (
-                                <button
-                                    className="mcord-btn mcord-ghost mcord-card-gear"
-                                    onClick={openDetail}
-                                    aria-label={`${plugin.name} ayarları`}
-                                    title="Ayarlar"
-                                    style={iconButtonStyle}
-                                >
-                                    <IconGear size={15} />
-                                </button>
-                            )}
                             <Toggle
                                 checked={enabled}
                                 onChange={next => void toggle(next)}
