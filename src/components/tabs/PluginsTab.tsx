@@ -24,7 +24,6 @@ const CATEGORIES: Array<{ id: string; label: string; tags: string[] }> = [
     { id: "messages", label: "Mesajlar", tags: ["mesaj", "bahsetme", "reaksiyon", "alıntı"] },
     { id: "commands", label: "Komutlar", tags: ["komut"] },
     { id: "media", label: "Medya & GIF", tags: ["medya", "gif", "emoji", "çıkartma", "sticker", "resim", "dosya"] },
-    { id: "fun", label: "Eğlence", tags: ["eglence", "eğlence"] },
     { id: "server", label: "Sunucu & Rol", tags: ["sunucu", "rol", "izin"] },
     { id: "voice", label: "Ses & Arama", tags: ["ses", "arama", "yayın", "aktivite", "durum"] },
     { id: "privacy", label: "Gizlilik", tags: ["gizlilik", "güvenlik"] },
@@ -37,19 +36,10 @@ for (const cat of CATEGORIES) {
     for (const tag of cat.tags) CATEGORY_BY_TAG.set(tag, cat.id);
 }
 
-/** Yatay kaydırılabilir, seçilebilir çip satırı. */
+/** Seçilebilir çip satırı — sığmayınca alt satıra sarar. */
 function Chips({ children }: { children: React.ReactNode }) {
     return (
-        <div
-            style={{
-                display: "flex",
-                gap: "6px",
-                overflowX: "auto",
-                paddingBottom: "2px",
-                scrollbarWidth: "none",
-                WebkitMaskImage: "linear-gradient(90deg, #000 calc(100% - 24px), transparent)"
-            }}
-        >
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
             {children}
         </div>
     );
@@ -339,7 +329,7 @@ export function PluginsTab() {
                         <Chip active={status === "enabled"} onClick={() => setStatus(status === "enabled" ? "all" : "enabled")}>
                             Açıklar
                         </Chip>
-                        <span style={{ flex: "0 0 auto", width: "1px", background: c.border, margin: "4px 2px" }} />
+                        <span style={{ flex: "0 0 auto", width: "1px", alignSelf: "stretch", background: c.border, margin: "0 2px" }} />
                         {CATEGORIES.map(cat => (
                             <Chip
                                 key={cat.id}

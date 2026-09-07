@@ -48,7 +48,7 @@ export default definePlugin({
     name: "LoadingQuotes",
     description: "Discord yükleme ekranına MCord ve kişisel sözler ekler",
     authors: [Devs.Berk],
-    tags: ["görünüm", "eğlence"],
+    tags: ["görünüm"],
     settings,
 
     patches: [{
