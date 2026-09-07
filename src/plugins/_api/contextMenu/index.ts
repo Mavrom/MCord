@@ -38,7 +38,20 @@ function findMenuProps(node: any, sourceProps: Record<string, any>): Record<stri
 
     const props = node?.props;
     if (props == null) return;
-    if (typeof props.navId === "string") return { ...sourceProps, ...props };
+    if (typeof props.navId === "string") {
+        // Bazı menülerde (ör. `expression-picker`) `children` tek bir eleman ya
+        // da fonksiyon — patch'ler diziye `push` yapıyor. Menü node'unun kendi
+        // `props.children`'ını yerinde diziye çeviriyoruz ki değişiklik render'a
+        // yansısın (referans katalog da böyle normalize ediyor).
+        if (!Array.isArray(props.children)) {
+            try {
+                props.children = props.children == null ? [] : [props.children];
+            } catch {
+                return; // props donmuş — dokunamıyoruz, patch'i atla
+            }
+        }
+        return { ...sourceProps, ...props };
+    }
 
     return findMenuProps(props.children, sourceProps);
 }
