@@ -27,6 +27,8 @@ export function PluginCard({ plugin, onChanged, onOpenSettings, onPickTag }: {
             style={{
                 ...s.card,
                 width: "100%",
+                height: "100%",
+                minHeight: "132px",
                 gap: space.sm,
                 padding: space.md,
                 borderLeft: `3px solid ${enabled
@@ -133,7 +135,7 @@ export function PluginCard({ plugin, onChanged, onOpenSettings, onPickTag }: {
             </p>
 
             {(plugin.tags?.length ?? 0) > 0 && (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "5px", paddingTop: "2px" }}>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "5px", marginTop: "auto", paddingTop: "2px" }}>
                     {plugin.tags!.slice(0, 3).map(tag => (
                         <button
                             key={tag}

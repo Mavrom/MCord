@@ -383,7 +383,7 @@ export function PluginsTab() {
                         </div>
                     )
                     : (
-                        <div style={{ ...s.grid, alignItems: "start" }}>
+                        <div style={s.grid}>
                             {visible.map((plugin, index) => {
                                 const letter = plugin.name[0]?.toUpperCase() ?? "";
                                 const isLeader = letterLeaders[letter] === plugin.name;
