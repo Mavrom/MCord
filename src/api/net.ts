@@ -40,6 +40,34 @@ export async function fetchJson<T = unknown>(url: string, options: FetchJsonOpti
     }
 }
 
+/**
+ * Main process üzerinden JSON çeker — renderer CSP'sine takılmaz.
+ * Discord'un izin vermediği host'lara istek atması gereken plugin'ler için
+ * (çeviri, sözlük vb.).
+ */
+export async function nativeFetchJson<T = unknown>(
+    url: string,
+    options?: { method?: string; headers?: Record<string, string>; body?: string }
+): Promise<T> {
+    const response = await window.McordNative.net.request(url, options);
+    if (!response.ok) {
+        throw new Error(`${url} → ${response.status}`);
+    }
+    return JSON.parse(response.text) as T;
+}
+
+/** Main process üzerinden ham metin çeker. */
+export async function nativeFetchText(
+    url: string,
+    options?: { method?: string; headers?: Record<string, string>; body?: string }
+): Promise<string> {
+    const response = await window.McordNative.net.request(url, options);
+    if (!response.ok) {
+        throw new Error(`${url} → ${response.status}`);
+    }
+    return response.text;
+}
+
 /** Harici bağlantıyı sistem tarayıcısında açar — main process üzerinden. */
 export async function openExternal(url: string): Promise<void> {
     try {

@@ -20,6 +20,9 @@ export const enum IpcEvents {
     OPEN_EXTERNAL = "McordOpenExternal",
     OPEN_SETTINGS_FOLDER = "McordOpenSettingsFolder",
 
+    /** Plugin'lerin CSP'yi aşan dış isteği (main process fetch'i, çeviri vb.) */
+    NATIVE_FETCH = "McordNativeFetch",
+
     RELAUNCH = "McordRelaunch",
 
     /** Discord host güncellemesi sonrası enjeksiyon durumu (plan §3.6) */

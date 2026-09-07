@@ -6,6 +6,7 @@
 
 import { type ContextMenuPatch } from "../../api/contextMenu";
 import { updateMessage } from "../../api/messageUpdater";
+import { nativeFetchJson } from "../../api/net";
 import { definePluginSettings } from "../../api/settings";
 import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
@@ -22,9 +23,8 @@ const settings = definePluginSettings({
 
 async function translate(text: string, target: string): Promise<{ text: string; source: string }> {
     const query = new URLSearchParams({ client: "gtx", sl: "auto", tl: target, dt: "t", q: text });
-    const response = await fetch(`https://translate.googleapis.com/translate_a/single?${query}`);
-    if (!response.ok) throw new Error(`Çeviri HTTP ${response.status}`);
-    const data = await response.json();
+    // Discord CSP `translate.googleapis.com`'a izin vermiyor — main process üzerinden.
+    const data = await nativeFetchJson<any>(`https://translate.googleapis.com/translate_a/single?${query}`);
     return { text: data?.[0]?.map((part: any[]) => part?.[0] ?? "").join("") ?? text, source: data?.[2] ?? "auto" };
 }
 

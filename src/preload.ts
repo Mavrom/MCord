@@ -21,6 +21,9 @@ const McordNativeBridge: McordNative = {
         relaunch: () => ipcRenderer.invoke(IpcEvents.RELAUNCH),
         openExternal: url => ipcRenderer.invoke(IpcEvents.OPEN_EXTERNAL, url)
     },
+    net: {
+        request: (url, options) => ipcRenderer.invoke(IpcEvents.NATIVE_FETCH, url, options)
+    },
     injection: {
         getState: () => ipcRenderer.sendSync(IpcEvents.GET_INJECTION_STATE) as InjectionState | null,
         repatchLatest: () => ipcRenderer.invoke(IpcEvents.REPATCH_LATEST)

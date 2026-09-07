@@ -42,6 +42,17 @@ export interface McordNative {
         relaunch(): Promise<void>;
         openExternal(url: string): Promise<void>;
     };
+    net: {
+        /**
+         * Main process üzerinden HTTP isteği — renderer CSP'sine takılmaz.
+         * Yalnızca plugin'lerin açıkça talep ettiği dış istekler için.
+         */
+        request(url: string, options?: {
+            method?: string;
+            headers?: Record<string, string>;
+            body?: string;
+        }): Promise<{ status: number; ok: boolean; text: string }>;
+    };
     injection: {
         getState(): InjectionState | null;
         repatchLatest(): Promise<boolean>;

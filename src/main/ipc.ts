@@ -60,6 +60,25 @@ export function registerIpc(): void {
 
     ipcMain.handle(IpcEvents.OPEN_SETTINGS_FOLDER, () => shell.showItemInFolder(SETTINGS_FILE));
 
+    // Main process fetch'i — renderer CSP'sine takılmaz (çeviri vb.).
+    ipcMain.handle(
+        IpcEvents.NATIVE_FETCH,
+        async (_event, url: string, options: { method?: string; headers?: Record<string, string>; body?: string } = {}) => {
+            const { protocol } = new URL(url);
+            if (protocol !== "http:" && protocol !== "https:") {
+                throw new Error(`Desteklenmeyen protokol: ${protocol}`);
+            }
+
+            const response = await fetch(url, {
+                method: options.method ?? "GET",
+                headers: options.headers,
+                body: options.body
+            });
+
+            return { status: response.status, ok: response.ok, text: await response.text() };
+        }
+    );
+
     ipcMain.handle(IpcEvents.RELAUNCH, () => {
         app.relaunch();
         app.exit();
