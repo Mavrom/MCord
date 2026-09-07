@@ -5,6 +5,7 @@
  */
 
 import { Logger } from "../utils/logger";
+import { getDiscordToken } from "../webpack/auth";
 
 const logger = new Logger("Api:Net", "#f4b8e4");
 
@@ -66,6 +67,48 @@ export async function nativeFetchText(
         throw new Error(`${url} → ${response.status}`);
     }
     return response.text;
+}
+
+/**
+ * Discord API isteği — main process üzerinden (renderer CSP'sine ve kırılabilen
+ * webpack RestAPI'sine takılmadan), oturum token'ıyla.
+ *
+ * `path` `/guilds/…` gibi API v9 yolu. `body` JSON string ya da `form` multipart
+ * (dosya main'de base64'ten kuruluyor).
+ */
+export async function discordApi<T = any>(
+    path: string,
+    init: {
+        method?: string;
+        headers?: Record<string, string>;
+        body?: unknown;
+        form?: {
+            fields?: Record<string, string>;
+            file?: { name: string; type: string; base64: string };
+        };
+    } = {}
+): Promise<{ status: number; ok: boolean; body: T | null }> {
+    const token = getDiscordToken();
+    if (!token) throw new Error("Oturum token'ı alınamadı");
+
+    const isJson = init.body != null && init.form == null;
+    const response = await window.McordNative.net.request(`https://discord.com/api/v9${path}`, {
+        method: init.method ?? "POST",
+        headers: {
+            authorization: token,
+            ...(isJson ? { "content-type": "application/json" } : {}),
+            ...init.headers
+        },
+        body: isJson ? (typeof init.body === "string" ? init.body : JSON.stringify(init.body)) : undefined,
+        form: init.form
+    });
+
+    let body: any = null;
+    try {
+        body = response.text ? JSON.parse(response.text) : null;
+    } catch { /* JSON değil */ }
+
+    return { status: response.status, ok: response.ok, body };
 }
 
 /** Harici bağlantıyı sistem tarayıcısında açar — main process üzerinden. */

@@ -36,6 +36,46 @@ export function removeContextMenuPatch(navId: string | string[], patch: ContextM
     return removed;
 }
 
+/**
+ * Bir bağlam menüsü ağacında, verilen `id`'li öğeyi içeren grup dizisini bulur.
+ * Plugin'ler kendi öğelerini mevcut bir öğenin (ör. `"copy-link"`) yanına
+ * eklemek için kullanır (referans katalog `findGroupChildrenByChildId`).
+ */
+export function findGroupChildrenByChildId(
+    id: string | string[],
+    children: any[],
+    matchSubstring = false
+): any[] | null {
+    for (const child of children) {
+        if (child == null) continue;
+
+        if (Array.isArray(child)) {
+            const found = findGroupChildrenByChildId(id, child, matchSubstring);
+            if (found !== null) return found;
+        }
+
+        const childId = child.props?.id ?? child.id;
+        const matches = (target: string) =>
+            matchSubstring ? childId?.includes(target) : childId === target;
+
+        if (Array.isArray(id) ? id.some(matches) : matches(id)) return children;
+
+        let nextChildren = child.props?.children ?? child.children;
+        if (nextChildren) {
+            if (!Array.isArray(nextChildren)) {
+                nextChildren = [nextChildren];
+                if (child.props) child.props.children = nextChildren;
+                else child.children = nextChildren;
+            }
+
+            const found = findGroupChildrenByChildId(id, nextChildren, matchSubstring);
+            if (found !== null) return found;
+        }
+    }
+
+    return null;
+}
+
 export function addGlobalContextMenuPatch(patch: ContextMenuPatch): ContextMenuPatch {
     globalPatches.add(patch);
     return patch;

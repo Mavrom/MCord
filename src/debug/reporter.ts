@@ -6,7 +6,7 @@
 
 import { Logger } from "../utils/logger";
 import { addPatch, getBuildNumber, patches, patchTimings } from "../webpack/codePatcher";
-import { describeFilter } from "../webpack/filters";
+import { byStoreName, describeFilter } from "../webpack/filters";
 import { find } from "../webpack/finder";
 import { lazyWebpackSearchHistory, wreq } from "../webpack/intercept";
 import { mapMangledModule } from "../webpack/mangled";
@@ -164,8 +164,9 @@ function findSlowPatches(): Report["slowPatches"] {
  * Her arama türü kendi doğrulama mantığına sahip; `mapMangledModule` için sonuç
  * anahtar sayısı mapper anahtar sayısıyla eşleşmeli (plan §9.1).
  */
-function findBadWebpackFinds(): string[] {
+export function findBadWebpackFinds(): string[] {
     const bad: string[] = [];
+    const seen = new Set<string>();
 
     for (const [kind, args] of lazyWebpackSearchHistory) {
         try {
@@ -174,8 +175,20 @@ function findBadWebpackFinds(): string[] {
                 case "getLazy":
                 case "findLazy": {
                     const filter = args[0] as ModuleFilter;
+                    if (typeof filter !== "function") break;
                     if (find(filter, { silent: true }) == null) {
-                        bad.push(`${kind}: ${describeFilter(filter)}`);
+                        const label = `${kind}: ${describeFilter(filter)}`;
+                        if (!seen.has(label)) { seen.add(label); bad.push(label); }
+                    }
+                    break;
+                }
+
+                case "waitForStore":
+                case "findStoreLazy": {
+                    const name = args[0] as string;
+                    if (find(byStoreName(name), { silent: true }) == null) {
+                        const label = `store: ${name}`;
+                        if (!seen.has(label)) { seen.add(label); bad.push(label); }
                     }
                     break;
                 }
@@ -208,6 +221,35 @@ function findBadWebpackFinds(): string[] {
     }
 
     return bad;
+}
+
+let selfCheckDone = false;
+
+/**
+ * Client tarafı finder sağlık kontrolü — reporter build'i değil, normal build.
+ * Açılıştan bir süre sonra tüm kayıtlı lazy aramaları çalıştırır, kırıkları
+ * tek satırda konsola basar. Kullanıcı o listeyi paylaşır, sadece kırıklar
+ * düzeltilir.
+ */
+export function runClientSelfCheck(delayMs = 10_000): void {
+    if (selfCheckDone) return;
+    selfCheckDone = true;
+
+    setTimeout(() => {
+        try {
+            const bad = findBadWebpackFinds();
+            if (bad.length === 0) {
+                logger.info("✔ webpack finder self-check: hepsi sağlam.");
+            } else {
+                logger.warn(
+                    `✘ webpack finder self-check — ${bad.length} kırık:\n` + bad.map(x => "  • " + x).join("\n")
+                );
+                (window as any).McordBrokenFinders = bad;
+            }
+        } catch (err) {
+            logger.error("Self-check hata verdi:\n", err);
+        }
+    }, delayMs);
 }
 
 function logSummary(report: Report): void {

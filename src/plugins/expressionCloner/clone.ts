@@ -4,47 +4,18 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
+import { discordApi } from "../../api/net";
 import { showNotification } from "../../api/notifications";
 import { Logger } from "../../utils/logger";
-import { getDiscordToken } from "../../webpack/auth";
-import { GuildStore, PermissionStore, UserStore } from "../../webpack/common";
+import { GuildStore, PermissionsBits, PermissionStore, UserStore } from "../../webpack/common";
 
 export const logger = new Logger("ExpressionCloner", "#f4b8e4");
 
-const API = "https://discord.com/api/v9";
-
-/**
- * Discord API isteği — main process üzerinden (renderer CSP'sine ve kırık
- * webpack RestAPI'sine takılmadan), oturum token'ıyla.
- */
-async function discordApi(
-    path: string,
-    init: {
-        headers?: Record<string, string>;
-        body?: string;
-        form?: { fields?: Record<string, string>; file?: { name: string; type: string; base64: string } };
-    }
-): Promise<{ status: number; ok: boolean; body: any }> {
-    const token = getDiscordToken();
-    if (!token) throw new Error("Oturum token'ı alınamadı");
-
-    const response = await window.McordNative.net.request(`${API}${path}`, {
-        method: "POST",
-        headers: { authorization: token, ...init.headers },
-        body: init.body,
-        form: init.form
-    });
-
-    let body: any = null;
-    try {
-        body = response.text ? JSON.parse(response.text) : null;
-    } catch { /* JSON değil */ }
-
-    return { status: response.status, ok: response.ok, body };
+/** `PermissionsBits.CREATE_GUILD_EXPRESSIONS`, bulunamazsa sabit (1 << 43). */
+function createExpressionsBit(): bigint {
+    const bit = (PermissionsBits as any)?.CREATE_GUILD_EXPRESSIONS;
+    return typeof bit === "bigint" ? bit : 1n << 43n;
 }
-
-/** İzin biti: CREATE_GUILD_EXPRESSIONS = 1 << 43. */
-const CREATE_GUILD_EXPRESSIONS = 1n << 43n;
 
 const MAX_EMOJI_BYTES = 256 * 1024;
 const MAX_STICKER_BYTES = 512 * 1024;
@@ -135,8 +106,7 @@ async function cloneEmoji(guildId: string, emoji: EmojiData): Promise<void> {
     logger.info("2/3 POST /guilds/…/emojis");
 
     const res = await discordApi(`/guilds/${guildId}/emojis`, {
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ name: safeEmojiName(emoji.name), image: dataUrl, roles: [] })
+        body: { name: safeEmojiName(emoji.name), image: dataUrl, roles: [] }
     });
 
     logger.info("3/3 yanıt →", res.status, res.body);
@@ -203,12 +173,14 @@ export async function doClone(guildId: string, data: Data): Promise<void> {
 export function candidateGuilds(): any[] {
     const meId = UserStore?.getCurrentUser?.()?.id;
 
+    const bit = createExpressionsBit();
+
     return Object.values<any>(GuildStore?.getGuilds?.() ?? {})
         .filter(guild => {
             if (guild?.ownerId === meId) return true;
             try {
                 const perms = (PermissionStore as any)?.getGuildPermissions?.({ id: guild.id }) ?? 0n;
-                return (BigInt(perms) & CREATE_GUILD_EXPRESSIONS) === CREATE_GUILD_EXPRESSIONS;
+                return (BigInt(perms) & bit) === bit;
             } catch {
                 return false;
             }

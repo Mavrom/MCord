@@ -41,7 +41,7 @@ export function mapMangledModule<M extends Record<string, Mapper>>(
     // henüz çalıştırılmamış modüller de bulunur (plan §4.4).
     const filter = typeof target === "string" ? bySource(target) : target;
 
-    if (IS_REPORTER) lazyWebpackSearchHistory.push(["mapMangledModule", [filter, mappers]]);
+    lazyWebpackSearchHistory.push(["mapMangledModule", [filter, mappers]]);
 
     const result = {} as MappedModule<M>;
     const exports = find(filter, { raw: true, silent: true });
@@ -100,7 +100,7 @@ export function mapMangledModuleLazy<M extends Record<string, Mapper>>(
 ): MappedModule<M> {
     const filter = typeof target === "string" ? bySource(target) : target;
 
-    if (IS_REPORTER) lazyWebpackSearchHistory.push(["mapMangledModuleLazy", [filter, mappers]]);
+    lazyWebpackSearchHistory.push(["mapMangledModuleLazy", [filter, mappers]]);
 
     let resolved: MappedModule<M> | null = null;
 

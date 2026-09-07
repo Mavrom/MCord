@@ -5,7 +5,7 @@
  */
 
 import { Logger } from "../utils/logger";
-import { byCode, byStoreName, describeFilter } from "./filters";
+import { byCode, byKeys, byStoreName, componentByCode, describeFilter } from "./filters";
 import { find, type FindOptions } from "./finder";
 import { shouldSkipModule, wrapModuleFilter } from "./guards";
 import { cache, lazyWebpackSearchHistory, moduleListeners } from "./intercept";
@@ -15,7 +15,7 @@ const logger = new Logger("Webpack:Lazy", "#8caaee");
 
 /** Reporter için arama kaydı — CI'da hepsi yeniden çalıştırılır (plan §9.1). */
 function record(kind: string, filter: ModuleFilter): void {
-    if (IS_REPORTER) lazyWebpackSearchHistory.push([kind, [filter]]);
+    lazyWebpackSearchHistory.push([kind, [filter]]);
 }
 
 /**
@@ -187,19 +187,40 @@ export function findLazy<T extends object = ModuleExports>(
  * kalıyor.
  */
 export function waitForStore(name: string, callback: (store: ModuleExports) => void): () => void {
-    if (IS_REPORTER) lazyWebpackSearchHistory.push(["waitForStore", [name]]);
+    lazyWebpackSearchHistory.push(["waitForStore", [name]]);
     return waitFor(byStoreName(name), callback, { silent: true });
 }
 
 /** Store'a erişildiği anda çözülen tembel proxy. */
 export function findStoreLazy<T extends object = ModuleExports>(name: string): T {
-    if (IS_REPORTER) lazyWebpackSearchHistory.push(["findStoreLazy", [name]]);
+    lazyWebpackSearchHistory.push(["findStoreLazy", [name]]);
     return findLazy<T>(byStoreName(name));
 }
 
 /** Kaynağında verilen stringleri içeren fonksiyonu tembel bulur. */
 export function findByCodeLazy<T extends object = ModuleExports>(...code: string[]): T {
     return findLazy<T>(byCode(...code));
+}
+
+/** Belirtilen property'lerin hepsine sahip modülü tembel bulur (referans katalog `findByPropsLazy`). */
+export function findByPropsLazy<T extends object = ModuleExports>(...props: string[]): T {
+    return findLazy<T>(byKeys(props));
+}
+
+/** Kaynağında verilen stringleri içeren React bileşenini tembel bulur. */
+export function findComponentByCodeLazy<T extends object = ModuleExports>(...code: string[]): T {
+    return findLazy<T>(componentByCode(...code));
+}
+
+/** `module[name]` bileşenini dışa açan modülü bulup o export'a tembel proxy döndürür. */
+export function findExportedComponentLazy<T extends object = ModuleExports>(name: string): T {
+    const moduleProxy = findLazy<any>(byKeys([name]));
+
+    return new Proxy((() => null) as any, {
+        get: (_target, prop) => moduleProxy?.[name]?.[prop],
+        apply: (_target, thisArg, args) => Reflect.apply(moduleProxy[name], thisArg, args),
+        construct: (_target, args) => Reflect.construct(moduleProxy[name], args)
+    }) as T;
 }
 
 /** Zaten yüklenmiş modül sayısı — debug/reporter için. */
