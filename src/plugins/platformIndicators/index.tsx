@@ -13,6 +13,7 @@ import {
     IconPlatformMobile,
     IconPlatformWeb
 } from "../../components/Icons";
+import { Tooltip } from "../../components/Tooltip";
 import { Devs } from "../../utils/constants";
 import { definePlugin, OptionType } from "../../utils/types";
 import { UserStore } from "../../webpack/common";
@@ -158,9 +159,11 @@ function Indicators({ user, small }: { user: any; small: boolean }) {
                 const label = `${LABELS[platform] ?? platform} — ${STATUS_LABEL[status] ?? status}`;
 
                 return (
-                    <span key={platform} title={label} aria-label={label} style={{ display: "inline-flex" }}>
-                        <Icon size={size} color={color} strokeWidth={2.4} />
-                    </span>
+                    <Tooltip key={platform} text={label}>
+                        <span aria-label={label} style={{ display: "inline-flex" }}>
+                            <Icon size={size} color={color} strokeWidth={2.4} />
+                        </span>
+                    </Tooltip>
                 );
             })}
         </span>

@@ -127,6 +127,50 @@ const CSS = `
 .mcord-panel { animation: mcord-panel-in var(--mc-slow) var(--mc-ease) both; }
 .mcord-enter { animation: mcord-fade-up 200ms var(--mc-ease) both; }
 
+/* ── İpucu balonu (kapsamsız — dekorasyonlar .mcord-root dışında) ────────── */
+.mcord-tt { position: relative; display: inline-flex; outline: none; }
+.mcord-tt::after {
+    content: attr(data-mcord-tip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    padding: 5px 9px;
+    border-radius: 6px;
+    background: var(--background-floating, #111214);
+    color: var(--text-default, #dbdee1);
+    font-family: var(--font-primary, "gg sans", "Segoe UI", system-ui, sans-serif);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .4);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 4px);
+    transition: opacity 120ms var(--mc-ease, cubic-bezier(.2,.7,.3,1)), transform 120ms var(--mc-ease, cubic-bezier(.2,.7,.3,1));
+    z-index: 100002;
+}
+.mcord-tt::before {
+    content: "";
+    position: absolute;
+    bottom: calc(100% + 3px);
+    left: 50%;
+    border: 5px solid transparent;
+    border-top-color: var(--background-floating, #111214);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 4px);
+    transition: opacity 120ms var(--mc-ease, cubic-bezier(.2,.7,.3,1)), transform 120ms var(--mc-ease, cubic-bezier(.2,.7,.3,1));
+    z-index: 100002;
+}
+.mcord-tt:hover::after,
+.mcord-tt:hover::before,
+.mcord-tt:focus-visible::after,
+.mcord-tt:focus-visible::before {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
 /* Hareket hassasiyeti — kullanıcı azaltılmış hareket istiyorsa hepsini kes. */
 @media (prefers-reduced-motion: reduce) {
     .mcord-root *,

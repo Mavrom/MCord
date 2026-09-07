@@ -7,6 +7,7 @@
 import { mountNotificationHost, unmountNotificationHost } from "../../../components/NotificationHost";
 import { closeSettingsOverlay, isSettingsOverlayOpen, openSettingsOverlay } from "../../../components/SettingsOverlay";
 import { type TabId } from "../../../components/SettingsRoot";
+import { injectStyles } from "../../../components/styles";
 import { Devs } from "../../../utils/constants";
 import { definePlugin, StartAt } from "../../../utils/types";
 
@@ -26,6 +27,9 @@ export default definePlugin({
     startAt: StartAt.DOMContentLoaded,
 
     start() {
+        // MCord CSS'i (ipucu balonu dahil) baştan enjekte et — ayar penceresi
+        // hiç açılmasa bile mesaj/üye listesi dekorasyonları kullanıyor.
+        injectStyles();
         mountNotificationHost();
         document.addEventListener("keydown", this.onKeyDown, true);
     },
