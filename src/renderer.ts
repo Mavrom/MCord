@@ -98,10 +98,6 @@ onceReady.then(async () => {
     finishTrace("MCord başlangıç");
     logger.info(`${VERSION} (${COMMIT_HASH}) hazır — webpack yakalandı.`);
 
-    // Finder sağlık kontrolü: kırık finder'ları açılıştan ~10 sn sonra konsola
-    // bas. Discord güncellemesinde sessizce kırılan modülleri yakalar.
-    Reporter.runClientSelfCheck();
-
     // Aşama 3: DOMContentLoaded — UI enjeksiyonu.
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", () => {
