@@ -13,8 +13,7 @@ export const logger = new Logger("ExpressionCloner", "#f4b8e4");
 
 /** Discord'un REST istemcisi — çağrı anında çözülüyor. */
 function getRest(): any {
-    return findByKeys<any>("getAPIBaseURL", "get", "post")
-        ?? findByKeys<any>("get", "post", "patch", "put");
+    return findByKeys<any>("get", "post", "patch", "put");
 }
 
 /** İzin biti: CREATE_GUILD_EXPRESSIONS = 1 << 43. */
@@ -103,12 +102,12 @@ async function cloneEmoji(guildId: string, emoji: EmojiData): Promise<void> {
     const rest = getRest();
     if (typeof rest?.post !== "function") throw new Error("Discord REST istemcisi bulunamadı");
 
-    const { body } = await rest.post({
+    // Sadece POST — Discord'un gateway'i oluşturulan emojiyi kendi push'luyor.
+    // Elle `GUILD_EMOJIS_UPDATE` dispatch etmek yanlış şekilde store'u çökertiyordu.
+    await rest.post({
         url: `/guilds/${guildId}/emojis`,
         body: { name: safeEmojiName(emoji.name), image: dataUrl, roles: [] }
     });
-
-    getFluxDispatcher()?.dispatch?.({ type: "GUILD_EMOJIS_UPDATE", guildId, emojis: [body] });
 }
 
 async function cloneSticker(guildId: string, sticker: StickerData): Promise<void> {
