@@ -112,6 +112,15 @@ const CSS = `
 .mcord-card-name { transition: color var(--mc-fast) var(--mc-ease); }
 .mcord-card [role="button"]:hover .mcord-card-name { color: var(--brand-500, #5865f2); }
 
+/* ── A–Z atlama şeridi ──────────────────────────────────────────────────── */
+.mcord-alpha { transition: color var(--mc-fast) var(--mc-ease), background var(--mc-fast) var(--mc-ease); }
+.mcord-alpha:not(:disabled):hover {
+    filter: none;
+    color: var(--header-primary, #f2f3f5) !important;
+    background: var(--background-modifier-selected, rgba(255, 255, 255, .1)) !important;
+}
+.mcord-alpha:disabled { cursor: default; }
+
 /* ── Giriş animasyonları ────────────────────────────────────────────────── */
 @keyframes mcord-overlay-in { from { opacity: 0 } to { opacity: 1 } }
 @keyframes mcord-panel-in {
