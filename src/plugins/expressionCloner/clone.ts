@@ -11,9 +11,11 @@ import { findByKeys } from "../../webpack/finder";
 
 export const logger = new Logger("ExpressionCloner", "#f4b8e4");
 
-/** Discord'un REST istemcisi — çağrı anında çözülüyor. */
+/** Discord'un REST istemcisi — `getAPIBaseURL` ona özgü işaret. */
 function getRest(): any {
-    return findByKeys<any>("get", "post", "patch", "put");
+    const api = findByKeys<any>("getAPIBaseURL")
+        ?? findByKeys<any>("get", "post", "put", "patch", "del");
+    return api?.default ?? api;
 }
 
 /** İzin biti: CREATE_GUILD_EXPRESSIONS = 1 << 43. */
@@ -43,7 +45,9 @@ function env(): Record<string, any> {
 export function mediaUrl(data: Data, size: number): string {
     if (data.t === "Emoji") {
         const host = env().CDN_HOST ?? "cdn.discordapp.com";
-        return `${location.protocol}//${host}/emojis/${data.id}.webp?size=${size}&lossless=true&animated=true`;
+        // Discord emoji yükleme yalnızca png/jpg/gif kabul ediyor — webp gönderme.
+        const ext = data.animated ? "gif" : "png";
+        return `${location.protocol}//${host}/emojis/${data.id}.${ext}?size=${size}&quality=lossless`;
     }
 
     const ext = STICKER_EXT[data.format_type ?? 1] ?? "png";
@@ -103,11 +107,15 @@ async function cloneEmoji(guildId: string, emoji: EmojiData): Promise<void> {
     if (typeof rest?.post !== "function") throw new Error("Discord REST istemcisi bulunamadı");
 
     // Sadece POST — Discord'un gateway'i oluşturulan emojiyi kendi push'luyor.
-    // Elle `GUILD_EMOJIS_UPDATE` dispatch etmek yanlış şekilde store'u çökertiyordu.
-    await rest.post({
+    const response = await rest.post({
         url: `/guilds/${guildId}/emojis`,
         body: { name: safeEmojiName(emoji.name), image: dataUrl, roles: [] }
     });
+
+    logger.info("emoji POST →", response?.status, response?.body);
+    if (!response?.body?.id) {
+        throw new Error(`Discord emojiyi oluşturmadı (yanıt: ${JSON.stringify(response?.body ?? response)})`);
+    }
 }
 
 async function cloneSticker(guildId: string, sticker: StickerData): Promise<void> {
