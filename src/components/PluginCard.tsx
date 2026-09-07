@@ -4,47 +4,20 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
-import {
-    isPluginEnabled,
-    pluginRequiresRestart,
-    setPluginEnabled,
-    startPlugin,
-    stopPlugin
-} from "../api/PluginManager";
 import type { Plugin } from "../utils/types";
-import { React } from "../webpack/react";
-import { IconChevronDown } from "./Icons";
-import { markRestartNeeded } from "./restartState";
-import { SettingsPanel } from "./SettingControls";
+import { IconGear } from "./Icons";
 import { c, radius, s, space, tint } from "./theme";
 import { Toggle } from "./Toggle";
+import { usePluginToggle } from "./usePluginToggle";
 
-export function PluginCard({ plugin, onChanged }: {
+export function PluginCard({ plugin, onChanged, onOpenSettings }: {
     plugin: Plugin;
     onChanged(): void;
+    onOpenSettings(plugin: Plugin): void;
 }) {
-    const [enabled, setEnabled] = React.useState(() => isPluginEnabled(plugin.name));
-    const [expanded, setExpanded] = React.useState(false);
+    const { enabled, toggle } = usePluginToggle(plugin, onChanged);
 
-    const needsRestart = pluginRequiresRestart(plugin);
     const hasSettings = plugin.settings != null;
-
-    const toggle = async (next: boolean) => {
-        setPluginEnabled(plugin.name, next);
-        setEnabled(next);
-        onChanged();
-
-        if (needsRestart) {
-            // Kod patch'i olan plugin'ler modül yüklenirken uygulandığı için
-            // sonradan geri alınamıyor (plan §7.3). Sol üstteki başlıkta yeniden
-            // başlat butonu belirir.
-            markRestartNeeded();
-            return;
-        }
-
-        if (next) await startPlugin(plugin);
-        else await stopPlugin(plugin);
-    };
 
     return (
         <div
@@ -84,11 +57,36 @@ export function PluginCard({ plugin, onChanged }: {
                 {plugin.required
                     ? <span style={{ ...s.badge, ...tint(c.accent), flex: "0 0 auto" }}>çekirdek</span>
                     : (
-                        <Toggle
-                            checked={enabled}
-                            onChange={next => void toggle(next)}
-                            label={`${plugin.name} aç/kapa`}
-                        />
+                        <div style={{ display: "flex", alignItems: "center", gap: "6px", flex: "0 0 auto" }}>
+                            {hasSettings && (
+                                <button
+                                    className="mcord-btn mcord-ghost"
+                                    onClick={() => onOpenSettings(plugin)}
+                                    aria-label={`${plugin.name} ayarları`}
+                                    title="Ayarlar"
+                                    style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        width: "28px",
+                                        height: "28px",
+                                        padding: 0,
+                                        borderRadius: radius.sm,
+                                        border: `1px solid ${c.border}`,
+                                        background: "transparent",
+                                        color: c.muted,
+                                        cursor: "pointer"
+                                    }}
+                                >
+                                    <IconGear size={15} />
+                                </button>
+                            )}
+                            <Toggle
+                                checked={enabled}
+                                onChange={next => void toggle(next)}
+                                label={`${plugin.name} aç/kapa`}
+                            />
+                        </div>
                     )}
             </div>
 
@@ -112,51 +110,6 @@ export function PluginCard({ plugin, onChanged }: {
                         <span key={tag} style={s.tag}>#{tag}</span>
                     ))}
                 </div>
-            )}
-
-            {hasSettings && (
-                <>
-                    {/* Alt satır her kartta aynı yerde — kartlar hizada kalıyor. */}
-                    <button
-                        className="mcord-btn mcord-ghost"
-                        onClick={() => setExpanded(value => !value)}
-                        aria-expanded={expanded}
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                            gap: "6px",
-                            marginTop: "auto",
-                            padding: "7px 10px",
-                            borderRadius: radius.sm,
-                            border: `1px solid ${expanded ? c.borderStrong : c.border}`,
-                            background: expanded ? c.surfaceActive : "transparent",
-                            color: expanded ? c.text : c.muted,
-                            cursor: "pointer",
-                            fontFamily: "inherit",
-                            fontSize: "12px",
-                            fontWeight: 600
-                        }}
-                    >
-                        Ayarlar
-                        <IconChevronDown
-                            size={14}
-                            style={{
-                                transform: expanded ? "rotate(180deg)" : "none",
-                                transition: "transform 140ms cubic-bezier(.2,.7,.3,1)"
-                            }}
-                        />
-                    </button>
-
-                    {expanded && (
-                        <div
-                            className="mcord-enter"
-                            style={{ paddingTop: space.sm, borderTop: `1px solid ${c.border}` }}
-                        >
-                            <SettingsPanel settings={plugin.settings!} />
-                        </div>
-                    )}
-                </>
             )}
         </div>
     );

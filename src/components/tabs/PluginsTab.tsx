@@ -9,6 +9,7 @@ import type { Plugin } from "../../utils/types";
 import { React } from "../../webpack/react";
 import { IconSearch, IconSearchOff } from "../Icons";
 import { PluginCard } from "../PluginCard";
+import { PluginDetail } from "../PluginDetail";
 import { c, radius, s, space } from "../theme";
 
 type Category = "all" | "enabled" | "disabled";
@@ -86,6 +87,7 @@ export function PluginsTab() {
     const [category, setCategory] = React.useState<Category>("all");
     const [tick, bump] = React.useReducer((n: number) => n + 1, 0);
     const [focused, setFocused] = React.useState(false);
+    const [detail, setDetail] = React.useState<Plugin | null>(null);
 
     // Çekirdek plugin'ler (`required`) listelenmiyor: kapatılamıyorlar, ayarları
     // yok ve kullanıcının onlarla bir işi olmuyor — arka planda çalışıyorlar.
@@ -103,6 +105,16 @@ export function PluginsTab() {
     }), [all, tick]);
 
     const visible = all.filter(plugin => matches(plugin, query, category));
+
+    if (detail != null) {
+        return (
+            <PluginDetail
+                plugin={detail}
+                onBack={() => setDetail(null)}
+                onChanged={bump}
+            />
+        );
+    }
 
     return (
         <div style={s.page}>
@@ -179,6 +191,7 @@ export function PluginsTab() {
                                 key={plugin.name}
                                 plugin={plugin}
                                 onChanged={bump}
+                                onOpenSettings={setDetail}
                             />
                         ))}
                     </div>
