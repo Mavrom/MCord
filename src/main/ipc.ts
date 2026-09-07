@@ -60,19 +60,45 @@ export function registerIpc(): void {
 
     ipcMain.handle(IpcEvents.OPEN_SETTINGS_FOLDER, () => shell.showItemInFolder(SETTINGS_FILE));
 
-    // Main process fetch'i — renderer CSP'sine takılmaz (çeviri vb.).
+    // Main process fetch'i — renderer CSP'sine takılmaz (çeviri, klonlama vb.).
     ipcMain.handle(
         IpcEvents.NATIVE_FETCH,
-        async (_event, url: string, options: { method?: string; headers?: Record<string, string>; body?: string } = {}) => {
+        async (_event, url: string, options: {
+            method?: string;
+            headers?: Record<string, string>;
+            body?: string;
+            form?: {
+                fields?: Record<string, string>;
+                file?: { name: string; type: string; base64: string };
+            };
+        } = {}) => {
             const { protocol } = new URL(url);
             if (protocol !== "http:" && protocol !== "https:") {
                 throw new Error(`Desteklenmeyen protokol: ${protocol}`);
             }
 
+            let body: BodyInit | undefined = options.body;
+
+            if (options.form) {
+                const formData = new FormData();
+                for (const [key, value] of Object.entries(options.form.fields ?? {})) {
+                    formData.append(key, value);
+                }
+                if (options.form.file) {
+                    const buffer = Buffer.from(options.form.file.base64, "base64");
+                    formData.append(
+                        "file",
+                        new Blob([buffer], { type: options.form.file.type }),
+                        options.form.file.name
+                    );
+                }
+                body = formData;
+            }
+
             const response = await fetch(url, {
                 method: options.method ?? "GET",
                 headers: options.headers,
-                body: options.body
+                body
             });
 
             return { status: response.status, ok: response.ok, text: await response.text() };

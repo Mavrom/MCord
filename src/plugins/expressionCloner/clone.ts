@@ -6,27 +6,41 @@
 
 import { showNotification } from "../../api/notifications";
 import { Logger } from "../../utils/logger";
-import { getFluxDispatcher, GuildStore, PermissionStore, UserStore } from "../../webpack/common";
-import { find } from "../../webpack/finder";
+import { getDiscordToken } from "../../webpack/auth";
+import { GuildStore, PermissionStore, UserStore } from "../../webpack/common";
 
 export const logger = new Logger("ExpressionCloner", "#f4b8e4");
 
+const API = "https://discord.com/api/v9";
+
 /**
- * Discord'un gerçek RestAPI'sı. `{get,post,put,patch,del}` şartına iki modül
- * uyuyor: gerçek RestAPI (metotları JS sarmalayıcı) ve düşük seviye HTTP
- * (metotları `.bind`'li → `[native code]`). Sarmalayıcı olanı seçiyoruz;
- * o Promise<{status, body}> döndürüyor.
+ * Discord API isteği — main process üzerinden (renderer CSP'sine ve kırık
+ * webpack RestAPI'sine takılmadan), oturum token'ıyla.
  */
-function getRest(): any {
-    return find<any>(module =>
-        module
-        && typeof module === "object"
-        && typeof module.get === "function"
-        && typeof module.post === "function"
-        && typeof module.put === "function"
-        && typeof module.patch === "function"
-        && !Function.prototype.toString.call(module.post).includes("native code")
-    );
+async function discordApi(
+    path: string,
+    init: {
+        headers?: Record<string, string>;
+        body?: string;
+        form?: { fields?: Record<string, string>; file?: { name: string; type: string; base64: string } };
+    }
+): Promise<{ status: number; ok: boolean; body: any }> {
+    const token = getDiscordToken();
+    if (!token) throw new Error("Oturum token'ı alınamadı");
+
+    const response = await window.McordNative.net.request(`${API}${path}`, {
+        method: "POST",
+        headers: { authorization: token, ...init.headers },
+        body: init.body,
+        form: init.form
+    });
+
+    let body: any = null;
+    try {
+        body = response.text ? JSON.parse(response.text) : null;
+    } catch { /* JSON değil */ }
+
+    return { status: response.status, ok: response.ok, body };
 }
 
 /** İzin biti: CREATE_GUILD_EXPRESSIONS = 1 << 43. */
@@ -111,62 +125,55 @@ export function safeEmojiName(raw: string): string {
     return cleaned.length >= 2 ? cleaned.slice(0, 32) : `emoji_${cleaned}`.slice(0, 32);
 }
 
-/** İstek 20 sn'de bitmezse (ör. 429 backoff) elle iptal — modal donmasın. */
-function withTimeout<T>(promise: Promise<T>, ms = 20_000): Promise<T> {
-    return Promise.race([
-        promise,
-        new Promise<T>((_, reject) =>
-            setTimeout(() => reject(new Error("İstek zaman aşımına uğradı (muhtemelen rate limit)")), ms))
-    ]);
+function blobToBase64(blob: Blob): Promise<string> {
+    return blobToDataUrl(blob).then(url => url.slice(url.indexOf(",") + 1));
 }
 
 async function cloneEmoji(guildId: string, emoji: EmojiData): Promise<void> {
-    logger.info("1/4 medya çekiliyor…");
-    const blob = await fetchBlob(emoji);
-    logger.info("2/4 blob", blob.size, "bayt", blob.type);
+    logger.info("1/3 medya çekiliyor…");
+    const dataUrl = await blobToDataUrl(await fetchBlob(emoji));
+    logger.info("2/3 POST /guilds/…/emojis");
 
-    const dataUrl = await blobToDataUrl(blob);
+    const res = await discordApi(`/guilds/${guildId}/emojis`, {
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ name: safeEmojiName(emoji.name), image: dataUrl, roles: [] })
+    });
 
-    const rest = getRest();
-    logger.info("3/4 RestAPI:", typeof rest?.post);
-    if (typeof rest?.post !== "function") throw new Error("Discord REST istemcisi bulunamadı");
+    logger.info("3/3 yanıt →", res.status, res.body);
 
-    const response: any = await withTimeout(rest.post({
-        url: `/guilds/${guildId}/emojis`,
-        body: { name: safeEmojiName(emoji.name), image: dataUrl, roles: [] }
-    }));
-
-    logger.info("4/4 yanıt →", response?.status, response?.body);
-
-    if (response?.status === 429) {
-        throw new Error("Rate limit — Discord çok fazla istek dedi, biraz bekle");
-    }
-    if (!response?.body?.id) {
-        throw new Error(`Discord emojiyi oluşturmadı (${response?.status}): ${JSON.stringify(response?.body ?? response)}`);
+    if (res.status === 429) throw new Error("Rate limit — biraz bekle");
+    if (!res.ok || !res.body?.id) {
+        throw new Error(`Discord (${res.status}): ${res.body?.message ?? JSON.stringify(res.body)}`);
     }
 }
 
 async function cloneSticker(guildId: string, sticker: StickerData): Promise<void> {
-    const rest = getRest();
-    if (typeof rest?.post !== "function") throw new Error("Discord REST istemcisi bulunamadı");
+    logger.info("1/3 medya çekiliyor…");
+    const blob = await fetchBlob(sticker);
+    const ext = STICKER_EXT[sticker.format_type ?? 1] ?? "png";
+    logger.info("2/3 POST /guilds/…/stickers");
 
-    const form = new FormData();
-    form.append("name", sticker.name);
-    form.append("tags", sticker.tags || "🙂");
-    form.append("description", sticker.description ?? "");
-    form.append(
-        "file",
-        await fetchBlob(sticker),
-        `${sticker.name}.${STICKER_EXT[sticker.format_type ?? 1] ?? "png"}`
-    );
-
-    const { body } = await rest.post({ url: `/guilds/${guildId}/stickers`, body: form });
-
-    getFluxDispatcher()?.dispatch?.({
-        type: "GUILD_STICKERS_CREATE_SUCCESS",
-        guildId,
-        sticker: { ...body, user: UserStore?.getCurrentUser?.() }
+    const res = await discordApi(`/guilds/${guildId}/stickers`, {
+        form: {
+            fields: {
+                name: sticker.name.slice(0, 30),
+                tags: sticker.tags || "🙂",
+                description: sticker.description ?? ""
+            },
+            file: {
+                name: `${sticker.name}.${ext}`,
+                type: blob.type || (ext === "png" ? "image/png" : ext === "gif" ? "image/gif" : "application/json"),
+                base64: await blobToBase64(blob)
+            }
+        }
     });
+
+    logger.info("3/3 yanıt →", res.status, res.body);
+
+    if (res.status === 429) throw new Error("Rate limit — biraz bekle");
+    if (!res.ok || !res.body?.id) {
+        throw new Error(`Discord (${res.status}): ${res.body?.message ?? JSON.stringify(res.body)}`);
+    }
 }
 
 export async function doClone(guildId: string, data: Data): Promise<void> {
@@ -182,15 +189,10 @@ export async function doClone(guildId: string, data: Data): Promise<void> {
             color: "var(--green-360, #23a55a)"
         });
     } catch (err: any) {
-        let message = "bir şeyler ters gitti (konsola bak)";
-        try {
-            message = JSON.parse(err?.text).message;
-        } catch { /* düz metin */ }
-
         logger.error("Kopyalama başarısız:", data.name, "→", guildId, err);
         showNotification({
             title: "ExpressionCloner",
-            body: `Kopyalanamadı: ${message}`,
+            body: `Kopyalanamadı: ${err?.message ?? "bilinmeyen hata"}`,
             color: "var(--red-400, #f23f43)"
         });
         throw err;

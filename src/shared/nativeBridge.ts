@@ -51,6 +51,11 @@ export interface McordNative {
             method?: string;
             headers?: Record<string, string>;
             body?: string;
+            /** Multipart form — dosya main'de base64'ten yeniden kuruluyor. */
+            form?: {
+                fields?: Record<string, string>;
+                file?: { name: string; type: string; base64: string };
+            };
         }): Promise<{ status: number; ok: boolean; text: string }>;
     };
     injection: {
