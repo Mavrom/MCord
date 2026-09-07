@@ -5,7 +5,7 @@
  */
 
 import type { Plugin } from "../utils/types";
-import { React } from "../webpack/react";
+import { React, ReactDOM } from "../webpack/react";
 import { IconClose } from "./Icons";
 import { SettingsPanel } from "./SettingControls";
 import { c, radius, s, shadow, space } from "./theme";
@@ -35,10 +35,14 @@ export function PluginSettingsPopover({ plugin, onClose, onChanged }: {
         return () => window.removeEventListener("keydown", onKey);
     }, [onClose]);
 
-    return (
+    // `document.body`'ye portal: MCord overlay'inde `backdrop-filter` var, o da
+    // `position: fixed`'i viewport yerine kendine göre konumlandırıyordu —
+    // popout listenin en üstüne yapışıyordu. Body'ye taşıyınca gerçekten
+    // ekranın ortasında açılıyor.
+    const node = (
         <div
             id={POPOVER_ID}
-            className="mcord-enter"
+            className="mcord-root mcord-enter"
             onMouseDown={onClose}
             style={{
                 position: "fixed",
@@ -129,4 +133,6 @@ export function PluginSettingsPopover({ plugin, onClose, onChanged }: {
             </div>
         </div>
     );
+
+    return ReactDOM.createPortal(node, document.body);
 }
