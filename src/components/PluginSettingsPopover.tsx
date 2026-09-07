@@ -7,6 +7,7 @@
 import type { Plugin } from "../utils/types";
 import { React, ReactDOM } from "../webpack/react";
 import { IconClose } from "./Icons";
+import { howItWorks } from "./pluginInfo";
 import { SettingsPanel } from "./SettingControls";
 import { c, radius, s, shadow, space } from "./theme";
 import { Toggle } from "./Toggle";
@@ -14,9 +15,28 @@ import { usePluginToggle } from "./usePluginToggle";
 
 const POPOVER_ID = "mcord-plugin-popover";
 
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+    return (
+        <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+            <div
+                style={{
+                    color: c.faint,
+                    fontSize: "11px",
+                    fontWeight: 700,
+                    letterSpacing: ".06em",
+                    textTransform: "uppercase"
+                }}
+            >
+                {title}
+            </div>
+            <div style={{ color: c.text, fontSize: "13.5px", lineHeight: 1.55 }}>{children}</div>
+        </div>
+    );
+}
+
 /**
- * Plugin ayarları — plugin listesini yerinde bırakıp üstünde küçük bir balon
- * pencere olarak açılır (Discord'un profil popout'u gibi). Sekme değiştirmez.
+ * Plugin ayrıntısı — ne işe yaradığı, nasıl çalıştığı ve ayarları. Plugin
+ * listesini yerinde bırakıp üstünde balon pencere olarak açılır.
  */
 export function PluginSettingsPopover({ plugin, onClose, onChanged }: {
     plugin: Plugin;
@@ -36,9 +56,7 @@ export function PluginSettingsPopover({ plugin, onClose, onChanged }: {
     }, [onClose]);
 
     // `document.body`'ye portal: MCord overlay'inde `backdrop-filter` var, o da
-    // `position: fixed`'i viewport yerine kendine göre konumlandırıyordu —
-    // popout listenin en üstüne yapışıyordu. Body'ye taşıyınca gerçekten
-    // ekranın ortasında açılıyor.
+    // `position: fixed`'i viewport yerine kendine göre konumlandırıyordu.
     const node = (
         <div
             id={POPOVER_ID}
@@ -51,21 +69,21 @@ export function PluginSettingsPopover({ plugin, onClose, onChanged }: {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background: "rgba(0, 0, 0, .35)",
+                background: "rgba(0, 0, 0, .4)",
                 padding: space.xl
             }}
         >
             <div
                 role="dialog"
                 aria-modal="true"
-                aria-label={`${plugin.name} ayarları`}
+                aria-label={`${plugin.name} bilgi ve ayarları`}
                 onMouseDown={event => event.stopPropagation()}
                 onClick={event => event.stopPropagation()}
                 style={{
                     display: "flex",
                     flexDirection: "column",
-                    width: "min(460px, 100%)",
-                    maxHeight: "min(560px, 82vh)",
+                    width: "min(600px, 100%)",
+                    maxHeight: "min(720px, 88vh)",
                     background: c.surface,
                     border: `1px solid ${c.border}`,
                     borderRadius: radius.lg,
@@ -76,16 +94,23 @@ export function PluginSettingsPopover({ plugin, onClose, onChanged }: {
                 <div
                     style={{
                         display: "flex",
-                        alignItems: "flex-start",
+                        alignItems: "center",
                         gap: space.sm,
-                        padding: `${space.md} ${space.md} ${space.sm}`,
+                        padding: `${space.md} ${space.lg}`,
                         borderBottom: `1px solid ${c.border}`
                     }}
                 >
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ color: c.heading, fontWeight: 700, fontSize: "15px" }}>
-                            {plugin.name}
-                        </div>
+                    <span
+                        style={{
+                            flex: "0 0 auto",
+                            width: "8px",
+                            height: "8px",
+                            borderRadius: "50%",
+                            background: enabled ? c.success : `color-mix(in srgb, ${c.danger} 60%, transparent)`
+                        }}
+                    />
+                    <div style={{ flex: 1, minWidth: 0, color: c.heading, fontWeight: 700, fontSize: "16px" }}>
+                        {plugin.name}
                     </div>
 
                     <Toggle
@@ -118,14 +143,51 @@ export function PluginSettingsPopover({ plugin, onClose, onChanged }: {
                     </button>
                 </div>
 
-                <div style={{ padding: space.md, overflowY: "auto", minHeight: 0 }}>
-                    <p style={{ ...s.muted, marginTop: 0, marginBottom: space.md }}>
-                        {plugin.description}
-                    </p>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: space.lg,
+                        padding: space.lg,
+                        overflowY: "auto",
+                        minHeight: 0
+                    }}
+                >
+                    <Section title="Ne işe yarar">{plugin.description}</Section>
+                    <Section title="Nasıl çalışır">{howItWorks(plugin)}</Section>
 
-                    {plugin.settings != null
-                        ? <SettingsPanel settings={plugin.settings} />
-                        : <div style={s.muted}>Bu plugin'in ayarlanabilir seçeneği yok.</div>}
+                    {(plugin.tags?.length ?? 0) > 0 && (
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                            {plugin.tags!.map(tag => (
+                                <span key={tag} style={s.tag}>#{tag}</span>
+                            ))}
+                        </div>
+                    )}
+
+                    {plugin.settings != null && (
+                        <div
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: space.sm,
+                                paddingTop: space.md,
+                                borderTop: `1px solid ${c.border}`
+                            }}
+                        >
+                            <div
+                                style={{
+                                    color: c.faint,
+                                    fontSize: "11px",
+                                    fontWeight: 700,
+                                    letterSpacing: ".06em",
+                                    textTransform: "uppercase"
+                                }}
+                            >
+                                Ayarlar
+                            </div>
+                            <SettingsPanel settings={plugin.settings} />
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

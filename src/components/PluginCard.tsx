@@ -5,21 +5,35 @@
  */
 
 import type { Plugin } from "../utils/types";
-import { IconGear } from "./Icons";
+import { IconGear, IconInfo } from "./Icons";
 import { c, radius, s, space, tint } from "./theme";
 import { Toggle } from "./Toggle";
 import { usePluginToggle } from "./usePluginToggle";
 
-export function PluginCard({ plugin, onChanged, onOpenSettings, onPickTag }: {
+const iconButtonStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "26px",
+    height: "26px",
+    padding: 0,
+    border: "none",
+    borderRadius: radius.sm,
+    background: "transparent",
+    color: c.faint,
+    cursor: "pointer"
+} as const;
+
+export function PluginCard({ plugin, onChanged, onOpenDetail, onPickTag }: {
     plugin: Plugin;
     onChanged(): void;
-    onOpenSettings(plugin: Plugin): void;
+    onOpenDetail(plugin: Plugin): void;
     onPickTag(tag: string): void;
 }) {
     const { enabled, toggle } = usePluginToggle(plugin, onChanged);
 
     const hasSettings = plugin.settings != null;
-    const openSettings = () => hasSettings && onOpenSettings(plugin);
+    const openDetail = () => onOpenDetail(plugin);
 
     return (
         <div
@@ -41,16 +55,16 @@ export function PluginCard({ plugin, onChanged, onOpenSettings, onPickTag }: {
         >
             <div style={{ display: "flex", alignItems: "flex-start", gap: space.sm }}>
                 <div
-                    role={hasSettings ? "button" : undefined}
-                    tabIndex={hasSettings ? 0 : undefined}
-                    onClick={openSettings}
-                    onKeyDown={hasSettings ? (event => {
+                    role="button"
+                    tabIndex={0}
+                    onClick={openDetail}
+                    onKeyDown={event => {
                         if (event.key === "Enter" || event.key === " ") {
                             event.preventDefault();
-                            openSettings();
+                            openDetail();
                         }
-                    }) : undefined}
-                    style={{ flex: 1, minWidth: 0, cursor: hasSettings ? "pointer" : "default" }}
+                    }}
+                    style={{ flex: 1, minWidth: 0, cursor: "pointer" }}
                 >
                     <div
                         className="mcord-card-name"
@@ -83,26 +97,23 @@ export function PluginCard({ plugin, onChanged, onOpenSettings, onPickTag }: {
                 {plugin.required
                     ? <span style={{ ...s.badge, ...tint(c.accent), flex: "0 0 auto" }}>çekirdek</span>
                     : (
-                        <div style={{ display: "flex", alignItems: "center", gap: "4px", flex: "0 0 auto" }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: "2px", flex: "0 0 auto" }}>
+                            <button
+                                className="mcord-btn mcord-ghost mcord-card-gear"
+                                onClick={openDetail}
+                                aria-label={`${plugin.name} hakkında`}
+                                title="Bilgi"
+                                style={iconButtonStyle}
+                            >
+                                <IconInfo size={15} />
+                            </button>
                             {hasSettings && (
                                 <button
                                     className="mcord-btn mcord-ghost mcord-card-gear"
-                                    onClick={openSettings}
+                                    onClick={openDetail}
                                     aria-label={`${plugin.name} ayarları`}
                                     title="Ayarlar"
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        width: "26px",
-                                        height: "26px",
-                                        padding: 0,
-                                        border: "none",
-                                        borderRadius: radius.sm,
-                                        background: "transparent",
-                                        color: c.faint,
-                                        cursor: "pointer"
-                                    }}
+                                    style={iconButtonStyle}
                                 >
                                     <IconGear size={15} />
                                 </button>
@@ -117,13 +128,13 @@ export function PluginCard({ plugin, onChanged, onOpenSettings, onPickTag }: {
             </div>
 
             <p
-                onClick={openSettings}
+                onClick={openDetail}
                 style={{
                     margin: 0,
                     color: c.muted,
                     fontSize: "13px",
                     lineHeight: 1.5,
-                    cursor: hasSettings ? "pointer" : "default",
+                    cursor: "pointer",
                     display: "-webkit-box",
                     WebkitLineClamp: 2,
                     WebkitBoxOrient: "vertical",

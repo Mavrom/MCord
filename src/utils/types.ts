@@ -187,6 +187,8 @@ export type FluxHandler = (event: any) => void | Promise<void>;
 export interface PluginDef {
     name: string;
     description: string;
+    /** İsteğe bağlı, daha uzun açıklama — "nasıl çalışır" bilgi kutusunda gösterilir. */
+    details?: string;
     authors: Author[];
     tags?: string[];
 

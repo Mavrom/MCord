@@ -424,7 +424,7 @@ export function PluginsTab() {
                                         <PluginCard
                                             plugin={plugin}
                                             onChanged={bump}
-                                            onOpenSettings={setDetail}
+                                            onOpenDetail={setDetail}
                                             onPickTag={tag => {
                                                 const catId = CATEGORY_BY_TAG.get(tag);
                                                 if (catId) setCategory(catId);
