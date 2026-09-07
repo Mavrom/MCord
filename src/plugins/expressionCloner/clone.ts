@@ -24,7 +24,7 @@ function getRest(): any {
         && typeof module.get === "function"
         && typeof module.post === "function"
         && typeof module.put === "function"
-        && typeof module.del === "function"
+        && typeof module.patch === "function"
         && !Function.prototype.toString.call(module.post).includes("native code")
     );
 }
