@@ -40,19 +40,37 @@ export function removeMemberListDecorator(id: string): boolean {
  * hata verse bile üye listesi çökmez.
  */
 export function renderMemberListDecorators(originalDecoration: any, props: Record<string, any>): any {
-    const children: any[] = [originalDecoration];
+    const ours: any[] = [];
 
     for (const [id, render] of decorators) {
         try {
             const element = render(props);
             if (element != null) {
-                children.push(McordCreateElement(McordFragment, { key: `mcord-mld-${id}` }, element));
+                ours.push(McordCreateElement(McordFragment, { key: `mcord-mld-${id}` }, element));
             }
         } catch (err) {
             logger.error(`"${id}" üye listesi süslemesi render edilemedi:\n`, err);
         }
     }
 
-    if (children.length === 1) return originalDecoration;
-    return McordCreateElement(McordFragment, null, ...children);
+    if (ours.length === 0) return originalDecoration;
+
+    // Tüm MCord süslemeleri tek bir flex kapsayıcıda: tutarlı boşluk, birbirine
+    // girmiyor, isim satırını bozmuyor.
+    const container = McordCreateElement(
+        "span",
+        {
+            style: {
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "3px",
+                marginLeft: "4px",
+                flexShrink: 0,
+                verticalAlign: "middle"
+            }
+        },
+        ...ours
+    );
+
+    return McordCreateElement(McordFragment, null, originalDecoration, container);
 }

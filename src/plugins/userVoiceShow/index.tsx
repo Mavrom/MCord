@@ -45,9 +45,13 @@ function VoiceIndicator({ userId, small }: { userId: string; small?: boolean }) 
         ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${String(guild.icon).startsWith("a_") ? "gif" : "webp"}?size=24`
         : null;
 
-    const showName = settings.store.showChannelName;
     const where = guild?.name ?? "Özel arama";
     const label = `${channel.name} — ${where}`;
+
+    // Üye listesinde yer dar: yalnızca simge (+ varsa sunucu ikonu), ad ve dolgu
+    // yok — tüm bilgi ipucu balonunda. Mesajlarda tam etiket.
+    const compact = small === true;
+    const showName = settings.store.showChannelName && !compact;
 
     return (
         <Tooltip text={label}>
@@ -63,31 +67,30 @@ function VoiceIndicator({ userId, small }: { userId: string; small?: boolean }) 
                 style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "4px",
-                    marginLeft: "4px",
-                    padding: showName ? "1px 6px 1px 3px" : "1px 3px",
+                    gap: compact ? "2px" : "4px",
+                    padding: compact ? 0 : (showName ? "1px 6px 1px 3px" : "1px 3px"),
                     border: 0,
                     borderRadius: "4px",
                     cursor: "pointer",
                     verticalAlign: "middle",
                     fontFamily: "inherit",
-                    fontSize: small ? "11px" : "12px",
+                    fontSize: "12px",
                     fontWeight: 600,
                     lineHeight: 1.2,
-                    background: "color-mix(in srgb, var(--brand-500, #5865f2) 16%, transparent)",
+                    background: compact ? "transparent" : "color-mix(in srgb, var(--brand-500, #5865f2) 16%, transparent)",
                     color: "var(--brand-500, #5865f2)"
                 }}
             >
-                {guildIcon && (
+                {guildIcon && !compact && (
                     <img
                         src={guildIcon}
                         alt=""
-                        width={small ? 13 : 14}
-                        height={small ? 13 : 14}
+                        width={14}
+                        height={14}
                         style={{ borderRadius: "50%", flex: "0 0 auto", objectFit: "cover" }}
                     />
                 )}
-                <IconVoice size={small ? 12 : 13} color="currentColor" strokeWidth={2.4} />
+                <IconVoice size={13} color="currentColor" strokeWidth={2.4} />
                 {showName && (
                     <span style={{ maxWidth: "160px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {channel.name}

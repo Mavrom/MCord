@@ -149,7 +149,6 @@ function Indicators({ user, small }: { user: any; small: boolean }) {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "3px",
-                marginLeft: "4px",
                 verticalAlign: "middle"
             }}
         >
