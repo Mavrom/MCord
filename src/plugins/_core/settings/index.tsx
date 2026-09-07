@@ -21,20 +21,43 @@ const SECTION_KEY = "mcord_section";
  * Discord'un ayar menüsü düzen türleri.
  *
  * Eski `getUserSettingsSections` API'si kaldırıldı; menü artık bir
- * `buildLayout()` ağacı üretiyor. Enum'u webpack'ten çözüyoruz, bulunamazsa
- * string karşılıklarına düşüyoruz (değerler bugüne kadar string olageldi).
+ * `buildLayout()` ağacı üretiyor. Discord Canary 1150'de tür değerleri
+ * string'den ("SECTION") sayıya (1) döndü — tanınmayan bir `type` ile düğüm
+ * oluşturmak ayar menüsünü komple çökertiyor. Bu yüzden webpack'ten çözemezsek
+ * referans katalog sabit sayısal haritasına düşüyoruz, asla ham string'e değil.
  */
+const FALLBACK_LAYOUT_TYPES = {
+    SECTION: 1,
+    SIDEBAR_ITEM: 2,
+    PANEL: 3,
+    CATEGORY: 5,
+    CUSTOM: 19
+} as const;
+
 const LayoutTypes = findLazy<Record<string, unknown>>(
-    byKeys(["SECTION", "SIDEBAR_ITEM", "PANEL"])
+    byKeys(["SECTION", "SIDEBAR_ITEM", "PANEL", "CUSTOM"])
 );
 
-function layoutType(name: string): unknown {
+function layoutType(name: keyof typeof FALLBACK_LAYOUT_TYPES): unknown {
     try {
-        return (LayoutTypes as any)?.[name] ?? name;
-    } catch {
-        return name;
-    }
+        const resolved = (LayoutTypes as any)?.[name];
+        if (typeof resolved === "number" || typeof resolved === "string") return resolved;
+    } catch { /* yedeğe düş */ }
+    return FALLBACK_LAYOUT_TYPES[name];
 }
+
+/**
+ * Her sekme için sabit bir bileşen referansı — `buildLayout()` her ayar
+ * açılışında çağrıldığı için burada arrow function üretirsek Discord her seferinde
+ * yeni bir bileşen türü görüp tüm ağacı yeniden mount eder.
+ */
+const TAB_COMPONENTS = new Map(
+    TABS.map(tab => {
+        const Component = () => <SettingsRoot initialTab={tab.id} />;
+        Component.displayName = `McordSettings(${tab.id})`;
+        return [tab.id, Component];
+    })
+);
 
 /** Bir MCord sekmesini Discord'un kenar çubuğu girdisine çevirir. */
 function buildEntry(tab: (typeof TABS)[number]) {
@@ -54,7 +77,7 @@ function buildEntry(tab: (typeof TABS)[number]) {
                 buildLayout: () => [{
                     key: `${key}_custom`,
                     type: layoutType("CUSTOM"),
-                    Component: () => <SettingsRoot initialTab={tab.id} />,
+                    Component: TAB_COMPONENTS.get(tab.id),
                     useSearchTerms: () => [tab.label, "MCord"]
                 }]
             }]
@@ -102,7 +125,7 @@ export default definePlugin({
      * orijinal düzeni döndürmek zorundayız, yoksa Discord'un ayarları komple
      * açılmaz.
      */
-    buildLayout(builder: { buildLayout(): any[] }) {
+    buildLayout(builder: { key?: string; buildLayout(): any[] }) {
         let layout: any[];
         try {
             layout = builder.buildLayout();
@@ -110,6 +133,11 @@ export default definePlugin({
             logger.error("Discord'un buildLayout'u patladı:\n", err);
             throw err;
         }
+
+        // `.buildLayout().map` bundle'da iç içe kurucularda da geçiyor; MCord
+        // bölümünü yalnızca kök menü ağacına ekliyoruz. Yanlış kurucuya düğüm
+        // enjekte etmek ayar menüsünü çökertiyordu (referans katalog de bu kontrolü yapar).
+        if (builder.key !== "$Root") return layout;
 
         try {
             if (!Array.isArray(layout)) return layout;
@@ -122,9 +150,9 @@ export default definePlugin({
                 buildLayout: () => TABS.map(buildEntry)
             };
 
-            // Nitro bölümünün üstü referans katalog da tercih ettiği yer; bulunamazsa
-            // listenin başlarına koyuyoruz.
-            let index = layout.findIndex(node => typeof node?.key === "string" && node.key.includes("nitro"));
+            // Nitro (faturalandırma) bölümünün üstü referans katalog da tercih ettiği
+            // yer; bulunamazsa listenin başlarına koyuyoruz.
+            let index = layout.findIndex(node => node?.key === "billing_section");
             if (index === -1) index = Math.min(2, layout.length);
 
             layout.splice(index, 0, section);
