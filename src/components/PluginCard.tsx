@@ -30,10 +30,10 @@ export function PluginCard({ plugin, onChanged, onOpenSettings, onPickTag }: {
                 minHeight: "126px",
                 gap: space.sm,
                 padding: space.md,
-                borderLeft: `3px solid ${enabled ? c.success : "transparent"}`,
+                borderLeft: `3px solid ${enabled ? c.success : c.danger}`,
                 background: enabled
                     ? `color-mix(in srgb, ${c.success} 6%, ${c.surfaceRaised})`
-                    : c.surfaceRaised
+                    : `color-mix(in srgb, ${c.danger} 5%, ${c.surfaceRaised})`
             }}
         >
             <div style={{ display: "flex", alignItems: "flex-start", gap: space.sm }}>
@@ -62,17 +62,15 @@ export function PluginCard({ plugin, onChanged, onOpenSettings, onPickTag }: {
                         }}
                         title={plugin.name}
                     >
-                        {enabled && (
-                            <span
-                                style={{
-                                    flex: "0 0 auto",
-                                    width: "6px",
-                                    height: "6px",
-                                    borderRadius: "50%",
-                                    background: c.success
-                                }}
-                            />
-                        )}
+                        <span
+                            style={{
+                                flex: "0 0 auto",
+                                width: "6px",
+                                height: "6px",
+                                borderRadius: "50%",
+                                background: enabled ? c.success : c.danger
+                            }}
+                        />
                         <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                             {plugin.name}
                         </span>
