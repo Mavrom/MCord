@@ -50,7 +50,7 @@ function Overlay({ initialTab, onClose }: { initialTab: TabId; onClose(): void }
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                padding: space.xl
+                padding: space.lg
             }}
         >
             <div
@@ -66,8 +66,8 @@ function Overlay({ initialTab, onClose }: { initialTab: TabId; onClose(): void }
                     color: c.text,
                     borderRadius: radius.lg,
                     border: `1px solid ${c.border}`,
-                    width: "min(1020px, 100%)",
-                    height: "min(720px, 100%)",
+                    width: "min(1320px, 100%)",
+                    height: "min(900px, 100%)",
                     display: "flex",
                     overflow: "hidden",
                     boxShadow: shadow.high
