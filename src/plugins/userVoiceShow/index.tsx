@@ -90,7 +90,7 @@ function VoiceIndicator({ userId, small }: { userId: string; small?: boolean }) 
                         style={{ borderRadius: "50%", flex: "0 0 auto", objectFit: "cover" }}
                     />
                 )}
-                <IconVoice size={13} color="currentColor" strokeWidth={2.4} />
+                <IconVoice size={compact ? 15 : 16} color="currentColor" strokeWidth={2.4} />
                 {showName && (
                     <span style={{ maxWidth: "160px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {channel.name}
