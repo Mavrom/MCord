@@ -49,9 +49,6 @@ export function PluginCard({ plugin, onChanged, onOpenSettings }: {
                     >
                         {plugin.name}
                     </div>
-                    <div style={{ ...s.faint, marginTop: "2px" }}>
-                        {plugin.authors.map(author => author.name).join(", ")}
-                    </div>
                 </div>
 
                 {plugin.required
