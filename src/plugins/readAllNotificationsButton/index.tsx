@@ -46,23 +46,31 @@ function markAllRead(): void {
 }
 
 const ReadAllButton = () => (
-    <button
-        type="button"
-        onClick={markAllRead}
-        title="Tüm sunucu bildirimlerini okundu işaretle"
-        style={{
-            width: 44,
-            margin: "4px 6px",
-            padding: "4px 2px",
-            border: 0,
-            borderRadius: 6,
-            cursor: "pointer",
-            color: "var(--interactive-normal)",
-            background: "var(--background-mod-normal)"
-        }}
-    >
-        Oku
-    </button>
+    <div style={{ flex: "0 0 auto", display: "flex", justifyContent: "center", margin: "2px 0" }}>
+        <button
+            type="button"
+            onClick={markAllRead}
+            title="Tüm sunucu bildirimlerini okundu işaretle"
+            aria-label="Tüm bildirimleri okundu işaretle"
+            style={{
+                width: 40,
+                height: 40,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: 0,
+                border: 0,
+                borderRadius: 12,
+                cursor: "pointer",
+                color: "var(--interactive-normal, #b5bac1)",
+                background: "var(--background-secondary, #2b2d31)"
+            }}
+        >
+            <svg width="20" height="20" viewBox="0 0 24 24" style={{ pointerEvents: "none" }}>
+                <path fill="currentColor" d="M9.5 16.6 4.9 12l-1.4 1.4 6 6 12-12-1.4-1.4z" />
+            </svg>
+        </button>
+    </div>
 );
 
 export default definePlugin({
@@ -71,7 +79,9 @@ export default definePlugin({
     authors: [Devs.Berk],
     tags: ["bildirim", "kısayol"],
     dependencies: ["ServerListAPI"],
-    requiresRestart: false,
+    // ServerListAPI kod patch'i host'u memoize'lediği için canlı toggle'da
+    // düğme görünmüyor — restart gerekiyor.
+    requiresRestart: true,
 
     renderButton: () => <ReadAllButton />,
 

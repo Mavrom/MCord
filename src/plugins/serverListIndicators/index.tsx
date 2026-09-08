@@ -54,10 +54,30 @@ function Indicator() {
     });
     const mode = settings.store.mode;
 
+    const lines: string[] = [];
+    if ((mode === "friends" || mode === "both") && friendCount > 0) lines.push(`${friendCount} çevrimiçi`);
+    if ((mode === "servers" || mode === "both") && serverCount > 0) lines.push(`${serverCount} sunucu`);
+    if (lines.length === 0) return null;
+
     return (
-        <div style={{ margin: "2px 0 6px", textAlign: "center", fontSize: 11, fontWeight: 600 }}>
-            {(mode === "friends" || mode === "both") && <div>{friendCount} çevrimiçi</div>}
-            {(mode === "servers" || mode === "both") && <div>{serverCount} sunucu</div>}
+        <div
+            style={{
+                flex: "0 0 auto",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+                margin: "2px 0 4px",
+                padding: "0 4px",
+                color: "var(--channels-default, var(--interactive-normal))",
+                fontSize: 10,
+                lineHeight: "12px",
+                fontWeight: 600,
+                textAlign: "center",
+                whiteSpace: "nowrap"
+            }}
+        >
+            {lines.map(line => <div key={line}>{line}</div>)}
         </div>
     );
 }
@@ -69,7 +89,9 @@ export default definePlugin({
     tags: ["sunucu", "görünüm"],
     dependencies: ["ServerListAPI"],
     settings,
-    requiresRestart: false,
+    // Sol şerit ServerListAPI kod patch'iyle besleniyor; host bileşen memoize
+    // olduğu için canlı toggle'da eleman görünmüyor — restart gerekiyor.
+    requiresRestart: true,
 
     renderIndicator: () => <Indicator />,
 
