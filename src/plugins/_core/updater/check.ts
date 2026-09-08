@@ -53,7 +53,17 @@ export async function checkForUpdates(): Promise<UpdateState> {
         // değil) — main process üzerinden çekiyoruz.
         const release = await nativeFetchJson<any>(RELEASES_API, {
             headers: { Accept: "application/vnd.github+json" }
+        }).catch((err: Error) => {
+            // Henüz yayın yoksa GitHub 404 döner — hata değil, "güncel".
+            if (String(err).includes("→ 404")) return null;
+            throw err;
         });
+
+        if (release == null) {
+            state = { current: VERSION, latest: null, available: false, checkedAt: Date.now(), error: null };
+            logger.info(`Güncel: ${VERSION} (yayın yok)`);
+            return state;
+        }
 
         const tag = String(release.tag_name ?? "");
         const version = tag.replace(/^v/, "");
