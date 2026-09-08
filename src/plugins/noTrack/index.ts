@@ -9,8 +9,6 @@ import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin, OptionType, StartAt } from "../../utils/types";
 import { Flux, getFluxDispatcher } from "../../webpack/common";
-import { byKeys } from "../../webpack/filters";
-import { find } from "../../webpack/finder";
 
 const logger = new Logger("NoTrack", "#a6d189");
 
@@ -53,15 +51,35 @@ export default definePlugin({
      * referans katalog güncel yöntemi — `AnalyticsActionHandlers.handle` modülünde
      * store yapıcısını kendi stub'ımızla değiştir.
      */
-    patches: [{
-        find: "AnalyticsActionHandlers.handle",
-        predicate: () => settings.store.blockAnalytics,
-        reason: "Discord analitiğini kapat — track finder'ı kırık, referans katalog gibi store yapıcısını değiştir.",
-        replacement: {
-            match: /\(0,\i\.analyticsTrackingStoreMaker\)/,
-            replace: "$self.analyticsTrackingStoreMaker"
+    patches: [
+        {
+            find: "AnalyticsActionHandlers.handle",
+            predicate: () => settings.store.blockAnalytics,
+            reason: "Discord analitiğini kapat — track finder'ı kırık, referans katalog gibi store yapıcısını değiştir.",
+            replacement: {
+                match: /\(0,\i\.analyticsTrackingStoreMaker\)/,
+                replace: "$self.analyticsTrackingStoreMaker"
+            }
+        },
+        {
+            // Science / metrics: `submitLiveEvent` finder'ı bu build'de kırık —
+            // referans katalog güncel yöntemi, METRICS_V2 modülünde interval'i ve
+            // increment/distribution çağrılarını etkisizleştir.
+            find: ".METRICS_V2",
+            predicate: () => settings.store.blockScienceEvents,
+            reason: "Discord metrics/science telemetrisini kapat — finder yerine kod patch'i (referans katalog).",
+            replacement: [
+                {
+                    match: /this\._intervalId=/,
+                    replace: "this._intervalId=void 0&&"
+                },
+                {
+                    match: /(?:increment|distribution)\(\i(?:,\i)?\)\{/g,
+                    replace: "$&return;"
+                }
+            ]
         }
-    }],
+    ],
 
     // Discord bazı yerlerde TRACK olayının `resolve` callback'ini bekliyor
     // (ör. sesli hata ayıklama toggle'ı). Handler'ı NOOP'ladığımız için
@@ -75,7 +93,7 @@ export default definePlugin({
     blocked: 0,
 
     start() {
-        if (settings.store.blockScienceEvents) this.blockScience();
+        // Analitik + science kod patch'leriyle hallediliyor; burada sadece Sentry.
         if (settings.store.blockSentry) this.blockSentry();
     },
 
@@ -111,23 +129,6 @@ export default definePlugin({
         }
 
         return new (AnalyticsTrackingStoreStub as any)(getFluxDispatcher());
-    },
-
-    blockScience() {
-        const ScienceModule = find(byKeys(["submitLiveEvent"]), { silent: true });
-
-        if (!ScienceModule) {
-            logger.warn("Science modülü bulunamadı.");
-            return;
-        }
-
-        for (const method of ["submitLiveEvent", "track"]) {
-            if (typeof (ScienceModule as any)[method] !== "function") continue;
-            this.patcher.instead(ScienceModule, method, () => {
-                this.count();
-                return undefined;
-            });
-        }
     },
 
     blockSentry() {
