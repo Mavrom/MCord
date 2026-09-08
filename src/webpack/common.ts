@@ -4,9 +4,18 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
-import { byCode, byKeys } from "./filters";
-import { findByCodeLazy, findByPropsLazy, findLazy, findStoreLazy, waitFor } from "./lazy";
-import { mapMangledModuleLazy } from "./mangled";
+import { byCode, byKeys, bySource } from "./filters";
+import {
+    findByCodeLazy,
+    findByPropsLazy,
+    findComponentByCodeLazy,
+    findExportedComponentLazy,
+    findLazy,
+    findStoreLazy,
+    waitFor
+} from "./lazy";
+import { mapMangledModuleLazy, mapperByRegex } from "./mangled";
+import { React } from "./react";
 import type { ModuleExports } from "./types";
 
 /**
@@ -156,3 +165,126 @@ export const ChannelRouter = mapMangledModuleLazy('"Thread must have a parent ID
     transitionToChannel: byCode(".preload"),
     transitionToThread: byCode('"Thread must have a parent ID."')
 });
+
+// ── Modal'lar ───────────────────────────────────────────────────────────────
+
+/**
+ * `openModal` / `closeModal` vb. — plugin'lerin kendi modal'ını açması için.
+ * Finder tanımları referans katalog `main`'den (canlı Discord'a karşı doğrulanmış).
+ */
+export const Modals = mapMangledModuleLazy(".modalKey?", {
+    openModalLazy: byCode(".modalKey?"),
+    openModal: byCode(",instant:"),
+    closeModal: byCode(".onCloseCallback()"),
+    closeAllModals: byCode(".getState();for")
+}) as any;
+
+export const openModal: (render: any, options?: any, key?: string) => string = (...args: any[]) => (Modals as any).openModal(...args);
+export const openModalLazy: (render: () => Promise<any>, options?: any) => Promise<string> = (...args: any[]) => (Modals as any).openModalLazy(...args);
+export const closeModal: (key: string) => void = (...args: any[]) => (Modals as any).closeModal(...args);
+export const closeAllModals: () => void = () => (Modals as any).closeAllModals();
+
+/** `ModalRoot`, `ModalHeader`, `ModalContent`, `ModalFooter`, `ModalCloseButton`, `ModalSize`. */
+export const ModalComponents = findByPropsLazy("ModalRoot", "ModalHeader", "ModalContent") as any;
+export const ModalRoot: any = new Proxy((() => null) as any, { get: (_t, p) => (ModalComponents as any).ModalRoot?.[p], apply: (_t, _th, a) => (ModalComponents as any).ModalRoot(...a) });
+export const ModalHeader: any = new Proxy((() => null) as any, { get: (_t, p) => (ModalComponents as any).ModalHeader?.[p], apply: (_t, _th, a) => (ModalComponents as any).ModalHeader(...a) });
+export const ModalContent: any = new Proxy((() => null) as any, { get: (_t, p) => (ModalComponents as any).ModalContent?.[p], apply: (_t, _th, a) => (ModalComponents as any).ModalContent(...a) });
+export const ModalFooter: any = new Proxy((() => null) as any, { get: (_t, p) => (ModalComponents as any).ModalFooter?.[p], apply: (_t, _th, a) => (ModalComponents as any).ModalFooter(...a) });
+export const ModalCloseButton: any = new Proxy((() => null) as any, { get: (_t, p) => (ModalComponents as any).ModalCloseButton?.[p], apply: (_t, _th, a) => (ModalComponents as any).ModalCloseButton(...a) });
+export const ModalSize: any = new Proxy({}, { get: (_t, p) => (ModalComponents as any).ModalSize?.[p] });
+
+// ── Menü bileşenleri ────────────────────────────────────────────────────────
+
+/** `<Menu.Menu>`, `<Menu.MenuItem>`, `<Menu.MenuGroup>`, `<Menu.MenuCheckboxItem>` … */
+export const Menu: any = findByPropsLazy("MenuGroup", "MenuItem", "MenuSeparator");
+
+// ── Discord UI bileşenleri (referans katalog `main` finder'ları) ─────────────────────
+//
+// Finder string'leri referans katalog birebir. Bu Discord build'inde uymayan olursa
+// lazy olduğu için no-op'a düşer (plugin kullanınca fark edilir, o an düzeltilir).
+
+export const Checkbox = findComponentByCodeLazy('"data-toggleable-component":"checkbox');
+export const TextInput = findComponentByCodeLazy('setHasValue?.(""!==', '="text",');
+export const TextArea = findComponentByCodeLazy("!0,rows:", "showRemainingCharacterCount:");
+export const Select = findComponentByCodeLazy('selectionMode:"single",onSelectionChange:', "isSelected:");
+export const SearchableSelect = findComponentByCodeLazy('?"multiple":"single",required:');
+export const Slider = findComponentByCodeLazy("markDash", "this.renderMark(");
+export const Popout = findComponentByCodeLazy("ref:this.ref,", "renderPopout:this.renderPopout,");
+export const Dialog = findComponentByCodeLazy('role:"dialog",tabIndex:-1');
+export const Clickable = findComponentByCodeLazy("this.context?this.renderNonInteractive():");
+export const Avatar = findComponentByCodeLazy(".size-1.375*");
+export const FocusLock = findComponentByCodeLazy(".containerRef,{keyboardModeEnabled:");
+export const MaskedLink = findComponentByCodeLazy("MASKED_LINK)");
+export const Timestamp = findComponentByCodeLazy("#{intl::MESSAGE_EDITED_TIMESTAMP_A11Y_LABEL}");
+export const OAuth2AuthorizeModal = findComponentByCodeLazy("hasContentBackground", "nextStep", "onClose?.()");
+
+/** Discord'un `Tooltip` sınıfı (MCord'un kendi `components/Tooltip`'inden ayrı). */
+export const Tooltip: any = findLazy((m: any) => m?.prototype?.shouldShowTooltip && m.prototype.render);
+export const TooltipContainer = findComponentByCodeLazy("this.renderTooltip()", "positionKey");
+
+// referans katalog bunları güncelde kendi wrapper bileşenlerine taşıdı; ham Discord
+// finder'ları (referans katalog daha eski ama gerçek tanımları):
+export const Button = findComponentByCodeLazy("#{intl::A11Y_LOADING_STARTED}", "buttonRef", "submittingFinishedLabel");
+export const Switch = findComponentByCodeLazy("xanchorScrollLeft", "wrapperClass", "onChange");
+export const Text = findComponentByCodeLazy('lineClamp:"var(--lineClamp")', ',lineHeight:"var(--lineHeight")');
+export const Heading = findComponentByCodeLazy('"h1":', 'variant:"heading', "level:");
+export const Card = findComponentByCodeLazy(".editable]:");
+export const Paragraph: any = Text;
+
+export const Forms = {
+    get FormSection() { return findExportedComponentLazy("FormSection") as any; },
+    get FormTitle() { return Heading as any; },
+    get FormText() { return Text as any; },
+    get FormItem() { return findExportedComponentLazy("FormItem") as any; },
+    get FormDivider() { return findExportedComponentLazy("FormDivider") as any; },
+    get FormSwitch() { return Switch as any; }
+};
+
+// ── Util modülleri (referans katalog `utils.ts`) ─────────────────────────────────────
+
+export const Clipboard = findByPropsLazy("SUPPORTS_COPY", "copy");
+
+export const UploadHandler = {
+    promptToUpload: findByCodeLazy("Unexpected mismatch between files and file metadata") as
+        (files: File[], channel: any, draftType: number) => void
+};
+
+export const UserUtils = { getUser: findByCodeLazy(".USER(") as (id: string) => Promise<any> };
+
+export const ExpressionPickerStore = mapMangledModuleLazy("expression-picker-last-active-view", {
+    openExpressionPicker: mapperByRegex(/setState\({activeView:(?:(?!null)\w+),activeViewType:/),
+    closeExpressionPicker: byCode("setState({activeView:null"),
+    toggleExpressionPicker: mapperByRegex(/\w\.activeView===\w+&&\w+\.activeViewType===\w+&&/),
+    setExpressionPickerView: mapperByRegex(/setState\({activeView:\w+,lastActiveView:/),
+    setSearchQuery: byCode("searchQuery:")
+}) as any;
+
+export const PopoutActions = mapMangledModuleLazy('type:"POPOUT_WINDOW_OPEN"', {
+    open: byCode('type:"POPOUT_WINDOW_OPEN"'),
+    close: byCode('type:"POPOUT_WINDOW_CLOSE"'),
+    setAlwaysOnTop: byCode('type:"POPOUT_WINDOW_SET_ALWAYS_ON_TOP"')
+}) as any;
+
+export const DisplayProfileUtils = mapMangledModuleLazy(
+    bySource(".getUserProfile(", ".getGuildMemberProfile("),
+    {
+        getDisplayProfile: byCode(".getGuildMemberProfile("),
+        useDisplayProfile: mapperByRegex(/\[\w+\.\w+,\w+\.\w+],\(\)=>/)
+    }
+) as any;
+
+/** `useStateFromStores([Store], () => Store.get())` — referans katalog en çok kullanılan hook'u. */
+export const useStateFromStores: <T>(
+    stores: any[],
+    getState: () => T,
+    deps?: any[],
+    compare?: (a: T, b: T) => boolean
+) => T = findByCodeLazy("useStateFromStores") as any;
+
+/** Discord intl proxy. */
+export const i18n = mapMangledModuleLazy(bySource('defaultLocale:"en-US"', "initialLocale:"), {
+    t: (m: any) => m?.[Symbol.toStringTag] === "IntlMessagesProxy",
+    intl: (m: any) => m != null && Object.getPrototypeOf(m)?.withFormatters != null
+}) as any;
+
+export { React };
