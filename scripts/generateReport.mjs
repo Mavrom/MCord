@@ -110,7 +110,7 @@ async function runBranch(branch) {
 
         const done = waitForReport(page);
 
-        await page.goto(BRANCHES[branch], { waitUntil: "domcontentloaded", timeout: 60_000 });
+        await page.goto(BRANCHES[branch], { waitUntil: "load", timeout: 120_000 });
 
         const report = await done;
         console.log(`[MCord] ${branch}: build ${report.meta.buildNumber}, ` +
