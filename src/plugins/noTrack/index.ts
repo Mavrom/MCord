@@ -8,8 +8,9 @@ import { definePluginSettings } from "../../api/settings";
 import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin, OptionType, StartAt } from "../../utils/types";
+import { Flux, getFluxDispatcher } from "../../webpack/common";
 import { byKeys } from "../../webpack/filters";
-import { find, findByKeys } from "../../webpack/finder";
+import { find } from "../../webpack/finder";
 
 const logger = new Logger("NoTrack", "#a6d189");
 
@@ -17,7 +18,8 @@ const settings = definePluginSettings({
     blockAnalytics: {
         type: OptionType.BOOLEAN,
         description: "Discord'un analitik (track) çağrılarını engelle",
-        default: true
+        default: true,
+        restartNeeded: true
     },
     blockSentry: {
         type: OptionType.BOOLEAN,
@@ -46,10 +48,33 @@ export default definePlugin({
     requiresRestart: false,
     startAt: StartAt.WebpackReady,
 
+    /**
+     * Analitik: `track`/`trackWithMetadata` finder'ı bu build'de kırık.
+     * referans katalog güncel yöntemi — `AnalyticsActionHandlers.handle` modülünde
+     * store yapıcısını kendi stub'ımızla değiştir.
+     */
+    patches: [{
+        find: "AnalyticsActionHandlers.handle",
+        predicate: () => settings.store.blockAnalytics,
+        reason: "Discord analitiğini kapat — track finder'ı kırık, referans katalog gibi store yapıcısını değiştir.",
+        replacement: {
+            match: /\(0,\i\.analyticsTrackingStoreMaker\)/,
+            replace: "$self.analyticsTrackingStoreMaker"
+        }
+    }],
+
+    // Discord bazı yerlerde TRACK olayının `resolve` callback'ini bekliyor
+    // (ör. sesli hata ayıklama toggle'ı). Handler'ı NOOP'ladığımız için
+    // kendimiz çözüyoruz.
+    flux: {
+        TRACK(event: any) {
+            event?.resolve?.();
+        }
+    },
+
     blocked: 0,
 
     start() {
-        if (settings.store.blockAnalytics) this.blockAnalytics();
         if (settings.store.blockScienceEvents) this.blockScience();
         if (settings.store.blockSentry) this.blockSentry();
     },
@@ -62,27 +87,34 @@ export default definePlugin({
         this.blocked++;
     },
 
-    blockAnalytics() {
-        const AnalyticsActions = findByKeys("track", "trackWithMetadata")
-            ?? findByKeys("AnalyticsActionHandlers");
-
-        if (!AnalyticsActions) {
-            logger.warn("Analitik modülü bulunamadı.");
-            return;
+    analyticsTrackingStoreMaker() {
+        const StoreBase = (Flux as any)?.Store;
+        if (typeof StoreBase !== "function") {
+            logger.warn("Flux.Store bulunamadı — analitik stub'ı kurulamadı.");
+            return {};
         }
 
-        for (const method of ["track", "trackWithMetadata"]) {
-            if (typeof AnalyticsActions[method] !== "function") continue;
-            this.patcher.instead(AnalyticsActions, method, () => {
-                this.count();
-                return undefined;
-            });
+        const self = this;
+        class AnalyticsTrackingStoreStub extends StoreBase {
+            static displayName = "AnalyticsTrackingStore";
+            requestDrain() { self.count(); }
+            async submitEventsImmediately() {
+                self.count();
+                throw {
+                    ok: false,
+                    status: 500,
+                    body: { message: "Analytics tracking is disabled by NoTrack", code: 0 },
+                    headers: {},
+                    text: JSON.stringify({ message: "Analytics tracking is disabled by NoTrack", code: 0 })
+                };
+            }
         }
+
+        return new (AnalyticsTrackingStoreStub as any)(getFluxDispatcher());
     },
 
     blockScience() {
-        const ScienceModule = find(byKeys(["submitLiveEvent"]), { silent: true })
-            ?? findByKeys("encodeProperties", "track");
+        const ScienceModule = find(byKeys(["submitLiveEvent"]), { silent: true });
 
         if (!ScienceModule) {
             logger.warn("Science modülü bulunamadı.");
@@ -90,7 +122,7 @@ export default definePlugin({
         }
 
         for (const method of ["submitLiveEvent", "track"]) {
-            if (typeof ScienceModule[method] !== "function") continue;
+            if (typeof (ScienceModule as any)[method] !== "function") continue;
             this.patcher.instead(ScienceModule, method, () => {
                 this.count();
                 return undefined;
@@ -115,10 +147,10 @@ export default definePlugin({
             }
         }
 
-        const console = (window as any).DiscordSentry;
-        if (console?.close) {
+        const discordSentry = (window as any).DiscordSentry;
+        if (discordSentry?.close) {
             try {
-                console.close();
+                discordSentry.close();
             } catch { /* zaten kapalı */ }
         }
     }

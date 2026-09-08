@@ -10,7 +10,6 @@ import { flushSettings, Settings } from "../../../api/settings";
 import { Devs } from "../../../utils/constants";
 import { Logger } from "../../../utils/logger";
 import { definePlugin, StartAt } from "../../../utils/types";
-import { findByPrototypeKeys } from "../../../webpack/finder";
 import { attributeCrash } from "./attribution";
 import {
     CRASH_LIMIT,
@@ -33,25 +32,61 @@ export default definePlugin({
     required: true,
     startAt: StartAt.WebpackReady,
 
-    start() {
-        // Discord'un `ErrorBoundary` bileşeni. `_handleSubmitReport` prototype
-        // üzerinde olduğu için mangle edilmiyor (plan §8.1).
-        const ErrorBoundary = findByPrototypeKeys("_handleSubmitReport");
-
-        if (!ErrorBoundary?.prototype) {
-            logger.error("Discord'un ErrorBoundary bileşeni bulunamadı — kurtarma devre dışı.");
-            return;
+    /**
+     * Discord'un `ErrorBoundary` bileşeni `_handleSubmitReport` prototype
+     * anahtarıyla artık bulunamıyor. referans katalog güncel CrashHandler yöntemi:
+     * `ERRORS_UNEXPECTED_CRASH` intl anahtarını içeren modülde `this.setState`
+     * çağrısını yakala (plan §8.1).
+     */
+    patches: [{
+        find: "#{intl::ERRORS_UNEXPECTED_CRASH}",
+        reason: "ErrorBoundary bileşeni prototype anahtarıyla bulunamıyor — referans katalog gibi setState'i yakala.",
+        replacement: {
+            match: /this\.setState\((.+?)\)/,
+            replace: "$self.onCrash(this,$1);"
         }
+    }],
 
-        this.patcher.after(ErrorBoundary.prototype, "render", (instance, _args, returnValue) => {
-            const { error, info } = instance.state ?? {};
-            if (!error) return returnValue;
-
-            return this.renderErrorScreen(instance, error, info?.componentStack ?? "");
-        });
-
+    start() {
         startCleanSessionTimer();
         this.warnAboutDisabledPlugins();
+    },
+
+    /**
+     * Discord'un ErrorBoundary'si çökme durumunu `setState` ediyor. Onu yutup
+     * kendi state'ini yine de uyguluyoruz (Discord'un fallback ekranı bozulmasın),
+     * atıf + bildirim akışını çalıştırıyoruz ve bu instance'ın `render`'ını
+     * MCord kurtarma ekranına çeviriyoruz.
+     */
+    onCrash(instance: any, errorState: any) {
+        try {
+            instance.setState(errorState);
+        } catch { /* state uygulanamazsa Discord kendi ekranını gösterir */ }
+
+        const error: Error | undefined = errorState?.error;
+        if (!error) return;
+
+        const componentStack: string =
+            errorState?.info?.componentStack ?? errorState?.componentStack ?? "";
+
+        if (!this.handled.has(error)) {
+            this.handled.add(error);
+            this.handleCrash(attributeCrash(error, componentStack).plugins, error);
+        }
+
+        if (!instance.__mcordRecoveryPatched) {
+            instance.__mcordRecoveryPatched = true;
+            const originalRender = instance.render.bind(instance);
+            instance.render = () => {
+                const state = instance.state ?? {};
+                if (!state.error) return originalRender();
+                return this.renderErrorScreen(instance, state.error, componentStack);
+            };
+        }
+
+        try {
+            instance.forceUpdate?.();
+        } catch { /* yeniden çizim başarısızsa Discord'un ekranı kalır */ }
     },
 
     stop() {

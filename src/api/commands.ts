@@ -59,6 +59,22 @@ export interface Command {
 
 export const commands: Command[] = [];
 
+/**
+ * Discord'un yerleşik komut dizisi (`BUILT_IN_COMMANDS`). `CommandsAPI` plugin'i
+ * bir kod patch'iyle bu diziyi yakalayıp buraya veriyor; sonra MCord komutları
+ * hem `commands`'e hem doğrudan bu diziye ekleniyor — Discord komut menüsü kendi
+ * dizisini okuduğu için ikisini senkron tutmak gerekiyor (referans katalog ile aynı).
+ */
+let builtInSink: Command[] | null = null;
+
+export function _bindBuiltInCommands(sink: Command[]): void {
+    if (!Array.isArray(sink)) return;
+    builtInSink = sink;
+    for (const command of commands) {
+        if (!sink.some(existing => existing.name === command.name)) sink.push(command);
+    }
+}
+
 export function registerCommand(command: Command, pluginName: string): void {
     if (commands.some(c => c.name === command.name)) {
         logger.warn(`${pluginName}: "${command.name}" komutu zaten kayıtlı, atlandı.`);
@@ -73,6 +89,7 @@ export function registerCommand(command: Command, pluginName: string): void {
     command.options ??= [];
 
     commands.push(command);
+    if (builtInSink && !builtInSink.some(c => c.name === command.name)) builtInSink.push(command);
 }
 
 export function unregisterCommand(name: string): boolean {
@@ -80,6 +97,10 @@ export function unregisterCommand(name: string): boolean {
     if (index === -1) return false;
 
     commands.splice(index, 1);
+
+    const sinkIndex = builtInSink?.findIndex(c => c.name === name) ?? -1;
+    if (sinkIndex !== -1) builtInSink!.splice(sinkIndex, 1);
+
     return true;
 }
 

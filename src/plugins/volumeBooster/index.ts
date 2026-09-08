@@ -7,7 +7,8 @@
 import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin, StartAt } from "../../utils/types";
-import { findByKeys } from "../../webpack/finder";
+import { byKeys } from "../../webpack/filters";
+import { find } from "../../webpack/finder";
 
 const logger = new Logger("VolumeBooster", "#a6d189");
 
@@ -27,9 +28,12 @@ export default definePlugin({
 
     start() {
         try {
-            const Volume = findByKeys("setLocalVolume", "getLocalVolume") ?? findByKeys("setLocalVolume");
-            if (Volume?.setLocalVolume) {
-                this.patcher.instead(Volume, "setLocalVolume", (self: any, args: any[], orig: any) => {
+            // Scaffold: Discord modülü yeniden adlandırdıysa sessizce no-op
+            // (konsolu kirletmeden). Doğru port kod patch'i gerektiriyor.
+            const Volume = find(byKeys(["setLocalVolume", "getLocalVolume"]), { silent: true })
+                ?? find(byKeys(["setLocalVolume"]), { silent: true });
+            if ((Volume as any)?.setLocalVolume) {
+                this.patcher.instead(Volume as any, "setLocalVolume", (self: any, args: any[], orig: any) => {
                     if (typeof args[1] === "number") args[1] = Math.min(args[1] * 2, 200);
                     return orig.apply(self, args);
                 });

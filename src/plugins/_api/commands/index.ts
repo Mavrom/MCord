@@ -4,10 +4,9 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
-import { commands } from "../../../api/commands";
+import { _bindBuiltInCommands, commands } from "../../../api/commands";
 import { Devs } from "../../../utils/constants";
 import { definePlugin } from "../../../utils/types";
-import { findByKeys } from "../../../webpack/finder";
 
 export default definePlugin({
     name: "CommandsAPI",
@@ -16,19 +15,28 @@ export default definePlugin({
     required: true,
 
     /**
-     * Discord'un yerleşik komut listesine bizimkileri ekliyoruz.
-     * Fonksiyon patch'i: liste her sorgulandığında sonuca ekleniyor,
-     * plugin durunca sarmalayıcı kalkıyor (plan §5.1, §6.5).
+     * `getBuiltInCommands` fonksiyonu bu Discord build'inde webpack anahtarıyla
+     * bulunamıyor. referans katalog güncel yöntemi: `BUILT_IN_COMMANDS` dizisi hiçbir
+     * yerde export edilmediği için `,"tableflip","unflip"` kaynak imzasından
+     * modülü bul, `.filter(...)` çağrısındaki diziyi yakala. `_bind` diziyi
+     * olduğu gibi geri döndürüyor — patch basit kalsın diye.
      */
-    start() {
-        const CommandsStore = findByKeys("getBuiltInCommands");
-        if (!CommandsStore) {
-            throw new Error("Komut deposu bulunamadı.");
+    patches: [{
+        find: ',"tableflip","unflip"',
+        reason: "getBuiltInCommands finder'ı bu build'de kırık — referans katalog gibi BUILT_IN_COMMANDS dizisini kaynaktan yakala.",
+        replacement: {
+            match: /(?<=\i=)(\i)(\.filter\(.{0,60}tableflip)/,
+            replace: "$self._bind($1)$2"
         }
+    }],
 
-        this.patcher.after(CommandsStore, "getBuiltInCommands", (self, args, returnValue) => {
-            if (!Array.isArray(returnValue)) return returnValue;
-            return [...returnValue, ...commands];
-        });
+    _bind(builtInCommands: any[]) {
+        _bindBuiltInCommands(builtInCommands);
+        return builtInCommands;
+    },
+
+    /** Patch tutmadıysa (Discord imzayı değiştirdi) komutlar sessizce yok. */
+    get registeredCount() {
+        return commands.length;
     }
 });

@@ -97,7 +97,9 @@ export function registerIpc(): void {
 
             const response = await fetch(url, {
                 method: options.method ?? "GET",
-                headers: options.headers,
+                // GitHub API vb. User-Agent olmadan 403 dönüyor — çağıran
+                // isterse ezebilir.
+                headers: { "User-Agent": `MCord/${app.getVersion()}`, ...options.headers },
                 body
             });
 

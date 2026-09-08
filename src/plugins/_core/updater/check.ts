@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
-import { fetchJson } from "../../../api/net";
+import { nativeFetchJson } from "../../../api/net";
 import { Settings } from "../../../api/settings";
 import { REPO_URL } from "../../../utils/constants";
 import { Logger } from "../../../utils/logger";
@@ -49,7 +49,9 @@ export function getUpdateState(): UpdateState {
 
 export async function checkForUpdates(): Promise<UpdateState> {
     try {
-        const release = await fetchJson<any>(RELEASES_API, {
+        // Renderer `fetch`'i Discord CSP'sine takılıyor (api.github.com izinli
+        // değil) — main process üzerinden çekiyoruz.
+        const release = await nativeFetchJson<any>(RELEASES_API, {
             headers: { Accept: "application/vnd.github+json" }
         });
 
@@ -142,7 +144,7 @@ export async function downloadRelease(release: ReleaseInfo): Promise<void> {
         throw new Error("Sürümde `app.asar.json` manifesti yok — doğrulama yapılamaz.");
     }
 
-    const manifest = await fetchJson<AsarManifest>(release.manifestUrl);
+    const manifest = await nativeFetchJson<AsarManifest>(release.manifestUrl);
 
     if (typeof manifest?.sha256 !== "string" || manifest.sha256.length !== 64) {
         throw new Error("Manifestteki SHA-256 geçersiz.");
