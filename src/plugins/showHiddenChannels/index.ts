@@ -9,7 +9,7 @@ import { definePluginSettings } from "../../api/settings";
 import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin, OptionType, StartAt } from "../../utils/types";
-import { PermissionStore } from "../../webpack/common";
+import { ChannelStore, PermissionStore } from "../../webpack/common";
 import { findByKeys } from "../../webpack/finder";
 
 const logger = new Logger("ShowHiddenChannels", "#a6d189");
@@ -32,6 +32,20 @@ const settings = definePluginSettings({
 
 /** Kanal tipi → ses kanalı mı. */
 const VOICE_TYPES = new Set([2, 13]);
+
+/**
+ * Gizlenebilir **sunucu** kanal tipleri: metin(0), ses(2), duyuru(5),
+ * duyuru-thread(10)? hayır, thread'ler değil — forum(15), medya(16),
+ * sahne(13). DM(1), grup DM(3), kategori(4), thread(11/12) HARİÇ.
+ */
+const HIDEABLE_GUILD_TYPES = new Set([0, 2, 5, 13, 15, 16]);
+
+/** Yalnız bir sunucuya ait, gizlenebilir tipte bir kanal mı? */
+function isHideableGuildChannel(channel: any): boolean {
+    if (!channel || typeof channel.id !== "string") return false;
+    if (channel.guild_id == null) return false;                 // DM / grup DM
+    return HIDEABLE_GUILD_TYPES.has(channel.type);
+}
 
 export default definePlugin({
     name: "ShowHiddenChannels",
@@ -66,7 +80,9 @@ export default definePlugin({
             if (!isViewChannel(permission)) return returnValue;
 
             const channel = context?.channel ?? context;
-            if (!isChannelLike(channel)) return returnValue;
+            // KRİTİK: yalnız sunucu kanalları. Aksi halde DM'ler "gizli" sayılıp
+            // navigasyonu engelleniyordu (kullanıcı DM'lerine giremiyordu).
+            if (!isHideableGuildChannel(channel)) return returnValue;
 
             if (!settings.store.showVoiceChannels && VOICE_TYPES.has(channel.type)) {
                 return returnValue;
@@ -94,7 +110,9 @@ export default definePlugin({
         this.patcher.instead(ChannelActions, "selectChannel", (self, args, original) => {
             const channelId = args[0]?.channelId ?? args[1];
 
-            if (channelId && hiddenChannels.has(channelId)) {
+            // Çift emniyet: listede olsa bile gerçekten bir sunucu kanalı mı?
+            const channel = channelId ? ChannelStore?.getChannel?.(channelId) : null;
+            if (channelId && hiddenChannels.has(channelId) && isHideableGuildChannel(channel)) {
                 showNotification({
                     title: "Gizli kanal",
                     body: "Bu kanalı görme iznin yok; içeriği yüklenemez.",
@@ -119,8 +137,4 @@ function isViewChannel(permission: unknown): boolean {
     if (typeof permission === "bigint") return permission === VIEW_CHANNEL;
     if (typeof permission === "number") return BigInt(permission) === VIEW_CHANNEL;
     return false;
-}
-
-function isChannelLike(value: any): value is { id: string; type: number } {
-    return value != null && typeof value.id === "string" && typeof value.type === "number";
 }
