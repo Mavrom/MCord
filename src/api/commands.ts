@@ -63,7 +63,7 @@ export const commands: Command[] = [];
  * Discord'un yerleşik komut dizisi (`BUILT_IN_COMMANDS`). `CommandsAPI` plugin'i
  * bir kod patch'iyle bu diziyi yakalayıp buraya veriyor; sonra MCord komutları
  * hem `commands`'e hem doğrudan bu diziye ekleniyor — Discord komut menüsü kendi
- * dizisini okuduğu için ikisini senkron tutmak gerekiyor (referans katalog ile aynı).
+ * dizisini okuduğu için ikisini senkron tutmak gerekiyor.
  */
 let builtInSink: Command[] | null = null;
 

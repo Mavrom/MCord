@@ -12,7 +12,7 @@ import { findByKeys } from "../../webpack/finder";
 const logger = new Logger("NoDefaultHangStatus", "#a6d189");
 
 /**
- * SCAFFOLD — referans katalog aynı adlı plugin'in davranışının MCord API'siyle
+ * SCAFFOLD — bilinen bir istemci modundaki aynı işlevin MCord API'siyle
  * yeniden yazımı. Kullanılan webpack aramaları ve patch noktaları canlı
  * Discord'da doğrulanmalı; Discord modülü yeniden adlandırdıysa `start`
  * sessizce uyarı basar ve plugin no-op olur (güvenli mod ilkesi).

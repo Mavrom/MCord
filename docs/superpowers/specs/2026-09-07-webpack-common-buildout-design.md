@@ -3,13 +3,13 @@
 **Tarih:** 2026-09-07
 **Amaç:** MCord'un webpack modül kataloğunu referans katalog seviyesine çıkarmak. Bugün
 ExpressionCloner `RestAPI`'yi bulamadığı için tıkandık; kök sebep MCord'un
-`webpack/common`'unda ~15 hazır modül olması, referans katalog ~80.
+`webpack/common`'unda ~15 hazır modül olması, referans katalog'da ~80.
 
 ## Yaklaşım
 
-referans katalog **güncel `dev` branch** finder tanımlarını doğrudan port et. Kendi
-imza tahmini yapma — referans katalog CI'ı bunları canlı Discord'a karşı doğruluyor.
-Yapı olarak referans katalog takip et: `src/webpack/common/` altında dosyalar
+Finder tanımları için kanıtlanmış, canlı Discord'a karşı çalışan imzalar kullan. Kendi
+imza tahmini yapma.
+Yapı: `src/webpack/common/` altında dosyalar
 (`stores.ts`, `utils.ts`, `components.ts`, `menu.ts`, `modals.ts`), hepsi
 `webpack/common/index.ts`'ten re-export.
 
@@ -19,7 +19,7 @@ Dayanıklılık sırası (aynı şeyi iki türlü bulabiliyorsak):
 ## Kapsam — Faz 1 (bu spec)
 
 ### `webpack/common/stores.ts`
-referans katalog `stores.ts`'indeki tüm `findStoreLazy` çağrıları: `GuildMemberStore`,
+Discord'un tüm Flux store'ları (ada göre): `GuildMemberStore`,
 `EmojiStore`, `StickersStore`, `DraftStore`, `WindowStore`, `ReadStateStore`,
 `PresenceStore`, `SessionsStore`, `TypingStore`, `ThemeStore`,
 `GuildChannelStore`, `SelectedGuildStore`, `EmojiDisabledReasons`, ... (mevcut
@@ -33,7 +33,7 @@ referans katalog `stores.ts`'indeki tüm `findStoreLazy` çağrıları: `GuildMe
   yap; SuperAgent'ın metotları bind'li (`[native code]`).
 - `Constants` — `mapMangledModuleLazy('ME:"/users/@me"', { Endpoints, ... })`
 - `PermissionsBits` — `findLazy(m => typeof m.ADMINISTRATOR === "bigint")`
-- `SnowflakeUtils`, `moment`, `lodash`, `Alerts`, `Toasts` (referans katalog obje),
+- `SnowflakeUtils`, `moment`, `lodash`, `Alerts`, `Toasts` (referans katalog'daki obje),
   `IconUtils`, `UsernameUtils`, `ChannelActionCreators`, `ExpressionPickerStore`,
   `NavigationRouter` (mevcut olan güncellensin), `SettingsRouter`
 - discord helpers (`webpack/common` değil `utils/discord.ts`):
@@ -46,7 +46,7 @@ referans katalog `menu.ts`: `Menu` (`MenuItem`, `MenuGroup`, `MenuSeparator`,
 **+** `api/contextMenu.ts`'e `findGroupChildrenByChildId` ekle (referans katalog `@api/ContextMenu`).
 
 ### `webpack/common/modals.ts`
-referans katalog `modals.ts`: `ModalRoot`, `ModalHeader`, `ModalContent`, `ModalFooter`,
+Modal katmanı: `ModalRoot`, `ModalHeader`, `ModalContent`, `ModalFooter`,
 `ModalCloseButton`, `ModalSize`, `openModal`, `openModalLazy`, `closeModal`,
 `closeAllModals`.
 

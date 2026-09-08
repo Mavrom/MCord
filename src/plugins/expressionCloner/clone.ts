@@ -65,7 +65,7 @@ export function guildAcronym(name: string): string {
         .slice(0, 3);
 }
 
-/** referans katalog yaklaşımı: büyükten başla, boyut sınırına inene kadar yarıla. */
+/** büyükten başla, boyut sınırına inene kadar yarıla. */
 async function fetchBlob(data: Data): Promise<Blob> {
     const max = data.t === "Sticker" ? MAX_STICKER_BYTES : MAX_EMOJI_BYTES;
 

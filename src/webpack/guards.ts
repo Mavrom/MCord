@@ -68,7 +68,7 @@ export function wrapModuleFilter(filter: ModuleFilter): ModuleFilter {
 /**
  * Sorulan **her** anahtara değer döndüren nesneler (Discord'un ve bizim proxy
  * katmanımızın ürettiği "catch-all"lar) her filtreyle eşleşip aramayı zehirliyor.
- * Var olmayan bir anahtarla test edip eliyoruz — referans katalog `PROXY_CHECK`
+ * Var olmayan bir anahtarla test edip eliyoruz — bilinen `PROXY_CHECK`
  * yaklaşımının aynısı.
  */
 const PROXY_CHECK = "$$mcordIsProxy";

@@ -87,7 +87,7 @@ export function handleDelete(cache: any, event: any): any {
                 result = result.remove(id);
             } else if (typeof result.update === "function") {
                 // Mesajı görünür bırak + `deleted` işaretle → satır kırmızı + çöp
-                // ikonu (referans katalog gibi). MessageRecord Immutable, `.set` yeni
+                // ikonu. MessageRecord Immutable, `.set` yeni
                 // kayıt döndürüyor.
                 result = result.update(id, (record: any) =>
                     typeof record?.set === "function" ? record.set("deleted", true) : record);

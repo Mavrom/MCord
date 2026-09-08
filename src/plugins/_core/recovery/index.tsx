@@ -34,13 +34,13 @@ export default definePlugin({
 
     /**
      * Discord'un `ErrorBoundary` bileşeni `_handleSubmitReport` prototype
-     * anahtarıyla artık bulunamıyor. referans katalog güncel CrashHandler yöntemi:
+     * anahtarıyla artık bulunamıyor. Bilinen çalışan yöntem:
      * `ERRORS_UNEXPECTED_CRASH` intl anahtarını içeren modülde `this.setState`
      * çağrısını yakala (plan §8.1).
      */
     patches: [{
         find: "#{intl::ERRORS_UNEXPECTED_CRASH}",
-        reason: "ErrorBoundary bileşeni prototype anahtarıyla bulunamıyor — referans katalog gibi setState'i yakala.",
+        reason: "ErrorBoundary bileşeni prototype anahtarıyla bulunamıyor — setState'i yakala.",
         replacement: {
             match: /this\.setState\((.+?)\)/,
             replace: "$self.onCrash(this,$1);"

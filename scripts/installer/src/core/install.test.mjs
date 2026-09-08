@@ -65,7 +65,7 @@ describe("installAsar", () => {
 });
 
 describe("getStatus", () => {
-    it("sadece _app.asar varsa (referans katalog vb.) → otherMod, installed değil", () => {
+    it("sadece _app.asar varsa (başka istemci modu) → otherMod, installed değil", () => {
         writeFileSync(install.backupAsar, "GERÇEK DISCORD");
         const s = getStatus(install);
         expect(s.installed).toBe(false);

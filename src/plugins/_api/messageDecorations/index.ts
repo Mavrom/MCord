@@ -25,7 +25,7 @@ export default definePlugin({
         reason: "Mesaj yazar dekorasyonları başlık bileşeninin yerel children dizisinde oluşturuluyor.",
         replacement: {
             // Discord artık intl anahtarlarını hash'liyor — ham string bundle'da
-            // yok, `#{intl::…}` işaretçisiyle canonicalize edilmeli (referans katalog ile aynı).
+            // yok, `#{intl::…}` işaretçisiyle canonicalize edilmeli.
             match: /#{intl::GUILD_COMMUNICATION_DISABLED_BOTTOM_SHEET_TITLE}.+?renderPopout:.+?(?=\])/,
             replace: "$&,$self.render(arguments[0])"
         }

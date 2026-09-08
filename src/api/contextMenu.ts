@@ -39,7 +39,7 @@ export function removeContextMenuPatch(navId: string | string[], patch: ContextM
 /**
  * Bir bağlam menüsü ağacında, verilen `id`'li öğeyi içeren grup dizisini bulur.
  * Plugin'ler kendi öğelerini mevcut bir öğenin (ör. `"copy-link"`) yanına
- * eklemek için kullanır (referans katalog `findGroupChildrenByChildId`).
+ * eklemek için kullanır.
  */
 export function findGroupChildrenByChildId(
     id: string | string[],

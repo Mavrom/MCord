@@ -202,7 +202,7 @@ export function findByCodeLazy<T extends object = ModuleExports>(...code: string
     return findLazy<T>(byCode(...code));
 }
 
-/** Belirtilen property'lerin hepsine sahip modülü tembel bulur (referans katalog `findByPropsLazy`). */
+/** Belirtilen property'lerin hepsine sahip modülü tembel bulur. */
 export function findByPropsLazy<T extends object = ModuleExports>(...props: string[]): T {
     return findLazy<T>(byKeys(props));
 }

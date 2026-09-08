@@ -57,7 +57,7 @@ export default definePlugin({
     tags: ["sunucu", "yardımcı"],
 
     patches: [{
-        // referans katalog güncel yöntemi: tooltip bileşenini bizimkiyle sarmala
+        // Bilinen yöntem: tooltip bileşenini bizimkiyle sarmala
         // (intl anahtarı hem `find` hem `match` içinde canonicalize edilmeli).
         find: "#{intl::GUILD_COMMUNICATION_DISABLED_ICON_TOOLTIP_BODY}",
         reason: "Zaman aşımı simgesi mesaj başlığında inline oluşturuluyor ve kalan süre için ayrı kanca yok.",

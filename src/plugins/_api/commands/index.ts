@@ -16,14 +16,14 @@ export default definePlugin({
 
     /**
      * `getBuiltInCommands` fonksiyonu bu Discord build'inde webpack anahtarıyla
-     * bulunamıyor. referans katalog güncel yöntemi: `BUILT_IN_COMMANDS` dizisi hiçbir
+     * bulunamıyor. Bilinen yöntem: `BUILT_IN_COMMANDS` dizisi hiçbir
      * yerde export edilmediği için `,"tableflip","unflip"` kaynak imzasından
      * modülü bul, `.filter(...)` çağrısındaki diziyi yakala. `_bind` diziyi
      * olduğu gibi geri döndürüyor — patch basit kalsın diye.
      */
     patches: [{
         find: ',"tableflip","unflip"',
-        reason: "getBuiltInCommands finder'ı bu build'de kırık — referans katalog gibi BUILT_IN_COMMANDS dizisini kaynaktan yakala.",
+        reason: "getBuiltInCommands finder'ı bu build'de kırık — BUILT_IN_COMMANDS dizisini kaynaktan yakala.",
         replacement: {
             match: /(?<=\i=)(\i)(\.filter\(.{0,60}tableflip)/,
             replace: "$self._bind($1)$2"

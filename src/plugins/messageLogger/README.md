@@ -4,11 +4,10 @@ Silinen mesajı **yeniden göndermeden**, aynı mesaj kimliği ve yazarıyla yal
 bu istemcinin sohbet görünümünde tutar. Düzenlemelerin önceki içeriklerini de
 oturum boyunca yerelde gösterir. Bir sohbet komutu değildir.
 
-## referans katalog referansı
+## Yaklaşım
 
-Davranış, [referans katalog resmi MessageLogger kaynağı](https://github.com//referans katalog/tree/ce4e84277e7de349f07e0d4d5820370d4c31f80a/src/plugins/messageLogger)
-ve yerel HistoryModal görünümü incelenerek MCord API'lerine uyarlandı.
-referans katalog dosyalarının birebir kopyası değildir.
+Bilinen istemci-modu davranışları incelenerek MCord API'lerine yeniden yazıldı;
+hiçbir dosya birebir kopya değildir.
 
 - Tekli ve toplu silme, yalnızca **MessageStore'un kanal önbelleği** sınırında
   ele alınır. Silme olayının diğer Flux tüketicilerine ulaşması engellenmez.
@@ -40,9 +39,8 @@ referans katalog dosyalarının birebir kopyası değildir.
 - Varsayılan olarak en fazla 500 mesajın geçmişi, mesaj başına son 20 önceki
   metin sürümü ve en fazla 32.000 karakterlik geçmiş tutulur. En eski kayıtlar
   çıkarılır; çıkarılan silinmiş mesaj yerel görünümden de temizlenir.
-- MCord uyarlamasında geçmiş metni güvenli düz metin olarak gösterilir;
-  referans katalog özel Markdown ayrıştırıcısı ve grup halinde daraltma bileşeni
-  kopyalanmamıştır. Daraltma seçeneği silinen mesajın metnine uygulanır.
+- Geçmiş metni güvenli düz metin olarak gösterilir; özel bir Markdown
+  ayrıştırıcısı kullanılmaz. Daraltma seçeneği silinen mesajın metnine uygulanır.
 
 ## Ayarlar
 
@@ -65,6 +63,6 @@ olarak taşınır. Mevcut `ignoreSelf` ve diğer kayıtlı tercihler korunur.
 ## Uyumluluk
 
 Pluginin etkinleştirilmesi/devre dışı bırakılması için Discord'u yeniden
-başlatmak gerekir. MessageStore ve düzenlendi etiketi yamaları, referans katalog
-incelenen Discord modül sınırlarına dayanır. Bir yama eşleşmezse MCord uyarı
-verir; olmayan bir başarı veya canlı Discord uyumluluğu iddia edilmez.
+başlatmak gerekir. MessageStore ve düzenlendi etiketi yamaları Discord modül
+sınırlarına dayanır. Bir yama eşleşmezse MCord uyarı verir; olmayan bir başarı
+veya canlı Discord uyumluluğu iddia edilmez.

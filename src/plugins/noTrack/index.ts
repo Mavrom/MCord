@@ -48,14 +48,14 @@ export default definePlugin({
 
     /**
      * Analitik: `track`/`trackWithMetadata` finder'ı bu build'de kırık.
-     * referans katalog güncel yöntemi — `AnalyticsActionHandlers.handle` modülünde
+     * Bilinen yöntem — `AnalyticsActionHandlers.handle` modülünde
      * store yapıcısını kendi stub'ımızla değiştir.
      */
     patches: [
         {
             find: "AnalyticsActionHandlers.handle",
             predicate: () => settings.store.blockAnalytics,
-            reason: "Discord analitiğini kapat — track finder'ı kırık, referans katalog gibi store yapıcısını değiştir.",
+            reason: "Discord analitiğini kapat — track finder'ı kırık, store yapıcısını değiştir.",
             replacement: {
                 match: /\(0,\i\.analyticsTrackingStoreMaker\)/,
                 replace: "$self.analyticsTrackingStoreMaker"
@@ -63,11 +63,11 @@ export default definePlugin({
         },
         {
             // Science / metrics: `submitLiveEvent` finder'ı bu build'de kırık —
-            // referans katalog güncel yöntemi, METRICS_V2 modülünde interval'i ve
+            // Bilinen yöntem, METRICS_V2 modülünde interval'i ve
             // increment/distribution çağrılarını etkisizleştir.
             find: ".METRICS_V2",
             predicate: () => settings.store.blockScienceEvents,
-            reason: "Discord metrics/science telemetrisini kapat — finder yerine kod patch'i (referans katalog).",
+            reason: "Discord metrics/science telemetrisini kapat — finder yerine kod patch'i",
             replacement: [
                 {
                     match: /this\._intervalId=/,

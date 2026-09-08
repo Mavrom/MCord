@@ -19,7 +19,7 @@ import { getReactDOMClient, React, ReactDOM } from "./react";
 import type { ModuleExports } from "./types";
 
 /**
- * Discord'un ortak modülleri — referans katalog `webpack/common`'una denk katalog.
+ * Discord'un ortak modülleri — Discord'un webpack modül kataloğu.
  *
  * Filtreler dayanıklılık sırasına göre seçildi:
  * `findStoreLazy(ad)` > `findByPropsLazy(props)` > `mapMangledModuleLazy(kaynak)`.
@@ -92,7 +92,7 @@ export const PrivateChannelSortStore = findStoreLazy<{
     getPrivateChannelIds(): string[];
 }>("PrivateChannelSortStore");
 
-// referans katalog `stores.ts` paritesi — kalan store'lar.
+// Kalan store'lar.
 export const AccessibilityStore = findStoreLazy("AccessibilityStore");
 export const ApplicationStore = findStoreLazy("ApplicationStore");
 export const AuthenticationStore = findStoreLazy("AuthenticationStore");
@@ -124,7 +124,7 @@ export const GuildChannelsStore = GuildChannelStore;
 // ── REST / sabitler ─────────────────────────────────────────────────────────
 
 /**
- * Discord'un RestAPI'sı. referans katalog: `findLazy(m => m.del && m.put)`. Bazı Discord
+ * Discord'un RestAPI'sı. Bazı Discord
  * sürümlerinde bu SuperAgent'ı da yakalıyor — authed API isteği için
  * `api/net.ts` `discordApi()` (token + main-process fetch) daha güvenilir.
  */
@@ -214,7 +214,7 @@ export const ChannelRouter = mapMangledModuleLazy('"Thread must have a parent ID
 
 /**
  * `openModal` / `closeModal` vb. — plugin'lerin kendi modal'ını açması için.
- * Finder tanımları referans katalog `main`'den (canlı Discord'a karşı doğrulanmış).
+ * Finder tanımları canlı Discord'a karşı doğrulanmış.
  */
 export const Modals = mapMangledModuleLazy(".modalKey?", {
     openModalLazy: byCode(".modalKey?"),
@@ -242,9 +242,9 @@ export const ModalSize: any = new Proxy({}, { get: (_t, p) => (ModalComponents a
 /** `<Menu.Menu>`, `<Menu.MenuItem>`, `<Menu.MenuGroup>`, `<Menu.MenuCheckboxItem>` … */
 export const Menu: any = findByPropsLazy("MenuGroup", "MenuItem", "MenuSeparator");
 
-// ── Discord UI bileşenleri (referans katalog `main` finder'ları) ─────────────────────
+// ── Discord UI bileşenleri (canlı Discord finder'ları) ─────────────────────
 //
-// Finder string'leri referans katalog birebir. Bu Discord build'inde uymayan olursa
+// Bu Discord build'inde uymayan olursa
 // lazy olduğu için no-op'a düşer (plugin kullanınca fark edilir, o an düzeltilir).
 
 export const Checkbox = findComponentByCodeLazy('"data-toggleable-component":"checkbox');
@@ -266,8 +266,8 @@ export const OAuth2AuthorizeModal = findComponentByCodeLazy("hasContentBackgroun
 export const Tooltip: any = findLazy((m: any) => m?.prototype?.shouldShowTooltip && m.prototype.render);
 export const TooltipContainer = findComponentByCodeLazy("this.renderTooltip()", "positionKey");
 
-// referans katalog bunları güncelde kendi wrapper bileşenlerine taşıdı; ham Discord
-// finder'ları (referans katalog daha eski ama gerçek tanımları):
+// Ham Discord bileşen
+// finder'ları:
 export const Button = findComponentByCodeLazy("#{intl::A11Y_LOADING_STARTED}", "buttonRef", "submittingFinishedLabel");
 export const Switch = findComponentByCodeLazy("xanchorScrollLeft", "wrapperClass", "onChange");
 export const Text = findComponentByCodeLazy('lineClamp:"var(--lineClamp")', ',lineHeight:"var(--lineHeight")');
@@ -284,7 +284,7 @@ export const Forms = {
     get FormSwitch() { return Switch as any; }
 };
 
-// ── Util modülleri (referans katalog `utils.ts`) ─────────────────────────────────────
+// ── Util modülleri ─────────────────────────────────────
 
 export const Clipboard = findByPropsLazy("SUPPORTS_COPY", "copy");
 
@@ -295,7 +295,7 @@ export const UploadHandler = {
 
 export const UserUtils = { getUser: findByCodeLazy(".USER(") as (id: string) => Promise<any> };
 
-/** highlight.js — kod bloğu vurgulama (referans katalog `hljs`). */
+/** highlight.js — kod bloğu vurgulama. */
 export const hljs = findByPropsLazy("highlight", "registerLanguage");
 
 export const ApplicationAssetUtils = mapMangledModuleLazy("getAssetImage: size must === [", {
@@ -337,7 +337,7 @@ export const DisplayProfileUtils = mapMangledModuleLazy(
     }
 ) as any;
 
-/** `useStateFromStores([Store], () => Store.get())` — referans katalog en çok kullanılan hook'u. */
+/** `useStateFromStores([Store], () => Store.get())` — çok kullanılan hook. */
 export const useStateFromStores: <T>(
     stores: any[],
     getState: () => T,
@@ -351,7 +351,7 @@ export const i18n = mapMangledModuleLazy(bySource('defaultLocale:"en-US"', "init
     intl: (m: any) => m != null && Object.getPrototypeOf(m)?.withFormatters != null
 }) as any;
 
-// ── React (doğrudan hook export'ları — referans katalog `react.ts`) ──────────────────
+// ── React (doğrudan hook export'ları) ──────────────────
 
 export { getReactDOMClient, React, ReactDOM };
 

@@ -42,7 +42,7 @@ function findMenuProps(node: any, sourceProps: Record<string, any>): Record<stri
         // Bazı menülerde (ör. `expression-picker`) `children` tek bir eleman ya
         // da fonksiyon — patch'ler diziye `push` yapıyor. Menü node'unun kendi
         // `props.children`'ını yerinde diziye çeviriyoruz ki değişiklik render'a
-        // yansısın (referans katalog da böyle normalize ediyor).
+        // yansısın.
         if (!Array.isArray(props.children)) {
             try {
                 props.children = props.children == null ? [] : [props.children];

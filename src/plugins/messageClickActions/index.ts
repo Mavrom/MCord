@@ -22,7 +22,7 @@ const logger = new Logger("MessageClickActions", "#a6d189");
 let deleteHeld = false;
 
 const EPHEMERAL = 64;
-/** referans katalog ile birebir: yetki bitleri (bulunamazsa sabit). */
+/** yetki bitleri (bulunamazsa sabit). */
 function bit(name: "MANAGE_MESSAGES" | "SEND_MESSAGES", fallback: bigint): bigint {
     const value = (PermissionsBits as any)?.[name];
     return typeof value === "bigint" ? value : fallback;
@@ -67,7 +67,7 @@ function canDelete(isOwn: boolean, channel: any): boolean {
 
 export default definePlugin({
     name: "MessageClickActions",
-    description: "Çift tıklamayla düzenleme/yanıtlama ve Backspace+tıklamayla silme (referans katalog ile aynı davranış)",
+    description: "Çift tıklamayla düzenleme/yanıtlama ve Backspace+tıklamayla silme",
     authors: [Devs.Berk],
     tags: ["mesaj", "kısayol"],
     dependencies: ["MessageEventsAPI"],
@@ -122,7 +122,7 @@ export default definePlugin({
 
             if (message?.deleted) {
                 // Yerelde tutulan (MessageLogger) silinmiş mesajı gerçekten kaldır
-                // (referans katalog ile aynı: `mlDeleted` bayrağı).
+                // (`mlDeleted` bayrağı).
                 dispatcher?.dispatch?.({ type: "MESSAGE_DELETE", channelId: channel.id, id: message.id, mlDeleted: true });
             } else if (typeof actions?.deleteMessage === "function") {
                 actions.deleteMessage(channel.id, message.id);

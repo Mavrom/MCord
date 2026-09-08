@@ -32,7 +32,7 @@ export interface FindOptions {
  *
  * Sadece `A`/`Ay`/`default` anahtarlarına bakmak yetmiyor — Discord modülleri
  * `Z`, `ZP`, `n` gibi rastgele mangle'lı anahtarlar altında export ediyor ve
- * o modüller hiç bulunamıyordu. referans katalog da tüm anahtarları geziyor.
+ * o modüller hiç bulunamıyordu. Bu yüzden tüm anahtarları geziyoruz.
  */
 function* searchableExports(module: Module): Generator<ModuleExports> {
     const { exports } = module;

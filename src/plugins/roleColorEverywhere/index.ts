@@ -39,7 +39,7 @@ export default definePlugin({
             predicate: () => settings.store.voiceUsers,
             replacement: {
                 // intl anahtarı hem `find` hem `match` içinde `#{intl::}` ile
-                // canonicalize edilmeli (referans katalog ile aynı).
+                // canonicalize edilmeli.
                 match: /#{intl::GUEST_NAME_SUFFIX}.{0,50}?""\](?<=guildId:(\i),.+?user:(\i).+?)/,
                 replace: "$&,style:$self.colorStyle($2.id,$1)"
             }

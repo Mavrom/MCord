@@ -16,7 +16,7 @@ export default definePlugin({
 
     patches: [{
         // Discord intl anahtarlarını hash'liyor — ham string bundle'da yok,
-        // `#{intl::…}` işaretçisiyle canonicalize edilmeli (referans katalog ile aynı).
+        // `#{intl::…}` işaretçisiyle canonicalize edilmeli.
         find: "#{intl::REMOVE_ATTACHMENT_BODY}",
         reason: "Mesaj aksesuarları sınıf render metodundaki yerel children dizisinde oluşturuluyor.",
         replacement: {

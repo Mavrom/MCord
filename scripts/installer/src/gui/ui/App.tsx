@@ -109,7 +109,7 @@ export function App() {
                     />
                     {sel?.otherMod && (
                         <p className="sub" style={{ color: "var(--danger)", marginTop: 8 }}>
-                            Bu Discord'da başka bir mod (referans katalog vb.) kurulu görünüyor.
+                            Bu Discord'da başka bir istemci modu kurulu görünüyor.
                             "Kur" dersen üzerine yazılır; orijinal app.asar yedeği korunur.
                         </p>
                     )}

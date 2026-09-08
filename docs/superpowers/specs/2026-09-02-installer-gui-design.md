@@ -7,7 +7,7 @@ bir kurulum aracına dönüştürmek.
 
 ## 1. Amaç
 
-referans katalog gibi: `MCordInstaller.exe`'ye çift tıkla → koyu temalı bir pencere
+Şuna benzer bir akış: `MCordInstaller.exe`'ye çift tıkla → koyu temalı bir pencere
 açılır → Discord kurulumunu kendi bulur → **Kur / Kaldır / Onar** düğmeleri →
 ilerleme + sonuç ekranı. NSIS sihirbazı **yok**, tek taşınabilir exe.
 
