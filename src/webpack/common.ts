@@ -15,7 +15,7 @@ import {
     waitFor
 } from "./lazy";
 import { mapMangledModuleLazy, mapperByRegex } from "./mangled";
-import { React } from "./react";
+import { getReactDOMClient, React, ReactDOM } from "./react";
 import type { ModuleExports } from "./types";
 
 /**
@@ -39,9 +39,24 @@ export function getFluxDispatcher(): ModuleExports {
 }
 
 export const Flux = findByPropsLazy("connectStores");
+/** Flux `Store` temel sınıfı — `class X extends Flux.Store` için. */
+export const FluxStore = findLazy((m: any) => m?.Store?.getAll && m?.connectStores) as any;
 
 export let ComponentDispatch: any = null;
 waitFor(byKeys(["dispatchToLastSubscribed"]), m => ComponentDispatch = m, { silent: true });
+
+/** `DraftType` enum'u (ChannelMessage, SlashCommand, …). */
+export const DraftType = findByPropsLazy("ChannelMessage", "SlashCommand");
+
+/** Discord'un kendi user-settings proto action creator'ları. */
+export const UserSettingsActionCreators = {
+    get FrecencyUserSettingsActionCreators() {
+        return findLazy((m: any) => m?.ProtoClass?.typeName?.endsWith(".FrecencyUserSettings"));
+    },
+    get PreloadedUserSettingsActionCreators() {
+        return findLazy((m: any) => m?.ProtoClass?.typeName?.endsWith(".PreloadedUserSettings"));
+    }
+};
 
 // ── Store'lar (ada göre — mangle'a dayanıklı) ────────────────────────────────
 
@@ -76,6 +91,35 @@ export const PendingReplyStore = findStoreLazy("PendingReplyStore");
 export const PrivateChannelSortStore = findStoreLazy<{
     getPrivateChannelIds(): string[];
 }>("PrivateChannelSortStore");
+
+// referans katalog `stores.ts` paritesi — kalan store'lar.
+export const AccessibilityStore = findStoreLazy("AccessibilityStore");
+export const ApplicationStore = findStoreLazy("ApplicationStore");
+export const AuthenticationStore = findStoreLazy("AuthenticationStore");
+export const GuildScheduledEventStore = findStoreLazy("GuildScheduledEventStore");
+export const GuildMemberCountStore = findStoreLazy("GuildMemberCountStore");
+export const NotificationSettingsStore = findStoreLazy("NotificationSettingsStore");
+export const SpellCheckStore = findStoreLazy("SpellcheckStore");
+export const UploadAttachmentStore = findStoreLazy("UploadAttachmentStore");
+export const OverridePremiumTypeStore = findStoreLazy("OverridePremiumTypeStore");
+export const ActiveJoinedThreadsStore = findStoreLazy("ActiveJoinedThreadsStore");
+export const UserGuildSettingsStore = findStoreLazy("UserGuildSettingsStore");
+export const UserSettingsProtoStore = findStoreLazy("UserSettingsProtoStore");
+export const CallStore = findStoreLazy("CallStore");
+export const ChannelRTCStore = findStoreLazy("ChannelRTCStore");
+export const FriendsStore = findStoreLazy("FriendsStore");
+export const InstantInviteStore = findStoreLazy("InstantInviteStore");
+export const InviteStore = findStoreLazy("InviteStore");
+export const RTCConnectionStore = findStoreLazy("RTCConnectionStore");
+export const SoundboardStore = findStoreLazy("SoundboardStore");
+export const PopoutWindowStore = findStoreLazy("PopoutWindowStore");
+export const ApplicationCommandIndexStore = findStoreLazy("ApplicationCommandIndexStore");
+export const EditMessageStore = findStoreLazy("EditMessageStore");
+export const ExperimentStore = findStoreLazy("ExperimentStore");
+export const UserAffinitiesStore = findStoreLazy("UserAffinitiesV2Store");
+export const ApplicationStreamingStore = findStoreLazy("ApplicationStreamingStore");
+export const ApplicationStreamPreviewStore = findStoreLazy("ApplicationStreamPreviewStore");
+export const GuildChannelsStore = GuildChannelStore;
 
 // ── REST / sabitler ─────────────────────────────────────────────────────────
 
@@ -251,6 +295,26 @@ export const UploadHandler = {
 
 export const UserUtils = { getUser: findByCodeLazy(".USER(") as (id: string) => Promise<any> };
 
+/** highlight.js — kod bloğu vurgulama (referans katalog `hljs`). */
+export const hljs = findByPropsLazy("highlight", "registerLanguage");
+
+export const ApplicationAssetUtils = mapMangledModuleLazy("getAssetImage: size must === [", {
+    fetchAssetIds: byCode('.startsWith("http:")', ".dispatch({"),
+    getAssetFromImageURL: byCode("].serialize(", ":null"),
+    getAssetImage: byCode("getAssetImage: size must === ["),
+    getAssets: byCode(".assets")
+}) as any;
+
+export const { zustandCreate } = mapMangledModuleLazy(
+    bySource("useSyncExternalStoreWithSelector:", "Object.assign"),
+    { zustandCreate: mapperByRegex(/=>(\w+)\?\w+\(\1/) }
+) as any;
+
+export const { zustandPersist } = mapMangledModuleLazy(
+    ".onRehydrateStorage)?",
+    { zustandPersist: mapperByRegex(/(\(\w+,\w+\))=>.+?\w+\1/) }
+) as any;
+
 export const ExpressionPickerStore = mapMangledModuleLazy("expression-picker-last-active-view", {
     openExpressionPicker: mapperByRegex(/setState\({activeView:(?:(?!null)\w+),activeViewType:/),
     closeExpressionPicker: byCode("setState({activeView:null"),
@@ -287,4 +351,17 @@ export const i18n = mapMangledModuleLazy(bySource('defaultLocale:"en-US"', "init
     intl: (m: any) => m != null && Object.getPrototypeOf(m)?.withFormatters != null
 }) as any;
 
-export { React };
+// ── React (doğrudan hook export'ları — referans katalog `react.ts`) ──────────────────
+
+export { getReactDOMClient, React, ReactDOM };
+
+/** `getReactDOMClient().createRoot` kısayolu. */
+export const createRoot = (el: Element) => getReactDOMClient().createRoot(el);
+
+export const useState: typeof React.useState = ((...a: any[]) => (React as any).useState(...a)) as any;
+export const useEffect: typeof React.useEffect = ((...a: any[]) => (React as any).useEffect(...a)) as any;
+export const useLayoutEffect: typeof React.useLayoutEffect = ((...a: any[]) => (React as any).useLayoutEffect(...a)) as any;
+export const useMemo: typeof React.useMemo = ((...a: any[]) => (React as any).useMemo(...a)) as any;
+export const useRef: typeof React.useRef = ((...a: any[]) => (React as any).useRef(...a)) as any;
+export const useReducer: typeof React.useReducer = ((...a: any[]) => (React as any).useReducer(...a)) as any;
+export const useCallback: typeof React.useCallback = ((...a: any[]) => (React as any).useCallback(...a)) as any;
