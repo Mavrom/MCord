@@ -25,6 +25,26 @@ function timestamp(value: number): string {
     return new Date(value).toLocaleString();
 }
 
+/**
+ * Bu accessory'nin `<li>`'sinden başlayıp yukarı doğru ardışık silinmiş
+ * mesajları toplayıp hepsinin yerel kopyasını kaldırır. Düğme grubun **son**
+ * (en alttaki) silinmiş mesajında gösterildiği için geriye yürüyoruz.
+ */
+function clearDeletedGroup(anchor: Element | null): void {
+    let li: Element | null = anchor?.closest("li") ?? null;
+    const targets: Array<[string, string]> = [];
+
+    while (li && li.classList.contains("mcord-ml-deleted")) {
+        const parts = (li.id || "").split("-");
+        const messageId = parts.at(-1);
+        const channelId = parts.at(-2);
+        if (channelId && messageId) targets.push([channelId, messageId]);
+        li = li.previousElementSibling;
+    }
+
+    for (const [channelId, messageId] of targets) history.forget(channelId, messageId);
+}
+
 export function MessageEditMarker({ message, children, ...props }: any) {
     const hasHistory = (history.get(message?.channel_id, message?.id)?.edits.length ?? 0) > 0;
     const open = () => document.getElementById(`mcord-history-${message?.channel_id}-${message?.id}`)?.click();
@@ -109,16 +129,17 @@ export function MessageHistoryView({ channelId, messageId }: { channelId: string
     const hasHistory = entry.edits.length > 0 || entry.attachments.length > 0;
     const canCollapse = deleted && settings.store.collapseDeleted;
     // Sade silinmiş mesaj (düzenleme/ek yok): dolu araç çubuğu yok — kırmızı satır
-    // + sağ tık menüsü + mesajın hemen altında minik "yerelden kaldır".
+    // + sağ tık menüsü. "Silinenleri kaldır" düğmesi her mesajda değil, ardışık
+    // silinmiş grubun SONUNDA gösterilir (CSS `:has` ile, aşağıdaki style'da).
     if (deleted && !hasHistory && !canCollapse) {
-        return <div ref={containerRef} onClick={event => event.stopPropagation()}>
+        return <div ref={containerRef} className="mcord-ml-groupclear" onClick={event => event.stopPropagation()}>
             <button
                 type="button"
                 className="mcord-ml-forget"
-                title="Bu mesajın yerel kopyasını kaldır"
-                onClick={() => history.forget(channelId, messageId)}
+                title="Bu silinmiş mesaj grubunun yerel kopyalarını kaldır"
+                onClick={() => clearDeletedGroup(containerRef.current)}
             >
-                yerelden kaldır
+                Silinenleri kaldır
             </button>
         </div>;
     }

@@ -23,16 +23,24 @@ export const messageLoggerStyle = `
 .mcord-ml-deleted:not(.mcord-ml-unmark) [class*="buttons_"] { display: none !important; }
 .mcord-ml-collapsed [id^="message-content-"] { display: none; }
 
-/* Sade silinmiş mesaj: mesajın hemen altında minik "yerelden kaldır" */
-.mcord-ml-forget {
-    display: inline-block; margin-top: 2px;
-    font: inherit; font-size: 11px; line-height: 1;
-    color: var(--status-danger, #f23f43); background: transparent;
-    border: 0; padding: 1px 0; cursor: pointer;
-    opacity: .55; transition: opacity .1s;
+/* "Silinenleri kaldır" — her mesajda değil, ardışık silinmiş grubun SONUNDA.
+   `:has` ile: sonraki kardeş <li> de silinmişse bu son değildir, gizle. */
+.mcord-ml-groupclear { display: none; margin: 3px 0 1px; }
+li.mcord-ml-deleted:not(.mcord-ml-unmark):not(:has(+ li.mcord-ml-deleted)) .mcord-ml-groupclear {
+    display: block;
 }
-.mcord-ml-deleted:hover .mcord-ml-forget { opacity: .9; }
-.mcord-ml-forget:hover { opacity: 1 !important; text-decoration: underline; }
+.mcord-ml-forget {
+    font: inherit; font-size: 12px; font-weight: 600; line-height: 1.2;
+    color: var(--status-danger, #f23f43);
+    background: color-mix(in srgb, var(--status-danger, #f23f43) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--status-danger, #f23f43) 35%, transparent);
+    border-radius: 4px; padding: 3px 8px; cursor: pointer;
+    opacity: .85; transition: opacity .1s, background .1s;
+}
+.mcord-ml-forget:hover {
+    opacity: 1;
+    background: color-mix(in srgb, var(--status-danger, #f23f43) 22%, transparent);
+}
 .mcord-ml { margin-top: 4px; color: var(--text-muted); font-size: 12px; }
 .mcord-ml-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
 .mcord-ml-label { color: var(--status-danger, #f04747); }
