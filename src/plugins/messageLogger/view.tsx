@@ -11,7 +11,8 @@ import { history } from "./runtime";
 import { settings } from "./settings";
 
 const logger = new Logger("MessageLogger", "#a6d189");
-const rowClasses = ["mcord-ml-deleted", "mcord-ml-text", "mcord-ml-overlay", "mcord-ml-collapsed"];
+/** Satır sınıflarından bizim yönettiklerimiz — `mcord-ml-deleted` patch'e ait, dokunmuyoruz. */
+const modifierClasses = ["mcord-ml-unmark", "mcord-ml-overlay-style", "mcord-ml-collapsed"];
 
 function attachmentUrl(value: string): string | undefined {
     try {
@@ -84,21 +85,27 @@ export function MessageHistoryView({ channelId, messageId }: { channelId: string
     const [expanded, setExpanded] = React.useState(false);
     const close = React.useCallback(() => setOpen(false), []);
     const deleteStyle = settings.store.deleteStyle;
-    const collapsed = entry?.deleted === true && settings.store.collapseDeleted && !expanded;
-    const highlighted = entry?.deleted === true && entry.highlight;
+    const deleted = entry?.deleted === true;
+    const collapsed = deleted && settings.store.collapseDeleted && !expanded;
+    const unmarked = deleted && !entry!.highlight;
+    const containerRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
-        const row = document.getElementById(`chat-messages-${channelId}-${messageId}`);
+        // Kırmızı sınıfı `<li>`'ye patch ekliyor; burada sadece kullanıcının
+        // aç/kapattığı vurgu ve stil değişkenlerini yönetiyoruz. Satırı ref'ten
+        // (accessory mesajın içinde) buluyoruz, id tahminine güvenmiyoruz.
+        const row = containerRef.current?.closest("li")
+            ?? document.getElementById(`chat-messages-${channelId}-${messageId}`);
         if (!row) return;
-        row.classList.toggle("mcord-ml-deleted", highlighted);
-        row.classList.toggle("mcord-ml-text", highlighted && deleteStyle === "text");
-        row.classList.toggle("mcord-ml-overlay", highlighted && deleteStyle === "overlay");
+        row.classList.toggle("mcord-ml-deleted", deleted);
+        row.classList.toggle("mcord-ml-unmark", unmarked);
+        row.classList.toggle("mcord-ml-overlay-style", deleted && deleteStyle === "overlay");
         row.classList.toggle("mcord-ml-collapsed", collapsed);
-        return () => row.classList.remove(...rowClasses);
-    }, [channelId, messageId, highlighted, collapsed, deleteStyle]);
+        return () => row.classList.remove(...modifierClasses);
+    }, [channelId, messageId, deleted, unmarked, collapsed, deleteStyle]);
 
     if (!entry) return null;
-    return <div className="mcord-ml" onClick={event => event.stopPropagation()}>
+    return <div className="mcord-ml" ref={containerRef} onClick={event => event.stopPropagation()}>
         <div className="mcord-ml-toolbar">
             {entry.deleted ? <span className="mcord-ml-label">Silindi · yalnızca sende görünüyor</span> : null}
             {entry.deleted && settings.store.collapseDeleted ? <button type="button" aria-expanded={!collapsed} onClick={() => setExpanded(value => !value)}>

@@ -5,13 +5,37 @@
  */
 
 export const messageLoggerStyle = `
-.mcord-ml-deleted.mcord-ml-text [id^="message-content-"] {
-    color: var(--status-danger, #f04747);
+/* Silinen mesaj — varsayılan: kırmızı metin + hafif kırmızı zemin + çöp ikonu.
+   Sınıf artık doğrudan <li> satırına patch'le ekleniyor (referans katalog gibi). */
+.mcord-ml-deleted {
+    position: relative;
+    background: color-mix(in srgb, var(--status-danger, #f23f43) 7%, transparent);
 }
-.mcord-ml-deleted.mcord-ml-overlay {
-    background: color-mix(in srgb, var(--status-danger, #f04747) 14%, transparent) !important;
+.mcord-ml-deleted:not(.mcord-ml-unmark):not(.mcord-ml-overlay-style)
+    :is([id^="message-content-"], [class*="messageContent_"]) {
+    color: var(--text-danger, var(--status-danger, #f23f43));
 }
-.mcord-ml-deleted [class*="buttons_"] { display: none; }
+.mcord-ml-deleted.mcord-ml-overlay-style:not(.mcord-ml-unmark) {
+    background: color-mix(in srgb, var(--status-danger, #f23f43) 14%, transparent) !important;
+}
+/* Çöp ikonu — satırın sağ üstünde, tema tehlike rengiyle */
+.mcord-ml-deleted:not(.mcord-ml-unmark)::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    background-color: var(--status-danger, #f23f43);
+    -webkit-mask: var(--mcord-ml-trash) center / contain no-repeat;
+    mask: var(--mcord-ml-trash) center / contain no-repeat;
+    opacity: .85;
+    pointer-events: none;
+}
+.mcord-ml-deleted {
+    --mcord-ml-trash: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 3v1H4v2h16V4h-5V3H9zm-3 5 1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12H6zm4 2h1v9h-1v-9zm3 0h1v9h-1v-9z'/%3E%3C/svg%3E");
+}
+.mcord-ml-deleted:not(.mcord-ml-unmark) [class*="buttons_"] { opacity: .4; }
 .mcord-ml-deleted :is([class*="imageContainer"], [data-type="sticker"]) { filter: grayscale(1); }
 .mcord-ml-collapsed [id^="message-content-"] { display: none; }
 .mcord-ml { margin-top: 4px; color: var(--text-muted); font-size: 12px; }

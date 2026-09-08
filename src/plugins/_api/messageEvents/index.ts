@@ -42,11 +42,15 @@ export default definePlugin({
         this.cancelMessageStoreWait = waitForStore("MessageStore", store => { this.messageStore = store; });
         this.cancelChannelStoreWait = waitForStore("ChannelStore", store => { this.channelStore = store; });
 
-        document.addEventListener("click", this.onDocumentClick, true);
+        // `this` bağlanmalı — addEventListener çağrıda `this`'i document yapıyor,
+        // sonra `this.messageStore` undefined olup tıklama olayları hiç iletilmiyordu.
+        this.boundDocumentClick = this.onDocumentClick.bind(this);
+        document.addEventListener("click", this.boundDocumentClick, true);
     },
 
     stop() {
-        document.removeEventListener("click", this.onDocumentClick, true);
+        if (this.boundDocumentClick) document.removeEventListener("click", this.boundDocumentClick, true);
+        this.boundDocumentClick = undefined;
         this.cancelActionsWait?.();
         this.cancelMessageStoreWait?.();
         this.cancelChannelStoreWait?.();
@@ -60,6 +64,7 @@ export default definePlugin({
     cancelActionsWait: undefined as (() => void) | undefined,
     cancelMessageStoreWait: undefined as (() => void) | undefined,
     cancelChannelStoreWait: undefined as (() => void) | undefined,
+    boundDocumentClick: undefined as ((event: MouseEvent) => void) | undefined,
     messageStore: null as any,
     channelStore: null as any,
 

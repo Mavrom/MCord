@@ -81,6 +81,12 @@ export function handleDelete(cache: any, event: any): any {
             if (!history.recordDelete(message, settings.store, context(message))) {
                 history.forget(message.channel_id, id, false);
                 result = result.remove(id);
+            } else if (typeof result.update === "function") {
+                // Mesajı görünür bırak + `deleted` işaretle → satır kırmızı + çöp
+                // ikonu (referans katalog gibi). MessageRecord Immutable, `.set` yeni
+                // kayıt döndürüyor.
+                result = result.update(id, (record: any) =>
+                    typeof record?.set === "function" ? record.set("deleted", true) : record);
             }
         }
         return result;
