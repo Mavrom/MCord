@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
+import { plugins } from "../../api/PluginManager";
 import { definePluginSettings } from "../../api/settings";
 import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
@@ -46,11 +47,16 @@ export default definePlugin({
     settings,
 
     patches: [{
-        find: "ERRORS_UNEXPECTED_CRASH",
+        find: "#{intl::ERRORS_UNEXPECTED_CRASH}",
         reason: "Discord hata sınırı kurtarma işlemi için olay veya bileşen kancası sunmuyor.",
+        // Recovery (çekirdek, `required`) aynı setState'i zaten yakalıyor ve daha
+        // kapsamlı (atıf + plugin kapatma + özel ekran). Recovery kayıtlıysa bu
+        // patch hiç uygulanmaz — çift sarmalama olmaz. `plugins` init'te dolduğu
+        // için predicate patch anında deterministik.
+        predicate: () => !plugins.Recovery,
         replacement: {
-            match: /this\.setState\(([^)]+)\)/,
-            replace: "$self.handleCrash(this,$1)"
+            match: /this\.setState\((.+?)\)/,
+            replace: "$self.handleCrash(this,$1);"
         }
     }],
 

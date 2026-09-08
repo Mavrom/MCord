@@ -35,9 +35,23 @@ export const messageLoggerStyle = `
 .mcord-ml-deleted {
     --mcord-ml-trash: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 3v1H4v2h16V4h-5V3H9zm-3 5 1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12H6zm4 2h1v9h-1v-9zm3 0h1v9h-1v-9z'/%3E%3C/svg%3E");
 }
-.mcord-ml-deleted:not(.mcord-ml-unmark) [class*="buttons_"] { opacity: .4; }
 .mcord-ml-deleted :is([class*="imageContainer"], [data-type="sticker"]) { filter: grayscale(1); }
+/* Silinmiş mesaja tepki/yanıt verilemez — hover eylem çubuğunu gizle. */
+.mcord-ml-deleted:not(.mcord-ml-unmark) [class*="buttonContainer_"],
+.mcord-ml-deleted:not(.mcord-ml-unmark) [class*="buttons_"] { display: none !important; }
 .mcord-ml-collapsed [id^="message-content-"] { display: none; }
+
+/* Sade silinmiş mesaj: görünmez çapa + hover'da minik "yerelden kaldır" */
+.mcord-ml-anchor { height: 0; overflow: visible; }
+.mcord-ml-forget {
+    position: absolute; right: 8px; bottom: 2px; z-index: 2;
+    font: inherit; font-size: 11px; line-height: 1;
+    color: var(--status-danger, #f23f43); background: transparent;
+    border: 0; padding: 2px 4px; cursor: pointer; border-radius: 3px;
+    opacity: 0; transition: opacity .1s;
+}
+.mcord-ml-deleted:hover .mcord-ml-forget { opacity: .75; }
+.mcord-ml-forget:hover { opacity: 1 !important; text-decoration: underline; }
 .mcord-ml { margin-top: 4px; color: var(--text-muted); font-size: 12px; }
 .mcord-ml-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
 .mcord-ml-label { color: var(--status-danger, #f04747); }

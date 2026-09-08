@@ -105,10 +105,28 @@ export function MessageHistoryView({ channelId, messageId }: { channelId: string
     }, [channelId, messageId, deleted, unmarked, collapsed, deleteStyle]);
 
     if (!entry) return null;
+
+    const hasHistory = entry.edits.length > 0 || entry.attachments.length > 0;
+    const canCollapse = deleted && settings.store.collapseDeleted;
+    // Sade silinmiş mesaj (düzenleme/ek yok): dolu araç çubuğu yok — kırmızı satır
+    // + çöp ikonu + sağ tık menüsü yeterli. Sadece hover'da minik "yerelden kaldır".
+    if (deleted && !hasHistory && !canCollapse) {
+        return <div className="mcord-ml-anchor" ref={containerRef} aria-hidden="true">
+            <button
+                type="button"
+                className="mcord-ml-forget"
+                title="Bu mesajın yerel kopyasını kaldır"
+                onClick={event => { event.stopPropagation(); history.forget(channelId, messageId); }}
+            >
+                yerelden kaldır
+            </button>
+        </div>;
+    }
+
     return <div className="mcord-ml" ref={containerRef} onClick={event => event.stopPropagation()}>
         <div className="mcord-ml-toolbar">
-            {entry.deleted ? <span className="mcord-ml-label">Silindi · yalnızca sende görünüyor</span> : null}
-            {entry.deleted && settings.store.collapseDeleted ? <button type="button" aria-expanded={!collapsed} onClick={() => setExpanded(value => !value)}>
+            {deleted && !hasHistory ? <span className="mcord-ml-label">Silindi</span> : null}
+            {canCollapse ? <button type="button" aria-expanded={!collapsed} onClick={() => setExpanded(value => !value)}>
                 {collapsed ? "Mesajı göster" : "Mesajı daralt"}
             </button> : null}
             {entry.edits.length > 0 ? <button id={`mcord-history-${channelId}-${messageId}`} type="button" onClick={() => setOpen(true)}>

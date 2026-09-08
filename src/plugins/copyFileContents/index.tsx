@@ -38,7 +38,7 @@ export default definePlugin({
     tags: ["dosya", "yardımcı"],
 
     patches: [{
-        find: "PREVIEW_BYTES_LEFT",
+        find: "#{intl::PREVIEW_BYTES_LEFT}",
         reason: "Dosya metni ve kalan bayt sayısı yalnız önizleme bileşeninin yerel props alanlarında mevcut.",
         replacement: [
             {

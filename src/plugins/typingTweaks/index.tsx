@@ -105,7 +105,7 @@ export default definePlugin({
     settings,
 
     patches: [{
-        find: "SEVERAL_USERS_TYPING_STRONG",
+        find: "#{intl::SEVERAL_USERS_TYPING_STRONG}",
         reason: "Discord yazma göstergesi, kullanıcı adlarını değiştirmek için bir bileşen kancası sunmuyor.",
         replacement: {
             match: /("aria-hidden":!0,children:)(\i)/,

@@ -42,7 +42,7 @@ export default definePlugin({
             }
         },
         {
-            find: "GUILD_OWNER",
+            find: "#{intl::GUILD_OWNER}),children:",
             reason: "Üye listesindeki ad rengi yalnız satır bileşeninin yerel props nesnesinden değiştirilebiliyor.",
             predicate: () => settings.store.memberListColors,
             replacement: {

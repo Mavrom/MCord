@@ -52,7 +52,7 @@ export default definePlugin({
     dependencies: ["UserSettingsAPI"],
 
     patches: [{
-        find: "USER_PROFILE_ACCOUNT_POPOUT_BUTTON_A11Y_LABEL",
+        find: "#{intl::USER_PROFILE_ACCOUNT_POPOUT_BUTTON_A11Y_LABEL}",
         reason: "Discord hesap paneli ek düğmeler için resmi bir yerleşim kancası sunmuyor.",
         replacement: {
             match: /children:\[(?=.{0,40}?accountContainerRef)/,

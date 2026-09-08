@@ -14,7 +14,7 @@ export default definePlugin({
     tags: ["mesaj", "görünüm"],
 
     patches: [{
-        find: "MESSAGE_UTILITIES_A11Y_LABEL",
+        find: "#{intl::MESSAGE_UTILITIES_A11Y_LABEL}",
         reason: "Mesaj işlem çubuğunun genişletilmiş hali inline Shift koşuluyla seçiliyor.",
         replacement: {
             match: /isExpanded:\i&&(.+?),/,

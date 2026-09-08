@@ -37,7 +37,7 @@ export default definePlugin({
     tags: ["güvenlik", "ayarlar"],
 
     patches: [{
-        find: "AUTH_SESSIONS_OS_UNKNOWN",
+        find: "#{intl::AUTH_SESSIONS_OS_UNKNOWN}",
         reason: "Discord oturum satırı açıklamasını özelleştirmek için bir ayarlar bileşeni kancası sunmuyor.",
         replacement: {
             match: /("text-muted",children:)(\i)(?=\}\)\]\}\),.{0,160}\.client_info\?\.location)/,

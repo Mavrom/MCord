@@ -34,11 +34,13 @@ export default definePlugin({
             }
         },
         {
-            find: "GUEST_NAME_SUFFIX",
+            find: "#{intl::GUEST_NAME_SUFFIX})]",
             reason: "Ses katılımcısı adının style alanı yalnız inline kullanıcı satırında eklenebiliyor.",
             predicate: () => settings.store.voiceUsers,
             replacement: {
-                match: /GUEST_NAME_SUFFIX.{0,50}?""\](?<=guildId:(\i),.+?user:(\i).+?)/,
+                // intl anahtarı hem `find` hem `match` içinde `#{intl::}` ile
+                // canonicalize edilmeli (referans katalog ile aynı).
+                match: /#{intl::GUEST_NAME_SUFFIX}.{0,50}?""\](?<=guildId:(\i),.+?user:(\i).+?)/,
                 replace: "$&,style:$self.colorStyle($2.id,$1)"
             }
         }

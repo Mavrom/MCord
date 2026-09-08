@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
+import { discordApi } from "../../api/net";
 import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin } from "../../utils/types";
 import { getFluxDispatcher } from "../../webpack/common";
-import { findByKeys } from "../../webpack/finder";
 
 const logger = new Logger("ValidReply", "#f4b8e4");
 const fetching = new Set<string>();
@@ -22,10 +22,11 @@ export default definePlugin({
 
     patches: [
         {
-            find: "REPLY_QUOTE_MESSAGE_NOT_LOADED",
+            find: "#{intl::REPLY_QUOTE_MESSAGE_NOT_LOADED}",
             reason: "Yüklenemeyen yanıt önizlemesinin mesaj referansı yalnız inline render props'unda bulunuyor.",
             replacement: {
-                match: /REPLY_QUOTE_MESSAGE_NOT_LOADED\)/,
+                // intl anahtarı hem `find` hem `match` içinde canonicalize edilmeli.
+                match: /#{intl::REPLY_QUOTE_MESSAGE_NOT_LOADED}\)/,
                 replace: "$&,onMouseEnter:()=>$self.fetchReply(arguments[0])"
             }
         },
@@ -50,9 +51,14 @@ export default definePlugin({
         if (!channelId || !messageId || fetching.has(messageId)) return;
         fetching.add(messageId);
         try {
-            const rest = findByKeys<any>("get", "patch");
-            const response = await rest?.get?.({ url: `/channels/${channelId}/messages`, query: { limit: 1, around: messageId } });
-            const message = response?.body?.find?.((entry: any) => entry.id === messageId);
+            // Webpack RestAPI bu build'de güvenilmez — token + main-process fetch.
+            const response = await discordApi<any[]>(
+                `/channels/${channelId}/messages?limit=1&around=${messageId}`,
+                { method: "GET" }
+            );
+            const message = Array.isArray(response.body)
+                ? response.body.find((entry: any) => entry.id === messageId)
+                : null;
             if (!message) return;
             replyStore?.set?.(channelId, messageId, { state: 0, message });
             getFluxDispatcher()?.dispatch?.({ type: "MESSAGE_UPDATE", message });

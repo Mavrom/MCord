@@ -14,7 +14,7 @@ export default definePlugin({
     tags: ["ses", "medya"],
 
     patches: [{
-        find: "VOICE_MESSAGES_PLAYBACK_RATE_LABEL",
+        find: "#{intl::VOICE_MESSAGES_PLAYBACK_RATE_LABEL}",
         reason: "Sesli mesaj araçları oynatıcı bileşeninin inline children dizisinde oluşturuluyor.",
         replacement: {
             match: /(?<=onVolumeHide:\i\}\))/,

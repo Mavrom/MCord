@@ -15,7 +15,7 @@ export default definePlugin({
     required: true,
 
     patches: [{
-        find: "MESSAGE_UTILITIES_A11Y_LABEL",
+        find: "#{intl::MESSAGE_UTILITIES_A11Y_LABEL}",
         reason: "Mesaj hover düğmeleri, dışarıdan erişilemeyen yerel bir children dizisinde oluşturuluyor.",
         replacement: {
             match: /(?<=\]\}\)),(.{0,40}togglePopout:.+?\}\))\]\}\):null,(?<=\((\i),\{label:.+?:null,(\i)\?\(0,\i\.jsxs?\)\(\i\.Fragment.+?message:(\i).+?)/,

@@ -19,7 +19,7 @@ export default definePlugin({
     tags: ["mesaj", "görünüm"],
 
     patches: [{
-        find: "REPLY_QUOTE_MESSAGE_NOT_LOADED",
+        find: "#{intl::REPLY_QUOTE_MESSAGE_NOT_LOADED}",
         reason: "Yanıt önizlemesinin children dizisi başka bir UI kancası sunmuyor.",
         replacement: {
             match: /\.onClickReply,.+?}\),(?=\i,\i,\i\])/,
