@@ -23,8 +23,8 @@ export const messageLoggerStyle = `
 .mcord-ml-deleted:not(.mcord-ml-unmark) [class*="buttons_"] { display: none !important; }
 .mcord-ml-collapsed [id^="message-content-"] { display: none; }
 
-/* "Silinenleri kaldır" — her mesajda değil, ardışık silinmiş grubun SONUNDA.
-   `:has` ile: sonraki kardeş <li> de silinmişse bu son değildir, gizle. */
+/* "Silinenleri kaldir" — her mesajda degil, ardisik silinmis grubun SONUNDA.
+   :has ile: sonraki kardes li de silinmisse bu son degildir, gizle. */
 .mcord-ml-groupclear { display: none; margin: 3px 0 1px; }
 li.mcord-ml-deleted:not(.mcord-ml-unmark):not(:has(+ li.mcord-ml-deleted)) .mcord-ml-groupclear {
     display: block;

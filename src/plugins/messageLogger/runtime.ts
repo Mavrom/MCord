@@ -69,7 +69,11 @@ export function resetAccount(): void {
 
 /** null: özgün Discord işleyicisi devam etsin; cache: yalnız bu store için commit. */
 export function handleDelete(cache: any, event: any): any {
-    if (!active || !cache || event?.mcordLoggerPurge === LOCAL_PURGE) return null;
+    // `mcordLoggerPurge`: kendi temizleme dispatch'imiz. `mlDeleted`: başka bir
+    // plugin (MessageClickActions) zaten silinmiş bir mesajı gerçekten kaldırmak
+    // istiyor — ikisinde de yeniden kaydetme, Discord'un normal silmesi geçsin.
+    if (!active || !cache) return null;
+    if (event?.mcordLoggerPurge === LOCAL_PURGE || event?.mlDeleted === true) return null;
     try {
         if (typeof cache.get !== "function" || typeof cache.remove !== "function") return null;
         const ids: string[] = Array.isArray(event.ids) ? event.ids : [event.id];
