@@ -15,7 +15,9 @@ export default definePlugin({
     required: true,
 
     patches: [{
-        find: "REMOVE_ATTACHMENT_BODY",
+        // Discord intl anahtarlarını hash'liyor — ham string bundle'da yok,
+        // `#{intl::…}` işaretçisiyle canonicalize edilmeli (referans katalog ile aynı).
+        find: "#{intl::REMOVE_ATTACHMENT_BODY}",
         reason: "Mesaj aksesuarları sınıf render metodundaki yerel children dizisinde oluşturuluyor.",
         replacement: {
             match: /children:(\[[^\]]{0,100}?this\.renderSuppressConfirmModal[^\]]{0,100}?\])/,
