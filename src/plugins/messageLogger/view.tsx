@@ -109,14 +109,14 @@ export function MessageHistoryView({ channelId, messageId }: { channelId: string
     const hasHistory = entry.edits.length > 0 || entry.attachments.length > 0;
     const canCollapse = deleted && settings.store.collapseDeleted;
     // Sade silinmiş mesaj (düzenleme/ek yok): dolu araç çubuğu yok — kırmızı satır
-    // + çöp ikonu + sağ tık menüsü yeterli. Sadece hover'da minik "yerelden kaldır".
+    // + sağ tık menüsü + mesajın hemen altında minik "yerelden kaldır".
     if (deleted && !hasHistory && !canCollapse) {
-        return <div className="mcord-ml-anchor" ref={containerRef} aria-hidden="true">
+        return <div ref={containerRef} onClick={event => event.stopPropagation()}>
             <button
                 type="button"
                 className="mcord-ml-forget"
                 title="Bu mesajın yerel kopyasını kaldır"
-                onClick={event => { event.stopPropagation(); history.forget(channelId, messageId); }}
+                onClick={() => history.forget(channelId, messageId)}
             >
                 yerelden kaldır
             </button>
