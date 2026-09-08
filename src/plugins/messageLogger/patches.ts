@@ -46,22 +46,6 @@ export const messageLoggerPatches: PatchDefinition[] = [
         }
     },
     {
-        find: "Message must not be a thread starter message",
-        reason: "Silinen mesaj satırına kırmızı stil + çöp ikonu sınıfı ekleniyor (referans katalog ile aynı yaklaşım — DOM sorgusu kırılgan).",
-        replacement: {
-            match: /\)\("li",\{(.+?),className:/,
-            replace: ')("li",{$1,className:(arguments[0].message.deleted?"mcord-ml-deleted ":"")+'
-        }
-    },
-    {
-        find: "}addReaction(",
-        reason: "MessageRecord yeniden kurulduğunda (tepki, düzenleme, yeniden çizim) `deleted` bayrağı korunmalı (referans katalog).",
-        replacement: {
-            match: /this\.customRenderedContent=(\i)\.customRenderedContent,/,
-            replace: "$&this.deleted=$1.deleted||!1,"
-        }
-    },
-    {
         find: "this.truncateTop",
         reason: "Başka bir kullanıcının nonce değeri mevcut mesaj kimliğiyle çakışıp yerel geçmişi sessizce değiştirmemeli.",
         replacement: {
