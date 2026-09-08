@@ -34,9 +34,18 @@ function CloneModal({ data, onClose }: { data: Data; onClose(): void }) {
     const [name, setName] = React.useState(initialName);
     const [cloning, setCloning] = React.useState(false);
     const [, bump] = React.useReducer((n: number) => n + 1, 0);
+    const inputRef = React.useRef<HTMLInputElement>(null);
 
-    // İlk açılışta sanitize edilmiş adı uygula.
-    React.useEffect(() => { data.name = initialName; }, []);
+    // İlk açılışta sanitize edilmiş adı uygula + ad alanını seçili odakla ki
+    // kullanıcı hemen yeni ad yazabilsin (Discord'un odak tuzağına karşı gecikmeli).
+    React.useEffect(() => {
+        data.name = initialName;
+        const timer = setTimeout(() => {
+            inputRef.current?.focus();
+            inputRef.current?.select();
+        }, 60);
+        return () => clearTimeout(timer);
+    }, []);
 
     const guilds = React.useMemo(() => candidateGuilds(), [bump]);
     const error = validateName(data, name);
@@ -128,11 +137,16 @@ function CloneModal({ data, onClose }: { data: Data; onClose(): void }) {
                 >
                     <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                         <span style={{ ...s.faint, fontWeight: 700, letterSpacing: ".04em", textTransform: "uppercase" }}>
-                            Ad
+                            {data.t === "Emoji" ? "Emoji adı — istediğin gibi değiştir" : "Çıkartma adı — istediğin gibi değiştir"}
                         </span>
                         <input
+                            ref={inputRef}
+                            autoFocus
+                            spellCheck={false}
+                            placeholder={initialName}
                             style={{ ...s.input, borderColor: error ? c.danger : c.border }}
                             value={name}
+                            onKeyDown={event => { if (event.key !== "Escape") event.stopPropagation(); }}
                             onChange={event => {
                                 const next = event.currentTarget.value;
                                 setName(next);
@@ -143,7 +157,7 @@ function CloneModal({ data, onClose }: { data: Data; onClose(): void }) {
                     </label>
 
                     <div style={{ ...s.faint, fontWeight: 700, letterSpacing: ".04em", textTransform: "uppercase" }}>
-                        Hedef sunucu ({guilds.length})
+                        Hedef sunucu ({guilds.length}) — tıkla, bu adla klonlansın
                     </div>
 
                     {guilds.length === 0
