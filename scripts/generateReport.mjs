@@ -11,9 +11,12 @@
  *
  * Ortam değişkenleri:
  *   CHROMIUM_BIN    Puppeteer'ın kullanacağı Chromium (CI'da zorunlu)
- *   DISCORD_TOKEN   İsteğe bağlı; verilirse giriş yapılır, daha çok modül yüklenir
  *   WEBHOOK_URL     İsteğe bağlı; verilirse sonuç Discord webhook'una gönderilir
  *   WEBHOOK_SECRET  İsteğe bağlı; verilirse gövde HMAC-SHA256 ile imzalanır
+ *
+ * Giriş YOK — Discord'un `/login` sayfası tüm webpack bundle'ını yüklüyor;
+ * `loadLazyChunks` kalan chunk'ları zorla çekiyor. Token gerekmiyor, hiçbir
+ * kişisel veri kullanılmıyor.
  */
 
 import { createHmac } from "node:crypto";
@@ -25,8 +28,8 @@ import puppeteer from "puppeteer-core";
 import { DIST, PackageJson, ROOT } from "./build/common.mjs";
 
 const BRANCHES = {
-    stable: "https://discord.com/app",
-    canary: "https://canary.discord.com/app"
+    stable: "https://discord.com/login",
+    canary: "https://canary.discord.com/login"
 };
 
 const branchArg = process.argv.find(a => a.startsWith("--branch="))?.split("=")[1] ?? "stable";
@@ -97,20 +100,15 @@ async function runBranch(branch) {
 
         // Renderer bundle'ı sayfanın kendi scriptlerinden **önce** çalışmalı:
         // `Function.prototype.m` tuzağı webpack başlamadan kurulmuş olmalı.
-        await page.evaluateOnNewDocument(rendererScript);
-
-        if (process.env.DISCORD_TOKEN) {
-            await page.evaluateOnNewDocument(`
-                setInterval(() => {
-                    const frame = document.body?.appendChild(document.createElement("iframe"));
-                    if (frame) frame.contentWindow.localStorage.token = ${JSON.stringify(`"${process.env.DISCORD_TOKEN}"`)};
-                }, 50);
-            `);
-        }
+        await page.evaluateOnNewDocument(`
+            if (location.host.endsWith("discord.com")) {
+                ${rendererScript}
+            }
+        `);
 
         const done = waitForReport(page);
 
-        await page.goto(BRANCHES[branch], { waitUntil: "load", timeout: 120_000 });
+        await page.goto(BRANCHES[branch], { waitUntil: "load", timeout: 180_000 });
 
         const report = await done;
         console.log(`[MCord] ${branch}: build ${report.meta.buildNumber}, ` +

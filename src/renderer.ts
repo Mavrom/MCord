@@ -98,6 +98,11 @@ onceReady.then(async () => {
     finishTrace("MCord başlangıç");
     logger.info(`${VERSION} (${COMMIT_HASH}) hazır — webpack yakalandı.`);
 
+    // Reporter build'inde: giriş yapılmadığı için Discord'un "app-mount" kodu
+    // (`init()`'i tetikleyen patch) çalışmayabilir. Yedek tetikleyici — `init()`
+    // zaten `running` bayrağıyla korumalı, çift çağrı zararsız.
+    if (IS_REPORTER) setTimeout(() => void Reporter.init(), 10_000);
+
     // Aşama 3: DOMContentLoaded — UI enjeksiyonu.
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", () => {

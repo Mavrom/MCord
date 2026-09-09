@@ -1,16 +1,11 @@
 name: Report Broken Patches
 
-# Saatlik patch doğrulama (plan §9.2) geçici olarak kapalı.
+# Patch/finder doğrulama. Puppeteer ile Discord'un `/login` sayfasını açar
+# (giriş YOK, token YOK, kişisel veri YOK) — o sayfa tüm webpack bundle'ını
+# yüklüyor, `loadLazyChunks` gerisini çekiyor, tüm finder/patch'ler denenir.
 #
-# Reporter, Puppeteer ile canlı Discord'a bağlanıp patch'leri doğruluyor ve
-# bunun için `DISCORD_TOKEN` secret'ına ihtiyaç duyuyor. O secret tanımlı
-# olmadığı sürece daha az modül yükleniyor, aramalar başarısız oluyor ve
-# "Fail if patches are broken" adımı job'ı kırmızıya düşürüyor — yani zamanlı
-# çalışma her seferinde depo sahibine başarısızlık maili gönderiyordu.
-#
-# Yeniden açmak için: DISCORD_TOKEN secret'ını tanımla, workflow'u elle
-# (Run workflow) bir kez çalıştır, yeşil geçtiğini gör, sonra aşağıdaki
-# `schedule` bloğunun yorumunu kaldır.
+# Zamanlı çalışmayı açmak için: workflow'u elle (Run workflow) bir kez
+# çalıştır, yeşil geçtiğini gör, sonra `schedule` bloğunun yorumunu kaldır.
 #
 #  schedule:
 #    - cron: "0 * * * *"
@@ -80,7 +75,6 @@ jobs:
         continue-on-error: true
         env:
           CHROMIUM_BIN: ${{ env.CHROMIUM_BIN }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
           CANARY_WEBHOOK_URL: ${{ secrets.CANARY_WEBHOOK_URL }}
           WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
