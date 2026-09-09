@@ -43,14 +43,9 @@ export function canonicalizeMatch<T extends RegExp | string>(match: T): T {
 
     // Kaçış sayısı kontrolü: tek sayıda ters bölü varsa `\i` kaçırılmış demektir,
     // bir ters bölü düşürülüp literal bırakılıyor.
-    //
-    // Genişletme **birebir** kanıtlanmış açık-kaynak istemcinin (Vencord)
-    // yaptığı gibi: `[A-Za-z_$][\w$]*` — grupsuz. `(?:…)` sarmalayıcı fazladan
-    // geri-izleme çerçevesi ekliyordu ve Vencord'un desenlerinde (`.+?` yoğun)
-    // katastrofik yavaşlamaya yol açıyordu.
     const canonSource = partialCanon.replaceAll(/(\\*)\\i/g, (match, leadingEscapes) =>
         leadingEscapes.length % 2 === 0
-            ? `${leadingEscapes}${String.raw`[A-Za-z_$][\w$]*`}`
+            ? `${leadingEscapes}${String.raw`(?:[A-Za-z_$][\w$]*)`}`
             : match.slice(1)
     );
 
