@@ -15,8 +15,7 @@ import {
     PermissionStore,
     UserStore
 } from "../../webpack/common";
-import { byKeys } from "../../webpack/filters";
-import { find } from "../../webpack/finder";
+import { findByPropsLazy } from "../../webpack/lazy";
 
 const logger = new Logger("MessageClickActions", "#a6d189");
 let deleteHeld = false;
@@ -51,9 +50,12 @@ const settings = definePluginSettings({
     }
 });
 
-function getMessageActions(): any {
-    return find(byKeys(["deleteMessage", "startEditMessage"]), { silent: true });
-}
+/**
+ * Tembel + reporter'a kayitli. Eski surum her tikta `find(...,{silent:true})`
+ * calistiriyordu: hem tum cache'i her seferinde tariyor hem de kirildiginda
+ * CI'da gorunmuyordu.
+ */
+const MessageActions = findByPropsLazy("deleteMessage", "startEditMessage") as any;
 
 /** Bu kanalda mesaj silme yetkin var mı (kendi mesajın veya MANAGE_MESSAGES). */
 function canDelete(isOwn: boolean, channel: any): boolean {
@@ -112,7 +114,7 @@ export default definePlugin({
 
         const myId = UserStore?.getCurrentUser?.()?.id;
         const isMe = message?.author?.id === myId;
-        const actions = getMessageActions();
+        const actions = MessageActions;
         const dispatcher = getFluxDispatcher();
 
         // ── Backspace + tık: sil ────────────────────────────────────────────

@@ -58,15 +58,11 @@ export function getUserSetting<T = any>(group: string, name: string): UserSettin
 /** {@link getUserSetting}, tembel — ilk erişimde çözülür (`findLazy` ile aynı desen). */
 export function getUserSettingLazy<T = any>(group: string, name: string): UserSettingDefinition<T> {
     let resolved: UserSettingDefinition<T> | undefined;
-    let attempted = false;
 
-    const resolve = () => {
-        if (!attempted) {
-            attempted = true;
-            resolved = getUserSetting<T>(group, name);
-        }
-        return resolved;
-    };
+    // Başarılı sonuç önbelleğe alınır, BAŞARISIZ sonuç alınmaz: ayar modülü
+    // erişim anında henüz yüklenmemiş olabiliyor ve eski "bir kez dene"
+    // mantığı o durumda kalıcı olarak `undefined` döndürüyordu.
+    const resolve = () => (resolved ??= getUserSetting<T>(group, name));
 
     return new Proxy({} as UserSettingDefinition<T>, {
         get(_target, prop, receiver) {

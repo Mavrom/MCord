@@ -8,7 +8,8 @@ import { definePluginSettings, Settings } from "../../api/settings";
 import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin, OptionType, StartAt } from "../../utils/types";
-import { findByKeys } from "../../webpack/finder";
+import { byKeys } from "../../webpack/filters";
+import { waitFor } from "../../webpack/lazy";
 import { parseHidden } from "./parse";
 
 const logger = new Logger("BetterSettings", "#a6d189");
@@ -56,57 +57,62 @@ export default definePlugin({
         return settings.store.disableFade ? FADE_CSS : "";
     },
 
+    cancels: [] as Array<() => void>,
+
     start() {
         this.hideSections();
         if (settings.store.rememberLastSection) this.rememberSection();
     },
 
-    /** İstenmeyen bölümler ayar listesinden çıkarılır. */
+    stop() {
+        for (const cancel of this.cancels) cancel();
+        this.cancels = [];
+    },
+
+    /**
+     * İstenmeyen bölümler ayar listesinden çıkarılır.
+     *
+     * `waitFor` kullanıyoruz: eski eager `findByKeys`, ayar modülü `start()`
+     * anında (DOMContentLoaded) henüz yüklenmediği için hep `null` dönüyor ve
+     * "modül bulunamadı" uyarısı basıyordu. `waitFor` hem yüklenmeyi bekliyor
+     * hem de CI reporter'a kaydoluyor.
+     */
     hideSections() {
         const hidden = parseHidden(settings.store.hiddenSections);
         if (hidden.size === 0) return;
 
-        const SectionsModule = findByKeys("useDefaultUserSettingsSections")
-            ?? findByKeys("getUserSettingsSections");
+        this.cancels.push(waitFor(byKeys(["useDefaultUserSettingsSections"]), (SectionsModule: any) => {
+            if (typeof SectionsModule?.useDefaultUserSettingsSections !== "function") return;
 
-        if (!SectionsModule) {
-            logger.warn("Ayar bölümü modülü bulunamadı, gizleme atlandı.");
-            return;
-        }
-
-        const method = typeof SectionsModule.useDefaultUserSettingsSections === "function"
-            ? "useDefaultUserSettingsSections"
-            : "getUserSettingsSections";
-
-        this.patcher.after(SectionsModule, method, (_self, _args, returnValue) => {
-            if (!Array.isArray(returnValue)) return returnValue;
-            return returnValue.filter((entry: any) =>
-                typeof entry?.section !== "string" || !hidden.has(entry.section.toLowerCase()));
-        });
+            this.patcher.after(SectionsModule, "useDefaultUserSettingsSections", (_self, _args, returnValue) => {
+                if (!Array.isArray(returnValue)) return returnValue;
+                return returnValue.filter((entry: any) =>
+                    typeof entry?.section !== "string" || !hidden.has(entry.section.toLowerCase()));
+            });
+        }));
     },
 
     /** Ayarlar kapanırken açık olan bölüm kaydedilir, bir dahakine oradan açılır. */
     rememberSection() {
-        const SettingsActions = findByKeys("open", "setSection")
-            ?? findByKeys("setSection");
-
-        if (!SettingsActions?.setSection) {
-            logger.warn("Ayar bölümü eylemleri bulunamadı, hatırlama atlandı.");
-            return;
-        }
-
-        this.patcher.after(SettingsActions, "setSection", (_self, args) => {
-            const section = args[0];
-            if (typeof section === "string") {
-                (Settings.plugins.BetterSettings ??= {}).lastSection = section;
+        this.cancels.push(waitFor(byKeys(["open", "setSection", "saveAccountChanges"]), (SettingsActions: any) => {
+            if (typeof SettingsActions?.setSection !== "function") {
+                logger.warn("Ayar bölümü eylemleri bulunamadı, hatırlama atlandı.");
+                return;
             }
-        });
 
-        if (typeof SettingsActions.open === "function") {
-            this.patcher.before(SettingsActions, "open", (_self, args) => {
-                const last = Settings.plugins.BetterSettings?.lastSection;
-                if (args[0] == null && typeof last === "string") args[0] = last;
+            this.patcher.after(SettingsActions, "setSection", (_self, args) => {
+                const section = args[0];
+                if (typeof section === "string") {
+                    (Settings.plugins.BetterSettings ??= {}).lastSection = section;
+                }
             });
-        }
+
+            if (typeof SettingsActions.open === "function") {
+                this.patcher.before(SettingsActions, "open", (_self, args) => {
+                    const last = Settings.plugins.BetterSettings?.lastSection;
+                    if (args[0] == null && typeof last === "string") args[0] = last;
+                });
+            }
+        }));
     }
 });

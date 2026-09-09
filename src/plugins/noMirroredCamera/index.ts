@@ -7,7 +7,8 @@
 import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin, StartAt } from "../../utils/types";
-import { findByKeys } from "../../webpack/finder";
+import { byKeys } from "../../webpack/filters";
+import { waitFor } from "../../webpack/lazy";
 
 const logger = new Logger("NoMirroredCamera", "#a6d189");
 
@@ -25,12 +26,20 @@ export default definePlugin({
     startAt: StartAt.WebpackReady,
     requiresRestart: false,
 
+    cancel: undefined as (() => void) | undefined,
+
     start() {
-        try {
-            const Video = findByKeys("getVideoDeviceId", "mirror") ?? null;
-            if (Video && "mirror" in Video) { try { (Video as any).mirror = false; } catch { /* salt okunur */ } }
-        } catch (err) {
-            logger.error("Başlatılamadı:", err);
-        }
+        this.cancel = waitFor(byKeys(["getVideoDeviceId", "mirror"]), (Video: any) => {
+            try {
+                if (Video != null && "mirror" in Video) Video.mirror = false;
+            } catch {
+                logger.warn("Kamera aynasi kapatilamadi (salt okunur).");
+            }
+        });
+    },
+
+    stop() {
+        this.cancel?.();
+        this.cancel = undefined;
     }
 });

@@ -10,7 +10,8 @@ import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin, OptionType, StartAt } from "../../utils/types";
 import { ChannelStore, PermissionStore } from "../../webpack/common";
-import { findByKeys } from "../../webpack/finder";
+import { byKeys } from "../../webpack/filters";
+import { waitFor } from "../../webpack/lazy";
 
 const logger = new Logger("ShowHiddenChannels", "#a6d189");
 
@@ -95,33 +96,43 @@ export default definePlugin({
         if (settings.store.blockNavigation) this.blockNavigation();
     },
 
+    cancel: undefined as (() => void) | undefined,
+
     stop() {
         hiddenChannels.clear();
+        this.cancel?.();
+        this.cancel = undefined;
     },
 
-    /** Gizli kanala girmeye çalışmak 403 döndürüp arayüzü bozuyor; engelliyoruz. */
+    /**
+     * Gizli kanala girmeye çalışmak 403 döndürüp arayüzü bozuyor; engelliyoruz.
+     *
+     * Eager `findByKeys` yerine `waitFor`: kanal eylemleri modülü
+     * `ConnectionOpen` anında henüz yüklenmiş olmayabiliyordu.
+     */
     blockNavigation() {
-        const ChannelActions = findByKeys("selectChannel", "selectVoiceChannel");
-        if (!ChannelActions) {
-            logger.warn("Kanal seçme modülü bulunamadı, gezinme engellenemiyor.");
-            return;
-        }
-
-        this.patcher.instead(ChannelActions, "selectChannel", (self, args, original) => {
-            const channelId = args[0]?.channelId ?? args[1];
-
-            // Çift emniyet: listede olsa bile gerçekten bir sunucu kanalı mı?
-            const channel = channelId ? ChannelStore?.getChannel?.(channelId) : null;
-            if (channelId && hiddenChannels.has(channelId) && isHideableGuildChannel(channel)) {
-                showNotification({
-                    title: "Gizli kanal",
-                    body: "Bu kanalı görme iznin yok; içeriği yüklenemez.",
-                    color: "#e5c890"
-                });
-                return undefined;
+        this.cancel = waitFor(byKeys(["selectChannel", "selectVoiceChannel"]), (ChannelActions: any) => {
+            if (typeof ChannelActions?.selectChannel !== "function") {
+                logger.warn("Kanal seçme modülü bulunamadı, gezinme engellenemiyor.");
+                return;
             }
 
-            return original.apply(self, args);
+            this.patcher.instead(ChannelActions, "selectChannel", (self, args, original) => {
+                const channelId = args[0]?.channelId ?? args[1];
+
+                // Çift emniyet: listede olsa bile gerçekten bir sunucu kanalı mı?
+                const channel = channelId ? ChannelStore?.getChannel?.(channelId) : null;
+                if (channelId && hiddenChannels.has(channelId) && isHideableGuildChannel(channel)) {
+                    showNotification({
+                        title: "Gizli kanal",
+                        body: "Bu kanalı görme iznin yok; içeriği yüklenemez.",
+                        color: "#e5c890"
+                    });
+                    return undefined;
+                }
+
+                return original.apply(self, args);
+            });
         });
     }
 });

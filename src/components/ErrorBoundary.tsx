@@ -22,59 +22,75 @@ interface State {
 }
 
 /**
- * Plugin-içi hata sınırı. Bir bileşen çökerse Discord'un tamamını değil sadece
- * o parçayı düşürür.
+ * Sınıf **tembel** kuruluyor.
  *
- *   ErrorBoundary.wrap(MyComponent)
- *   ErrorBoundary.wrap(myRenderFn, { noop: true })
+ * `class X extends React.Component` ifadesi modül yüklenirken değerlendirilir;
+ * `webpack/react`'teki `React` bir Proxy ve Discord'un React'i henüz hazır
+ * değilken FIRLATIR. Eski sürüm bu yüzden `/login` ekranında renderer'ı
+ * komple çökertiyordu (`[MCord] Discord'un React'i bulunamadı`). İlk render'a
+ * kadar beklersek React garanti hazır oluyor.
  */
-class ErrorBoundaryImpl extends React.Component<Props, State> {
-    override state: State = { error: null };
+let Impl: any = null;
 
-    static getDerivedStateFromError(error: unknown): State {
-        return { error };
-    }
+function getImpl(): any {
+    if (Impl != null) return Impl;
 
-    override componentDidCatch(error: unknown, info: unknown): void {
-        logger.error("Sınır bir hata yakaladı:\n", error, info);
-        try {
-            this.props.onError?.(error, info);
-        } catch { /* onError kendisi patlarsa yut */ }
-    }
+    Impl = class ErrorBoundaryImpl extends (React as any).Component<Props, State> {
+        state: State = { error: null };
 
-    override render(): React.ReactNode {
-        if (this.state.error == null) return this.props.children;
-        if (this.props.noop) return null;
-
-        if (this.props.fallback) {
-            return React.createElement(this.props.fallback, { error: this.state.error });
+        static getDerivedStateFromError(error: unknown): State {
+            return { error };
         }
 
-        return React.createElement(
-            "div",
-            {
-                style: {
-                    color: "var(--text-danger, #f23f43)",
-                    fontSize: "12px",
-                    padding: "6px 8px",
-                    border: "1px solid var(--status-danger, #f23f43)",
-                    borderRadius: "4px",
-                    background: "color-mix(in srgb, var(--status-danger, #f23f43) 8%, transparent)"
-                }
-            },
-            "Bu MCord bileşeni hata verdi (konsola bakın)."
-        );
-    }
+        componentDidCatch(error: unknown, info: unknown): void {
+            logger.error("Sınır bir hata yakaladı:\n", error, info);
+            try {
+                (this as any).props.onError?.(error, info);
+            } catch { /* onError kendisi patlarsa yut */ }
+        }
+
+        render(): React.ReactNode {
+            const { props, state } = this as any;
+            if (state.error == null) return props.children;
+            if (props.noop) return null;
+
+            if (props.fallback) {
+                return React.createElement(props.fallback, { error: state.error });
+            }
+
+            return React.createElement(
+                "div",
+                {
+                    style: {
+                        color: "var(--text-danger, #f23f43)",
+                        fontSize: "12px",
+                        padding: "6px 8px",
+                        border: "1px solid var(--status-danger, #f23f43)",
+                        borderRadius: "4px",
+                        background: "color-mix(in srgb, var(--status-danger, #f23f43) 8%, transparent)"
+                    }
+                },
+                "Bu MCord bileşeni hata verdi (konsola bakın)."
+            );
+        }
+    };
+
+    return Impl;
+}
+
+/** JSX'te doğrudan kullanılabilen sarmalayıcı: `<ErrorBoundary>…</ErrorBoundary>`. */
+function ErrorBoundaryComponent(props: Props): React.ReactNode {
+    return React.createElement(getImpl(), props, props.children);
 }
 
 type Wrappable = React.ComponentType<any> | ((props: any) => React.ReactNode);
 
-export const ErrorBoundary = Object.assign(ErrorBoundaryImpl, {
+export const ErrorBoundary = Object.assign(ErrorBoundaryComponent, {
     /** Bir bileşeni/fonksiyonu hata sınırıyla sar. */
     wrap<T extends Wrappable>(Component: T, options: Omit<Props, "children"> = {}): T {
         const Wrapped = (props: any) =>
             React.createElement(
-                ErrorBoundaryImpl,
+                getImpl(),
                 options as Props,
                 React.createElement(Component as any, props)
             );

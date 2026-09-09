@@ -7,8 +7,8 @@
 import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin, StartAt } from "../../utils/types";
-import { SelectedChannelStore } from "../../webpack/common";
-import { findByKeys } from "../../webpack/finder";
+import { NavigationRouter, SelectedChannelStore } from "../../webpack/common";
+
 
 const logger = new Logger("KeepCurrentChannel", "#a6d189");
 const KEY = "mcord-last-channel";
@@ -33,10 +33,11 @@ export default definePlugin({
         if (!saved?.channelId) return;
         if (SelectedChannelStore?.getChannelId?.() === saved.channelId) return;
 
-        const nav = findByKeys("transitionToGuild") ?? findByKeys("transitionTo");
         try {
-            if (saved.guildId) nav?.transitionToGuild?.(saved.guildId, saved.channelId);
-            else nav?.transitionTo?.(`/channels/@me/${saved.channelId}`);
+            // NavigationRouter zaten dogrulanmis bir mangled modul (common.ts);
+            // eager findByKeys yerine onu kullaniyoruz.
+            if (saved.guildId) (NavigationRouter as any)?.transitionToGuild?.(saved.guildId, saved.channelId);
+            else (NavigationRouter as any)?.transitionTo?.(`/channels/@me/${saved.channelId}`);
         } catch (err) {
             logger.warn("Kanala dönülemedi:", err);
         }

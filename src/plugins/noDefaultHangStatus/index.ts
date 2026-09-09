@@ -5,11 +5,9 @@
  */
 
 import { Devs } from "../../utils/constants";
-import { Logger } from "../../utils/logger";
 import { definePlugin, StartAt } from "../../utils/types";
-import { findByKeys } from "../../webpack/finder";
-
-const logger = new Logger("NoDefaultHangStatus", "#a6d189");
+import { byKeys } from "../../webpack/filters";
+import { waitFor } from "../../webpack/lazy";
 
 /**
  * SCAFFOLD — bilinen bir istemci modundaki aynı işlevin MCord API'siyle
@@ -25,12 +23,19 @@ export default definePlugin({
     startAt: StartAt.WebpackReady,
     requiresRestart: false,
 
+    cancel: undefined as (() => void) | undefined,
+
     start() {
-        try {
-            const HangStatus = findByKeys("setHangStatus", "clearHangStatus") ?? findByKeys("HANG_STATUS");
-            if (HangStatus?.setHangStatus) this.patcher.instead(HangStatus, "setHangStatus", () => undefined);
-        } catch (err) {
-            logger.error("Başlatılamadı:", err);
-        }
+        // waitFor: modul yuklenene kadar bekler VE reporter'a kaydolur.
+        // Eski eager findByKeys, modul o an yuklu olmadigi icin hic calismiyordu.
+        this.cancel = waitFor(byKeys(["setHangStatus", "clearHangStatus"]), (HangStatus: any) => {
+            if (typeof HangStatus?.setHangStatus !== "function") return;
+            this.patcher.instead(HangStatus, "setHangStatus", () => undefined);
+        });
+    },
+
+    stop() {
+        this.cancel?.();
+        this.cancel = undefined;
     }
 });

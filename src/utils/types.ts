@@ -180,6 +180,8 @@ export interface DefinedSettings<D extends SettingsDefinition = SettingsDefiniti
     /** `PluginManager` tarafından doldurulur. */
     pluginName: string;
     withPrivateSettings<T extends object>(): SettingsStore<D> & T;
+    /** React hook'u — verilen ayarlar değişince bileşeni yeniden çizer. */
+    use(keys?: (keyof D & string)[]): SettingsStore<D>;
 }
 
 export type FluxHandler = (event: any) => void | Promise<void>;

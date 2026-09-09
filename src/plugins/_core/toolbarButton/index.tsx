@@ -8,127 +8,81 @@
  * Discord'un üst bar toolbar'ına (inbox / yardım ikonlarının yanı) bir **MC**
  * butonu koyar → tıkla → MCord ayarları açılır.
  *
- * Kod patch'i değil **DOM enjeksiyonu**: Discord'un toolbar bileşenini webpack'ten
- * bulup patch'lemek sürüm kırılgan; bunun yerine toolbar elementini seçip
- * butonu ekliyoruz, `MutationObserver` ile yeniden render'larda geri koyuyoruz.
+ * Kanıtlanmış açık-kaynak istemcinin (Vencord) `VencordToolbox` plugin'iyle
+ * aynı yaklaşım: **kod patch'i**. Eski MCord sürümü DOM enjeksiyonu yapıyordu
+ * (`querySelector` + `MutationObserver`); `start()` DOMContentLoaded'da
+ * çalıştığı için toolbar henüz yokken "Toolbar bulunamadı" uyarısı basıyor,
+ * butonu ancak ilk mutasyondan sonra ekleyebiliyordu. Kod patch'i toolbar'ın
+ * kendi `trailing` bölümüne giriyor — zamanlamadan bağımsız ve CI reporter
+ * tarafından doğrulanıyor.
  */
 
+import { ErrorBoundary } from "../../../components/ErrorBoundary";
 import { Devs } from "../../../utils/constants";
-import { Logger } from "../../../utils/logger";
-import { definePlugin, StartAt } from "../../../utils/types";
+import { definePlugin } from "../../../utils/types";
+import { useRef } from "../../../webpack/common";
+import { findComponentByCodeLazy } from "../../../webpack/lazy";
 import { toggleSettings } from "../settings";
 
-const logger = new Logger("ToolbarButton", "#c9a0f0");
+const HeaderBarIcon = findComponentByCodeLazy(".HEADER_BAR_BADGE_BOTTOM,", 'position:"bottom"');
 
-const BUTTON_ID = "mcord-toolbar-button";
-
-/** Discord toolbar'ı için aday seçiciler — ilki tutan kullanılır. */
-const TOOLBAR_SELECTORS = [
-    '[class*="toolbar_"]',
-    '[class*="toolbar-"]',
-    'section[aria-label] [class*="toolbar"]'
-];
-
-function findToolbar(): Element | null {
-    for (const selector of TOOLBAR_SELECTORS) {
-        const candidates = document.querySelectorAll(selector);
-        for (const el of candidates) {
-            // İçinde en az bir buton/ikon barındıran görünür bir toolbar seç.
-            if (el.querySelector("button, [role='button']") && (el as HTMLElement).offsetParent !== null) {
-                return el;
-            }
-        }
-    }
-    return null;
+function Icon() {
+    return (
+        <svg viewBox="0 0 24 24" width={20} height={20} aria-hidden="true">
+            <text
+                x="12"
+                y="16"
+                textAnchor="middle"
+                fill="currentColor"
+                fontSize="11"
+                fontWeight="700"
+                fontFamily="var(--font-primary, sans-serif)"
+            >
+                MC
+            </text>
+        </svg>
+    );
 }
 
-function makeButton(): HTMLButtonElement {
-    const button = document.createElement("button");
-    button.id = BUTTON_ID;
-    button.type = "button";
-    button.textContent = "MC";
-    button.title = "MCord ayarları (Ctrl+Alt+M)";
-    button.setAttribute("aria-label", "MCord ayarları");
-    button.style.cssText = [
-        "background:none",
-        "border:0",
-        "cursor:pointer",
-        "font:700 13px var(--font-primary, sans-serif)",
-        "color:var(--interactive-normal, #b5bac1)",
-        "padding:0 8px",
-        "height:24px",
-        "display:flex",
-        "align-items:center",
-        "border-radius:4px"
-    ].join(";");
+function McordToolbarButton() {
+    const buttonRef = useRef(null);
 
-    button.addEventListener("mouseenter", () => {
-        button.style.color = "var(--interactive-hover, #dbdee1)";
-    });
-    button.addEventListener("mouseleave", () => {
-        button.style.color = "var(--interactive-normal, #b5bac1)";
-    });
-    button.addEventListener("click", event => {
-        event.preventDefault();
-        event.stopPropagation();
-        logger.info("MC butonuna tıklandı → ayarlar açılıyor");
-        try {
-            toggleSettings();
-        } catch (err) {
-            logger.error("toggleSettings patladı:", err);
-        }
-    });
-
-    return button;
+    return (
+        <HeaderBarIcon
+            ref={buttonRef}
+            onClick={() => toggleSettings()}
+            tooltip="MCord ayarları (Ctrl+Alt+M)"
+            icon={Icon}
+        />
+    );
 }
 
-let observer: MutationObserver | null = null;
-let warned = false;
-let scheduled = false;
-
-/** Büyük re-render'larda `inject`'i dakikada bir değil, kare başına bir kez çağır. */
-function scheduleInject(): void {
-    if (scheduled) return;
-    scheduled = true;
-    requestAnimationFrame(() => {
-        scheduled = false;
-        inject();
-    });
-}
-
-function inject(): void {
-    if (document.getElementById(BUTTON_ID)) return;
-
-    const toolbar = findToolbar();
-    if (!toolbar) {
-        if (!warned) {
-            logger.warn("Toolbar bulunamadı — MC butonu eklenemedi (Ctrl+Alt+M çalışıyor).");
-            warned = true;
-        }
-        return;
-    }
-
-    toolbar.prepend(makeButton());
-    if (warned) logger.info("Toolbar bulundu, MC butonu eklendi.");
-    warned = false;
-}
+const WrappedButton = ErrorBoundary.wrap(McordToolbarButton, { noop: true });
 
 export default definePlugin({
     name: "ToolbarButton",
     description: "Discord toolbar'ına MCord ayarlarını açan MC butonu ekler",
     authors: [Devs.MCord],
     required: true,
-    startAt: StartAt.DOMContentLoaded,
+    requiresRestart: true,
 
-    start() {
-        inject();
-        observer = new MutationObserver(scheduleInject);
-        observer.observe(document.body, { childList: true, subtree: true });
-    },
+    patches: [
+        {
+            find: '?"BACK_FORWARD_NAVIGATION":',
+            reason: "Üst bar toolbar'ının sağ (trailing) ikon grubu.",
+            replacement: {
+                match: /(trailing:.{0,50}?)\i\.Fragment,(?=\{children:\[)/,
+                replace: "$1$self.TrailingWrapper,"
+            }
+        }
+    ],
 
-    stop() {
-        observer?.disconnect();
-        observer = null;
-        document.getElementById(BUTTON_ID)?.remove();
+    TrailingWrapper({ children }: { children?: any }) {
+        return (
+            <>
+                {children}
+                <WrappedButton key="mcord-toolbar-button" />
+            </>
+        );
     }
 });

@@ -5,6 +5,7 @@
  */
 
 import { Logger } from "../utils/logger";
+import { getReact } from "../webpack/react";
 import {
     type DefinedSettings,
     OptionType,
@@ -214,6 +215,28 @@ export function definePluginSettings<D extends SettingsDefinition>(definition: D
 
         withPrivateSettings<T extends object>() {
             return result.store as SettingsStore<D> & T;
+        },
+
+        /**
+         * React hook'u: verilen ayarlar değiştiğinde bileşeni yeniden çizer.
+         *
+         * Kanıtlanmış açık-kaynak istemcinin (Vencord) `settings.use([...])`
+         * API'sinin aynısı — bileşen içinde `settings.store` okumak tek başına
+         * abone olmuyordu.
+         */
+        use(keys?: string[]): SettingsStore<D> {
+            const React = getReact();
+            const [, forceUpdate] = React.useReducer((n: number) => n + 1, 0);
+            const { pluginName } = result;
+
+            React.useEffect(() => subscribeToSettings(path => {
+                const prefix = `plugins.${pluginName}.`;
+                if (!path.startsWith(prefix)) return;
+                if (keys != null && !keys.includes(path.slice(prefix.length))) return;
+                forceUpdate();
+            }), [pluginName, keys?.join(",")]);
+
+            return result.store;
         }
     };
 
