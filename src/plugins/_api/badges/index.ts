@@ -14,20 +14,16 @@ export default definePlugin({
     authors: [Devs.MCord],
     required: true,
 
+    // Kanıtlanmış açık-kaynak istemcinin (Vencord) `getLegacyUsername(){`
+    // patch'inin birebir portu. (Vencord'un `#{intl::PROFILE_USER_BADGES}`
+    // bileşen-rozet grubu MCord'da yok — MCord yalnız resim-URL'li rozet
+    // destekliyor; component rozet desteği eklenince o patch de portlanacak.)
     patches: [
         {
             find: "getLegacyUsername(){",
-            reason:
-                "Discord'un profil sınıfı `getBadges()` metodunda rozet dizisini "
-                + "`this._userProfile.badges` üzerinden kuruyor. Metot bir sınıf gövdesi "
-                + "içinde; dışarıdan tutulabilir referansı yok, fonksiyon patch'i "
-                + "uygulanamıyor. Çapa `getLegacyUsername(){` — aynı sınıfta, bundle'da "
-                + "tek geçiyor.",
+            reason: "getBadges() dönüşüne MCord rozetlerini ekle. Vencord BadgesAPI portu.",
             replacement: {
-                // `getBadges(){…return[` kalıbının hemen ardına kendi rozetlerimizi
-                // yayıyoruz (dizi başına). `[^}]{0,80}?` ile `return`'den önce
-                // olası bir ifadeye de izin veriyoruz.
-                match: /getBadges\(\)\{[^}]{0,80}?return\[/,
+                match: /getBadges\(\)\{.{0,100}?return\[/,
                 replace: "$&...$self.getBadges(this),"
             }
         }
