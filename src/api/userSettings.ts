@@ -19,9 +19,9 @@ export interface UserSettingDefinition<T> {
     updateSetting(value: T | ((old: T) => T)): Promise<void>;
     useSetting(): T;
     /** Enjeksiyon plugin'i tarafından eklenir; ham Discord nesnesinde yoktur. */
-    mcordGroup: string;
+    userSettingsAPIGroup: string;
     /** Enjeksiyon plugin'i tarafından eklenir; ham Discord nesnesinde yoktur. */
-    mcordName: string;
+    userSettingsAPIName: string;
 }
 
 /**
@@ -47,7 +47,7 @@ export function getUserSetting<T = any>(group: string, name: string): UserSettin
 
     for (const key in module) {
         const setting = module[key];
-        if (setting?.mcordGroup === group && setting?.mcordName === name) {
+        if (setting?.userSettingsAPIGroup === group && setting?.userSettingsAPIName === name) {
             return setting as UserSettingDefinition<T>;
         }
     }

@@ -11,11 +11,20 @@ export default definePlugin({
     name: "MessageUpdaterAPI",
     description: "Plugin'lerin bir mesajı yeniden render etmeye zorlamasını sağlar",
     authors: [Devs.MCord],
-    required: true
+    required: true,
 
-    // Kod patch'i yok, fonksiyon patch'i yok: `updateMessage` saf bir
-    // `FluxDispatcher.dispatch({type:"MESSAGE_UPDATE", ...})` çağrısı
-    // (bkz. src/api/messageUpdater.ts). Bu plugin sadece bağımlılık işaretçisi:
-    // kullanan plugin `dependencies: ["MessageUpdaterAPI"]` yazınca API'nin
-    // varlığı garanti altına alınıyor.
+    // Kanıtlanmış açık-kaynak istemcinin (Vencord) güncel `MessageUpdaterAPI`
+    // patch'inin birebir portu: mesaj aksesuarları yeniden render kararını
+    // özel bir mantıkla veriyor ve değişen mesaj referansını yoksayıyordu —
+    // `"message"` bağımlılığını kaldırınca güncelleme re-render'ı tetikliyor.
+    patches: [
+        {
+            find: "}renderStickersAccessories(",
+            reason: "Mesaj güncellemesi aksesuar re-render'ını tetiklesin. Vencord MessageUpdaterAPI portu.",
+            replacement: {
+                match: /(?<=this\.props,\i,\[)"message",/,
+                replace: ""
+            }
+        }
+    ]
 });

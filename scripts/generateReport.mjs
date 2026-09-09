@@ -130,15 +130,15 @@ async function runBranch(branch) {
         // catch zaten raporluyor.
         done.catch(() => {});
 
-        // `/login` sıklıkla client-side redirect yapıyor (`net::ERR_ABORTED`).
-        // Bu bir hata değil: renderer zaten enjekte oldu, reporter çalışıyor.
-        // Sadece `done` bekleniyor.
-        page.goto(BRANCHES[branch], { waitUntil: "domcontentloaded", timeout: 180_000 })
-            .catch(err => {
-                if (!String(err?.message).includes("ERR_ABORTED")) {
-                    process.stderr.write(`  goto uyarısı: ${err?.message}\n`);
-                }
-            });
+        // `/login` bazen client-side redirect yapıyor (`net::ERR_ABORTED`); bu
+        // durumda renderer zaten enjekte olmuş oluyor, reporter çalışır. Diğer
+        // goto hataları gerçek — onları fırlat.
+        try {
+            await page.goto(BRANCHES[branch], { waitUntil: "load", timeout: 180_000 });
+        } catch (err) {
+            if (!String(err?.message).includes("ERR_ABORTED")) throw err;
+            process.stderr.write("  goto: ERR_ABORTED (redirect) — renderer enjekte edildi, devam.\n");
+        }
 
         const report = await done;
         console.log(`[MCord] ${branch}: build ${report.meta.buildNumber}, ` +
@@ -171,7 +171,12 @@ function waitForReport(page) {
     };
 
     return new Promise((resolve, reject) => {
-        let idleTimer = armIdleTimer();
+        // Idle timer yalnız `[REPORTER_META]` görüldükten SONRA devreye giriyor:
+        // ondan önce renderer başlatma + loadLazyChunks (ağ-bağımlı, dakikalarca
+        // sürebilir, hiç `[REPORTER_*]` basmaz) var — o aşamada sadece hard
+        // timeout koruyor.
+        let idleTimer = null;
+        let metaSeen = false;
 
         function armIdleTimer() {
             return setTimeout(
@@ -180,6 +185,7 @@ function waitForReport(page) {
             );
         }
         function bump() {
+            if (!metaSeen) return;
             clearTimeout(idleTimer);
             idleTimer = armIdleTimer();
         }
@@ -190,7 +196,7 @@ function waitForReport(page) {
         );
 
         function finish(report) {
-            clearTimeout(idleTimer);
+            if (idleTimer) clearTimeout(idleTimer);
             clearTimeout(hardTimer);
             resolve(report ?? partial);
         }
@@ -212,6 +218,8 @@ function waitForReport(page) {
                 case "REPORTER_META":
                     try { partial.meta = JSON.parse(payload); } catch { /* yoksa */ }
                     process.stderr.write(`  … meta alındı (build ${partial.meta.buildNumber})\n`);
+                    // Artık akış başladı — idle timer'ı devreye al.
+                    if (!metaSeen) { metaSeen = true; idleTimer = armIdleTimer(); }
                     break;
                 case "REPORTER_PROGRESS":
                     process.stderr.write(`  … ${payload}\n`);

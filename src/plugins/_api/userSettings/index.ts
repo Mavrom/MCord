@@ -18,32 +18,25 @@ export default definePlugin({
      * o zaman otomatik etkinleştiriyor (plan §6.3). Discord'un ayar
      * tarama modülünü gereksiz yere patch'lememek için varsayılan kapalı.
      */
+    // Kanıtlanmış açık-kaynak istemcinin (Vencord) güncel `UserSettingsAPI`
+    // patch'lerinin birebir portu: her ayar tanımına hangi grup/isimden
+    // geldiğini (`userSettingsAPIGroup`/`userSettingsAPIName`) yazıyor.
     patches: [
         {
-            find: '"textAndImages","renderSpoilers"',
-            reason:
-                "Discord her ayarı `{getSetting,updateSetting,useSetting}` şeklinde "
-                + "tek bir yardımcı fonksiyonla üretiyor, ama sonuca hangi grup/isimden "
-                + "geldiğini yazmıyor — modülün export'ları rastgele kısa anahtarlarla "
-                + "(`n.d` webpack export haritası) geliyor, grup/isim bilgisi sadece "
-                + "kaynak kodun kendisinde. Dışarıdan tutulabilir bir fonksiyon "
-                + "referansı yok, bu yüzden fonksiyon patch'i uygulanamıyor.",
+            find: ",updateSetting:",
+            reason: "Ayar tanımlarına grup/isim bilgisini ekle. Vencord UserSettingsAPI portu.",
             replacement: [
                 {
-                    // Adım 1: üretici fonksiyonun grup/isim parametrelerini kendi
-                    // seçtiğimiz, çakışması imkansız isimlerle yakala. `\i` ile
-                    // eşleşen orijinal minify edilmiş adlara bağımlı kalmıyoruz;
-                    // fonksiyon adı ve son iki parametre değişmeden bırakılıyor.
-                    match: /(function \i\()(\i),(\i)(,\i,\i\)\{)/,
-                    replace: "$1$2,$3$4const $mcordGroup=$2,$mcordName=$3;"
+                    match: /\.updateAsync\(.+?(?=,useSetting:)/,
+                    replace: "$&,userSettingsAPIGroup:arguments[0],userSettingsAPIName:arguments[1]"
                 },
                 {
-                    // Adım 2: üretici fonksiyonun döndürdüğü nesneye, adım 1'de
-                    // yakalanan grup/isim çiftini ekliyoruz. Anahtar sırası
-                    // (`getSetting` hemen ardından `updateSetting`) bu yardımcıyı
-                    // aynı modüldeki benzer şekilli diğer yardımcılardan ayırıyor.
-                    match: /return\{getSetting:(\i),updateSetting:/,
-                    replace: "return{getSetting:$1,mcordGroup:$mcordGroup,mcordName:$mcordName,updateSetting:"
+                    match: /updateSetting:.{0,100}SELECTIVELY_SYNCED_USER_SETTINGS_UPDATE/,
+                    replace: "userSettingsAPIGroup:arguments[0].userSettingsAPIGroup,userSettingsAPIName:arguments[0].userSettingsAPIName,$&"
+                },
+                {
+                    match: /updateSetting:.{0,60}USER_SETTINGS_OVERRIDE_CLEAR/,
+                    replace: "userSettingsAPIGroup:arguments[0].userSettingsAPIGroup,userSettingsAPIName:arguments[0].userSettingsAPIName,$&"
                 }
             ]
         }
