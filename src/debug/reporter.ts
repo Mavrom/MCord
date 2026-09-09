@@ -7,7 +7,7 @@
 import { Logger } from "../utils/logger";
 import { addPatch, getBuildNumber, patches, patchTimings } from "../webpack/codePatcher";
 import { byStoreName, describeFilter } from "../webpack/filters";
-import { find } from "../webpack/finder";
+import { find, findAll } from "../webpack/finder";
 import { erroredPatches, lazyWebpackSearchHistory, setRecordSearchHistory, wreq } from "../webpack/intercept";
 import { mapMangledModule } from "../webpack/mangled";
 import { resolveStore } from "../webpack/stores";
@@ -104,6 +104,8 @@ export async function init(): Promise<void> {
         requireAllModules();
         console.log("[REPORTER_PHASE]", `requireAllModules bitti (+${Math.round((Date.now() - t1) / 1000)}s)`);
 
+        if (IS_REPORTER) deepStoreProbe();
+
         const meta = buildMeta();
         console.log("[REPORTER_META]", JSON.stringify(meta));
 
@@ -165,6 +167,49 @@ export async function init(): Promise<void> {
     } catch (err) {
         logger.error("Rapor koşusu başarısız:\n", err);
         console.log("[REPORTER_FAILED]", String(err));
+    }
+}
+
+/** GEÇİCİ derin tanı: ChannelStore neden hiçbir yerde yok. */
+function deepStoreProbe(): void {
+    const P = (s: string) => console.log("[REPORTER_PHASE]", s);
+    try {
+        const factories = wreq.m as Record<string, any>;
+
+        // 1) "ChannelStore" geçen TÜM modüller
+        const mentions: string[] = [];
+        for (const id in factories) {
+            let src = ""; try { src = String(factories[id]); } catch { continue; }
+            if (src.includes('"ChannelStore"')) mentions.push(id);
+            if (mentions.length >= 12) break;
+        }
+        P(`"ChannelStore" geçen modüller: [${mentions.join(",")}]`);
+
+        // 2) Her birinin export'larını dök
+        for (const id of mentions.slice(0, 4)) {
+            let ex: any;
+            try { ex = (wreq as any)(id); } catch (e) { P(`  ${id}: require THREW ${String(e).slice(0, 80)}`); continue; }
+            let keys: string[] = [];
+            try { keys = Object.getOwnPropertyNames(ex ?? {}); } catch { /* */ }
+            P(`  ${id}: typeof=${typeof ex} keys=[${keys.slice(0, 10).join(",")}]`);
+            for (const k of keys.slice(0, 10)) {
+                let v: any, err = "";
+                try { v = ex[k]; } catch (e) { err = "GET-THREW:" + String(e).slice(0, 50); }
+                if (err) { P(`    .${k} ${err}`); continue; }
+                let gn = "-"; try { gn = String(v?.getName?.()); } catch (e) { gn = "throw"; }
+                P(`    .${k}: ${typeof v} ctorName=${v?.constructor?.name} ctorDisplay=${v?.constructor?.displayName} display=${v?.displayName} getName=${gn}`);
+            }
+        }
+
+        // 3) Flux registry boyutu
+        try {
+            const regs = findAll((m: any) => typeof m?.Store?.getAll === "function");
+            let tot = 0; const sizes: number[] = [];
+            for (const r of regs) { try { const a = (r as any).Store.getAll(); sizes.push(a.length); tot += a.length; } catch { /* */ } }
+            P(`Store.getAll sunan modül: ${regs.length}, boyutlar=[${sizes.slice(0, 6).join(",")}] toplam=${tot}`);
+        } catch (e) { P("registry probe threw " + String(e).slice(0, 60)); }
+    } catch (err) {
+        P("deepStoreProbe threw: " + String(err).slice(0, 120));
     }
 }
 
