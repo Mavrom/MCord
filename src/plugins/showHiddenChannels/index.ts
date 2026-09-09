@@ -11,7 +11,10 @@ import { Logger } from "../../utils/logger";
 import { definePlugin, OptionType, StartAt } from "../../utils/types";
 import { ChannelStore, PermissionStore } from "../../webpack/common";
 import { byKeys } from "../../webpack/filters";
-import { waitFor } from "../../webpack/lazy";
+import { reportFinder, waitFor } from "../../webpack/lazy";
+
+/** Modul kapsaminda kayit: plugin kapaliyken de CI dogruluyor. */
+const CHANNEL_ACTIONS = reportFinder(byKeys(["selectChannel", "selectVoiceChannel"]));
 
 const logger = new Logger("ShowHiddenChannels", "#a6d189");
 
@@ -111,7 +114,7 @@ export default definePlugin({
      * `ConnectionOpen` anında henüz yüklenmiş olmayabiliyordu.
      */
     blockNavigation() {
-        this.cancel = waitFor(byKeys(["selectChannel", "selectVoiceChannel"]), (ChannelActions: any) => {
+        this.cancel = waitFor(CHANNEL_ACTIONS, (ChannelActions: any) => {
             if (typeof ChannelActions?.selectChannel !== "function") {
                 logger.warn("Kanal seçme modülü bulunamadı, gezinme engellenemiyor.");
                 return;
@@ -133,7 +136,7 @@ export default definePlugin({
 
                 return original.apply(self, args);
             });
-        });
+        }, { silent: true });
     }
 });
 

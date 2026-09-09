@@ -1,0 +1,37 @@
+[
+    {
+        "timestamp": 1788989417468,
+        "branch": "stable",
+        "buildNumber": -1,
+        "mcordVersion": "0.1.4",
+        "timings": []
+    },
+    {
+        "timestamp": 1788991034945,
+        "branch": "stable",
+        "buildNumber": -1,
+        "mcordVersion": "0.1.4",
+        "timings": []
+    },
+    {
+        "timestamp": 1788991166190,
+        "branch": "stable",
+        "buildNumber": -1,
+        "mcordVersion": "0.1.4",
+        "timings": []
+    },
+    {
+        "timestamp": 1788991310738,
+        "branch": "stable",
+        "buildNumber": -1,
+        "mcordVersion": "0.1.4",
+        "timings": []
+    },
+    {
+        "timestamp": 1788991424641,
+        "branch": "canary",
+        "buildNumber": -1,
+        "mcordVersion": "0.1.4",
+        "timings": []
+    }
+]

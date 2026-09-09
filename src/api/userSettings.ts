@@ -45,8 +45,26 @@ export function getUserSetting<T = any>(group: string, name: string): UserSettin
     const module = UserSettingsModule;
     if (module == null) return undefined;
 
-    for (const key in module) {
-        const setting = module[key];
+    // `getOwnPropertyNames` + export başına try/catch: Discord'un
+    // `_blacklistBadModules`'ü bazı export'ları sayılamaz (non-enumerable)
+    // yapıyor (`for...in` görmüyor) ve zehirlenmiş modül önbelleğindeki
+    // getter'lar "Cannot access 'X' before initialization" fırlatıyor. Tek bir
+    // bozuk export yüzünden tüm arama patlamamalı.
+    let keys: string[];
+    try {
+        keys = Object.getOwnPropertyNames(module);
+    } catch {
+        return undefined;
+    }
+
+    for (const key of keys) {
+        let setting: any;
+        try {
+            setting = module[key];
+        } catch {
+            continue;
+        }
+
         if (setting?.userSettingsAPIGroup === group && setting?.userSettingsAPIName === name) {
             return setting as UserSettingDefinition<T>;
         }

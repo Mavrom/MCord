@@ -9,8 +9,12 @@ import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin, OptionType, StartAt } from "../../utils/types";
 import { byKeys } from "../../webpack/filters";
-import { waitFor } from "../../webpack/lazy";
+import { reportFinder, waitFor } from "../../webpack/lazy";
 import { parseHidden } from "./parse";
+
+/** Modul kapsaminda kayit: plugin kapaliyken de CI dogruluyor. */
+const SETTINGS_SECTIONS = reportFinder(byKeys(["useDefaultUserSettingsSections"]));
+const SETTINGS_ACTIONS = reportFinder(byKeys(["open", "setSection", "saveAccountChanges"]));
 
 const logger = new Logger("BetterSettings", "#a6d189");
 
@@ -81,7 +85,7 @@ export default definePlugin({
         const hidden = parseHidden(settings.store.hiddenSections);
         if (hidden.size === 0) return;
 
-        this.cancels.push(waitFor(byKeys(["useDefaultUserSettingsSections"]), (SectionsModule: any) => {
+        this.cancels.push(waitFor(SETTINGS_SECTIONS, (SectionsModule: any) => {
             if (typeof SectionsModule?.useDefaultUserSettingsSections !== "function") return;
 
             this.patcher.after(SectionsModule, "useDefaultUserSettingsSections", (_self, _args, returnValue) => {
@@ -89,12 +93,12 @@ export default definePlugin({
                 return returnValue.filter((entry: any) =>
                     typeof entry?.section !== "string" || !hidden.has(entry.section.toLowerCase()));
             });
-        }));
+        }, { silent: true }));
     },
 
     /** Ayarlar kapanırken açık olan bölüm kaydedilir, bir dahakine oradan açılır. */
     rememberSection() {
-        this.cancels.push(waitFor(byKeys(["open", "setSection", "saveAccountChanges"]), (SettingsActions: any) => {
+        this.cancels.push(waitFor(SETTINGS_ACTIONS, (SettingsActions: any) => {
             if (typeof SettingsActions?.setSection !== "function") {
                 logger.warn("Ayar bölümü eylemleri bulunamadı, hatırlama atlandı.");
                 return;
@@ -113,6 +117,6 @@ export default definePlugin({
                     if (args[0] == null && typeof last === "string") args[0] = last;
                 });
             }
-        }));
+        }, { silent: true }));
     }
 });

@@ -8,7 +8,10 @@ import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin, StartAt } from "../../utils/types";
 import { byKeys } from "../../webpack/filters";
-import { waitFor } from "../../webpack/lazy";
+import { reportFinder, waitFor } from "../../webpack/lazy";
+
+/** Modul kapsaminda kayit: plugin kapaliyken de CI dogruluyor. */
+const VIDEO_SETTINGS = reportFinder(byKeys(["getVideoDeviceId", "mirror"]));
 
 const logger = new Logger("NoMirroredCamera", "#a6d189");
 
@@ -29,13 +32,13 @@ export default definePlugin({
     cancel: undefined as (() => void) | undefined,
 
     start() {
-        this.cancel = waitFor(byKeys(["getVideoDeviceId", "mirror"]), (Video: any) => {
+        this.cancel = waitFor(VIDEO_SETTINGS, (Video: any) => {
             try {
                 if (Video != null && "mirror" in Video) Video.mirror = false;
             } catch {
                 logger.warn("Kamera aynasi kapatilamadi (salt okunur).");
             }
-        });
+        }, { silent: true });
     },
 
     stop() {

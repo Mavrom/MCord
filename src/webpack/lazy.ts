@@ -20,6 +20,27 @@ function record(kind: string, filter: ModuleFilter): void {
 }
 
 /**
+ * Filtreyi **modül kapsamında** CI reporter'a kaydeder ve aynen geri döndürür.
+ *
+ * Neden gerekli: `lazyWebpackSearchHistory` yalnız arama çağrıldığında dolar.
+ * `start()` içindeki `waitFor`'lar ancak plugin etkinse çalışıyor, reporter ise
+ * (kanıtlanmış açık-kaynak istemcide olduğu gibi) varsayılan-kapalı pluginleri
+ * başlatmıyor — o yüzden bu aramalar CI'da hiç denenmiyordu. Filtreyi modül
+ * kapsamında kaydedersek plugin kapalıyken bile doğrulanıyor.
+ *
+ *     const HANG_STATUS = reportFinder(byKeys(["setHangStatus"]));
+ *     // start(): waitFor(HANG_STATUS, …, { silent: true })
+ *
+ * Çalışma zamanında hiçbir arama yapmaz; yalnızca kaydı ekler.
+ */
+export function reportFinder(filter: ModuleFilter): ModuleFilter {
+    // "findLazy" olarak kaydediyoruz: reporter'ın yeniden çalıştırıcısı bu türü
+    // `find(filter)` diye deniyor — tam istediğimiz doğrulama.
+    pushSearchHistory(["findLazy", [filter]]);
+    return filter;
+}
+
+/**
  * Modül henüz yüklenmemişse yüklendiğinde haber verir.
  *
  * Discord'un modüllerinin büyük kısmı tembel yükleniyor; plugin başlatılırken

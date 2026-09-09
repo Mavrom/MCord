@@ -144,7 +144,11 @@ async function runBranch(branch) {
         // durumda renderer zaten enjekte olmuş oluyor, reporter çalışır. Diğer
         // goto hataları gerçek — onları fırlat.
         try {
-            await page.goto(BRANCHES[branch], { waitUntil: "load", timeout: 180_000 });
+            // `domcontentloaded` yeterli: reporter kendi akışını
+            // (`[REPORTER_*]`) ayrıca bekliyor. `load`'u beklemek, tüm
+            // pluginler etkinken (reporter modu) sayfanın `load` olayı geç
+            // tetiklendiği için yanlışlıkla zaman aşımı veriyordu.
+            await page.goto(BRANCHES[branch], { waitUntil: "domcontentloaded", timeout: 180_000 });
         } catch (err) {
             if (!String(err?.message).includes("ERR_ABORTED")) throw err;
             process.stderr.write("  goto: ERR_ABORTED (redirect) — renderer enjekte edildi, devam.\n");

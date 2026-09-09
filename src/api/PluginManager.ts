@@ -57,6 +57,7 @@ export function isPluginEnabled(name: string): boolean {
 
     // `_api` ve `_core` pluginleri kapatılamaz.
     if (plugin.required) return true;
+
     if (Settings.safeMode) return false;
 
     const stored = Settings.plugins[name]?.enabled;

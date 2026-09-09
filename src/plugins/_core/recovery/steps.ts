@@ -8,8 +8,16 @@ import { Logger } from "../../../utils/logger";
 import { ContextMenuApi, getFluxDispatcher, transitionTo } from "../../../webpack/common";
 import { byKeys } from "../../../webpack/filters";
 import { find } from "../../../webpack/finder";
+import { reportFinder } from "../../../webpack/lazy";
 
 const logger = new Logger("Recovery", "#e78284");
+
+/**
+ * Modül kapsamında kayıt: arama yalnız kurtarma anında çalıştığı için CI'da
+ * hiç denenmiyordu. Kayıt sayesinde Discord modülü yeniden adlandırırsa
+ * reporter haber veriyor.
+ */
+const MODAL_ACTIONS = reportFinder(byKeys(["closeAllModals", "openModal"]));
 
 interface RecoveryStep {
     action(): void;
@@ -25,7 +33,7 @@ interface RecoveryStep {
  */
 export function buildRecoverySteps(): RecoveryStep[] {
     const Dispatcher = getFluxDispatcher();
-    const ModalActions = find(byKeys(["closeAllModals", "openModal"]), { silent: true });
+    const ModalActions = find(MODAL_ACTIONS, { silent: true });
 
     return [
         {

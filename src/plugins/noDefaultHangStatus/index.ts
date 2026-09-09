@@ -7,7 +7,10 @@
 import { Devs } from "../../utils/constants";
 import { definePlugin, StartAt } from "../../utils/types";
 import { byKeys } from "../../webpack/filters";
-import { waitFor } from "../../webpack/lazy";
+import { reportFinder, waitFor } from "../../webpack/lazy";
+
+/** Modul kapsaminda kayit: plugin kapaliyken de CI dogruluyor. */
+const HANG_STATUS = reportFinder(byKeys(["setHangStatus", "clearHangStatus"]));
 
 /**
  * SCAFFOLD — bilinen bir istemci modundaki aynı işlevin MCord API'siyle
@@ -28,10 +31,10 @@ export default definePlugin({
     start() {
         // waitFor: modul yuklenene kadar bekler VE reporter'a kaydolur.
         // Eski eager findByKeys, modul o an yuklu olmadigi icin hic calismiyordu.
-        this.cancel = waitFor(byKeys(["setHangStatus", "clearHangStatus"]), (HangStatus: any) => {
+        this.cancel = waitFor(HANG_STATUS, (HangStatus: any) => {
             if (typeof HangStatus?.setHangStatus !== "function") return;
             this.patcher.instead(HangStatus, "setHangStatus", () => undefined);
-        });
+        }, { silent: true });
     },
 
     stop() {

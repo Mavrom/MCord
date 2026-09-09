@@ -44,7 +44,15 @@ export default definePlugin({
         defineShortcut("mcordMe", () => UserStore?.getCurrentUser?.(), true);
         defineShortcut("mcordMessages", () => MessageStore?.getMessages?.(SelectedChannelStore?.getChannelId?.()), true);
 
-        defineShortcut("shortcutList", Object.fromEntries(shortcutNames.map(name => [name, (window as any)[name]])));
+        // `shortcutList` de TEMBEL olmalı: eski sürüm burada
+        // `(window as any)[name]` okuyup `mcordChannel`/`mcordMe`/
+        // `mcordMessages` getter'larını başlatma anında çalıştırıyordu. Bu,
+        // henüz hazır olmayan store'lar için tam webpack taraması tetikliyor
+        // ve `start()` dakikalarca dönüyordu (tüm pluginler etkinken reporter
+        // koşusu bu yüzden zaman aşımına uğruyordu).
+        defineShortcut("shortcutList", () => Object.fromEntries(
+            shortcutNames.map(name => [name, (window as any)[name]])
+        ), true);
     },
 
     stop() {
