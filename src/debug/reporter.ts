@@ -176,14 +176,21 @@ function deepStoreProbe(): void {
     try {
         const factories = wreq.m as Record<string, any>;
 
-        // 1) "ChannelStore" geçen TÜM modüller
-        const mentions: string[] = [];
-        for (const id in factories) {
-            let src = ""; try { src = String(factories[id]); } catch { continue; }
-            if (src.includes('"ChannelStore"')) mentions.push(id);
-            if (mentions.length >= 12) break;
+        // Kalan kırık store'ların kaynak imzasını dök
+        for (const nm of ["ReadStateStore", "MediaEngineStore", "ChannelRTCStore", "FriendsStore"]) {
+            let found = 0;
+            for (const id in factories) {
+                let src = ""; try { src = String(factories[id]); } catch { continue; }
+                const i = src.indexOf(`"${nm}"`);
+                if (i < 0) continue;
+                found++;
+                P(`  ${nm} @${id}: ...${src.slice(Math.max(0, i - 70), i + 30).replace(/\s+/g, " ")}...`);
+                if (found >= 2) break;
+            }
+            if (found === 0) P(`  ${nm}: kaynakta HİÇ geçmiyor`);
         }
-        P(`"ChannelStore" geçen modüller: [${mentions.join(",")}]`);
+
+        const mentions: string[] = [];
 
         // 2) Her birinin export'larını dök
         for (const id of mentions.slice(0, 4)) {
