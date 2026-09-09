@@ -7,10 +7,10 @@
 import { Logger } from "../utils/logger";
 import { addPatch, getBuildNumber, patches, patchTimings } from "../webpack/codePatcher";
 import { byStoreName, describeFilter } from "../webpack/filters";
-import { find } from "../webpack/finder";
+import { find, findModuleIdBySource } from "../webpack/finder";
 import { erroredPatches, lazyWebpackSearchHistory, setRecordSearchHistory, wreq } from "../webpack/intercept";
 import { mapMangledModule } from "../webpack/mangled";
-import { allStores as allStoresFn, resolveStore } from "../webpack/stores";
+import { resolveStore } from "../webpack/stores";
 import type { ModuleFilter } from "../webpack/types";
 import { loadLazyChunks } from "./loadLazyChunks";
 import { getTraceSummary } from "./tracer";
@@ -106,10 +106,14 @@ export async function init(): Promise<void> {
 
         if (IS_REPORTER) {
             try {
-                const names: string[] = [];
-                for (const st of (allStoresFn() as any[])) { try { const n = st.getName?.() ?? st.constructor?.displayName; if (typeof n === "string") names.push(n); } catch { /* */ } }
-                console.log("[REPORTER_PHASE]", `store adları (${names.length}) benzer: [${names.filter(n => /ReadState|MediaEngine|ChannelRTC|RTC|Media|ReadS/i.test(n)).slice(0, 25).join(",")}]`);
-            } catch (e) { console.log("[REPORTER_PHASE]", "store adı probe threw " + String(e).slice(0, 80)); }
+                const id = findModuleIdBySource(`type:"CONTEXT_MENU_OPEN`);
+                const ex: any = id != null ? (wreq as any)(id) : null;
+                for (const k of Object.getOwnPropertyNames(ex ?? {})) {
+                    let v: any; try { v = ex[k]; } catch { continue; }
+                    if (typeof v !== "function") continue;
+                    console.log("[REPORTER_PHASE]", `ctxmenu .${k}: ${String(v).slice(0, 150).replace(/s+/g, " ")}`);
+                }
+            } catch (e) { console.log("[REPORTER_PHASE]", "ctxmenu probe threw " + String(e).slice(0, 80)); }
         }
 
         const meta = buildMeta();
