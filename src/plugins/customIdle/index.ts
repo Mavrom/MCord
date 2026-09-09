@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
-import { removeNoticesBySource, showNotice } from "../../api/notices";
+import { popNotice, showNotice } from "../../api/notices";
 import { definePluginSettings } from "../../api/settings";
 import { Devs } from "../../utils/constants";
 import { definePlugin, OptionType } from "../../utils/types";
@@ -58,18 +58,15 @@ export default definePlugin({
             return;
         }
 
-        removeNoticesBySource("CustomIdle");
-        showNotice({
-            source: "CustomIdle",
-            message: "Tekrar çevrimiçi görünmek ister misin?",
-            buttons: [{
-                label: "Çevrimiçi ol",
-                onClick: () => getFluxDispatcher()?.dispatch?.({ type: "IDLE", idle: false })
-            }]
-        });
+        popNotice();
+        showNotice(
+            "Tekrar çevrimiçi görünmek ister misin?",
+            "Çevrimiçi ol",
+            () => getFluxDispatcher()?.dispatch?.({ type: "IDLE", idle: false })
+        );
     },
 
     stop() {
-        removeNoticesBySource("CustomIdle");
+        popNotice();
     }
 });
