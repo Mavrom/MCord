@@ -188,15 +188,15 @@ export const Toasts = {
 
 export const ContextMenuApi = mapMangledModuleLazy('type:"CONTEXT_MENU_OPEN', {
     closeContextMenu: byCode("CONTEXT_MENU_CLOSE"),
-    // Vencord `byCode("renderLazy:")`. Discord bazı build'lerde `renderLazy`
-    // yerine sadece `CONTEXT_MENU_OPEN` dispatch'i bırakıyor — ikinci ölçüt
-    // fallback.
+    // Vencord `byCode("renderLazy:")` kullanıyor ama Discord bu build'de
+    // `renderLazy` üretmiyor. Gerçek `openContextMenu`, olayın konumunu
+    // hesaplayan uzun fonksiyon: `"pageX"in e` içeriyor (kısa sarmalayıcı
+    // `openContextMenuLazy` içermiyor).
     openContextMenu: (value: ModuleExports) => {
         if (typeof value !== "function") return false;
         const src = Function.prototype.toString.call(value);
         if (src.includes("CONTEXT_MENU_CLOSE")) return false;
-        return src.includes("renderLazy:")
-            || (src.includes("CONTEXT_MENU_OPEN") && src.length >= 100);
+        return src.includes("renderLazy:") || src.includes('"pageX"in');
     },
     openContextMenuLazy: (value: ModuleExports) =>
         typeof value === "function" && Function.prototype.toString.call(value).length < 100

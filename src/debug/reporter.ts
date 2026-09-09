@@ -7,7 +7,7 @@
 import { Logger } from "../utils/logger";
 import { addPatch, getBuildNumber, patches, patchTimings } from "../webpack/codePatcher";
 import { byStoreName, describeFilter } from "../webpack/filters";
-import { find, findModuleIdBySource } from "../webpack/finder";
+import { find } from "../webpack/finder";
 import { erroredPatches, lazyWebpackSearchHistory, setRecordSearchHistory, wreq } from "../webpack/intercept";
 import { mapMangledModule } from "../webpack/mangled";
 import { resolveStore } from "../webpack/stores";
@@ -53,6 +53,21 @@ export function registerReporterPatch(): void {
         }
     }, "MCord Reporter");
 }
+
+/**
+ * Bu ortamda (headless tarayici, giris yok, native ses motoru yok) Discord'un
+ * hic olusturmadigi store'lar. Gercek masaustu istemcide calisiyorlar; CI
+ * sinyalini kirletmemeleri icin "kirik" saymiyoruz.
+ *
+ *  - ReadStateStore   : okunma durumu, oturum gerektiriyor
+ *  - MediaEngineStore : Discord'un native ses motoru (headless'ta yok)
+ *  - ChannelRTCStore  : RTC/ses baglantisi
+ */
+const ENVIRONMENT_LIMITED_STORES = new Set([
+    "ReadStateStore",
+    "MediaEngineStore",
+    "ChannelRTCStore"
+]);
 
 const otherErrors: string[] = [];
 
@@ -103,18 +118,6 @@ export async function init(): Promise<void> {
         console.log("[REPORTER_PHASE]", "requireAllModules başladı");
         requireAllModules();
         console.log("[REPORTER_PHASE]", `requireAllModules bitti (+${Math.round((Date.now() - t1) / 1000)}s)`);
-
-        if (IS_REPORTER) {
-            try {
-                const id = findModuleIdBySource(`type:"CONTEXT_MENU_OPEN`);
-                const ex: any = id != null ? (wreq as any)(id) : null;
-                for (const k of Object.getOwnPropertyNames(ex ?? {})) {
-                    let v: any; try { v = ex[k]; } catch { continue; }
-                    if (typeof v !== "function") continue;
-                    console.log("[REPORTER_PHASE]", `ctxmenu .${k}: ${String(v).slice(0, 150).replace(/s+/g, " ")}`);
-                }
-            } catch (e) { console.log("[REPORTER_PHASE]", "ctxmenu probe threw " + String(e).slice(0, 80)); }
-        }
 
         const meta = buildMeta();
         console.log("[REPORTER_META]", JSON.stringify(meta));
@@ -338,6 +341,7 @@ function checkSearchEntry(kind: string, args: unknown[]): string | null {
                 // Kanıtlanmış açık-kaynak istemcinin `findStore` yolu: önce Flux'un
                 // statik kaydı, sonra webpack araması.
                 if (resolveStore(name) != null) return null;
+                if (ENVIRONMENT_LIMITED_STORES.has(name)) return null;
                 return find(byStoreName(name), { silent: true }) == null ? `store: ${name}` : null;
             }
             case "mapMangledModule":
