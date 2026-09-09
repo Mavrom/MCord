@@ -87,7 +87,10 @@ const IGNORED_DISCORD_ERRORS = [
     "Cannot access '",
     "search for 'name' in undefined",
     "Attempting to set fast connect zstd when unsupported",
-    "was preloaded using link preload but not used"
+    "was preloaded using link preload but not used",
+    // Sirasiz zorla-yukleme sirasinda Discord'un kendi modulleri arasinda
+    // olusan basamakli hata; gercek istemcide olusmuyor.
+    "Cannot read properties of undefined (reading 'Ay')"
 ] as const;
 
 export function recordConsoleError(message: string): void {

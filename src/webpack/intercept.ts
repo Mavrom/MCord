@@ -425,13 +425,24 @@ function runFactoryWithWrap(
         if ((patchedFactory as any) === originalFactory) throw err;
 
         const plugins: string[] = (patchedFactory as any)[Symbol.for("MCord.patchedBy")] ?? [];
-        logger.error(
-            `Patch'lenmiş modül fabrikasında hata (${String(module.id)}` +
-            `${plugins.length ? `, patch: ${plugins.join(", ")}` : ""}):\n`, err
-        );
-        erroredPatches.push({ moduleId: String(module.id), plugins, error: String(err) });
 
-        return (originalFactory as any).apply(thisArg, argArray);
+        // Patch'siz orijinali dene. Orijinal de patlıyorsa hata modülün
+        // kendisinden (dairesel bağımlılık / sırasız yükleme) — patch'e
+        // yazmıyoruz. Yalnız orijinal ÇALIŞIYORSA suç gerçekten patch'te.
+        try {
+            const originalReturn = (originalFactory as any).apply(thisArg, argArray);
+
+            logger.error(
+                `Patch'lenmiş modül fabrikasında hata (${String(module.id)}` +
+                `${plugins.length ? `, patch: ${plugins.join(", ")}` : ""}):\n`, err
+            );
+            erroredPatches.push({ moduleId: String(module.id), plugins, error: String(err) });
+
+            return originalReturn;
+        } catch {
+            // Orijinal de patlıyor → modülün kendi sorunu, sessizce ilet.
+            throw err;
+        }
     }
 
     const exports = module.exports;
