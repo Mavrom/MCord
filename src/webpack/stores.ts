@@ -144,6 +144,10 @@ function reviveStoreModule(name: string): ModuleExports | undefined {
                 }
             } catch { /* */ }
         }
+
+        // Kayıt tazelenmemiş olabilir ama modül export'u artık sağlam olabilir.
+        const viaSearch = findStore(name);
+        if (viaSearch != null) return viaSearch;
     }
 
     return undefined;

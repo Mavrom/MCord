@@ -196,7 +196,12 @@ export const ContextMenuApi = mapMangledModuleLazy('type:"CONTEXT_MENU_OPEN', {
         if (typeof value !== "function") return false;
         const src = Function.prototype.toString.call(value);
         if (src.includes("CONTEXT_MENU_CLOSE")) return false;
-        return src.includes("renderLazy:") || src.includes('"pageX"in');
+        if (src.includes("renderLazy:")) return true;
+        // Bu modülde üç fonksiyon var: kısa sarmalayıcı (openContextMenuLazy),
+        // kapatma (closeContextMenu) ve olay konumunu hesaplayan uzun asıl
+        // fonksiyon. Sonuncusu `pageX` kullanıyor; kullanmıyorsa uzunluğu
+        // kesin ayırt ediyor.
+        return /["']pageX["']\s*in\b/.test(src) || src.length >= 200;
     },
     openContextMenuLazy: (value: ModuleExports) =>
         typeof value === "function" && Function.prototype.toString.call(value).length < 100
