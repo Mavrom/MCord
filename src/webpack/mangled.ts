@@ -6,8 +6,8 @@
 
 import { Logger } from "../utils/logger";
 import { bySource, describeFilter } from "./filters";
-import { find } from "./finder";
-import { pushSearchHistory } from "./intercept";
+import { findModuleIdBySource } from "./finder";
+import { pushSearchHistory, wreq } from "./intercept";
 import type { ModuleExports, ModuleFilter } from "./types";
 
 const logger = new Logger("Webpack:Mangled", "#8caaee");
@@ -15,7 +15,7 @@ const logger = new Logger("Webpack:Mangled", "#8caaee");
 /**
  * Discord minify sırasında property adlarını mangle ediyor: `getUser` yerine
  * `Z8`, `n5` gibi adlar kalıyor. Mapper'lar bu adları *değerine* bakarak
- * bulur ve okunabilir adlara bağlar (plan §4.7).
+ * bulur ve okunabilir adlara bağlar.
  */
 export type Mapper = (value: ModuleExports, key?: any, exports?: any) => boolean;
 
@@ -24,73 +24,118 @@ export type MappedModule<M extends Record<string, Mapper>> = {
 };
 
 /**
- * Filtreyle bulunan modüldeki mangle edilmiş property'leri okunabilir adlara
- * bağlar. Dönen nesne getter'larla gerçek property'lere proxy'ler — böylece
- * modül sonradan değişse bile bağ kopmuyor.
+ * Kanıtlanmış açık-kaynak istemcinin (Vencord) `getAllPropertyNames`'i.
  *
- * Her çağrı `lazyWebpackSearchHistory`'ye kaydediliyor ve CI'da doğrulanıyor;
- * bir mapper Discord güncellemesinde kırılırsa reporter yakalıyor
- * (plan §4.7, §9.1).
+ * `includeNonEnumerable` şart: `_blacklistBadModules` bazı export'ları
+ * (ör. `IntlMessagesProxy`) **non-enumerable** yapıyor; `for...in` onları
+ * atlıyor ve `i18n.t` gibi mapper'lar hep kırık görünüyordu.
+ */
+function getAllPropertyNames(object: Record<PropertyKey, any>, includeNonEnumerable: boolean): Set<PropertyKey> {
+    const names = new Set<PropertyKey>();
+    const getKeys = includeNonEnumerable ? Object.getOwnPropertyNames : Object.keys;
+
+    do {
+        try {
+            getKeys(object).forEach(name => name !== "__esModule" && names.add(name));
+        } catch { /* erişilemeyen prototip */ }
+        object = Object.getPrototypeOf(object);
+    } while (object != null);
+
+    return names;
+}
+
+/**
+ * Filtreyle bulunan modüldeki mangle edilmiş property'leri okunabilir adlara
+ * bağlar — kanıtlanmış açık-kaynak istemcinin (Vencord) `mapMangledModule`
+ * algoritmasının birebir portu:
+ *
+ *   1. `findModuleId(...code)` — modülü **ham fabrika kaynağında** bul
+ *      (cache/`loaded` durumundan bağımsız).
+ *   2. `wreq(id)` — çalıştır ve export'u al.
+ *   3. `getAllPropertyNames` ile (non-enumerable dahil) tüm anahtarları gez.
  */
 export function mapMangledModule<M extends Record<string, Mapper>>(
     target: string | ModuleFilter,
     mappers: M,
-    options: { silent?: boolean } = {}
+    options: { silent?: boolean; includeBlacklistedExports?: boolean } = {}
 ): MappedModule<M> {
-    // String de kabul ediyoruz: modülün **ham kaynağında** aranır, böylece
-    // henüz çalıştırılmamış modüller de bulunur (plan §4.4).
     const filter = typeof target === "string" ? bySource(target) : target;
-
     pushSearchHistory(["mapMangledModule", [filter, mappers]]);
 
     const result = {} as MappedModule<M>;
-    const exports = find(filter, { raw: true, silent: true });
 
-    if (exports == null) {
+    // Kaynak string'lerini filtreden çıkar (`bySource(...)` argümanları).
+    const codes = filterSourceStrings(filter);
+    const moduleId = codes.length > 0 ? findModuleIdBySource(...codes) : null;
+
+    if (moduleId == null) {
         if (!options.silent) {
             logger.warn(`mapMangledModule: modül bulunamadı — ${describeFilter(filter)}`);
         }
         return result;
     }
 
-    for (const mapperName in mappers) {
-        const mapper = mappers[mapperName];
-        let found = false;
+    let mod: any;
+    try {
+        mod = wreq(moduleId as any);
+    } catch (err) {
+        if (!options.silent) {
+            logger.warn(`mapMangledModule: modül ${String(moduleId)} require edilemedi:`, err);
+        }
+        return result;
+    }
+    if (mod == null) return result;
 
-        for (const key in exports) {
-            let value: ModuleExports;
-            try {
-                value = exports[key];
-            } catch {
-                continue;
-            }
+    const keys = getAllPropertyNames(mod, options.includeBlacklistedExports !== false);
 
-            let matched = false;
-            try {
-                matched = mapper(value, key, exports);
-            } catch {
-                continue;
-            }
-
-            if (!matched) continue;
-
-            Object.defineProperty(result, mapperName, {
-                enumerable: true,
-                configurable: true,
-                get: () => exports[key],
-                set: newValue => { exports[key] = newValue; }
-            });
-
-            found = true;
-            break;
+    outer:
+    for (const key of keys) {
+        let member: any;
+        try {
+            member = mod[key as any];
+        } catch {
+            continue;
         }
 
-        if (!found && !options.silent) {
-            logger.warn(`mapMangledModule: "${mapperName}" eşleşmedi — ${describeFilter(filter)}`);
+        for (const newName in mappers) {
+            let matched = false;
+            try {
+                matched = mappers[newName](member, key, mod);
+            } catch {
+                continue;
+            }
+
+            if (matched) {
+                Object.defineProperty(result, newName, {
+                    enumerable: true,
+                    configurable: true,
+                    get: () => mod[key as any],
+                    set: value => { mod[key as any] = value; }
+                });
+                continue outer;
+            }
+        }
+    }
+
+    if (!options.silent) {
+        for (const name in mappers) {
+            if (!(name in result)) {
+                logger.warn(`mapMangledModule: "${name}" eşleşmedi — ${describeFilter(filter)}`);
+            }
         }
     }
 
     return result;
+}
+
+/** `bySource(...)` filtresinin arama string'lerini çıkarır. */
+function filterSourceStrings(filter: ModuleFilter): string[] {
+    const meta = (filter as any)[Symbol.for("MCord.Filter")]
+        ?? (filter as any).__originalFilter?.[Symbol.for("MCord.Filter")];
+    if (meta?.name === "bySource" && Array.isArray(meta.args)) {
+        return meta.args.filter((a: unknown) => typeof a === "string") as string[];
+    }
+    return [];
 }
 
 /** Erişildiği anda çözülen tembel sürüm. */
@@ -99,7 +144,6 @@ export function mapMangledModuleLazy<M extends Record<string, Mapper>>(
     mappers: M
 ): MappedModule<M> {
     const filter = typeof target === "string" ? bySource(target) : target;
-
     pushSearchHistory(["mapMangledModuleLazy", [filter, mappers]]);
 
     let resolved: MappedModule<M> | null = null;

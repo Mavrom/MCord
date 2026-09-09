@@ -52,17 +52,27 @@ function safe(filter: ModuleFilter): (v: any) => boolean {
 export function find<T = ModuleExports>(filter: ModuleFilter, options: FindOptions = {}): T | null {
     const wrapped = safe(filter);
 
-    // `bySource` sadece `moduleId`'ye bakıyor — modül başına tek çağrı (perf).
-    const isSourceFilter = (filter[FilterSymbol] ?? filter.__originalFilter?.[FilterSymbol])?.name === "bySource";
+    // `bySource` **ham fabrika kaynağına** bakıyor: cache'te olmayan / henüz
+    // çalıştırılmamış modülleri de bulmalı. Vencord'un yolu: `findModuleId`
+    // (wreq.m kaynak taraması) + `wreq(id)`.
+    const meta = filter[FilterSymbol] ?? filter.__originalFilter?.[FilterSymbol];
+    if (meta?.name === "bySource") {
+        const codes = (meta.args ?? []).filter((a: unknown) => typeof a === "string") as string[];
+        const id = codes.length > 0 ? findModuleIdBySource(...codes) : null;
+        if (id == null) {
+            if (!options.silent) logger.warn(`Modül bulunamadı: ${describeFilter(filter)}`);
+            return null;
+        }
+        try {
+            return wreq(id as any) as T;
+        } catch {
+            return null;
+        }
+    }
 
     for (const key in cache) {
         const mod = cache[key] as any;
         if (!mod?.loaded || mod.exports == null) continue;
-
-        if (isSourceFilter) {
-            if ((filter as any)(mod.exports, mod, key)) return mod.exports as T;
-            continue;
-        }
 
         if (wrapped(mod.exports)) return mod.exports as T;
 
@@ -156,7 +166,6 @@ export function findModuleIdBySource(...strings: string[]): PropertyKey | null {
         }
     }
 
-    logger.warn(`Kaynakta bulunamadı: ${strings.join(", ")}`);
     return null;
 }
 
