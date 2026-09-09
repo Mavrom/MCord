@@ -8,7 +8,7 @@ import { Logger } from "../utils/logger";
 import { addPatch, getBuildNumber, patches, patchTimings } from "../webpack/codePatcher";
 import { byStoreName, describeFilter } from "../webpack/filters";
 import { find } from "../webpack/finder";
-import { lazyWebpackSearchHistory, setRecordSearchHistory, wreq } from "../webpack/intercept";
+import { erroredPatches, lazyWebpackSearchHistory, setRecordSearchHistory, wreq } from "../webpack/intercept";
 import { mapMangledModule } from "../webpack/mangled";
 import { resolveStore } from "../webpack/stores";
 import type { ModuleFilter } from "../webpack/types";
@@ -30,6 +30,7 @@ export interface Report {
         timestamp: number;
     };
     badPatches: Array<{ plugin: string; find: string; reason: string }>;
+    erroredPatches: Array<{ moduleId: string; plugins: string[]; error: string }>;
     slowPatches: Array<{ plugin: string; moduleId: string; match: string; time: number }>;
     badWebpackFinds: string[];
     traces: Array<{ name: string; totalTime: number }>;
@@ -105,6 +106,12 @@ export async function init(): Promise<void> {
             console.log("[REPORTER_BAD_PATCH]", JSON.stringify(patch));
         }
 
+        // Çalışma anında patlayan patch'ler — plugin başına grupla.
+        const erroredByPlugin = groupErroredPatches();
+        for (const entry of erroredByPlugin) {
+            console.log("[REPORTER_ERRORED_PATCH]", JSON.stringify(entry));
+        }
+
         const slowPatches = findSlowPatches();
         for (const patch of slowPatches.slice(0, 30)) {
             console.log("[REPORTER_SLOW_PATCH]", JSON.stringify(patch));
@@ -135,7 +142,7 @@ export async function init(): Promise<void> {
         }
 
         const report: Report = {
-            meta, badPatches, slowPatches, badWebpackFinds,
+            meta, badPatches, erroredPatches, slowPatches, badWebpackFinds,
             traces: getTraceSummary(), otherErrors
         };
         (window as any).McordReport = report;
@@ -241,6 +248,29 @@ function findBadPatches(): Report["badPatches"] {
         }));
 }
 
+/**
+ * Çalışma anında patlayan patch'leri plugin(ler)e göre grupla — hangi
+ * MCord plugin'inin patch'i canlıda bozuk kod üretiyor, tek bakışta görülsün.
+ */
+function groupErroredPatches(): Array<{ plugins: string; count: number; sampleModule: string; sampleError: string }> {
+    const byKey = new Map<string, { plugins: string; count: number; sampleModule: string; sampleError: string }>();
+    for (const entry of erroredPatches) {
+        const key = entry.plugins.join(", ") || "(bilinmiyor)";
+        const existing = byKey.get(key);
+        if (existing) {
+            existing.count++;
+        } else {
+            byKey.set(key, {
+                plugins: key,
+                count: 1,
+                sampleModule: entry.moduleId,
+                sampleError: entry.error.slice(0, 200)
+            });
+        }
+    }
+    return [...byKey.values()].sort((a, b) => b.count - a.count);
+}
+
 function findSlowPatches(): Report["slowPatches"] {
     return patchTimings
         .filter(timing => timing.time > SLOW_PATCH_THRESHOLD_MS)
@@ -306,13 +336,14 @@ export function runClientSelfCheck(delayMs = 10_000): void {
 
 function logSummary(report: Report): void {
     const { badPatches, slowPatches, badWebpackFinds } = report;
+    const erroredCount = report.erroredPatches.length;
 
-    if (badPatches.length === 0 && badWebpackFinds.length === 0) {
+    if (badPatches.length === 0 && badWebpackFinds.length === 0 && erroredCount === 0) {
         logger.info(`✔ Tüm patch'ler ve aramalar geçerli (build ${report.meta.buildNumber}).`);
     } else {
         logger.error(
-            `✘ ${badPatches.length} kırık patch, ${badWebpackFinds.length} kırık arama ` +
-            `(build ${report.meta.buildNumber}).`
+            `✘ ${badPatches.length} kırık patch, ${erroredCount} çalışma-anı patch hatası, ` +
+            `${badWebpackFinds.length} kırık arama (build ${report.meta.buildNumber}).`
         );
     }
 

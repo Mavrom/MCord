@@ -54,6 +54,15 @@ export const factoryListeners = new Set<(factory: ModuleFactory, moduleId: Prope
 export const lazyWebpackSearchHistory: Array<[string, unknown[]]> = [];
 
 /**
+ * Çalışma anında patlayan patch'lenmiş fabrikalar. `codePatcher` sözdizimi
+ * hatalarını eval'da yakalıyor ama TDZ / semantik hatalar sadece fabrika
+ * çalışınca ortaya çıkıyor — onları burada, patch'i yapan plugin(ler)e
+ * atfederek topluyoruz (kanıtlanmış açık-kaynak istemcinin "Patch errored"
+ * raporunun karşılığı).
+ */
+export const erroredPatches: Array<{ moduleId: string; plugins: string[]; error: string }> = [];
+
+/**
  * Reporter/self-check bu geçmişi tek tek yeniden çalıştırırken bazı aramalar
  * (ör. `mapMangledModule`) yeniden kayıt yapıyor — bu bayrak açıkken kayıt
  * atlanır, yoksa dizi sonsuza kadar büyür ve koşu takılır.
@@ -414,7 +423,14 @@ function runFactoryWithWrap(
         factoryReturn = (patchedFactory as any).apply(thisArg, argArray);
     } catch (err) {
         if ((patchedFactory as any) === originalFactory) throw err;
-        logger.error(`Patch'lenmiş modül fabrikasında hata (${String(module.id)}):\n`, err);
+
+        const plugins: string[] = (patchedFactory as any)[Symbol.for("MCord.patchedBy")] ?? [];
+        logger.error(
+            `Patch'lenmiş modül fabrikasında hata (${String(module.id)}` +
+            `${plugins.length ? `, patch: ${plugins.join(", ")}` : ""}):\n`, err
+        );
+        erroredPatches.push({ moduleId: String(module.id), plugins, error: String(err) });
+
         return (originalFactory as any).apply(thisArg, argArray);
     }
 

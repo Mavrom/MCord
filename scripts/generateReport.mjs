@@ -60,7 +60,10 @@ for (const branch of branches) {
     const report = await runBranch(branch);
     results.push({ branch, report });
 
-    if (report == null || report.badPatches.length > 0 || report.badWebpackFinds.length > 0) {
+    if (
+        report == null || report.badPatches.length > 0 || report.badWebpackFinds.length > 0
+        || (report.erroredPatches?.length ?? 0) > 0
+    ) {
         anyFailed = true;
     }
 }
@@ -147,6 +150,8 @@ function waitForReport(page) {
     const partial = {
         meta: { buildNumber: "?", buildHash: null },
         badPatches: [],
+        erroredPatches: [],
+        erroredPatchGroups: [],
         slowPatches: [],
         badWebpackFinds: [],
         traces: [],
@@ -209,6 +214,13 @@ function waitForReport(page) {
                 case "REPORTER_BAD_PATCH":
                     try { partial.badPatches.push(JSON.parse(payload)); } catch { /* yoksa */ }
                     break;
+                case "REPORTER_ERRORED_PATCH":
+                    try {
+                        const g = JSON.parse(payload);
+                        partial.erroredPatchGroups.push(g);
+                        process.stderr.write(`  ✘ patch errored: ${g.plugins} (${g.count} modül)\n`);
+                    } catch { /* yoksa */ }
+                    break;
                 case "REPORTER_SLOW_PATCH":
                     try { partial.slowPatches.push(JSON.parse(payload)); } catch { /* yoksa */ }
                     break;
@@ -239,6 +251,7 @@ function renderMarkdown(results) {
         }
 
         const { meta, badPatches, slowPatches, badWebpackFinds, otherErrors } = report;
+        const erroredPatches = report.erroredPatches ?? [];
 
         lines.push(
             `- Discord build: **${meta.buildNumber}** (\`${meta.buildHash ?? "?"}\`)`,
@@ -247,8 +260,23 @@ function renderMarkdown(results) {
             ""
         );
 
-        if (badPatches.length === 0 && badWebpackFinds.length === 0) {
+        if (badPatches.length === 0 && badWebpackFinds.length === 0 && erroredPatches.length === 0) {
             lines.push("✅ Tüm patch'ler ve aramalar geçerli.", "");
+        }
+
+        if (erroredPatches.length > 0) {
+            const byPlugin = new Map();
+            for (const e of erroredPatches) {
+                const key = (e.plugins ?? []).join(", ") || "(bilinmiyor)";
+                const g = byPlugin.get(key) ?? { count: 0, sample: e.error };
+                g.count++;
+                byPlugin.set(key, g);
+            }
+            lines.push(`### 💥 Çalışma-anı patch hataları (${erroredPatches.length} modül)`, "");
+            for (const [plugin, g] of [...byPlugin].sort((a, b) => b[1].count - a[1].count)) {
+                lines.push(`- **${plugin}** — ${g.count} modül — \`${truncate(g.sample)}\``);
+            }
+            lines.push("");
         }
 
         if (badPatches.length > 0) {
