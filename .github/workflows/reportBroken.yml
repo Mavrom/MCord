@@ -72,7 +72,7 @@ jobs:
 
       - name: Run reporter
         id: reporter
-        timeout-minutes: 10
+        timeout-minutes: 16
         continue-on-error: true
         env:
           CHROMIUM_BIN: ${{ env.CHROMIUM_BIN }}
