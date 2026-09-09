@@ -324,10 +324,13 @@ function healPoisonedModules(): void {
         if (poisoned.length === 0 || poisoned.length >= previous) return;
         previous = poisoned.length;
 
+        // ÖNCE hepsini sil, SONRA hepsini yükle. Tek tek silip yüklemek
+        // karşılıklı-dairesel zehirlenmeyi çözemiyor: A yeniden yüklenirken
+        // hâlâ zehirli B'yi cache'ten alıyor.
         for (const id of poisoned) {
-            try {
-                delete cacheObj[id];
-            } catch { continue; }
+            try { delete cacheObj[id]; } catch { /* */ }
+        }
+        for (const id of poisoned) {
             try {
                 wreq(id as any);
             } catch {
