@@ -297,7 +297,8 @@ function healPoisonedModules(): void {
     const cacheObj = (wreq as any).c;
     if (cacheObj == null) return;
 
-    for (let pass = 1; pass <= 3; pass++) {
+    let previous = Infinity;
+    for (let pass = 1; pass <= 12; pass++) {
         const poisoned: string[] = [];
 
         for (const id of Object.getOwnPropertyNames(cacheObj)) {
@@ -319,7 +320,9 @@ function healPoisonedModules(): void {
         if (IS_REPORTER) {
             console.log("[REPORTER_PHASE]", `zehirli modül iyileştirme geçiş ${pass}: ${poisoned.length} modül`);
         }
-        if (poisoned.length === 0) return;
+        // Bitti ya da artık ilerlemiyor.
+        if (poisoned.length === 0 || poisoned.length >= previous) return;
+        previous = poisoned.length;
 
         for (const id of poisoned) {
             try {
