@@ -142,7 +142,11 @@ export async function init(): Promise<void> {
         }
 
         const report: Report = {
-            meta, badPatches, erroredPatches, slowPatches, badWebpackFinds,
+            meta, badPatches,
+            // Yalnız bir plugin'e atfedilebilenler eyleme dönük; atıfsız TDZ
+            // gürültüsü rapora girmiyor (yukarıdaki `groupErroredPatches` notu).
+            erroredPatches: erroredPatches.filter(e => e.plugins.length > 0),
+            slowPatches, badWebpackFinds,
             traces: getTraceSummary(), otherErrors
         };
         (window as any).McordReport = report;
@@ -251,11 +255,17 @@ function findBadPatches(): Report["badPatches"] {
 /**
  * Çalışma anında patlayan patch'leri plugin(ler)e göre grupla — hangi
  * MCord plugin'inin patch'i canlıda bozuk kod üretiyor, tek bakışta görülsün.
+ *
+ * Atıfsız olanlar (`plugins` boş) raporlanmıyor: 20 bin modülü sırasız require
+ * ederken Discord'un kendi kodu da bol bol TDZ/`Cannot read` fırlatıyor —
+ * kanıtlanmış açık-kaynak istemci de bunları rapora almıyor, sadece konsola
+ * basıp orijinaline düşüyor.
  */
 function groupErroredPatches(): Array<{ plugins: string; count: number; sampleModule: string; sampleError: string }> {
     const byKey = new Map<string, { plugins: string; count: number; sampleModule: string; sampleError: string }>();
     for (const entry of erroredPatches) {
-        const key = entry.plugins.join(", ") || "(bilinmiyor)";
+        if (!entry.plugins.length) continue;
+        const key = entry.plugins.join(", ");
         const existing = byKey.get(key);
         if (existing) {
             existing.count++;
