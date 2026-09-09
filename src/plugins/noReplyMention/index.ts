@@ -6,11 +6,8 @@
 
 import { definePluginSettings } from "../../api/settings";
 import { Devs } from "../../utils/constants";
-import { Logger } from "../../utils/logger";
-import { definePlugin, OptionType, StartAt } from "../../utils/types";
-import { findByKeys } from "../../webpack/finder";
-
-const logger = new Logger("NoReplyMention", "#a6d189");
+import { definePlugin, OptionType } from "../../utils/types";
+import { UserStore } from "../../webpack/common";
 
 const settings = definePluginSettings({
     exceptDirect: {
@@ -21,9 +18,13 @@ const settings = definePluginSettings({
 });
 
 /**
- * SCAFFOLD — yanıt verirken `@` etiketini varsayılan olarak kapatır.
- * `allowedMentions.repliedUser` alanını mesaj gönderiminden önce `false`
- * yapan modülü webpack'ten bulup patch'liyor; canlı doğrulama gerek.
+ * Kanıtlanmış açık-kaynak istemcinin (Vencord) `NoReplyMention` patch'inin
+ * portu.
+ *
+ * Eski MCord sürümü `start()` içinde eager `findByKeys("sendMessage",
+ * "editMessage")` ile `MessageActions`'ı arıyordu; modül o an yüklü olmadığı
+ * için hiç bağlanmıyordu. Kod patch'i doğrudan yanıt kutusundaki
+ * `shouldMention` kararını değiştiriyor — zamanlamadan bağımsız, CI doğruluyor.
  */
 export default definePlugin({
     name: "NoReplyMention",
@@ -31,22 +32,30 @@ export default definePlugin({
     authors: [Devs.Berk],
     tags: ["mesaj", "gizlilik"],
     settings,
-    startAt: StartAt.WebpackReady,
-    requiresRestart: false,
+    requiresRestart: true,
 
-    start() {
-        const MessageActions = findByKeys("sendMessage", "editMessage");
-        if (!MessageActions?.sendMessage) {
-            logger.warn("sendMessage modülü bulunamadı.");
-            return;
-        }
-        this.patcher.before(MessageActions, "sendMessage", (_self, args) => {
-            const opts = args[1];
-            if (opts && typeof opts === "object" && opts.allowedMentions) {
-                opts.allowedMentions.repliedUser = false;
-            } else if (opts && typeof opts === "object") {
-                opts.allowedMentions = { parse: ["users", "roles", "everyone"], repliedUser: false };
+    patches: [
+        {
+            find: ",\"Message\")}function",
+            reason: "Yanıt kutusunun `shouldMention` varsayılanı burada hesaplanıyor (Shift ile tersleniyor).",
+            replacement: {
+                match: /:(\i),shouldMention:!(\i)\.shiftKey/,
+                replace: ":$1,shouldMention:$self.shouldMention($1,$2.shiftKey)"
             }
-        });
+        }
+    ],
+
+    /** `true` → etiketle. Shift basılıysa Discord'un varsayılanı tersleniyor. */
+    shouldMention(message: any, isHoldingShift: boolean): boolean {
+        try {
+            if (settings.store.exceptDirect) {
+                const me = UserStore?.getCurrentUser?.()?.id;
+                // Yanıt bize yapılmışsa etiketlemeyi koru.
+                if (me != null && message?.author?.id === me) return !isHoldingShift;
+            }
+        } catch { /* store hazır değil */ }
+
+        // Varsayılan: etiketleme. Shift ile etiketle.
+        return isHoldingShift;
     }
 });
