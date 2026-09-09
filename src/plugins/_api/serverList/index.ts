@@ -14,29 +14,24 @@ export default definePlugin({
     authors: [Devs.MCord],
     required: true,
 
+    // Kanıtlanmış açık-kaynak istemcinin (Vencord) güncel `ServerListAPI`
+    // patch'lerinin birebir portu.
     patches: [
         {
-            find: '"guildsnav"',
-            reason:
-                "Sunucu şeridi (`<nav aria-label=…>`) kaydırılabilir listeyi bir modül "
-                + "literali içinde inline JSX children dizisi olarak kuruyor. Dizi "
-                + "elemanlarının dışarıdan tutulabilir referansı yok, fonksiyon patch'i "
-                + "uygulanamıyor. Çapa `\"guildsnav\"` navigasyon kimliği — bundle'da tek "
-                + "geçiyor.",
-            replacement: [
-                {
-                    // ÜST: home/DM düğme kümesinden (`{scrollToTop,lurkingGuildIds}`)
-                    // hemen sonra, guild ağacından önce.
-                    match: /(\(0,\i\.jsx\)\(\i,\{scrollToTop:\i,lurkingGuildIds:\i\}\),)/,
-                    replace: "$1...$self.renderAbove(),"
-                },
-                {
-                    // ALT: guild keşif düğmesini taşıyan eleman (`{guildDiscoveryButton:…}`)
-                    // kaydırıcının son çocuğu — ondan hemen sonra.
-                    match: /((\(0,\i\.jsx\)\(\i,\{guildDiscoveryButton:\i,[^}]*\}\)))(\]\}\))/,
-                    replace: "$1,...$self.renderBelow()$3"
-                }
-            ]
+            find: "#{intl::DISCODO_DISABLED}",
+            reason: "Sunucu şeridinin ÜSTÜ (home/DM düğme kümesi). Vencord ServerListAPI portu.",
+            replacement: {
+                match: /(?<=#{intl::DISCODO_DISABLED}.+?return)(\(.{0,150}?tutorialId:"friends-list".+?}\))(?=}function)/,
+                replace: "[$1].concat($self.renderAbove())"
+            }
+        },
+        {
+            find: ".setGuildsTree(",
+            reason: "Sunucu şeridinin İÇİ (guild ağacı listesi). Vencord ServerListAPI portu.",
+            replacement: {
+                match: /(?<=#{intl::SERVERS}\),gap:"xs",children:)\i\.map\(.{0,50}\.length\)/,
+                replace: "$self.renderBelow().concat($&)"
+            }
         }
     ],
 
