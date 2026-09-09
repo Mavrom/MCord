@@ -139,7 +139,9 @@ export function resolveStore(name: string): ModuleExports | undefined {
     // 1) Flux statik kaydı (`class X extends Flux.Store`).
     for (const store of allStores()) {
         try {
-            if (store.getName?.() === name || store.constructor?.displayName === name) {
+            if (store.constructor?.displayName === name
+                || store.displayName === name
+                || store.getName?.() === name) {
                 storeCache.set(name, store);
                 return store;
             }

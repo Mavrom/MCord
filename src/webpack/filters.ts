@@ -159,9 +159,14 @@ export const componentByCode = (...rawCode: Array<string | RegExp>): ModuleFilte
  */
 export const byStoreName = (name: string): ModuleFilter =>
     makeFilter("byStoreName", [name], exports => {
+        if (exports == null) return false;
         try {
-            if (exports?.constructor?.displayName === name) return true;
-            if (typeof exports?.getName === "function" && exports.getName.length === 0) {
+            // Vencord'un tek ölçütü bu.
+            if (exports.constructor?.displayName === name) return true;
+            if (exports.displayName === name) return true;
+            // Ek yol: `getName()`. Eskiden `getName.length === 0` şartı vardı;
+            // minify'da argümanlı üretilen `getName`'leri eliyordu.
+            if (typeof exports.getName === "function") {
                 return exports.getName() === name;
             }
         } catch { /* bozuk store */ }
