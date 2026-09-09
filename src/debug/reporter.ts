@@ -275,7 +275,63 @@ function requireAllModules(): void {
         pending = stillFailing;
     }
 
+    healPoisonedModules();
+
     logger.info(`${total} modül require edildi (${pending.length} kalıcı hata).`);
+}
+
+/**
+ * "Zehirlenmiş" modülleri iyileştirir.
+ *
+ * Bir modülün fabrikası **fırlatmadan** yarım kalabiliyor: webpack `wreq.d` ile
+ * export getter'larını en başta tanımlıyor, ama getter'ın kapattığı modül-içi
+ * `let` değişkeni (dairesel bağımlılık yüzünden) hiç atanmıyor. Sonuç:
+ * `exports.A` erişimi `Cannot access 'x' before initialization` fırlatıyor ve o
+ * modüldeki store/component hiçbir aramada görünmüyor. ChannelStore'un modülü
+ * (734057) tam olarak buydu.
+ *
+ * Çözüm: her cache kaydının export'larına dokunup fırlatanı tespit et, cache
+ * kaydını sil ve fabrikayı **gerçekten** yeniden çalıştır.
+ */
+function healPoisonedModules(): void {
+    const cacheObj = (wreq as any).c;
+    if (cacheObj == null) return;
+
+    for (let pass = 1; pass <= 3; pass++) {
+        const poisoned: string[] = [];
+
+        for (const id of Object.getOwnPropertyNames(cacheObj)) {
+            const exports = cacheObj[id]?.exports;
+            if (exports == null || typeof exports !== "object") continue;
+
+            let bad = false;
+            for (const key of Object.getOwnPropertyNames(exports)) {
+                try {
+                    void (exports as any)[key];
+                } catch {
+                    bad = true;
+                    break;
+                }
+            }
+            if (bad) poisoned.push(id);
+        }
+
+        if (IS_REPORTER) {
+            console.log("[REPORTER_PHASE]", `zehirli modül iyileştirme geçiş ${pass}: ${poisoned.length} modül`);
+        }
+        if (poisoned.length === 0) return;
+
+        for (const id of poisoned) {
+            try {
+                delete cacheObj[id];
+            } catch { continue; }
+            try {
+                wreq(id as any);
+            } catch {
+                try { delete cacheObj[id]; } catch { /* */ }
+            }
+        }
+    }
 }
 
 /** Girdiyi çalıştırmadan önce insan-okunur kısa etiket — hangi arama takıldı görmek için. */
