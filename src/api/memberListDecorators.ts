@@ -6,11 +6,19 @@
 
 /*
  * Kanıtlanmış açık-kaynak istemcinin (Vencord) güncel `MemberListDecorators`
- * API'sinin birebir portu.
+ * API'sinin portu.
+ *
+ * NOT: Vencord her süslemeyi `<ErrorBoundary noop>` ile sarıyor. MCord'da
+ * `ErrorBoundary` `class extends React.Component` — modül yüklenirken
+ * değerlendiriliyor ve `/login` gibi React henüz hazır olmayan bağlamlarda
+ * fırlatıyor. Bu yüzden burada `ErrorBoundary` import etmiyoruz; her renderer'ı
+ * kendi `try/catch`'inde çağırıyoruz (eski MCord deseni).
  */
 
-import { ErrorBoundary } from "../components/ErrorBoundary";
+import { Logger } from "../utils/logger";
 import { McordCreateElement } from "../utils/jsx";
+
+const logger = new Logger("Api:MemberListDecorators", "#f4b8e4");
 
 interface DecoratorProps {
     type: "guild" | "dm";
@@ -36,20 +44,22 @@ export function removeMemberListDecorator(identifier: string): void {
 }
 
 export function __getDecorators(props: DecoratorProps, type: "guild" | "dm"): any {
-    const decorators = Array.from(
-        decoratorsFactories.entries(),
-        ([key, { render: Decorator, onlyIn }]) => {
-            if ((onlyIn === "guilds" && type !== "guild") || (onlyIn === "dms" && type !== "dm")) {
-                return null;
-            }
+    const decorators: any[] = [];
 
-            return McordCreateElement(
-                ErrorBoundary,
-                { noop: true, key, message: `"${key}" üye listesi süslemesi render edilemedi` },
-                McordCreateElement(Decorator as any, { ...props, type })
-            );
+    for (const [key, { render, onlyIn }] of decoratorsFactories) {
+        if ((onlyIn === "guilds" && type !== "guild") || (onlyIn === "dms" && type !== "dm")) {
+            continue;
         }
-    );
+
+        try {
+            const element = render({ ...props, type });
+            if (element != null) {
+                decorators.push(McordCreateElement("div", { key }, element));
+            }
+        } catch (err) {
+            logger.error(`"${key}" üye listesi süslemesi render edilemedi:\n`, err);
+        }
+    }
 
     return McordCreateElement("div", { className: "mcord-member-list-decorators-wrapper" }, decorators);
 }
