@@ -5,7 +5,7 @@
  */
 
 import { byCode, byKeys, byStoreName } from "./filters";
-import { find, findStore } from "./finder";
+import { find, findAll, findStore } from "./finder";
 import type { ModuleExports } from "./types";
 
 /** Discord'un Flux modülü — `Store.getAll()` buradan geliyor. */
@@ -29,12 +29,35 @@ function getFlux(): ModuleExports | null {
  * edildiğinde) `Flux.Store.getAll()` bunları döndürüyor.
  */
 export function allStores(): ModuleExports[] {
-    const flux = getFlux();
+    const out: ModuleExports[] = [];
+    const seen = new Set<unknown>();
+
+    const collect = (registry: unknown) => {
+        if (!Array.isArray(registry)) return;
+        for (const store of registry) {
+            if (store == null || seen.has(store)) continue;
+            seen.add(store);
+            out.push(store);
+        }
+    };
+
+    // 1) Bilinen Flux modülü
     try {
-        return flux?.Store?.getAll?.() ?? [];
-    } catch {
-        return [];
-    }
+        collect(getFlux()?.Store?.getAll?.());
+    } catch { /* */ }
+
+    // 2) `Store.getAll` sunan **tüm** modüller. Discord'da birden fazla
+    //    Flux-benzeri modül var ve store'lar farklı kayıtlara dağılabiliyor;
+    //    yalnız ilkini almak store finder'larının kırık görünmesine yol açıyordu.
+    try {
+        for (const mod of findAll((m: any) => typeof m?.Store?.getAll === "function")) {
+            try {
+                collect((mod as any).Store.getAll());
+            } catch { /* */ }
+        }
+    } catch { /* */ }
+
+    return out;
 }
 
 /**
