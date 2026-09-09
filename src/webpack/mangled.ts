@@ -7,7 +7,7 @@
 import { Logger } from "../utils/logger";
 import { bySource, describeFilter } from "./filters";
 import { find } from "./finder";
-import { lazyWebpackSearchHistory } from "./intercept";
+import { pushSearchHistory } from "./intercept";
 import type { ModuleExports, ModuleFilter } from "./types";
 
 const logger = new Logger("Webpack:Mangled", "#8caaee");
@@ -41,7 +41,7 @@ export function mapMangledModule<M extends Record<string, Mapper>>(
     // henüz çalıştırılmamış modüller de bulunur (plan §4.4).
     const filter = typeof target === "string" ? bySource(target) : target;
 
-    lazyWebpackSearchHistory.push(["mapMangledModule", [filter, mappers]]);
+    pushSearchHistory(["mapMangledModule", [filter, mappers]]);
 
     const result = {} as MappedModule<M>;
     const exports = find(filter, { raw: true, silent: true });
@@ -100,7 +100,7 @@ export function mapMangledModuleLazy<M extends Record<string, Mapper>>(
 ): MappedModule<M> {
     const filter = typeof target === "string" ? bySource(target) : target;
 
-    lazyWebpackSearchHistory.push(["mapMangledModuleLazy", [filter, mappers]]);
+    pushSearchHistory(["mapMangledModuleLazy", [filter, mappers]]);
 
     let resolved: MappedModule<M> | null = null;
 

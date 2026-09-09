@@ -53,6 +53,19 @@ export const factoryListeners = new Set<(factory: ModuleFactory, moduleId: Prope
 /** Reporter kaydı: her tembel arama tipi ve argümanları. */
 export const lazyWebpackSearchHistory: Array<[string, unknown[]]> = [];
 
+/**
+ * Reporter/self-check bu geçmişi tek tek yeniden çalıştırırken bazı aramalar
+ * (ör. `mapMangledModule`) yeniden kayıt yapıyor — bu bayrak açıkken kayıt
+ * atlanır, yoksa dizi sonsuza kadar büyür ve koşu takılır.
+ */
+export let recordSearchHistory = true;
+export function setRecordSearchHistory(value: boolean): void {
+    recordSearchHistory = value;
+}
+export function pushSearchHistory(entry: [string, unknown[]]): void {
+    if (recordSearchHistory) lazyWebpackSearchHistory.push(entry);
+}
+
 export const SYM_ORIGINAL_MODULE_FACTORIES = Symbol("MCord.originalModuleFactories");
 export const SYM_IS_PROXIED_FACTORY = Symbol("MCord.isProxiedFactory");
 export const SYM_ORIGINAL_FACTORY = Symbol("MCord.originalFactory");

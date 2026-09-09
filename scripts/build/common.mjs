@@ -150,6 +150,23 @@ export const makeAllPackagesExternalPlugin = {
     }
 };
 
+/**
+ * Reporter yalnızca `--reporter` build'inde gerekli. Normal build'de gerçek
+ * `debug/reporter` modülünü hafif stub'la değiştiriyoruz — böylece
+ * `loadLazyChunks`, `tracer`, `p-limit` gibi ağır bağımlılıklar (ve ~15 KB ölü
+ * kod) pakete hiç girmiyor.
+ */
+export const reporterStubPlugin = {
+    name: "reporter-stub-plugin",
+    setup(build) {
+        if (IS_REPORTER) return;
+
+        build.onResolve({ filter: /(^|\/)debug\/reporter$/ }, args => ({
+            path: join(dirname(fileURLToPath(import.meta.url)), "..", "..", "src", "debug", "reporter.stub.ts")
+        }));
+    }
+};
+
 /** `file://` ile import edilen dosyaları base64 string olarak gömer. */
 export const fileIncludePlugin = {
     name: "file-include-plugin",
@@ -187,7 +204,7 @@ export const commonOpts = {
     sourcemap: IS_DEV_BUILD ? "inline" : false,
     legalComments: "linked",
     banner,
-    plugins: [fileIncludePlugin],
+    plugins: [reporterStubPlugin, fileIncludePlugin],
     define: defines,
     // React'i biz bundle etmiyoruz; Discord'unkini webpack'ten çekiyoruz (plan §11.3)
     jsxFactory: "McordCreateElement",

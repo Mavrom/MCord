@@ -124,16 +124,31 @@ export const byAll = (...filters: ModuleFilter[]): ModuleFilter =>
 /** `wreq.e("1234")` çağrılarından chunk id'lerini ayıklar. */
 export const ChunkIdsRegex = /\("([^"]+?)"\)/g;
 
+/**
+ * Fabrika kaynağı önbelleği: `bySource` her modülün **her iç export'u** için
+ * çağrılıyor (20 bin modül × ~5 export = ~100 bin çağrı). String'e çevirmeyi
+ * modül başına bir kez yapıyoruz — Vencord'un `bySource`/`byFactoryCode`
+ * yaklaşımı da aynı: kaynağı bir kez okur, tekrar tekrar tarar.
+ */
+const moduleSourceCache = new Map<PropertyKey, string>();
+
 /** Ham modül kaynağı — fabrika henüz çalışmamış olsa bile okunabilir. */
 export function getModuleSource(moduleId: PropertyKey): string {
+    const cached = moduleSourceCache.get(moduleId);
+    if (cached !== undefined) return cached;
+
     const factory = wreq?.m?.[moduleId as any];
     if (factory == null) return "";
 
+    let source: string;
     try {
-        return String(factory);
+        source = String(factory);
     } catch {
-        return "";
+        source = "";
     }
+
+    moduleSourceCache.set(moduleId, source);
+    return source;
 }
 
 /** Bir filtrenin insan okunabilir tanımı (reporter için). */

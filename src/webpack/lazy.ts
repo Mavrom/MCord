@@ -8,14 +8,14 @@ import { Logger } from "../utils/logger";
 import { byCode, byKeys, byStoreName, componentByCode, describeFilter } from "./filters";
 import { find, type FindOptions } from "./finder";
 import { shouldSkipModule, wrapModuleFilter } from "./guards";
-import { cache, lazyWebpackSearchHistory, moduleListeners } from "./intercept";
+import { cache, moduleListeners, pushSearchHistory } from "./intercept";
 import type { Module, ModuleExports, ModuleFilter } from "./types";
 
 const logger = new Logger("Webpack:Lazy", "#8caaee");
 
 /** Reporter için arama kaydı — CI'da hepsi yeniden çalıştırılır (plan §9.1). */
 function record(kind: string, filter: ModuleFilter): void {
-    lazyWebpackSearchHistory.push([kind, [filter]]);
+    pushSearchHistory([kind, [filter]]);
 }
 
 /**
@@ -187,13 +187,13 @@ export function findLazy<T extends object = ModuleExports>(
  * kalıyor.
  */
 export function waitForStore(name: string, callback: (store: ModuleExports) => void): () => void {
-    lazyWebpackSearchHistory.push(["waitForStore", [name]]);
+    pushSearchHistory(["waitForStore", [name]]);
     return waitFor(byStoreName(name), callback, { silent: true });
 }
 
 /** Store'a erişildiği anda çözülen tembel proxy. */
 export function findStoreLazy<T extends object = ModuleExports>(name: string): T {
-    lazyWebpackSearchHistory.push(["findStoreLazy", [name]]);
+    pushSearchHistory(["findStoreLazy", [name]]);
     return findLazy<T>(byStoreName(name));
 }
 

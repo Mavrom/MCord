@@ -42,7 +42,14 @@ for (const branch of branches) {
     }
 }
 
-const TIMEOUT_MS = Number(process.env.REPORTER_TIMEOUT ?? 300_000);
+const TIMEOUT_MS = Number(process.env.REPORTER_TIMEOUT ?? 900_000);
+
+/**
+ * Akış sessizlik eşiği: reporter her kırık girdiyi anında logluyor, ayrıca her
+ * 20 aramada bir olay döngüsüne yer açıyor. Bu süre boyunca hiç `[REPORTER_*]`
+ * satırı gelmiyorsa koşu takılmış demektir.
+ */
+const IDLE_MS = Number(process.env.REPORTER_IDLE ?? 90_000);
 
 const rendererScript = readFileSync(join(DIST, "renderer.js"), "utf-8");
 
@@ -85,7 +92,8 @@ async function runBranch(branch) {
 
     const browser = await puppeteer.launch({
         executablePath: process.env.CHROMIUM_BIN,
-        headless: "shell",
+        headless: true,
+        protocolTimeout: TIMEOUT_MS + 60_000,
         args: [
             "--no-sandbox",
             "--disable-setuid-sandbox",
@@ -96,7 +104,14 @@ async function runBranch(branch) {
 
     try {
         const page = await browser.newPage();
+        await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36");
         await page.setBypassCSP(true);
+
+        if (process.env.REPORTER_DEBUG) {
+            page.on("console", m => process.stderr.write(`  [page:${m.type()}] ${m.text().slice(0, 300)}\n`));
+            page.on("pageerror", e => process.stderr.write(`  [pageerror] ${String(e).slice(0, 300)}\n`));
+            page.on("requestfailed", r => process.stderr.write(`  [reqfail] ${r.url().slice(0, 120)} — ${r.failure()?.errorText}\n`));
+        }
 
         // Renderer bundle'ı sayfanın kendi scriptlerinden **önce** çalışmalı:
         // `Function.prototype.m` tuzağı webpack başlamadan kurulmuş olmalı.
@@ -123,33 +138,92 @@ async function runBranch(branch) {
     }
 }
 
+/**
+ * Reporter sonuçları **akış halinde** geliyor (Vencord yaklaşımı): her kırık
+ * finder/patch anında loglanıyor, `[REPORTER_DONE]` sonda tam raporu taşıyor.
+ * Böyle 20 bin modülle bile sayfa donmadan ilerliyor.
+ */
 function waitForReport(page) {
+    const partial = {
+        meta: { buildNumber: "?", buildHash: null },
+        badPatches: [],
+        slowPatches: [],
+        badWebpackFinds: [],
+        traces: [],
+        otherErrors: []
+    };
+
     return new Promise((resolve, reject) => {
-        const timer = setTimeout(
-            () => reject(new Error(`Reporter ${TIMEOUT_MS} ms içinde bitmedi`)),
+        let idleTimer = armIdleTimer();
+
+        function armIdleTimer() {
+            return setTimeout(
+                () => reject(new Error(`Reporter ${Math.round(IDLE_MS / 1000)} sn boyunca sessiz kaldı`)),
+                IDLE_MS
+            );
+        }
+        function bump() {
+            clearTimeout(idleTimer);
+            idleTimer = armIdleTimer();
+        }
+
+        const hardTimer = setTimeout(
+            () => reject(new Error(`Reporter ${Math.round(TIMEOUT_MS / 1000)} sn içinde bitmedi`)),
             TIMEOUT_MS
         );
 
+        function finish(report) {
+            clearTimeout(idleTimer);
+            clearTimeout(hardTimer);
+            resolve(report ?? partial);
+        }
+
+        // Idle timer'ı **her** konsol satırında sıfırlıyoruz: JS olay döngüsü
+        // gerçekten kilitlenirse Discord'un kendi log'ları da durur — bu yüzden
+        // "hiç satır yok" gerçek bir donma göstergesi. `loadLazyChunks` dakikalarca
+        // sürebilir ama sürekli log basar, o yüzden takılmış saymayız.
         page.on("console", message => {
+            bump();
+
             const text = message.text();
+            if (!text.startsWith("[REPORTER_")) return;
 
-            if (text.startsWith("[REPORTER_DONE]")) {
-                clearTimeout(timer);
-                try {
-                    resolve(JSON.parse(text.slice("[REPORTER_DONE]".length).trim()));
-                } catch (err) {
-                    reject(err);
-                }
-                return;
-            }
+            const [, tag, ...rest] = text.match(/^\[(REPORTER_[A-Z_]+)\]\s*(.*)$/s) ?? [];
+            const payload = rest.join(" ");
 
-            if (text.startsWith("[REPORTER_FAILED]")) {
-                clearTimeout(timer);
-                reject(new Error(text));
+            switch (tag) {
+                case "REPORTER_META":
+                    try { partial.meta = JSON.parse(payload); } catch { /* yoksa */ }
+                    process.stderr.write(`  … meta alındı (build ${partial.meta.buildNumber})\n`);
+                    break;
+                case "REPORTER_PROGRESS":
+                    process.stderr.write(`  … ${payload}\n`);
+                    break;
+                case "REPORTER_CHECK":
+                    if (process.env.REPORTER_DEBUG) process.stderr.write(`  → ${payload}\n`);
+                    break;
+                case "REPORTER_FIND_FAIL":
+                    partial.badWebpackFinds.push(payload);
+                    process.stderr.write(`  ✘ ${payload}\n`);
+                    break;
+                case "REPORTER_BAD_PATCH":
+                    try { partial.badPatches.push(JSON.parse(payload)); } catch { /* yoksa */ }
+                    break;
+                case "REPORTER_SLOW_PATCH":
+                    try { partial.slowPatches.push(JSON.parse(payload)); } catch { /* yoksa */ }
+                    break;
+                case "REPORTER_DONE":
+                    try { finish(JSON.parse(payload)); } catch { finish(null); }
+                    break;
+                case "REPORTER_FAILED":
+                    clearTimeout(idleTimer);
+                    clearTimeout(hardTimer);
+                    reject(new Error(payload || text));
+                    break;
             }
         });
 
-        page.on("pageerror", () => { /* sayfa hataları rapora renderer tarafında giriyor */ });
+        page.on("pageerror", () => { /* sayfa hataları renderer tarafında rapora giriyor */ });
     });
 }
 

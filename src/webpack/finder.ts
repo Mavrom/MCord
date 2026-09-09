@@ -16,7 +16,7 @@ import {
 } from "./filters";
 import { shouldSkipModule, wrapModuleFilter } from "./guards";
 import { allWebpackInstances, cache, wreq } from "./intercept";
-import type { Module, ModuleExports, ModuleFilter } from "./types";
+import { FilterSymbol, type Module, type ModuleExports, type ModuleFilter } from "./types";
 
 const logger = new Logger("Webpack:Finder", "#8caaee");
 
@@ -65,9 +65,23 @@ function* searchableExports(module: Module): Generator<ModuleExports> {
 export function find<T = ModuleExports>(filter: ModuleFilter, options: FindOptions = {}): T | null {
     const wrapped = wrapModuleFilter(filter);
 
+    // `bySource` sadece `moduleId`'ye bakıyor, export'a değil — iç içe export'lar
+    // için tekrar tekrar çağırmak anlamsız ve çok pahalı (20 bin modül ×
+    // ~5 export). Modül başına bir kez çalıştır.
+    const isSourceFilter = (filter[FilterSymbol] ?? filter.__originalFilter?.[FilterSymbol])?.name === "bySource";
+
     for (const moduleId in cache) {
         const module = cache[moduleId];
         if (module?.exports == null) continue;
+
+        if (isSourceFilter) {
+            if (wrapped(module.exports, module, moduleId)) {
+                if (options.raw) return module.exports as T;
+                for (const exports of searchableExports(module)) return exports as T;
+                return module.exports as T;
+            }
+            continue;
+        }
 
         for (const exports of searchableExports(module)) {
             if (!wrapped(exports, module, moduleId)) continue;
