@@ -125,8 +125,20 @@ async function runBranch(branch) {
         `);
 
         const done = waitForReport(page);
+        // `done` bir `runBranch` hatasından sonra reject olursa Node "unhandled
+        // rejection" ile çöküyor — sessizce yut, gerçek hatayı aşağıdaki
+        // catch zaten raporluyor.
+        done.catch(() => {});
 
-        await page.goto(BRANCHES[branch], { waitUntil: "load", timeout: 180_000 });
+        // `/login` sıklıkla client-side redirect yapıyor (`net::ERR_ABORTED`).
+        // Bu bir hata değil: renderer zaten enjekte oldu, reporter çalışıyor.
+        // Sadece `done` bekleniyor.
+        page.goto(BRANCHES[branch], { waitUntil: "domcontentloaded", timeout: 180_000 })
+            .catch(err => {
+                if (!String(err?.message).includes("ERR_ABORTED")) {
+                    process.stderr.write(`  goto uyarısı: ${err?.message}\n`);
+                }
+            });
 
         const report = await done;
         console.log(`[MCord] ${branch}: build ${report.meta.buildNumber}, ` +
