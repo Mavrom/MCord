@@ -109,9 +109,15 @@ function reviveStoreModule(name: string): ModuleExports | undefined {
     const cacheObj = (wreq as any)?.c;
     if (factories == null || cacheObj == null) return undefined;
 
-    const needle = `getName(){return"${name}"`;
-    const altNeedle = `displayName="${name}"`;
+    // Store SINIFININ imzaları. `new Logger("XStore")` gibi yanlış eşleşmeleri
+    // elemek için sınıf-tanımı desenleri aranıyor.
+    const needles = [
+        `displayName="${name}"`,      // class X extends Store { static displayName="Y" }
+        `displayName:"${name}"`,
+        `getName(){return"${name}"`
+    ];
 
+    const candidates: string[] = [];
     for (const id in factories) {
         let src: string;
         try {
@@ -119,8 +125,11 @@ function reviveStoreModule(name: string): ModuleExports | undefined {
         } catch {
             continue;
         }
-        if (!src.includes(needle) && !src.includes(altNeedle)) continue;
+        if (needles.some(n => src.includes(n))) candidates.push(id);
+    }
 
+    // Her adayı dene — ilkinde durma (ilk eşleşen çoğu zaman yanlış modül).
+    for (const id of candidates) {
         try {
             delete cacheObj[id];
         } catch { /* silinemedi */ }
@@ -128,7 +137,6 @@ function reviveStoreModule(name: string): ModuleExports | undefined {
             (wreq as any)(id);
         } catch { /* yeniden de patladı */ }
 
-        // Kayıt tazelendi mi?
         for (const store of allStores()) {
             try {
                 if (store.constructor?.displayName === name || store.getName?.() === name) {
@@ -136,7 +144,6 @@ function reviveStoreModule(name: string): ModuleExports | undefined {
                 }
             } catch { /* */ }
         }
-        break;
     }
 
     return undefined;
