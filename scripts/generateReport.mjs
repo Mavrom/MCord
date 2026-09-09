@@ -110,9 +110,19 @@ async function runBranch(branch) {
         await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36");
         await page.setBypassCSP(true);
 
+        // Her koşuda: sayfa hataları + MCord/renderer log'ları stderr'e. Bunlar
+        // olmadan CI'da "başlıyor sonra sessizlik" durumunun neden olduğu
+        // görülemiyor. (REPORTER_DEBUG=1 ise TÜM konsol satırları.)
+        page.on("pageerror", e => process.stderr.write(`  [pageerror] ${String(e).slice(0, 300)}\n`));
+        page.on("console", m => {
+            const t = m.text();
+            if (process.env.REPORTER_DEBUG) {
+                process.stderr.write(`  [page:${m.type()}] ${t.slice(0, 300)}\n`);
+            } else if (m.type() === "error" || /\bMCord\b|Reporter:|LazyChunks|PluginManager|Webpack/.test(t)) {
+                process.stderr.write(`  [page] ${t.slice(0, 240)}\n`);
+            }
+        });
         if (process.env.REPORTER_DEBUG) {
-            page.on("console", m => process.stderr.write(`  [page:${m.type()}] ${m.text().slice(0, 300)}\n`));
-            page.on("pageerror", e => process.stderr.write(`  [pageerror] ${String(e).slice(0, 300)}\n`));
             page.on("requestfailed", r => process.stderr.write(`  [reqfail] ${r.url().slice(0, 120)} — ${r.failure()?.errorText}\n`));
         }
 
