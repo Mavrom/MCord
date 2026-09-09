@@ -324,13 +324,13 @@ function healPoisonedModules(): void {
         if (poisoned.length === 0 || poisoned.length >= previous) return;
         previous = poisoned.length;
 
-        // ÖNCE hepsini sil, SONRA hepsini yükle. Tek tek silip yüklemek
-        // karşılıklı-dairesel zehirlenmeyi çözemiyor: A yeniden yüklenirken
-        // hâlâ zehirli B'yi cache'ten alıyor.
+        // Tek tek sil + yeniden yükle. (Toplu silme denendi ve GERİ TEPTİ:
+        // sağlıklı modüllerin tuttuğu referanslar bayatlıyor, store'lar iki kez
+        // kaydoluyor — 876 store 807'ye düştü.)
         for (const id of poisoned) {
-            try { delete cacheObj[id]; } catch { /* */ }
-        }
-        for (const id of poisoned) {
+            try {
+                delete cacheObj[id];
+            } catch { continue; }
             try {
                 wreq(id as any);
             } catch {
