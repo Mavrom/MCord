@@ -104,6 +104,8 @@ export async function init(): Promise<void> {
         requireAllModules();
         console.log("[REPORTER_PHASE]", `requireAllModules bitti (+${Math.round((Date.now() - t1) / 1000)}s)`);
 
+        if (IS_REPORTER) diagnoseChannelStore();
+
         const meta = buildMeta();
         console.log("[REPORTER_META]", JSON.stringify(meta));
 
@@ -165,6 +167,47 @@ export async function init(): Promise<void> {
     } catch (err) {
         logger.error("Rapor koşusu başarısız:\n", err);
         console.log("[REPORTER_FAILED]", String(err));
+    }
+}
+
+/**
+ * GEÇİCİ: ChannelStore hangi modülde, o modül neden cache'e girmiyor.
+ * Kaynak imzasından modül id'sini bul, `wreq(id)` çağır, hatayı yakala.
+ */
+function diagnoseChannelStore(): void {
+    try {
+        const factories = wreq.m as Record<string, any>;
+        const candidates: string[] = [];
+        for (const id in factories) {
+            let src: string;
+            try { src = String(factories[id]); } catch { continue; }
+            // Flux store tanımı: `getName(){return"ChannelStore"}` veya displayName.
+            if (/["']ChannelStore["']/.test(src) && /getName\(\)\{return|displayName|extends.{0,40}Store/.test(src)) {
+                candidates.push(id);
+                if (candidates.length >= 5) break;
+            }
+        }
+        console.log("[REPORTER_PHASE]", `ChannelStore aday modüller: [${candidates.join(",")}]`);
+
+        for (const id of candidates.slice(0, 3)) {
+            const inCache = (wreq as any).c?.[id] != null;
+            let err = "yok";
+            try {
+                (wreq as any)(id);
+                err = "OK";
+            } catch (e) {
+                err = String(e).slice(0, 160);
+            }
+            const exNow = (wreq as any).c?.[id]?.exports;
+            let hasName = false;
+            try {
+                for (const k in exNow) { if (exNow[k]?.getName?.() === "ChannelStore" || exNow[k]?.constructor?.displayName === "ChannelStore") hasName = true; }
+                if (exNow?.getName?.() === "ChannelStore") hasName = true;
+            } catch { /* */ }
+            console.log("[REPORTER_PHASE]", `  mod ${id}: önce-cache:${inCache} require:${err} sonra-ChannelStore-export:${hasName}`);
+        }
+    } catch (err) {
+        console.log("[REPORTER_PHASE]", "diagnoseChannelStore threw: " + String(err).slice(0, 120));
     }
 }
 
