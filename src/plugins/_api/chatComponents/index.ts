@@ -17,29 +17,15 @@ export default definePlugin({
     authors: [Devs.MCord],
     required: true,
 
+    // Kanıtlanmış açık-kaynak istemcinin (Vencord) güncel `ChatInputButtonAPI`
+    // patch'inin birebir portu.
     patches: [
         {
-            find: '"ChannelTextAreaButtons"',
-            reason:
-                "Düğmeler `j=[]` gibi yerel bir diziye push ediliyor ve dizi doğrudan "
-                + "`children`'a veriliyor; dışarıdan tutulabilir bir fonksiyon referansı yok, "
-                + "bu yüzden fonksiyon patch'i uygulanamıyor. Çapa `\"ChannelTextAreaButtons\"` "
-                + "sabiti — bundle genelinde tek geçiyor ve Discord'un kendi bileşen adı olduğu "
-                + "için minify sırasında değişmiyor.",
+            find: '"sticker")',
+            reason: "Sohbet girişi düğme dizisi. Vencord ChatInputButtonAPI portu.",
             replacement: {
-                // Boşluk kontrolünden ÖNCE enjekte ediyoruz: Discord'un kendi düğmeleri
-                // kapalıyken dizi boş kalır ve `null` dönerdi, bizimkiler de görünmezdi.
-                //
-                // Desen bilinçli olarak karakter mesafesine değil **yapıya** bağlı:
-                // aynı ifade içinde (`;` görmeden) aynı dizinin `children` olarak
-                // kullanılması aranıyor. Discord div'e prop eklerse ya da eleman türünü
-                // değiştirirse desen tutmaya devam eder.
-                // Eşleşme yalnızca `0===j.length` — yerine kendi içinde kapalı bir
-                // virgül ifadesi konuyor. `)?null:` kısmı bilinçli olarak ileriye
-                // bakışta: oradaki kapanış parantezi çok önce açılmış dış bir
-                // parantezi kapatıyor, eşleşmeye dahil edilirse denge bozuluyor.
-                match: /0===(\i)\.length(?=\)\?null:[^;]{0,200}?children:\1)/,
-                replace: "($self.injectButtons($1,arguments[0]),0===$1.length)"
+                match: /0===(\i)\.length(?=.{0,25}?\(0,\i\.jsxs?\)\(.{0,75}?children:\1)/,
+                replace: "($self.injectButtons($1,arguments[0]),$&)"
             }
         }
     ],
@@ -52,7 +38,9 @@ export default definePlugin({
      */
     injectButtons(buttons: unknown[], props: Record<string, any>): void {
         try {
-            if (!Array.isArray(buttons) || props?.disabled) return;
+            // Vencord `_injectButtons`: devre dışıysa veya Discord hiç düğme
+            // render etmediyse (gerçek sohbet çubuğu değil) atla.
+            if (!Array.isArray(buttons) || props?.disabled || buttons.length === 0) return;
             buttons.push(...renderChatBarButtons(props));
         } catch (err) {
             logger.error("Sohbet çubuğu düğmeleri eklenemedi:\n", err);

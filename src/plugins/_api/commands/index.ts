@@ -21,14 +21,28 @@ export default definePlugin({
      * modülü bul, `.filter(...)` çağrısındaki diziyi yakala. `_bind` diziyi
      * olduğu gibi geri döndürüyor — patch basit kalsın diye.
      */
-    patches: [{
-        find: ',"tableflip","unflip"',
-        reason: "getBuiltInCommands finder'ı bu build'de kırık — BUILT_IN_COMMANDS dizisini kaynaktan yakala.",
-        replacement: {
-            match: /(?<=\i=)(\i)(\.filter\(.{0,60}tableflip)/,
-            replace: "$self._bind($1)$2"
+    // Kanıtlanmış açık-kaynak istemcinin (Vencord) güncel `CommandsAPI`
+    // patch'lerinin portu.
+    patches: [
+        {
+            // BUILT_IN_COMMANDS dizisini yakala (hiçbir yerde export edilmiyor).
+            find: ',"tableflip","unflip"',
+            reason: "BUILT_IN_COMMANDS dizisini kaynaktan yakala. Vencord CommandsAPI portu.",
+            replacement: {
+                match: /(?<=\w=)(\w)(\.filter\(.{0,60}tableflip)/,
+                replace: "$self._bind($1)$2"
+            }
+        },
+        {
+            // Komut listesinde "Built-In" yerine plugin adını göster.
+            find: "#{intl::COMMANDS_OPTIONAL_COUNT}",
+            reason: "Komut menüsünde MCord komutlarının kaynağını göster. Vencord CommandsAPI portu.",
+            replacement: {
+                match: /children:(?=\i\?\?\i\?\.name)(?<=command:(\i),.+?)/,
+                replace: "children:$1.plugin??"
+            }
         }
-    }],
+    ],
 
     _bind(builtInCommands: any[]) {
         _bindBuiltInCommands(builtInCommands);
