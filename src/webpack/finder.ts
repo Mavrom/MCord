@@ -14,9 +14,8 @@ import {
     byStrings,
     describeFilter
 } from "./filters";
-import { shouldSkipModule, wrapModuleFilter } from "./guards";
 import { allWebpackInstances, cache, wreq } from "./intercept";
-import { FilterSymbol, type Module, type ModuleExports, type ModuleFilter } from "./types";
+import { FilterSymbol, type ModuleExports, type ModuleFilter } from "./types";
 
 const logger = new Logger("Webpack:Finder", "#8caaee");
 
@@ -28,64 +27,53 @@ export interface FindOptions {
 }
 
 /**
- * Bir modülün aranabilir export'ları: ham export + **tüm** iç içe export'lar.
- *
- * Sadece `A`/`Ay`/`default` anahtarlarına bakmak yetmiyor — Discord modülleri
- * `Z`, `ZP`, `n` gibi rastgele mangle'lı anahtarlar altında export ediyor ve
- * o modüller hiç bulunamıyordu. Bu yüzden tüm anahtarları geziyoruz.
+ * Filtreyi güvenli çağıran sarmalayıcı — filtre fırlatırsa `false`.
+ * (Kanıtlanmış açık-kaynak istemcinin `find`'i filtreyi çıplak çağırıyor;
+ * biz sadece try/catch ekliyoruz, `shouldSkipModule`/token-guard katmanını
+ * KALDIRDIK — o katman ChannelStore gibi Proxy-tabanlı store'ları eliyordu.)
  */
-function* searchableExports(module: Module): Generator<ModuleExports> {
-    const { exports } = module;
-    if (exports == null) return;
-
-    if (!shouldSkipModule(exports)) yield exports;
-
-    // İç içe gezinme sadece düz nesnelerde anlamlı; fonksiyon/sınıf export'ları
-    // zaten yukarıda denendi.
-    if (typeof exports !== "object") return;
-
-    for (const key in exports) {
-        let nested: ModuleExports;
+function safe(filter: ModuleFilter): (v: any) => boolean {
+    return (v: any) => {
         try {
-            nested = exports[key];
+            return (filter as (m: any) => boolean)(v);
         } catch {
-            continue;
+            return false;
         }
-
-        if (nested != null && !shouldSkipModule(nested)) yield nested;
-    }
+    };
 }
 
 /**
- * Çalıştırılmış tüm modüller üzerinde arama yapar.
+ * Çalıştırılmış tüm modüller üzerinde arama yapar — kanıtlanmış açık-kaynak
+ * istemcinin (Vencord) `find`'iyle birebir aynı döngü.
  *
  * `raw: true` ise eşleşen modülün ham `exports`'u döner; aksi halde filtreyi
- * sağlayan export (varsayılan export dahil) döner.
+ * sağlayan (iç içe) export döner.
  */
 export function find<T = ModuleExports>(filter: ModuleFilter, options: FindOptions = {}): T | null {
-    const wrapped = wrapModuleFilter(filter);
+    const wrapped = safe(filter);
 
-    // `bySource` sadece `moduleId`'ye bakıyor, export'a değil — iç içe export'lar
-    // için tekrar tekrar çağırmak anlamsız ve çok pahalı (20 bin modül ×
-    // ~5 export). Modül başına bir kez çalıştır.
+    // `bySource` sadece `moduleId`'ye bakıyor — modül başına tek çağrı (perf).
     const isSourceFilter = (filter[FilterSymbol] ?? filter.__originalFilter?.[FilterSymbol])?.name === "bySource";
 
-    for (const moduleId in cache) {
-        const module = cache[moduleId];
-        if (module?.exports == null) continue;
+    for (const key in cache) {
+        const mod = cache[key] as any;
+        if (!mod?.loaded || mod.exports == null) continue;
 
         if (isSourceFilter) {
-            if (wrapped(module.exports, module, moduleId)) {
-                if (options.raw) return module.exports as T;
-                for (const exports of searchableExports(module)) return exports as T;
-                return module.exports as T;
-            }
+            if ((filter as any)(mod.exports, mod, key)) return mod.exports as T;
             continue;
         }
 
-        for (const exports of searchableExports(module)) {
-            if (!wrapped(exports, module, moduleId)) continue;
-            return (options.raw ? module.exports : exports) as T;
+        if (wrapped(mod.exports)) return mod.exports as T;
+
+        if (typeof mod.exports !== "object") continue;
+
+        for (const nestedMod in mod.exports) {
+            let nested: any;
+            try { nested = mod.exports[nestedMod]; } catch { continue; }
+            if (nested && wrapped(nested)) {
+                return (options.raw ? mod.exports : nested) as T;
+            }
         }
     }
 
@@ -96,17 +84,22 @@ export function find<T = ModuleExports>(filter: ModuleFilter, options: FindOptio
     return null;
 }
 
-/** Filtreyi sağlayan tüm export'lar. */
+/** Filtreyi sağlayan tüm export'lar (Vencord `findAll` döngüsü). */
 export function findAll<T = ModuleExports>(filter: ModuleFilter): T[] {
-    const wrapped = wrapModuleFilter(filter);
+    const wrapped = safe(filter);
     const results: T[] = [];
 
-    for (const moduleId in cache) {
-        const module = cache[moduleId];
-        if (module?.exports == null) continue;
+    for (const key in cache) {
+        const mod = cache[key] as any;
+        if (!mod?.loaded || mod.exports == null) continue;
 
-        for (const exports of searchableExports(module)) {
-            if (wrapped(exports, module, moduleId)) results.push(exports as T);
+        if (wrapped(mod.exports)) results.push(mod.exports as T);
+        if (typeof mod.exports !== "object") continue;
+
+        for (const nestedMod in mod.exports) {
+            let nested: any;
+            try { nested = mod.exports[nestedMod]; } catch { continue; }
+            if (nested && wrapped(nested)) results.push(nested as T);
         }
     }
 
@@ -115,14 +108,19 @@ export function findAll<T = ModuleExports>(filter: ModuleFilter): T[] {
 
 /** Eşleşen modülün id'si — patch hedefi ararken ve reporter'da kullanılıyor. */
 export function findModuleId(filter: ModuleFilter, options: FindOptions = {}): PropertyKey | null {
-    const wrapped = wrapModuleFilter(filter);
+    const wrapped = safe(filter);
 
-    for (const moduleId in cache) {
-        const module = cache[moduleId];
-        if (module?.exports == null) continue;
+    for (const key in cache) {
+        const mod = cache[key] as any;
+        if (!mod?.loaded || mod.exports == null) continue;
 
-        for (const exports of searchableExports(module)) {
-            if (wrapped(exports, module, moduleId)) return moduleId;
+        if (wrapped(mod.exports)) return key;
+        if (typeof mod.exports !== "object") continue;
+
+        for (const nestedMod in mod.exports) {
+            let nested: any;
+            try { nested = mod.exports[nestedMod]; } catch { continue; }
+            if (nested && wrapped(nested)) return key;
         }
     }
 

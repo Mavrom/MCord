@@ -7,7 +7,7 @@
 import { Logger } from "../utils/logger";
 import { byCode, byKeys, byStoreName, componentByCode, describeFilter } from "./filters";
 import { find, type FindOptions } from "./finder";
-import { shouldSkipModule, wrapModuleFilter } from "./guards";
+import { shouldSkipModule } from "./guards";
 import { cache, moduleListeners, pushSearchHistory } from "./intercept";
 import { getStoreLazy, resolveStore } from "./stores";
 import type { Module, ModuleExports, ModuleFilter } from "./types";
@@ -30,7 +30,16 @@ export function waitFor(
     callback: (exports: ModuleExports, module: Module) => void,
     options: { silent?: boolean } = {}
 ): () => void {
-    const wrapped = wrapModuleFilter(filter);
+    // Kanıtlanmış açık-kaynak istemci gibi filtreyi çıplak çağırıyoruz
+    // (yalnız try/catch); `shouldSkipModule`/token-guard katmanı store'ları
+    // eliyordu.
+    const wrapped = (v: any) => {
+        try {
+            return (filter as (m: any) => boolean)(v);
+        } catch {
+            return false;
+        }
+    };
 
     // Önce zaten yüklenmiş modüllere bak.
     const existing = find(filter, { silent: true });
@@ -45,14 +54,7 @@ export function waitFor(
         if (done || exports == null) return;
 
         for (const candidate of candidates(module)) {
-            let matched = false;
-            try {
-                matched = wrapped(candidate, module, module.id);
-            } catch {
-                continue;
-            }
-
-            if (!matched) continue;
+            if (!wrapped(candidate)) continue;
 
             done = true;
             moduleListeners.delete(listener);
@@ -76,12 +78,12 @@ export function waitFor(
     };
 }
 
-/** `finder.ts`'teki `searchableExports` ile aynı: ham export + tüm iç içe export'lar. */
+/** Ham export + tüm iç içe export'lar (Vencord waitFor'un taradığı küme). */
 function* candidates(module: Module): Generator<ModuleExports> {
     const { exports } = module;
     if (exports == null) return;
 
-    if (!shouldSkipModule(exports)) yield exports;
+    yield exports;
     if (typeof exports !== "object") return;
 
     for (const key in exports) {

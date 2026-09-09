@@ -104,8 +104,6 @@ export async function init(): Promise<void> {
         requireAllModules();
         console.log("[REPORTER_PHASE]", `requireAllModules bitti (+${Math.round((Date.now() - t1) / 1000)}s)`);
 
-        if (IS_REPORTER) diagnoseChannelStore();
-
         const meta = buildMeta();
         console.log("[REPORTER_META]", JSON.stringify(meta));
 
@@ -167,62 +165,6 @@ export async function init(): Promise<void> {
     } catch (err) {
         logger.error("Rapor koşusu başarısız:\n", err);
         console.log("[REPORTER_FAILED]", String(err));
-    }
-}
-
-/**
- * GEÇİCİ: ChannelStore hangi modülde, o modül neden cache'e girmiyor.
- * Kaynak imzasından modül id'sini bul, `wreq(id)` çağır, hatayı yakala.
- */
-function diagnoseChannelStore(): void {
-    try {
-        const factories = wreq.m as Record<string, any>;
-
-        // 1) `getName(){return"ChannelStore"` tam Flux-store imzası
-        const exact: string[] = [];
-        for (const id in factories) {
-            let src: string;
-            try { src = String(factories[id]); } catch { continue; }
-            if (/getName\(\)\{return"ChannelStore"|displayName="ChannelStore"|displayName:"ChannelStore"/.test(src)) {
-                exact.push(id);
-                if (exact.length >= 6) break;
-            }
-        }
-        console.log("[REPORTER_PHASE]", `ChannelStore tam-imza modüller: [${exact.join(",")}]`);
-
-        const flux0 = find((m: any) => m?.Store?.getAll && m?.connectStores, { silent: true }) as any;
-        const StoreClass = flux0?.Store;
-        console.log("[REPORTER_PHASE]", `webpack instance sayısı: ${(window as any).Mcord?.Webpack?.allWebpackInstances?.size ?? "?"}, StoreClass:${StoreClass != null}`);
-
-        for (const id of exact.slice(0, 4)) {
-            try { (wreq as any)(id); } catch { /* */ }
-            const ex = (wreq as any).c?.[id]?.exports;
-            for (const k of Object.keys(ex ?? {})) {
-                const v = ex[k];
-                let gn = "?"; try { gn = String(v?.getName?.()); } catch (e) { gn = "throw:" + String(e).slice(0, 40); }
-                const dn = v?.constructor?.displayName ?? v?.displayName ?? "?";
-                const isStore = StoreClass ? (v instanceof StoreClass) : "?";
-                console.log("[REPORTER_PHASE]", `  mod ${id}.${k}: typeof=${typeof v} getName()=${gn} displayName=${dn} instanceof Store=${isStore}`);
-            }
-        }
-
-        // 2) libdiscore: throw mı, ne döndürüyor
-        const getLd = find((m: any) => typeof m === "function" && String(m).includes("libdiscoreWasm is not initialized"), { silent: true }) as any;
-        try {
-            const ldEx = getLd?.();
-            console.log("[REPORTER_PHASE]", `libdiscore(): ${ldEx == null ? "null" : Object.keys(ldEx).length + " key, örnek [" + Object.keys(ldEx).slice(0, 10).join(",") + "]"}`);
-        } catch (e) {
-            console.log("[REPORTER_PHASE]", `libdiscore() THREW: ${String(e).slice(0, 120)}`);
-        }
-
-        // 3) Flux.Store.getAll içinde adında "Channel" geçen store'lar
-        try {
-            const flux = find((m: any) => m?.Store?.getAll && m?.connectStores, { silent: true });
-            const names = ((flux as any)?.Store?.getAll?.() ?? []).map((s: any) => { try { return s.getName(); } catch { return "?"; } });
-            console.log("[REPORTER_PHASE]", `flux 'Channel' store'lar: [${names.filter((n: string) => n.includes("Channel")).join(",")}]`);
-        } catch { /* */ }
-    } catch (err) {
-        console.log("[REPORTER_PHASE]", "diagnoseChannelStore threw: " + String(err).slice(0, 120));
     }
 }
 
