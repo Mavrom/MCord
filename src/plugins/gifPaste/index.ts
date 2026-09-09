@@ -9,10 +9,9 @@ import { Logger } from "../../utils/logger";
 import { definePlugin } from "../../utils/types";
 import { byKeys } from "../../webpack/filters";
 import { find } from "../../webpack/finder";
-import { findStoreLazy } from "../../webpack/lazy";
+import { ExpressionPickerStore } from "../../webpack/common";
 
 const logger = new Logger("GifPaste", "#a6d189");
-const ExpressionPickerStore = findStoreLazy("ExpressionPickerStore");
 
 export default definePlugin({
     name: "GifPaste",
