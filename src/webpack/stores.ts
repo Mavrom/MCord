@@ -6,6 +6,7 @@
 
 import { byCode, byKeys, byStoreName } from "./filters";
 import { find, findAll, findStore } from "./finder";
+import { wreq } from "./intercept";
 import type { ModuleExports } from "./types";
 
 /** Discord'un Flux modülü — `Store.getAll()` buradan geliyor. */
@@ -88,6 +89,58 @@ function libdiscoreStores(): Record<string, ModuleExports> {
 }
 
 const storeCache = new Map<string, ModuleExports>();
+
+/** Aynı store için tekrar tekrar yeniden yükleme denemeyelim. */
+const revivalTried = new Set<string>();
+
+/**
+ * Store'un modülünü ham fabrika kaynağından bulup zorla yeniden çalıştırır.
+ *
+ * Discord'un store modülleri dairesel bağımlılık yüzünden yarım kalabiliyor:
+ * webpack export getter'larını tanımlıyor ama getter'ın kapattığı `let`
+ * atanmadan kalıyor. Cache kaydını silip fabrikayı yeniden çalıştırmak
+ * store'un `new X()` satırını tekrar koşturuyor ve Flux kaydına giriyor.
+ */
+function reviveStoreModule(name: string): ModuleExports | undefined {
+    if (revivalTried.has(name)) return undefined;
+    revivalTried.add(name);
+
+    const factories = (wreq as any)?.m;
+    const cacheObj = (wreq as any)?.c;
+    if (factories == null || cacheObj == null) return undefined;
+
+    const needle = `getName(){return"${name}"`;
+    const altNeedle = `displayName="${name}"`;
+
+    for (const id in factories) {
+        let src: string;
+        try {
+            src = String(factories[id]);
+        } catch {
+            continue;
+        }
+        if (!src.includes(needle) && !src.includes(altNeedle)) continue;
+
+        try {
+            delete cacheObj[id];
+        } catch { /* silinemedi */ }
+        try {
+            (wreq as any)(id);
+        } catch { /* yeniden de patladı */ }
+
+        // Kayıt tazelendi mi?
+        for (const store of allStores()) {
+            try {
+                if (store.constructor?.displayName === name || store.getName?.() === name) {
+                    return store;
+                }
+            } catch { /* */ }
+        }
+        break;
+    }
+
+    return undefined;
+}
 
 /**
  * Flux store'lara ada göre dinamik erişim (plan §4.6).
@@ -172,6 +225,16 @@ export function resolveStore(name: string): ModuleExports | undefined {
     if (viaWebpack != null) {
         storeCache.set(name, viaWebpack);
         return viaWebpack;
+    }
+
+    // 4) SON ÇARE: store'un modülünü ham kaynağından bul ve **zorla yeniden
+    //    çalıştır**. Dairesel bağımlılık yüzünden modül yarım kalmış olabiliyor
+    //    (export getter'ları "Cannot access X before initialization" fırlatır);
+    //    cache kaydını silip yeniden yükleyince store kendini Flux'a kaydediyor.
+    const revived = reviveStoreModule(name);
+    if (revived != null) {
+        storeCache.set(name, revived);
+        return revived;
     }
 
     return undefined;
