@@ -92,8 +92,17 @@ export async function init(): Promise<void> {
     logger.info("Rapor koşusu başlıyor…");
 
     try {
+        // Faz işaretçileri: CI logunda hangi aşamada takıldığı net görünsün
+        // (loadLazyChunks = ağ-bağımlı; requireAllModules = patch-bağımlı).
+        const t0 = Date.now();
+        console.log("[REPORTER_PHASE]", "loadLazyChunks başladı");
         await loadLazyChunks();
+        console.log("[REPORTER_PHASE]", `loadLazyChunks bitti (+${Math.round((Date.now() - t0) / 1000)}s, ${Object.keys(wreq.m).length} fabrika)`);
+
+        const t1 = Date.now();
+        console.log("[REPORTER_PHASE]", "requireAllModules başladı");
         requireAllModules();
+        console.log("[REPORTER_PHASE]", `requireAllModules bitti (+${Math.round((Date.now() - t1) / 1000)}s)`);
 
         const meta = buildMeta();
         console.log("[REPORTER_META]", JSON.stringify(meta));
@@ -173,16 +182,25 @@ function buildMeta(): Report["meta"] {
 /** Tüm modülleri manuel require et — patch'ler ve aramalar tetiklensin. */
 function requireAllModules(): void {
     let failed = 0;
+    let done = 0;
+    const ids = Object.keys(wreq.m);
+    const total = ids.length;
+    let lastBeat = Date.now();
 
-    for (const moduleId of Object.keys(wreq.m)) {
+    for (const moduleId of ids) {
         try {
             wreq(moduleId as any);
         } catch {
             failed++;
         }
+        // 5 sn'de bir ilerleme: hangi modülde (varsa) yavaş patch takıldığını gör.
+        if (IS_REPORTER && ++done % 500 === 0 && Date.now() - lastBeat > 5000) {
+            console.log("[REPORTER_PHASE]", `requireAllModules ${done}/${total}`);
+            lastBeat = Date.now();
+        }
     }
 
-    logger.info(`${Object.keys(wreq.m).length} modül require edildi (${failed} hata).`);
+    logger.info(`${total} modül require edildi (${failed} hata).`);
 }
 
 /** Girdiyi çalıştırmadan önce insan-okunur kısa etiket — hangi arama takıldı görmek için. */

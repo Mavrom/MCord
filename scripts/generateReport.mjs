@@ -221,6 +221,9 @@ function waitForReport(page) {
                     // Artık akış başladı — idle timer'ı devreye al.
                     if (!metaSeen) { metaSeen = true; idleTimer = armIdleTimer(); }
                     break;
+                case "REPORTER_PHASE":
+                    process.stderr.write(`  ▸ ${payload}\n`);
+                    break;
                 case "REPORTER_PROGRESS":
                     process.stderr.write(`  … ${payload}\n`);
                     break;
