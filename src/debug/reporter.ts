@@ -10,7 +10,7 @@ import { byStoreName, describeFilter } from "../webpack/filters";
 import { find } from "../webpack/finder";
 import { erroredPatches, lazyWebpackSearchHistory, setRecordSearchHistory, wreq } from "../webpack/intercept";
 import { mapMangledModule } from "../webpack/mangled";
-import { resolveStore } from "../webpack/stores";
+import { recoverStoreModules, resolveStore } from "../webpack/stores";
 import type { ModuleFilter } from "../webpack/types";
 import { loadLazyChunks } from "./loadLazyChunks";
 import { getTraceSummary } from "./tracer";
@@ -246,6 +246,7 @@ function requireAllModules(): void {
     }
 
     healPoisonedModules();
+    recoverStoreModules();
 
     logger.info(`${total} modül require edildi (${pending.length} kalıcı hata).`);
 }

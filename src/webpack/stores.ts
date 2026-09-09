@@ -93,6 +93,66 @@ const storeCache = new Map<string, ModuleExports>();
 /** Aynı store için tekrar tekrar yeniden yükleme denemeyelim. */
 const revivalTried = new Set<string>();
 
+let storeModulesRecovered = false;
+
+/**
+ * Store sınıfı tanımlayan **tüm** modülleri tek seferde, sabit sırayla toparlar.
+ *
+ * Dairesel bağımlılık yüzünden yarım kalan store modüllerinde `new X()` hiç
+ * çalışmıyor ve store Flux kaydına girmiyor. Talep anında tek tek yeniden
+ * yüklemek (lazy revive) sonucu **koşudan koşuya değiştiriyordu**; bu yüzden
+ * tek, deterministik geçiş yapıyoruz: kaynağında `displayName="…Store"` geçen
+ * her modül için, o ad kayıtta yoksa modülü silip yeniden çalıştır.
+ */
+export function recoverStoreModules(): void {
+    if (storeModulesRecovered) return;
+    storeModulesRecovered = true;
+
+    const factories = (wreq as any)?.m;
+    const cacheObj = (wreq as any)?.c;
+    if (factories == null || cacheObj == null) return;
+
+    const known = new Set<string>();
+    for (const store of allStores()) {
+        try {
+            const n = store.constructor?.displayName ?? store.getName?.();
+            if (typeof n === "string") known.add(n);
+        } catch { /* */ }
+    }
+
+    const pattern = /displayName\s*[=:]\s*"([A-Za-z0-9_$]+Store)"/g;
+
+    for (const id of Object.keys(factories).sort()) {
+        let src: string;
+        try {
+            src = String(factories[id]);
+        } catch {
+            continue;
+        }
+        if (!src.includes("Store\"")) continue;
+
+        pattern.lastIndex = 0;
+        let missing = false;
+        let match: RegExpExecArray | null;
+        while ((match = pattern.exec(src)) !== null) {
+            if (!known.has(match[1])) {
+                missing = true;
+                break;
+            }
+        }
+        if (!missing) continue;
+
+        try {
+            delete cacheObj[id];
+        } catch { continue; }
+        try {
+            (wreq as any)(id);
+        } catch { /* yeniden de patladı */ }
+    }
+
+    storeCache.clear();
+}
+
 /**
  * Store'un modülünü ham fabrika kaynağından bulup zorla yeniden çalıştırır.
  *
@@ -242,6 +302,9 @@ export function resolveStore(name: string): ModuleExports | undefined {
     //    çalıştır**. Dairesel bağımlılık yüzünden modül yarım kalmış olabiliyor
     //    (export getter'ları "Cannot access X before initialization" fırlatır);
     //    cache kaydını silip yeniden yükleyince store kendini Flux'a kaydediyor.
+    // Deterministik toparlama (recoverStoreModules) reporter/başlangıçta bir
+    // kez çalışıyor. Talep anında tek tek yeniden yükleme sonucu koşudan
+    // koşuya değiştiriyordu; son çare olarak yalnız o ada özel deneniyor.
     const revived = reviveStoreModule(name);
     if (revived != null) {
         storeCache.set(name, revived);
