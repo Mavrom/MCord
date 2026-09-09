@@ -247,6 +247,14 @@ function requireAllModules(): void {
             try {
                 wreq(moduleId as any);
             } catch {
+                // KRİTİK: fabrika patlayınca webpack yarım `module.exports`'u
+                // cache'te bırakıyor ve sonraki `wreq()` fabrikayı hiç
+                // çalıştırmadan o bozuk kaydı döndürüyor (export getter'ları
+                // "Cannot access X before initialization" fırlatıyor).
+                // Kaydı silmezsek yeniden deneme anlamsız olur.
+                try {
+                    delete (wreq as any).c?.[moduleId];
+                } catch { /* silinemiyorsa geç */ }
                 stillFailing.push(moduleId);
             }
             if (IS_REPORTER && ++done % 500 === 0 && Date.now() - lastBeat > 5000) {
