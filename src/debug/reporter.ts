@@ -104,6 +104,8 @@ export async function init(): Promise<void> {
         requireAllModules();
         console.log("[REPORTER_PHASE]", `requireAllModules bitti (+${Math.round((Date.now() - t1) / 1000)}s)`);
 
+        if (IS_REPORTER) diagnoseStores();
+
         const meta = buildMeta();
         console.log("[REPORTER_META]", JSON.stringify(meta));
 
@@ -165,6 +167,40 @@ export async function init(): Promise<void> {
     } catch (err) {
         logger.error("Rapor koşusu başarısız:\n", err);
         console.log("[REPORTER_FAILED]", String(err));
+    }
+}
+
+/** GEÇİCİ: store finder'ları neden bulunamıyor — Flux mü libdiscore mu cache mi. */
+function diagnoseStores(): void {
+    try {
+        const flux = find((m: any) => m?.Store?.getAll && m?.connectStores, { silent: true })
+            ?? find((m: any) => m?.Store && m?.Dispatcher, { silent: true });
+        const fluxAll = (flux as any)?.Store?.getAll?.() ?? [];
+        const fluxNames = fluxAll.map((s: any) => { try { return s.getName(); } catch { return "?"; } });
+        console.log("[REPORTER_PHASE]", `flux modülü:${flux != null} store:${fluxAll.length} ChannelStore?${fluxNames.includes("ChannelStore")} ExperimentStore?${fluxNames.includes("ExperimentStore")}`);
+
+        const getLd = find((m: any) => typeof m === "function" && String(m).includes("libdiscoreWasm is not initialized"), { silent: true }) as any;
+        let ldKeys: string[] = [];
+        try { const ex = getLd?.(); ldKeys = ex ? Object.keys(ex).filter(k => k.endsWith("Store")) : []; } catch (e) { ldKeys = ["THREW:" + String(e).slice(0, 60)]; }
+        console.log("[REPORTER_PHASE]", `libdiscore fn:${getLd != null} storeKeys:${ldKeys.length} örnek:[${ldKeys.slice(0, 6).join(",")}] ChannelStore?${ldKeys.includes("ChannelStore")}`);
+
+        // Ham cache taraması: ChannelStore herhangi bir export'ta displayName/getName ile var mı
+        let rawHit = "";
+        for (const id in (wreq as any).c) {
+            const ex = (wreq as any).c[id]?.exports;
+            if (ex == null) continue;
+            try {
+                if (ex?.constructor?.displayName === "ChannelStore") { rawHit = "top:" + id; break; }
+                if (typeof ex === "object") for (const k in ex) {
+                    let v; try { v = ex[k]; } catch { continue; }
+                    if (v?.constructor?.displayName === "ChannelStore" || v?.getName?.() === "ChannelStore") { rawHit = "nested:" + id + "." + k; break; }
+                }
+            } catch { /* */ }
+            if (rawHit) break;
+        }
+        console.log("[REPORTER_PHASE]", `ChannelStore ham cache: ${rawHit || "YOK"}`);
+    } catch (err) {
+        console.log("[REPORTER_PHASE]", "diagnoseStores threw: " + String(err).slice(0, 100));
     }
 }
 
