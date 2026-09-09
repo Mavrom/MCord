@@ -169,7 +169,7 @@ export async function init(): Promise<void> {
             meta, badPatches,
             // Yalnız bir plugin'e atfedilebilenler eyleme dönük; atıfsız TDZ
             // gürültüsü rapora girmiyor (yukarıdaki `groupErroredPatches` notu).
-            erroredPatches: erroredPatches.filter(e => e.plugins.length > 0),
+            erroredPatches: actionableErroredPatches(),
             slowPatches, badWebpackFinds,
             traces: getTraceSummary(), otherErrors
         };
@@ -388,9 +388,44 @@ function findBadPatches(): Report["badPatches"] {
  * kanıtlanmış açık-kaynak istemci de bunları rapora almıyor, sadece konsola
  * basıp orijinaline düşüyor.
  */
+/**
+ * Gerçekten eyleme dönük çalışma-anı patch hataları.
+ *
+ * `requireAllModules` 20 bin modülü **sırasız** yüklüyor; bir modül bağımlılığı
+ * hazır olmadan çalıştırıldığında patch'lenmiş fabrikası patlıyor ve orijinaline
+ * düşüyoruz. Sonraki geçişler + `healPoisonedModules` o modülü düzeltiyor —
+ * yani patch aslında sağlam. Yalnız **sonunda hâlâ bozuk** kalan modülleri
+ * raporluyoruz.
+ */
+function actionableErroredPatches(): Report["erroredPatches"] {
+    const cacheObj = (wreq as any)?.c;
+
+    return erroredPatches.filter(entry => {
+        if (entry.plugins.length === 0) return false;
+        if (cacheObj == null) return true;
+
+        const mod = cacheObj[entry.moduleId];
+        if (mod == null) return true;
+
+        const exports = mod.exports;
+        if (exports == null) return true;
+        if (typeof exports !== "object") return false;
+
+        // Export'lardan biri hâlâ fırlatıyorsa modül gerçekten bozuk.
+        for (const key of Object.getOwnPropertyNames(exports)) {
+            try {
+                void (exports as any)[key];
+            } catch {
+                return true;
+            }
+        }
+        return false;
+    });
+}
+
 function groupErroredPatches(): Array<{ plugins: string; count: number; sampleModule: string; sampleError: string }> {
     const byKey = new Map<string, { plugins: string; count: number; sampleModule: string; sampleError: string }>();
-    for (const entry of erroredPatches) {
+    for (const entry of actionableErroredPatches()) {
         if (!entry.plugins.length) continue;
         const key = entry.plugins.join(", ");
         const existing = byKey.get(key);
