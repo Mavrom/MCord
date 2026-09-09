@@ -55,17 +55,28 @@ export function registerReporterPatch(): void {
 
 const otherErrors: string[] = [];
 
-/** Discord'un kendi gürültüsü — rapora girmemeli (plan §9.2). */
+/**
+ * Discord'un kendi gürültüsü — rapora girmemeli (plan §9.2).
+ *
+ * Kanıtlanmış açık-kaynak istemcinin `generateReport` filtresiyle aynı liste +
+ * ek olarak "Webpack" içeren her satır eleniyor: bunlar bizim kendi yakalama
+ * katmanımızın modülleri sırasız require ederken ürettiği beklenen churn.
+ */
 const IGNORED_DISCORD_ERRORS = [
     "KeybindStore: Looking for callback action",
     "Unable to process domain list delta",
+    "Downloading the full bad domains file",
     "Cannot read properties of undefined (reading 'delete')",
     "[GatewaySocket]",
     "Cannot access '",
+    "search for 'name' in undefined",
+    "Attempting to set fast connect zstd when unsupported",
     "was preloaded using link preload but not used"
 ] as const;
 
 export function recordConsoleError(message: string): void {
+    if (message.includes("Webpack")) return;
+    if (message.startsWith("Failed to load resource: the server responded with a status of")) return;
     if (IGNORED_DISCORD_ERRORS.some(ignored => message.includes(ignored))) return;
     otherErrors.push(message);
 }
