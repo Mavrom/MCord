@@ -198,7 +198,7 @@ export const ContextMenuApi = mapMangledModuleLazy('type:"CONTEXT_MENU_OPEN', {
 export const transitionTo = findByCodeLazy("transitionTo - Transitioning to");
 
 /** İstemci içi yönlendirici — `transitionTo("/channels/...")` kanalı açar. */
-export const NavigationRouter = mapMangledModuleLazy("Transitioning to ", {
+export const NavigationRouter = mapMangledModuleLazy("transitionTo - Transitioning to", {
     transitionTo: byCode("transitionTo -"),
     transitionToGuild: byCode("transitionToGuild -"),
     back: byCode("goBack()"),
@@ -329,11 +329,13 @@ export const PopoutActions = mapMangledModuleLazy('type:"POPOUT_WINDOW_OPEN"', {
     setAlwaysOnTop: byCode('type:"POPOUT_WINDOW_SET_ALWAYS_ON_TOP"')
 }) as any;
 
+// Vencord'un birebir tanımı: hedef bir REGEX, `useDisplayProfile` mapper'ı
+// `\i` (tanımlayıcı) desenli byCode.
 export const DisplayProfileUtils = mapMangledModuleLazy(
-    bySource(".getUserProfile(", ".getGuildMemberProfile("),
+    /=\i\.getUserProfile\(\i\),\i=\i\.getGuildMemberProfile\(/,
     {
         getDisplayProfile: byCode(".getGuildMemberProfile("),
-        useDisplayProfile: mapperByRegex(/\[\w+\.\w+,\w+\.\w+],\(\)=>/)
+        useDisplayProfile: byCode(/\[\i\.\i,\i\.\i],\(\)=>/)
     }
 ) as any;
 

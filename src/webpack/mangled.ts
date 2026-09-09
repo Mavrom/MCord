@@ -55,11 +55,13 @@ function getAllPropertyNames(object: Record<PropertyKey, any>, includeNonEnumera
  *   3. `getAllPropertyNames` ile (non-enumerable dahil) tüm anahtarları gez.
  */
 export function mapMangledModule<M extends Record<string, Mapper>>(
-    target: string | ModuleFilter,
+    target: string | RegExp | ModuleFilter,
     mappers: M,
     options: { silent?: boolean; includeBlacklistedExports?: boolean } = {}
 ): MappedModule<M> {
-    const filter = typeof target === "string" ? bySource(target) : target;
+    const filter = (typeof target === "string" || target instanceof RegExp)
+        ? bySource(target as any)
+        : target;
     pushSearchHistory(["mapMangledModule", [filter, mappers]]);
 
     const result = {} as MappedModule<M>;
@@ -129,21 +131,23 @@ export function mapMangledModule<M extends Record<string, Mapper>>(
 }
 
 /** `bySource(...)` filtresinin arama string'lerini çıkarır. */
-function filterSourceStrings(filter: ModuleFilter): string[] {
+function filterSourceStrings(filter: ModuleFilter): Array<string | RegExp> {
     const meta = (filter as any)[Symbol.for("MCord.Filter")]
         ?? (filter as any).__originalFilter?.[Symbol.for("MCord.Filter")];
     if (meta?.name === "bySource" && Array.isArray(meta.args)) {
-        return meta.args.filter((a: unknown) => typeof a === "string") as string[];
+        return meta.args.filter((a: unknown) => typeof a === "string" || a instanceof RegExp) as Array<string | RegExp>;
     }
     return [];
 }
 
 /** Erişildiği anda çözülen tembel sürüm. */
 export function mapMangledModuleLazy<M extends Record<string, Mapper>>(
-    target: string | ModuleFilter,
+    target: string | RegExp | ModuleFilter,
     mappers: M
 ): MappedModule<M> {
-    const filter = typeof target === "string" ? bySource(target) : target;
+    const filter = (typeof target === "string" || target instanceof RegExp)
+        ? bySource(target as any)
+        : target;
     pushSearchHistory(["mapMangledModuleLazy", [filter, mappers]]);
 
     let resolved: MappedModule<M> | null = null;

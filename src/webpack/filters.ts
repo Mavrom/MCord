@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
+import { canonicalizeMatch } from "../utils/patches";
 import { wreq } from "./intercept";
 import { FilterSymbol, type ModuleExports, type ModuleFilter } from "./types";
 
@@ -57,12 +58,18 @@ export const byStrings = (...strings: string[]): ModuleFilter =>
  * `byStrings` ise değerlendirilmiş export'a bakıyor. İkisi farklı zamanlarda
  * çalışıyor (plan §4.4).
  */
-export const bySource = (...strings: string[]): ModuleFilter =>
-    makeFilter("bySource", strings, (_exports, _module, moduleId) => {
+export const bySource = (...rawStrings: Array<string | RegExp>): ModuleFilter => {
+    const strings = rawStrings.map(c => canonicalizeMatch(c as any)) as Array<string | RegExp>;
+    return makeFilter("bySource", strings, (_exports, _module, moduleId) => {
         const source = getModuleSource(moduleId);
         if (!source) return false;
-        return strings.every(str => source.includes(str));
+        return strings.every(part => {
+            if (typeof part === "string") return source.includes(part);
+            if (part.global) part.lastIndex = 0;
+            return part.test(source);
+        });
     });
+};
 
 /** Fonksiyon kaynağında regex araması. */
 export const byRegex = (regex: RegExp): ModuleFilter =>
@@ -85,12 +92,23 @@ export const byDisplayName = (name: string): ModuleFilter =>
  * `byStrings`'ten farkı: React sarmalayıcılarını açmaz, doğrudan `String(f)`.
  * Mangle edilmiş modüllerde mapper olarak kullanılıyor.
  */
-export const byCode = (...code: string[]): ModuleFilter =>
-    makeFilter("byCode", code, exports => {
+export const byCode = (...rawCode: Array<string | RegExp>): ModuleFilter => {
+    const code = rawCode.map(c => canonicalizeMatch(c as any)) as Array<string | RegExp>;
+    return makeFilter("byCode", code, exports => {
         if (typeof exports !== "function") return false;
-        const source = Function.prototype.toString.call(exports);
-        return code.every(str => source.includes(str));
+        let source: string;
+        try {
+            source = Function.prototype.toString.call(exports);
+        } catch {
+            return false;
+        }
+        return code.every(part => {
+            if (typeof part === "string") return source.includes(part);
+            if (part.global) part.lastIndex = 0;
+            return part.test(source);
+        });
     });
+};
 
 /**
  * Kaynağında verilen stringleri içeren React bileşeni.
@@ -99,8 +117,15 @@ export const byCode = (...code: string[]): ModuleFilter =>
  * portu: sarmalayıcıları **döngüyle** açıyor. Eski hâlimiz tek seviye açıyordu
  * ve `memo(forwardRef(...))` gibi iki katlı bileşenleri hiç bulamıyordu.
  */
-export const componentByCode = (...code: string[]): ModuleFilter =>
-    makeFilter("componentByCode", code, exports => {
+export const componentByCode = (...rawCode: Array<string | RegExp>): ModuleFilter => {
+    const code = rawCode.map(c => canonicalizeMatch(c as any)) as Array<string | RegExp>;
+    const matches = (source: string) => code.every(part => {
+        if (typeof part === "string") return source.includes(part);
+        if (part.global) part.lastIndex = 0;
+        return part.test(source);
+    });
+
+    return makeFilter("componentByCode", code, exports => {
         let inner: any = exports;
 
         while (inner != null) {
@@ -111,7 +136,7 @@ export const componentByCode = (...code: string[]): ModuleFilter =>
                 } catch {
                     return false;
                 }
-                if (code.every(str => source.includes(str))) return true;
+                if (matches(source)) return true;
             }
 
             if (!inner.$$typeof) return false;
@@ -122,6 +147,7 @@ export const componentByCode = (...code: string[]): ModuleFilter =>
 
         return false;
     });
+};
 
 /**
  * Flux store eşleşmesi.

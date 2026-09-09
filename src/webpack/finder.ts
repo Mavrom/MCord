@@ -57,7 +57,7 @@ export function find<T = ModuleExports>(filter: ModuleFilter, options: FindOptio
     // (wreq.m kaynak taraması) + `wreq(id)`.
     const meta = filter[FilterSymbol] ?? filter.__originalFilter?.[FilterSymbol];
     if (meta?.name === "bySource") {
-        const codes = (meta.args ?? []).filter((a: unknown) => typeof a === "string") as string[];
+        const codes = (meta.args ?? []).filter((a: unknown) => typeof a === "string" || a instanceof RegExp) as Array<string | RegExp>;
         const id = codes.length > 0 ? findModuleIdBySource(...codes) : null;
         if (id == null) {
             if (!options.silent) logger.warn(`Modül bulunamadı: ${describeFilter(filter)}`);
@@ -156,7 +156,16 @@ export function findModuleId(filter: ModuleFilter, options: FindOptions = {}): P
  * `bySource` filtresi zaten kaynağa bakıyor; burada `cache` yerine `wreq.m`
  * üzerinde geziyoruz çünkü modül hiç require edilmemiş olabilir (plan §4.4).
  */
-export function findModuleIdBySource(...strings: string[]): PropertyKey | null {
+/** Vencord `stringMatches`: string veya RegExp parçalarının hepsi eşleşiyor mu. */
+function sourceMatches(source: string, parts: Array<string | RegExp>): boolean {
+    return parts.every(part => {
+        if (typeof part === "string") return source.includes(part);
+        if (part.global) part.lastIndex = 0;
+        return part.test(source);
+    });
+}
+
+export function findModuleIdBySource(...strings: Array<string | RegExp>): PropertyKey | null {
     // Tek `wreq` yetmiyor: Discord'da birden fazla webpack instance'ı var ve
     // aradığımız modül başka bir instance'ın fabrika listesinde olabilir.
     for (const instance of new Set([wreq, ...allWebpackInstances])) {
@@ -171,7 +180,7 @@ export function findModuleIdBySource(...strings: string[]): PropertyKey | null {
                 continue;
             }
 
-            if (strings.every(str => source.includes(str))) return moduleId;
+            if (sourceMatches(source, strings)) return moduleId;
         }
     }
 

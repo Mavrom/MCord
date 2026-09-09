@@ -179,28 +179,50 @@ function buildMeta(): Report["meta"] {
     };
 }
 
-/** Tüm modülleri manuel require et — patch'ler ve aramalar tetiklensin. */
+/**
+ * Tüm modülleri manuel require et — patch'ler ve aramalar tetiklensin.
+ *
+ * **Çok geçişli:** tek geçişte bir modül, bağımlılığı henüz yüklenmediği için
+ * `Cannot access X before initialization` / `Cannot read 'Ay'` ile patlıyor ve
+ * bir daha denenmiyordu; o modülün içindeki store/action/component hiç
+ * bulunamıyordu. Sonraki geçişlerde bağımlılıklar hazır olduğu için başarılı
+ * oluyorlar. Yeni başarı gelmeyene kadar (en fazla 4 tur) tekrarlıyoruz.
+ */
 function requireAllModules(): void {
-    let failed = 0;
-    let done = 0;
     const ids = Object.keys(wreq.m);
     const total = ids.length;
-    let lastBeat = Date.now();
+    let pending = ids;
 
-    for (const moduleId of ids) {
-        try {
-            wreq(moduleId as any);
-        } catch {
-            failed++;
+    for (let pass = 1; pass <= 4 && pending.length > 0; pass++) {
+        const stillFailing: string[] = [];
+        let done = 0;
+        let lastBeat = Date.now();
+
+        for (const moduleId of pending) {
+            try {
+                wreq(moduleId as any);
+            } catch {
+                stillFailing.push(moduleId);
+            }
+            if (IS_REPORTER && ++done % 500 === 0 && Date.now() - lastBeat > 5000) {
+                console.log("[REPORTER_PHASE]", `requireAllModules geçiş ${pass}: ${done}/${pending.length}`);
+                lastBeat = Date.now();
+            }
         }
-        // 5 sn'de bir ilerleme: hangi modülde (varsa) yavaş patch takıldığını gör.
-        if (IS_REPORTER && ++done % 500 === 0 && Date.now() - lastBeat > 5000) {
-            console.log("[REPORTER_PHASE]", `requireAllModules ${done}/${total}`);
-            lastBeat = Date.now();
+
+        if (IS_REPORTER) {
+            console.log("[REPORTER_PHASE]", `requireAllModules geçiş ${pass} bitti: ${stillFailing.length} hata (önceki ${pending.length})`);
         }
+
+        // Yeni başarı yoksa devam etmenin anlamı yok.
+        if (stillFailing.length === pending.length) {
+            pending = stillFailing;
+            break;
+        }
+        pending = stillFailing;
     }
 
-    logger.info(`${total} modül require edildi (${failed} hata).`);
+    logger.info(`${total} modül require edildi (${pending.length} kalıcı hata).`);
 }
 
 /** Girdiyi çalıştırmadan önce insan-okunur kısa etiket — hangi arama takıldı görmek için. */
