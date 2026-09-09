@@ -17,7 +17,16 @@ function getFlux(): ModuleExports | null {
     return fluxModule;
 }
 
-function allStores(): ModuleExports[] {
+/**
+ * Discord'un tüm Flux store singleton'ları.
+ *
+ * Kanıtlanmış açık-kaynak istemcinin `populateFluxStoreMap` yaklaşımı: her
+ * store `class X extends Flux.Store` çalıştırıldığında temel sınıfın statik
+ * kaydına giriyor. `/login` sayfasında bile (tüm modüller zorla require
+ * edildiğinde) `Flux.Store.getAll()` bunları döndürüyor — bu yüzden token'sız
+ * doğrulama işe yarıyor.
+ */
+export function allStores(): ModuleExports[] {
     const flux = getFlux();
     try {
         return flux?.Store?.getAll?.() ?? [];
@@ -71,7 +80,7 @@ export const Stores: Record<string, ModuleExports> = new Proxy({}, {
     }
 });
 
-function resolveStore(name: string): ModuleExports | undefined {
+export function resolveStore(name: string): ModuleExports | undefined {
     const cached = storeCache.get(name);
     if (cached !== undefined) return cached;
 

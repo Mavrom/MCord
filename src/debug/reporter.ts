@@ -10,6 +10,7 @@ import { byStoreName, describeFilter } from "../webpack/filters";
 import { find } from "../webpack/finder";
 import { lazyWebpackSearchHistory, setRecordSearchHistory, wreq } from "../webpack/intercept";
 import { mapMangledModule } from "../webpack/mangled";
+import { resolveStore } from "../webpack/stores";
 import type { ModuleFilter } from "../webpack/types";
 import { loadLazyChunks } from "./loadLazyChunks";
 import { getTraceSummary } from "./tracer";
@@ -190,6 +191,9 @@ function checkSearchEntry(kind: string, args: unknown[]): string | null {
             case "waitForStore":
             case "findStoreLazy": {
                 const name = args[0] as string;
+                // Kanıtlanmış açık-kaynak istemcinin `findStore` yolu: önce Flux'un
+                // statik kaydı, sonra webpack araması.
+                if (resolveStore(name) != null) return null;
                 return find(byStoreName(name), { silent: true }) == null ? `store: ${name}` : null;
             }
             case "mapMangledModule":

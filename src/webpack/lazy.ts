@@ -9,6 +9,7 @@ import { byCode, byKeys, byStoreName, componentByCode, describeFilter } from "./
 import { find, type FindOptions } from "./finder";
 import { shouldSkipModule, wrapModuleFilter } from "./guards";
 import { cache, moduleListeners, pushSearchHistory } from "./intercept";
+import { getStoreLazy, resolveStore } from "./stores";
 import type { Module, ModuleExports, ModuleFilter } from "./types";
 
 const logger = new Logger("Webpack:Lazy", "#8caaee");
@@ -182,19 +183,26 @@ export function findLazy<T extends object = ModuleExports>(
 /**
  * Flux store'u **adına göre** bekler.
  *
- * Arama `getName()` üzerinden yapılıyor: anahtar tahminine göre çok daha
- * dayanıklı — Discord property adlarını mangle etse bile store adı sabit
- * kalıyor.
+ * Önce Flux'un statik store kaydına (`Flux.Store.getAll()`), sonra webpack
+ * araması olarak `constructor.displayName` / `getName()` eşleşmesine bakıyor —
+ * kanıtlanmış açık-kaynak istemcinin `findStore` yaklaşımının aynısı.
  */
 export function waitForStore(name: string, callback: (store: ModuleExports) => void): () => void {
     pushSearchHistory(["waitForStore", [name]]);
+
+    const fromRegistry = resolveStore(name);
+    if (fromRegistry != null) {
+        callback(fromRegistry);
+        return () => { /* zaten çözüldü */ };
+    }
+
     return waitFor(byStoreName(name), callback, { silent: true });
 }
 
 /** Store'a erişildiği anda çözülen tembel proxy. */
 export function findStoreLazy<T extends object = ModuleExports>(name: string): T {
     pushSearchHistory(["findStoreLazy", [name]]);
-    return findLazy<T>(byStoreName(name));
+    return getStoreLazy(name) as T;
 }
 
 /** Kaynağında verilen stringleri içeren fonksiyonu tembel bulur. */

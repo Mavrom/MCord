@@ -105,15 +105,23 @@ export const componentByCode = (...code: string[]): ModuleFilter =>
         return code.every(str => source.includes(str));
     });
 
-/** Flux store `getName()` eşleşmesi. */
+/**
+ * Flux store eşleşmesi.
+ *
+ * İki yol: `constructor.displayName` (kanıtlanmış açık-kaynak istemcinin
+ * kullandığı — store sınıfı çalıştırılmışsa hep var) ve `getName()` (bizim
+ * eski yolumuz, geri uyum). `getName()` bazı store'larda argüman istiyor veya
+ * fırlatıyor, o yüzden try/catch şart.
+ */
 export const byStoreName = (name: string): ModuleFilter =>
     makeFilter("byStoreName", [name], exports => {
-        if (typeof exports?.getName !== "function") return false;
         try {
-            return exports.getName() === name;
-        } catch {
-            return false;
-        }
+            if (exports?.constructor?.displayName === name) return true;
+            if (typeof exports?.getName === "function" && exports.getName.length === 0) {
+                return exports.getName() === name;
+            }
+        } catch { /* bozuk store */ }
+        return false;
     });
 
 /** Verilen filtrelerin hepsini sağlayan modüller. */
