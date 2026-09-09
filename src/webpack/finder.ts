@@ -241,4 +241,4 @@ export const findByDisplayName = <T = ModuleExports>(name: string) =>
     find<T>(byDisplayName(name));
 
 export const findStore = <T = ModuleExports>(name: string) =>
-    find<T>(byStoreName(name));
+    find<T>(byStoreName(name), { silent: true });

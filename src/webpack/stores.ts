@@ -137,11 +137,23 @@ export function resolveStore(name: string): ModuleExports | undefined {
     if (cached !== undefined) return cached;
 
     // 1) Flux statik kaydı (`class X extends Flux.Store`).
-    for (const store of allStores()) {
+    //    İki geçiş: önce KESİN ölçüt (`constructor.displayName` — Vencord'un
+    //    tek ölçütü), sonra gevşek `getName()`. Tek geçişte gevşek ölçüt
+    //    yanlış store'u kapabiliyordu.
+    const stores = allStores();
+
+    for (const store of stores) {
         try {
-            if (store.constructor?.displayName === name
-                || store.displayName === name
-                || store.getName?.() === name) {
+            if (store.constructor?.displayName === name || store.displayName === name) {
+                storeCache.set(name, store);
+                return store;
+            }
+        } catch { /* bozuk store'u atla */ }
+    }
+
+    for (const store of stores) {
+        try {
+            if (store.getName?.() === name) {
                 storeCache.set(name, store);
                 return store;
             }
