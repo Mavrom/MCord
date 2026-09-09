@@ -19,3 +19,8 @@ report.md
 .inject-state.json
 
 scripts/installer/src/gui/webview-native.generated.mjs
+
+# yerel geliştirici bağlam dosyaları (paylaşılmıyor)
+CLAUDE.md
+codebase-map.md
+.claude/
