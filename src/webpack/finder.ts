@@ -32,6 +32,30 @@ export interface FindOptions {
  * biz sadece try/catch ekliyoruz, `shouldSkipModule`/token-guard katmanını
  * KALDIRDIK — o katman ChannelStore gibi Proxy-tabanlı store'ları eliyordu.)
  */
+/**
+ * Modül cache anahtarları — **non-enumerable olanlar dahil**.
+ *
+ * `_blacklistBadModules` kötü sayılan modülü `wreq.c` içinde non-enumerable
+ * yapıyor; `for...in` onları atlıyordu ve o modüllerdeki store/action/component
+ * hiç bulunamıyordu.
+ */
+function cacheKeys(): string[] {
+    try {
+        return Object.getOwnPropertyNames(cache ?? {});
+    } catch {
+        return Object.keys(cache ?? {});
+    }
+}
+
+/** Bir nesnenin tüm kendi anahtarları — non-enumerable dahil. */
+function ownKeys(obj: any): string[] {
+    try {
+        return Object.getOwnPropertyNames(obj);
+    } catch {
+        return [];
+    }
+}
+
 function safe(filter: ModuleFilter): (v: any) => boolean {
     return (v: any) => {
         try {
@@ -70,8 +94,8 @@ export function find<T = ModuleExports>(filter: ModuleFilter, options: FindOptio
         }
     }
 
-    for (const key in cache) {
-        const mod = cache[key] as any;
+    for (const key of cacheKeys()) {
+        const mod = (cache as any)[key];
         // NOT: Vencord `!mod?.loaded` da kontrol ediyor. Bizde patch'lenmiş
         // fabrikaların bir kısmı fırlattığı için `loaded` false kalıyor ama
         // export'lar kullanılabilir oluyor — o yüzden yalnız `exports` şartı.
@@ -81,7 +105,7 @@ export function find<T = ModuleExports>(filter: ModuleFilter, options: FindOptio
 
         if (typeof mod.exports !== "object") continue;
 
-        for (const nestedMod in mod.exports) {
+        for (const nestedMod of ownKeys(mod.exports)) {
             let nested: any;
             try { nested = mod.exports[nestedMod]; } catch { continue; }
             if (nested && wrapped(nested)) {
@@ -102,8 +126,8 @@ export function findAll<T = ModuleExports>(filter: ModuleFilter): T[] {
     const wrapped = safe(filter);
     const results: T[] = [];
 
-    for (const key in cache) {
-        const mod = cache[key] as any;
+    for (const key of cacheKeys()) {
+        const mod = (cache as any)[key];
         // NOT: Vencord `!mod?.loaded` da kontrol ediyor. Bizde patch'lenmiş
         // fabrikaların bir kısmı fırlattığı için `loaded` false kalıyor ama
         // export'lar kullanılabilir oluyor — o yüzden yalnız `exports` şartı.
@@ -112,7 +136,7 @@ export function findAll<T = ModuleExports>(filter: ModuleFilter): T[] {
         if (wrapped(mod.exports)) results.push(mod.exports as T);
         if (typeof mod.exports !== "object") continue;
 
-        for (const nestedMod in mod.exports) {
+        for (const nestedMod of ownKeys(mod.exports)) {
             let nested: any;
             try { nested = mod.exports[nestedMod]; } catch { continue; }
             if (nested && wrapped(nested)) results.push(nested as T);
@@ -126,8 +150,8 @@ export function findAll<T = ModuleExports>(filter: ModuleFilter): T[] {
 export function findModuleId(filter: ModuleFilter, options: FindOptions = {}): PropertyKey | null {
     const wrapped = safe(filter);
 
-    for (const key in cache) {
-        const mod = cache[key] as any;
+    for (const key of cacheKeys()) {
+        const mod = (cache as any)[key];
         // NOT: Vencord `!mod?.loaded` da kontrol ediyor. Bizde patch'lenmiş
         // fabrikaların bir kısmı fırlattığı için `loaded` false kalıyor ama
         // export'lar kullanılabilir oluyor — o yüzden yalnız `exports` şartı.
@@ -136,7 +160,7 @@ export function findModuleId(filter: ModuleFilter, options: FindOptions = {}): P
         if (wrapped(mod.exports)) return key;
         if (typeof mod.exports !== "object") continue;
 
-        for (const nestedMod in mod.exports) {
+        for (const nestedMod of ownKeys(mod.exports)) {
             let nested: any;
             try { nested = mod.exports[nestedMod]; } catch { continue; }
             if (nested && wrapped(nested)) return key;
