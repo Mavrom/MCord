@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
-import { byKeys, byStoreName } from "./filters";
+import { byCode, byKeys, byStoreName } from "./filters";
 import { find, findStore } from "./finder";
 import type { ModuleExports } from "./types";
 
@@ -23,8 +23,7 @@ function getFlux(): ModuleExports | null {
  * Kanıtlanmış açık-kaynak istemcinin `populateFluxStoreMap` yaklaşımı: her
  * store `class X extends Flux.Store` çalıştırıldığında temel sınıfın statik
  * kaydına giriyor. `/login` sayfasında bile (tüm modüller zorla require
- * edildiğinde) `Flux.Store.getAll()` bunları döndürüyor — bu yüzden token'sız
- * doğrulama işe yarıyor.
+ * edildiğinde) `Flux.Store.getAll()` bunları döndürüyor.
  */
 export function allStores(): ModuleExports[] {
     const flux = getFlux();
@@ -32,6 +31,33 @@ export function allStores(): ModuleExports[] {
         return flux?.Store?.getAll?.() ?? [];
     } catch {
         return [];
+    }
+}
+
+/**
+ * `libdiscore` WASM modülünün `*Store` export'ları.
+ *
+ * Discord birçok store'u (ChannelStore, MessageStore, ExperimentStore vb.)
+ * `Flux.Store` kaydından çıkarıp libdiscore'a taşıdı — bunlar `Flux.Store.getAll()`
+ * içinde YOK. Vencord'un `populateFluxStoreMap`'i bunları `findByCode(
+ * "libdiscoreWasm is not initialized")` ile çekiyor. Bu adım olmadan store
+ * finder'larının çoğu kırık görünüyor.
+ */
+function libdiscoreStores(): Record<string, ModuleExports> {
+    try {
+        const getLibdiscore = find(byCode("libdiscoreWasm is not initialized"), { silent: true }) as
+            | (() => Record<string, ModuleExports>)
+            | null;
+        const exports = getLibdiscore?.();
+        if (exports == null) return {};
+
+        const out: Record<string, ModuleExports> = {};
+        for (const key in exports) {
+            if (key.endsWith("Store")) out[key] = exports[key];
+        }
+        return out;
+    } catch {
+        return {};
     }
 }
 
@@ -84,16 +110,24 @@ export function resolveStore(name: string): ModuleExports | undefined {
     const cached = storeCache.get(name);
     if (cached !== undefined) return cached;
 
+    // 1) Flux statik kaydı (`class X extends Flux.Store`).
     for (const store of allStores()) {
         try {
-            if (store.getName() === name) {
+            if (store.getName?.() === name || store.constructor?.displayName === name) {
                 storeCache.set(name, store);
                 return store;
             }
         } catch { /* bozuk store'u atla */ }
     }
 
-    // Flux henüz hazır değilse webpack araması ile dene.
+    // 2) libdiscore WASM store'ları (Discord birçoğunu buraya taşıdı).
+    const fromLibdiscore = libdiscoreStores()[name];
+    if (fromLibdiscore != null) {
+        storeCache.set(name, fromLibdiscore);
+        return fromLibdiscore;
+    }
+
+    // 3) Webpack araması (`constructor.displayName` / `getName()`).
     const viaWebpack = findStore(name);
     if (viaWebpack != null) {
         storeCache.set(name, viaWebpack);
