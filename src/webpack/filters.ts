@@ -92,17 +92,35 @@ export const byCode = (...code: string[]): ModuleFilter =>
         return code.every(str => source.includes(str));
     });
 
-/** Kaynağında verilen stringleri içeren React bileşeni. */
+/**
+ * Kaynağında verilen stringleri içeren React bileşeni.
+ *
+ * Kanıtlanmış açık-kaynak istemcinin (Vencord) `componentByCode`'unun birebir
+ * portu: sarmalayıcıları **döngüyle** açıyor. Eski hâlimiz tek seviye açıyordu
+ * ve `memo(forwardRef(...))` gibi iki katlı bileşenleri hiç bulamıyordu.
+ */
 export const componentByCode = (...code: string[]): ModuleFilter =>
     makeFilter("componentByCode", code, exports => {
-        const inner = exports?.$$typeof
-            ? (exports.render ?? exports.type ?? exports)
-            : exports;
+        let inner: any = exports;
 
-        if (typeof inner !== "function") return false;
+        while (inner != null) {
+            if (typeof inner === "function") {
+                let source: string;
+                try {
+                    source = Function.prototype.toString.call(inner);
+                } catch {
+                    return false;
+                }
+                if (code.every(str => source.includes(str))) return true;
+            }
 
-        const source = Function.prototype.toString.call(inner);
-        return code.every(str => source.includes(str));
+            if (!inner.$$typeof) return false;
+            else if (inner.type) inner = inner.type;      // memo
+            else if (inner.render) inner = inner.render;  // forwardRef
+            else return false;
+        }
+
+        return false;
     });
 
 /**

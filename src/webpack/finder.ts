@@ -72,7 +72,10 @@ export function find<T = ModuleExports>(filter: ModuleFilter, options: FindOptio
 
     for (const key in cache) {
         const mod = cache[key] as any;
-        if (!mod?.loaded || mod.exports == null) continue;
+        // NOT: Vencord `!mod?.loaded` da kontrol ediyor. Bizde patch'lenmiş
+        // fabrikaların bir kısmı fırlattığı için `loaded` false kalıyor ama
+        // export'lar kullanılabilir oluyor — o yüzden yalnız `exports` şartı.
+        if (mod?.exports == null) continue;
 
         if (wrapped(mod.exports)) return mod.exports as T;
 
@@ -101,7 +104,10 @@ export function findAll<T = ModuleExports>(filter: ModuleFilter): T[] {
 
     for (const key in cache) {
         const mod = cache[key] as any;
-        if (!mod?.loaded || mod.exports == null) continue;
+        // NOT: Vencord `!mod?.loaded` da kontrol ediyor. Bizde patch'lenmiş
+        // fabrikaların bir kısmı fırlattığı için `loaded` false kalıyor ama
+        // export'lar kullanılabilir oluyor — o yüzden yalnız `exports` şartı.
+        if (mod?.exports == null) continue;
 
         if (wrapped(mod.exports)) results.push(mod.exports as T);
         if (typeof mod.exports !== "object") continue;
@@ -122,7 +128,10 @@ export function findModuleId(filter: ModuleFilter, options: FindOptions = {}): P
 
     for (const key in cache) {
         const mod = cache[key] as any;
-        if (!mod?.loaded || mod.exports == null) continue;
+        // NOT: Vencord `!mod?.loaded` da kontrol ediyor. Bizde patch'lenmiş
+        // fabrikaların bir kısmı fırlattığı için `loaded` false kalıyor ama
+        // export'lar kullanılabilir oluyor — o yüzden yalnız `exports` şartı.
+        if (mod?.exports == null) continue;
 
         if (wrapped(mod.exports)) return key;
         if (typeof mod.exports !== "object") continue;

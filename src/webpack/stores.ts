@@ -12,7 +12,10 @@ import type { ModuleExports } from "./types";
 let fluxModule: ModuleExports | null = null;
 
 function getFlux(): ModuleExports | null {
-    fluxModule ??= find(byKeys(["Store", "connectStores"]), { silent: true })
+    // Vencord: `Flux = findByPropsLazy("connectStores")` — YALNIZ `connectStores`.
+    // Bizde `["Store","connectStores"]` aranıyordu ve bu FARKLI bir modülü
+    // (farklı `Store.getAll()` kaydını) bulabiliyordu.
+    fluxModule ??= find(byKeys(["connectStores"]), { silent: true })
         ?? find(byKeys(["Store", "Dispatcher"]), { silent: true });
     return fluxModule;
 }
