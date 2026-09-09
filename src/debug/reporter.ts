@@ -190,22 +190,20 @@ function diagnoseChannelStore(): void {
         }
         console.log("[REPORTER_PHASE]", `ChannelStore tam-imza modüller: [${exact.join(",")}]`);
 
+        const flux0 = find((m: any) => m?.Store?.getAll && m?.connectStores, { silent: true }) as any;
+        const StoreClass = flux0?.Store;
+        console.log("[REPORTER_PHASE]", `webpack instance sayısı: ${(window as any).Mcord?.Webpack?.allWebpackInstances?.size ?? "?"}, StoreClass:${StoreClass != null}`);
+
         for (const id of exact.slice(0, 4)) {
-            let err = "OK";
-            try { (wreq as any)(id); } catch (e) { err = String(e).slice(0, 140); }
+            try { (wreq as any)(id); } catch { /* */ }
             const ex = (wreq as any).c?.[id]?.exports;
-            const keys = ex ? Object.keys(ex).slice(0, 8) : [];
-            let nameFound = "";
-            try {
-                for (const k in ex) {
-                    const v = ex[k];
-                    if (v?.getName && typeof v.getName === "function") {
-                        try { if (v.getName() === "ChannelStore") nameFound = `${k}.getName()`; } catch { /* */ }
-                    }
-                    if (v?.constructor?.displayName === "ChannelStore") nameFound = `${k}.constructor.displayName`;
-                }
-            } catch { /* */ }
-            console.log("[REPORTER_PHASE]", `  mod ${id}: require:${err} keys:[${keys.join(",")}] name:${nameFound || "YOK"}`);
+            for (const k of Object.keys(ex ?? {})) {
+                const v = ex[k];
+                let gn = "?"; try { gn = String(v?.getName?.()); } catch (e) { gn = "throw:" + String(e).slice(0, 40); }
+                const dn = v?.constructor?.displayName ?? v?.displayName ?? "?";
+                const isStore = StoreClass ? (v instanceof StoreClass) : "?";
+                console.log("[REPORTER_PHASE]", `  mod ${id}.${k}: typeof=${typeof v} getName()=${gn} displayName=${dn} instanceof Store=${isStore}`);
+            }
         }
 
         // 2) libdiscore: throw mı, ne döndürüyor
