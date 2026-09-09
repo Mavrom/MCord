@@ -9,13 +9,13 @@ import { describe, expect, it } from "vitest";
 import { canonicalizeMatch, canonicalizeReplace, pluginPathOf } from "./patches";
 
 describe("canonicalizeMatch — \\i kısayolu", () => {
-    it("regex'te \\i'yi tanımlayıcı desenine çevirir", () => {
-        expect(canonicalizeMatch(/let \i=/).source).toBe(String.raw`let (?:[A-Za-z_$][\w$]*)=`);
+    it("regex'te \\i'yi tanımlayıcı desenine çevirir (grupsuz — Vencord ile birebir)", () => {
+        expect(canonicalizeMatch(/let \i=/).source).toBe(String.raw`let [A-Za-z_$][\w$]*=`);
     });
 
     it("birden fazla \\i'yi çevirir", () => {
         expect(canonicalizeMatch(/\i\.\i/).source)
-            .toBe(String.raw`(?:[A-Za-z_$][\w$]*)\.(?:[A-Za-z_$][\w$]*)`);
+            .toBe(String.raw`[A-Za-z_$][\w$]*\.[A-Za-z_$][\w$]*`);
     });
 
     it("kaçırılmış \\i'yi genişletmez, bir ters bölü düşürür", () => {
