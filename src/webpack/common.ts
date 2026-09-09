@@ -269,11 +269,30 @@ export const TooltipContainer = findComponentByCodeLazy("this.renderTooltip()", 
 // Ham Discord bileşen
 // finder'ları:
 export const Button = findComponentByCodeLazy("#{intl::A11Y_LOADING_STARTED}", "buttonRef", "submittingFinishedLabel");
-export const Switch = findComponentByCodeLazy("xanchorScrollLeft", "wrapperClass", "onChange");
-export const Text = findComponentByCodeLazy('lineClamp:"var(--lineClamp")', ',lineHeight:"var(--lineHeight")');
-export const Heading = findComponentByCodeLazy('"h1":', 'variant:"heading', "level:");
-export const Card = findComponentByCodeLazy(".editable]:");
-export const Paragraph: any = Text;
+
+/*
+ * `Switch` / `Text` / `Heading` / `Card`: Discord bu bileşenleri artık eski
+ * imzalarıyla dışa vermiyor. Kanıtlanmış açık-kaynak istemci (Vencord) de
+ * bunları Discord'da aramayı bırakıp kendi bileşenlerini yazdı
+ * (`@components/BaseText`, `FormSwitch`, `Heading`). Aynısını yapıyoruz —
+ * böylece kırık finder uyarısı üretmiyorlar.
+ */
+export const Text: any = ({ children, tag = "span", ...props }: any) =>
+    McordCreateElement(tag, props, children);
+
+export const Paragraph: any = ({ children, ...props }: any) =>
+    McordCreateElement("p", props, children);
+
+export const Heading: any = ({ children, level = 3, ...props }: any) =>
+    McordCreateElement(`h${level}`, props, children);
+
+export const Card: any = ({ children, className, ...props }: any) =>
+    McordCreateElement("div", { className: `mcord-card ${className ?? ""}`.trim(), ...props }, children);
+
+export const Switch: any = ({ checked, onChange, disabled, children, ...props }: any) =>
+    McordCreateElement("label", { style: { display: "inline-flex", alignItems: "center", gap: "8px" } },
+        McordCreateElement("input", { type: "checkbox", checked: !!checked, disabled, onChange: (e: any) => onChange?.(e.currentTarget.checked), ...props }),
+        children);
 
 export const Forms = {
     get FormSection() { return findExportedComponentLazy("FormSection") as any; },
