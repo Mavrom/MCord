@@ -177,35 +177,52 @@ export async function init(): Promise<void> {
 function diagnoseChannelStore(): void {
     try {
         const factories = wreq.m as Record<string, any>;
-        const candidates: string[] = [];
+
+        // 1) `getName(){return"ChannelStore"` tam Flux-store imzası
+        const exact: string[] = [];
         for (const id in factories) {
             let src: string;
             try { src = String(factories[id]); } catch { continue; }
-            // Flux store tanımı: `getName(){return"ChannelStore"}` veya displayName.
-            if (/["']ChannelStore["']/.test(src) && /getName\(\)\{return|displayName|extends.{0,40}Store/.test(src)) {
-                candidates.push(id);
-                if (candidates.length >= 5) break;
+            if (/getName\(\)\{return"ChannelStore"|displayName="ChannelStore"|displayName:"ChannelStore"/.test(src)) {
+                exact.push(id);
+                if (exact.length >= 6) break;
             }
         }
-        console.log("[REPORTER_PHASE]", `ChannelStore aday modüller: [${candidates.join(",")}]`);
+        console.log("[REPORTER_PHASE]", `ChannelStore tam-imza modüller: [${exact.join(",")}]`);
 
-        for (const id of candidates.slice(0, 3)) {
-            const inCache = (wreq as any).c?.[id] != null;
-            let err = "yok";
+        for (const id of exact.slice(0, 4)) {
+            let err = "OK";
+            try { (wreq as any)(id); } catch (e) { err = String(e).slice(0, 140); }
+            const ex = (wreq as any).c?.[id]?.exports;
+            const keys = ex ? Object.keys(ex).slice(0, 8) : [];
+            let nameFound = "";
             try {
-                (wreq as any)(id);
-                err = "OK";
-            } catch (e) {
-                err = String(e).slice(0, 160);
-            }
-            const exNow = (wreq as any).c?.[id]?.exports;
-            let hasName = false;
-            try {
-                for (const k in exNow) { if (exNow[k]?.getName?.() === "ChannelStore" || exNow[k]?.constructor?.displayName === "ChannelStore") hasName = true; }
-                if (exNow?.getName?.() === "ChannelStore") hasName = true;
+                for (const k in ex) {
+                    const v = ex[k];
+                    if (v?.getName && typeof v.getName === "function") {
+                        try { if (v.getName() === "ChannelStore") nameFound = `${k}.getName()`; } catch { /* */ }
+                    }
+                    if (v?.constructor?.displayName === "ChannelStore") nameFound = `${k}.constructor.displayName`;
+                }
             } catch { /* */ }
-            console.log("[REPORTER_PHASE]", `  mod ${id}: önce-cache:${inCache} require:${err} sonra-ChannelStore-export:${hasName}`);
+            console.log("[REPORTER_PHASE]", `  mod ${id}: require:${err} keys:[${keys.join(",")}] name:${nameFound || "YOK"}`);
         }
+
+        // 2) libdiscore: throw mı, ne döndürüyor
+        const getLd = find((m: any) => typeof m === "function" && String(m).includes("libdiscoreWasm is not initialized"), { silent: true }) as any;
+        try {
+            const ldEx = getLd?.();
+            console.log("[REPORTER_PHASE]", `libdiscore(): ${ldEx == null ? "null" : Object.keys(ldEx).length + " key, örnek [" + Object.keys(ldEx).slice(0, 10).join(",") + "]"}`);
+        } catch (e) {
+            console.log("[REPORTER_PHASE]", `libdiscore() THREW: ${String(e).slice(0, 120)}`);
+        }
+
+        // 3) Flux.Store.getAll içinde adında "Channel" geçen store'lar
+        try {
+            const flux = find((m: any) => m?.Store?.getAll && m?.connectStores, { silent: true });
+            const names = ((flux as any)?.Store?.getAll?.() ?? []).map((s: any) => { try { return s.getName(); } catch { return "?"; } });
+            console.log("[REPORTER_PHASE]", `flux 'Channel' store'lar: [${names.filter((n: string) => n.includes("Channel")).join(",")}]`);
+        } catch { /* */ }
     } catch (err) {
         console.log("[REPORTER_PHASE]", "diagnoseChannelStore threw: " + String(err).slice(0, 120));
     }
