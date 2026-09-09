@@ -4,38 +4,43 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
-import { renderMemberListDecorators } from "../../../api/memberListDecorators";
+import { __getDecorators } from "../../../api/memberListDecorators";
 import { Devs } from "../../../utils/constants";
 import { definePlugin } from "../../../utils/types";
+import { memberListDecoratorsStyle } from "./style";
 
+/**
+ * Kanıtlanmış açık-kaynak istemcinin (Vencord) güncel `MemberListDecoratorsAPI`
+ * patch'lerinin birebir portu — hem sunucu üye listesi hem DM listesi.
+ */
 export default definePlugin({
     name: "MemberListDecoratorsAPI",
-    description: "Plugin'lerin sunucu üye listesinde isimlerin yanına küçük eleman eklemesini sağlar",
+    description: "Plugin'lerin üye listesinde (sunucu ve DM) isimlerin yanına eleman eklemesini sağlar",
     authors: [Devs.MCord],
     required: true,
 
+    managedStyle: memberListDecoratorsStyle,
+
     patches: [
         {
-            find: ",ownerTooltipText:u,premiumSince:R,onClickPremiumGuildIcon",
-            reason:
-                "Üye listesi satırı `AvatarWithText` bileşenini kullanıyor ve `decorators` "
-                + "prop'unu ismin hemen sağında render ediyor. Bu prop bir modül literali "
-                + "içinde inline JSX olarak veriliyor (`decorators:(0,r.jsx)(SahipTacı,{...})`); "
-                + "dışarıdan tutulabilir referansı yok, fonksiyon patch'i uygulanamıyor. "
-                + "Çapa `,ownerTooltipText:u,premiumSince:R,onClickPremiumGuildIcon` — bundle'da "
-                + "tek geçiyor.",
+            find: "#{intl::GUILD_OWNER}),children:",
+            reason: "Sunucu üye listesi satırı. Vencord MemberListDecoratorsAPI portu.",
+            replacement: [
+                {
+                    match: /children:\[(?=.{0,300},lostPermissionTooltipText:)/,
+                    replace: "children:[$self.__getDecorators(arguments[0],'guild'),"
+                }
+            ]
+        },
+        {
+            find: "PrivateChannel.renderAvatar",
+            reason: "DM listesi satırı. Vencord MemberListDecoratorsAPI portu.",
             replacement: {
-                // `decorators` değerini Discord'un kendi elemanı + bizimkiler olacak
-                // şekilde sarıyoruz. Desen yapısal: `decorators:` prop'unun değeri bir
-                // `jsx(Bileşen,{user:<değişken>...})` çağrısı — prop eklenmesine,
-                // jsx→jsxs değişimine, değişken adı değişimine karşı dayanıklı (7/7).
-                match: /decorators:(\(0,\i\.\i\)\(\i,\{user:(\i)[,}][^}]*\}\))/,
-                replace: "decorators:$self.render($1,{user:$2})"
+                match: /decorators:(\i\.isSystemDM\(\)\?.+?:null)/,
+                replace: "decorators:[$self.__getDecorators(arguments[0],'dm'),$1]"
             }
         }
     ],
 
-    render(originalDecoration: any, props: Record<string, any>) {
-        return renderMemberListDecorators(originalDecoration, props);
-    }
+    __getDecorators
 });

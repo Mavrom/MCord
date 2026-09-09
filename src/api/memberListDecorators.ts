@@ -4,73 +4,52 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
-import { McordCreateElement, McordFragment } from "../utils/jsx";
-import { Logger } from "../utils/logger";
-
-const logger = new Logger("Api:MemberListDecorators", "#f4b8e4");
-
-/**
- * Üye listesi süslemeleri: sunucu üye listesinde bir üyenin isminin hemen
- * sağına küçük eleman (rozet, ikon, etiket) eklemeyi sağlar.
- *
- * Kayıt/silme `PluginManager` üzerinden değil, plugin'in `start`/`stop`'unda
- * `addMemberListDecorator` / `removeMemberListDecorator` ile yapılır.
+/*
+ * Kanıtlanmış açık-kaynak istemcinin (Vencord) güncel `MemberListDecorators`
+ * API'sinin birebir portu.
  */
 
-export type MemberListDecoratorRenderer = (props: Record<string, any>) => any;
+import { ErrorBoundary } from "../components/ErrorBoundary";
+import { McordCreateElement } from "../utils/jsx";
 
-const decorators = new Map<string, MemberListDecoratorRenderer>();
-
-export function addMemberListDecorator(id: string, render: MemberListDecoratorRenderer): void {
-    if (decorators.has(id)) {
-        logger.warn(`Üye listesi süslemesi "${id}" zaten kayıtlı, üzerine yazılıyor.`);
-    }
-    decorators.set(id, render);
+interface DecoratorProps {
+    type: "guild" | "dm";
+    user: any;
+    /** yalnız DM liste öğesinde var */
+    channel: any;
+    /** yalnız sunucu liste öğesinde var */
+    isOwner: boolean;
+    [key: string]: any;
 }
 
-export function removeMemberListDecorator(id: string): boolean {
-    return decorators.delete(id);
+export type MemberListDecoratorFactory = (props: DecoratorProps) => any;
+type OnlyIn = "guilds" | "dms";
+
+export const decoratorsFactories = new Map<string, { render: MemberListDecoratorFactory; onlyIn?: OnlyIn; }>();
+
+export function addMemberListDecorator(identifier: string, render: MemberListDecoratorFactory, onlyIn?: OnlyIn): void {
+    decoratorsFactories.set(identifier, { render, onlyIn });
 }
 
-/**
- * Patch'in çağırdığı giriş noktası: Discord'un kendi süsleme elemanını alır,
- * bizimkileri ekler, hepsini tek bir fragment içinde döndürür.
- *
- * Her render'da çağrılıyor; her renderer kendi try/catch'inde — bir plugin
- * hata verse bile üye listesi çökmez.
- */
-export function renderMemberListDecorators(originalDecoration: any, props: Record<string, any>): any {
-    const ours: any[] = [];
+export function removeMemberListDecorator(identifier: string): void {
+    decoratorsFactories.delete(identifier);
+}
 
-    for (const [id, render] of decorators) {
-        try {
-            const element = render(props);
-            if (element != null) {
-                ours.push(McordCreateElement(McordFragment, { key: `mcord-mld-${id}` }, element));
+export function __getDecorators(props: DecoratorProps, type: "guild" | "dm"): any {
+    const decorators = Array.from(
+        decoratorsFactories.entries(),
+        ([key, { render: Decorator, onlyIn }]) => {
+            if ((onlyIn === "guilds" && type !== "guild") || (onlyIn === "dms" && type !== "dm")) {
+                return null;
             }
-        } catch (err) {
-            logger.error(`"${id}" üye listesi süslemesi render edilemedi:\n`, err);
+
+            return McordCreateElement(
+                ErrorBoundary,
+                { noop: true, key, message: `"${key}" üye listesi süslemesi render edilemedi` },
+                McordCreateElement(Decorator as any, { ...props, type })
+            );
         }
-    }
-
-    if (ours.length === 0) return originalDecoration;
-
-    // Tüm MCord süslemeleri tek bir flex kapsayıcıda: tutarlı boşluk, birbirine
-    // girmiyor, isim satırını bozmuyor.
-    const container = McordCreateElement(
-        "span",
-        {
-            style: {
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "3px",
-                marginLeft: "4px",
-                flexShrink: 0,
-                verticalAlign: "middle"
-            }
-        },
-        ...ours
     );
 
-    return McordCreateElement(McordFragment, null, originalDecoration, container);
+    return McordCreateElement("div", { className: "mcord-member-list-decorators-wrapper" }, decorators);
 }
