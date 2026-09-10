@@ -5,6 +5,7 @@
  */
 
 import { proxyLazy } from "../utils/lazy";
+import { LazyComponent } from "../utils/lazyReact";
 import { Logger } from "../utils/logger";
 import { byCode, byKeys, byStoreName, componentByCode, describeFilter } from "./filters";
 import { find, type FindOptions } from "./finder";
@@ -198,20 +199,36 @@ export function findByPropsLazy<T extends object = ModuleExports>(...props: stri
     return findLazy<T>(byKeys(props));
 }
 
-/** Kaynağında verilen stringleri içeren React bileşenini tembel bulur. */
+/**
+ * Kaynağında verilen stringleri içeren React bileşenini tembel bulur.
+ *
+ * `findLazy` (Proxy) DEĞİL, `LazyComponent` (gerçek fonksiyon bileşeni):
+ * React bir Proxy'yi bileşen olarak çağırınca `apply` tuzağı devreye giriyor ve
+ * çözülen değer `forwardRef`/`memo` gibi bir nesneyse
+ * `Function.prototype.apply was called on #<Object>` hatası veriyor. Vencord da
+ * bileşenler için ayrı bir `LazyComponent` kullanıyor.
+ */
 export function findComponentByCodeLazy<T extends object = ModuleExports>(...code: string[]): T {
-    return findLazy<T>(componentByCode(...code));
+    record("findLazy", componentByCode(...code));
+
+    return LazyComponent<any>(() =>
+        find(componentByCode(...code), { silent: true }) as any) as unknown as T;
 }
 
-/** `module[name]` bileşenini dışa açan modülü bulup o export'a tembel proxy döndürür. */
-export function findExportedComponentLazy<T extends object = ModuleExports>(name: string): T {
-    const moduleProxy = findLazy<any>(byKeys([name]));
+/** Filtreyle bulunan React bileşenini tembel döndürür. */
+export function findComponentLazy<T extends object = ModuleExports>(filter: ModuleFilter): T {
+    record("findLazy", filter);
+    return LazyComponent<any>(() => find(filter, { silent: true }) as any) as unknown as T;
+}
 
-    return new Proxy((() => null) as any, {
-        get: (_target, prop) => moduleProxy?.[name]?.[prop],
-        apply: (_target, thisArg, args) => Reflect.apply(moduleProxy[name], thisArg, args),
-        construct: (_target, args) => Reflect.construct(moduleProxy[name], args)
-    }) as T;
+/** `module[name]` bileşenini dışa açan modülü bulup o export'u tembel döndürür. */
+export function findExportedComponentLazy<T extends object = ModuleExports>(name: string): T {
+    record("findLazy", byKeys([name]));
+
+    return LazyComponent<any>(() => {
+        const module = find<any>(byKeys([name]), { silent: true });
+        return module?.[name];
+    }) as unknown as T;
 }
 
 /** Zaten yüklenmiş modül sayısı — debug/reporter için. */
