@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
+import { proxyLazy } from "../utils/lazy";
 import { Logger } from "../utils/logger";
 import { byCode, byKeys, byStoreName, componentByCode, describeFilter } from "./filters";
 import { find, type FindOptions } from "./finder";
@@ -156,51 +157,10 @@ export function findLazy<T extends object = ModuleExports>(
 ): T {
     record("findLazy", filter);
 
-    let resolved: any;
-    let attempted = false;
-
-    const resolve = () => {
-        if (!attempted) {
-            attempted = true;
-            resolved = find(filter, { silent: true, ...options });
-            if (resolved == null) {
-                logger.warn(`findLazy çözümlenemedi: ${describeFilter(filter)}`);
-            }
-        }
-        return resolved;
-    };
-
-    return new Proxy({} as T, {
-        get(_target, prop, receiver) {
-            const value = resolve();
-            if (value == null) return undefined;
-            return Reflect.get(value, prop, receiver);
-        },
-        set(_target, prop, newValue) {
-            const value = resolve();
-            if (value == null) return false;
-            return Reflect.set(value, prop, newValue);
-        },
-        has(_target, prop) {
-            const value = resolve();
-            return value != null && Reflect.has(value, prop);
-        },
-        ownKeys() {
-            const value = resolve();
-            return value == null ? [] : Reflect.ownKeys(value);
-        },
-        getOwnPropertyDescriptor(_target, prop) {
-            const value = resolve();
-            if (value == null) return undefined;
-            const descriptor = Reflect.getOwnPropertyDescriptor(value, prop);
-            // Proxy değişmezleri: hedefte olmayan bir özellik configurable olmalı.
-            return descriptor && { ...descriptor, configurable: true };
-        },
-        apply(_target, thisArg, args) {
-            const value = resolve();
-            return Reflect.apply(value, thisArg, args);
-        }
-    });
+    // Vencord'un `proxyLazy`'si (bkz. `utils/lazy.ts`): başarısız çözümleme
+    // kalıcı önbelleğe alınmıyor (5 deneme) ve modül kapsamındaki destructuring
+    // çözümlemeyi erkenden tetiklemiyor.
+    return proxyLazy(() => find(filter, { silent: true, ...options })) as T;
 }
 
 /**

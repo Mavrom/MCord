@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
+import { proxyLazy } from "../utils/lazy";
 import { Logger } from "../utils/logger";
 import { bySource, describeFilter } from "./filters";
 import { findModuleIdBySource } from "./finder";
@@ -150,22 +151,11 @@ export function mapMangledModuleLazy<M extends Record<string, Mapper>>(
         : target;
     pushSearchHistory(["mapMangledModuleLazy", [filter, mappers]]);
 
-    let resolved: MappedModule<M> | null = null;
-
-    const resolve = () => {
-        resolved ??= mapMangledModule(filter, mappers);
-        return resolved;
-    };
-
-    return new Proxy({} as MappedModule<M>, {
-        get: (_t, prop, receiver) => Reflect.get(resolve(), prop, receiver),
-        has: (_t, prop) => Reflect.has(resolve(), prop),
-        ownKeys: () => Reflect.ownKeys(resolve()),
-        getOwnPropertyDescriptor: (_t, prop) => {
-            const descriptor = Reflect.getOwnPropertyDescriptor(resolve(), prop);
-            return descriptor && { ...descriptor, configurable: true };
-        }
-    });
+    // Vencord'un `proxyLazy`'si: yeniden deneme + aynı tick'teki property
+    // erişimini de tembelleştirme. `export const { zustandCreate } =
+    // mapMangledModuleLazy(…)` gibi destructuring satırları modül yüklenirken
+    // çözümlemeyi tetikleyip "modül bulunamadı" uyarısı bastırıyordu.
+    return proxyLazy(() => mapMangledModule(filter, mappers)) as MappedModule<M>;
 }
 
 // ── Sık kullanılan mapper'lar ────────────────────────────────────────────────
