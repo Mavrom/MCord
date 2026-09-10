@@ -7,22 +7,31 @@
 /**
  * Geliştirme enjeksiyonu (plan Faz 1).
  *
- * Son kullanıcı installer'ından (plan §12) farklı olarak burada `app.asar`'a
- * dokunmuyoruz. Electron `resources/app/` klasörünü `resources/app.asar`
- * dosyasına tercih ettiği için, dev derlemesini o klasöre yazmak yeterli.
+ * **Electron `app.asar`'ı `app/` klasörüne TERCİH EDER.** Bu dosyanın eski
+ * sürümü tersini varsayıyordu (`resources/app/` yazıp `app.asar`'a
+ * dokunmuyordu); her Discord kurulumunda zaten gerçek bir `app.asar`
+ * bulunduğu için o enjeksiyon hiçbir zaman devreye girmiyordu — Discord eski
+ * kodu çalıştırmaya devam ediyordu ve bu, sürüm karışıklığına yol açıyordu.
  *
- * Bu, `src/main/index.ts`'teki asar yönlendirme mantığıyla doğal olarak uyumlu:
- *   require.main.path = ...\resources\app        (".asar" ile bitmiyor)
- *   → asarName = "app.asar"
- *   → asarPath = ...\resources\app.asar          (orijinal Discord, dokunulmamış)
+ * Artık installer'ın (plan §12) yaptığının aynısını yapıyoruz:
+ *   1. `dist/` → `dist/app.asar` paketle
+ *   2. `app.asar` → `_app.asar` (yedek yoksa; orijinal Discord)
+ *   3. Bizim asar'ı `app.asar` olarak kopyala + SHA-256 doğrula
+ *   4. `resources/mcord.json` işaret dosyası
+ *   5. Eski, işe yaramayan `resources/app/` klasörünü temizle
  *
- * Geri alma tek klasör silmek: `pnpm uninject`.
+ * `app.asar` Discord açıkken kilitli — kopyalama başarısız olursa Discord'u
+ * kapatman gerektiğini söylüyoruz (zorla kapatma YOK).
+ *
+ * Geri alma: `pnpm uninject` → `_app.asar` geri adlandırılır.
  */
 
-import { cpSync, existsSync, mkdirSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
+import { existsSync, readdirSync, rmSync, statSync } from "node:fs";
 import { join } from "node:path";
 
-import { DIST, PackageJson } from "./build/common.mjs";
+import { DIST, ROOT } from "./build/common.mjs";
+import { installAsar, uninstallAsar } from "./installer/src/core/install.mjs";
 
 const UNINJECT = process.argv.includes("--uninject");
 
@@ -53,9 +62,13 @@ if (!installs.length) {
     process.exit(1);
 }
 
-for (const install of installs) {
-    if (UNINJECT) uninject(install);
-    else inject(install);
+if (UNINJECT) {
+    for (const install of installs) uninject(install);
+} else {
+    packAsar();
+    let failed = false;
+    for (const install of installs) failed = !inject(install) || failed;
+    if (failed) process.exit(1);
 }
 
 /** `%LocalAppData%\Discord*\app-<sürüm>\resources` — her dalın en yeni sürümü. */
@@ -77,47 +90,67 @@ function discoverInstalls() {
         const resources = join(branchPath, latest, "resources");
         if (!existsSync(resources)) continue;
 
-        found.push({ branch: branch.name, version: latest, resources });
+        found.push({
+            branch: branch.name,
+            version: latest,
+            resources,
+            appAsar: join(resources, "app.asar"),
+            backupAsar: join(resources, "_app.asar"),
+            markerFile: join(resources, "mcord.json"),
+            devAppDir: join(resources, "app")
+        });
     }
 
     return found;
 }
 
-function inject({ branch, version, resources }) {
+/** `dist/` → `dist/app.asar`. Ayrı süreç: `packAsar.mjs` üst düzey `await` kullanıyor. */
+function packAsar() {
     if (!existsSync(join(DIST, "patcher.js"))) {
-        console.error("[MCord] dist/ boş. Önce `pnpm buildDev` veya `pnpm watch` çalıştır.");
+        console.error("[MCord] dist/ boş. Önce `pnpm build` veya `pnpm watch` çalıştır.");
         process.exit(1);
     }
 
-    const appDir = join(resources, "app");
-
-    rmSync(appDir, { recursive: true, force: true });
-    mkdirSync(appDir, { recursive: true });
-
-    for (const file of ["patcher.js", "preload.js", "renderer.js"]) {
-        const src = join(DIST, file);
-        if (existsSync(src)) cpSync(src, join(appDir, file));
-    }
-
-    writeFileSync(join(appDir, "package.json"), JSON.stringify({
-        name: "mcord",
-        main: "patcher.js",
-        version: PackageJson.version
-    }, null, 4));
-
-    console.log(`[MCord] enjekte edildi → ${branch} ${version}\n           ${appDir}`);
+    execFileSync(process.execPath, [join(ROOT, "scripts", "packAsar.mjs")], { stdio: "inherit" });
 }
 
-function uninject({ branch, version, resources }) {
-    const appDir = join(resources, "app");
+function inject({ branch, version, devAppDir, ...install }) {
+    const source = join(DIST, "app.asar");
 
-    if (!existsSync(appDir)) {
-        console.log(`[MCord] ${branch} ${version}: enjeksiyon yok, atlandı.`);
-        return;
+    try {
+        const { size } = installAsar({ devAppDir, ...install }, source);
+
+        // Eski (etkisiz) dev enjeksiyonu kalıntısı — iki farklı MCord sürümü
+        // yan yana durunca hangisinin yüklendiği anlaşılmıyor.
+        rmSync(devAppDir, { recursive: true, force: true });
+
+        console.log(
+            `[MCord] enjekte edildi → ${branch} ${version} — ${(size / 1024).toFixed(1)} KB\n` +
+            `           ${install.appAsar}`
+        );
+        return true;
+    } catch (err) {
+        if (err.code === "EBUSY" || err.code === "EPERM" || err.code === "EACCES") {
+            console.error(
+                `[MCord] ${branch} ${version}: app.asar kilitli — ${branch} açık.\n` +
+                "        Sistem tepsisinden tamamen çık (sağ tık → Quit), sonra tekrar dene."
+            );
+        } else {
+            console.error(`[MCord] ${branch} ${version} enjekte edilemedi: ${err.message}`);
+        }
+        return false;
     }
+}
 
-    rmSync(appDir, { recursive: true, force: true });
-    console.log(`[MCord] kaldırıldı ← ${branch} ${version}`);
+function uninject({ branch, version, ...install }) {
+    try {
+        const { restored } = uninstallAsar(install);
+        console.log(restored
+            ? `[MCord] kaldırıldı ← ${branch} ${version} (orijinal app.asar geri yüklendi)`
+            : `[MCord] ${branch} ${version}: yedek yok, sadece işaretler temizlendi.`);
+    } catch (err) {
+        console.error(`[MCord] ${branch} ${version} kaldırılamadı: ${err.message}`);
+    }
 }
 
 /** `app-1.0.10` > `app-1.0.9` — string değil, sayısal parça parça (plan §3.6). */
