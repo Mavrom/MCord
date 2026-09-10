@@ -27,35 +27,36 @@ export interface FindOptions {
 }
 
 /**
- * Filtreyi güvenli çağıran sarmalayıcı — filtre fırlatırsa `false`.
- * (Kanıtlanmış açık-kaynak istemcinin `find`'i filtreyi çıplak çağırıyor;
- * biz sadece try/catch ekliyoruz, `shouldSkipModule`/token-guard katmanını
- * KALDIRDIK — o katman ChannelStore gibi Proxy-tabanlı store'ları eliyordu.)
- */
-/**
- * Modül cache anahtarları — **non-enumerable olanlar dahil**.
+ * Modül cache anahtarları — **`for...in`, yani yalnız enumerable olanlar**.
  *
- * `_blacklistBadModules` kötü sayılan modülü `wreq.c` içinde non-enumerable
- * yapıyor; `for...in` onları atlıyordu ve o modüllerdeki store/action/component
- * hiç bulunamıyordu.
+ * Bu kritik: `_blacklistBadModules` (Vencord'dan port, `intercept.ts`) zehirli
+ * modülleri ve export'ları `wreq.c` içinde non-enumerable yaparak eliyor —
+ * Discord'un i18n mesaj Proxy'si dahil; o proxy sorulan her anahtara değer
+ * döndürdüğü için `byKeys(["createElement",…])` gibi HER filtreyi sahte olarak
+ * sağlıyor.
+ *
+ * Bir ara buradan `Object.getOwnPropertyNames`'e geçilmişti; bu, karalistenin
+ * tamamını devre dışı bıraktı. Sonuç: `React` i18n proxy'sine çözüldü,
+ * `React.createElement(...)` bir `{locale, ast}` çeviri nesnesi döndürdü, React
+ * onu render edemedi (hata #31) ve **Discord siyah ekran açıldı**.
+ * Vencord'un döngüsünden ayrılma.
  */
 function cacheKeys(): string[] {
-    try {
-        return Object.getOwnPropertyNames(cache ?? {});
-    } catch {
-        return Object.keys(cache ?? {});
-    }
+    const keys: string[] = [];
+    for (const key in cache ?? {}) keys.push(key);
+    return keys;
 }
 
-/** Bir nesnenin tüm kendi anahtarları — non-enumerable dahil. */
+/** Bir modülün export anahtarları — yine yalnız enumerable (karaliste geçerli). */
 function ownKeys(obj: any): string[] {
+    const keys: string[] = [];
     try {
-        return Object.getOwnPropertyNames(obj);
-    } catch {
-        return [];
-    }
+        for (const key in obj) keys.push(key);
+    } catch { /* erişilemiyor */ }
+    return keys;
 }
 
+/** Filtreyi güvenli çağırır — filtre fırlatırsa `false` (hangi modülün eşleştiğini değiştirmez). */
 function safe(filter: ModuleFilter): (v: any) => boolean {
     return (v: any) => {
         try {

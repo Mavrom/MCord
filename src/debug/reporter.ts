@@ -10,6 +10,7 @@ import { byStoreName, describeFilter } from "../webpack/filters";
 import { find } from "../webpack/finder";
 import { erroredPatches, lazyWebpackSearchHistory, setRecordSearchHistory, wreq } from "../webpack/intercept";
 import { mapMangledModule } from "../webpack/mangled";
+import { getReact, getReactDOM } from "../webpack/react";
 import { recoverStoreModules, resolveStore } from "../webpack/stores";
 import type { ModuleFilter } from "../webpack/types";
 import { loadLazyChunks } from "./loadLazyChunks";
@@ -68,6 +69,44 @@ const ENVIRONMENT_LIMITED_STORES = new Set([
     "MediaEngineStore",
     "ChannelRTCStore"
 ]);
+
+/**
+ * Bu ortamda modülü **hiç yüklenmeyen** aramalar.
+ *
+ * `ENVIRONMENT_LIMITED_STORES` ile aynı gerekçe, aramalar için. Ölçüm (2026-09-10,
+ * stable, `loadLazyChunks` sonrası): bu anahtar kümelerini sağlayan **gerçek**
+ * modül sayısı `0`, buna karşılık her anahtara cevap veren Discord loader
+ * proxy'si (`$$loader`/`$$baseObject`, `Symbol.toStringTag === "IntlMessagesProxy"`)
+ * sayısı `63`. Yani modüller oturum arkasında; `/login` sayfasında yoklar.
+ *
+ * DİKKAT — bunlar bir ara "bulunuyor" görünüyordu: `find` cache'i
+ * `Object.getOwnPropertyNames` ile gezdiği için `_blacklistBadModules`'ün
+ * non-enumerable yaptığı O PROXY'LERE eşleşiyorlardı. Sahte bir yeşildi ve
+ * gerçek istemcide `React`'in i18n proxy'sine bağlanıp Discord'u siyah ekrana
+ * düşürmesiyle patladı. Doğrusu: proxy'yi eleyip burada dürüstçe
+ * "doğrulanamıyor" demek.
+ */
+const ENVIRONMENT_LIMITED_FINDS = [
+    ["editMessage", "sendMessage"],
+    ["sendMessage", "editMessage"],
+    ["clearCache", "_channelMessages"],
+    ["deleteMessage", "startEditMessage"],
+    ["open", "saveAccountChanges"],
+    ["open", "setSection", "saveAccountChanges"],
+    ["useDefaultUserSettingsSections"],
+    ["ModalRoot", "ModalHeader", "ModalContent"],
+    ["MenuGroup", "MenuItem", "MenuSeparator"],
+    ["SUPPORTS_COPY", "copy"],
+    ["setHangStatus", "clearHangStatus"],
+    ["getVideoDeviceId", "mirror"],
+    // stable'da bulunuyor, canary'de o chunk `/login`'de yüklenmiyor.
+    ["selectChannel", "selectVoiceChannel"]
+].map(keys => `byKeys(${keys.map(k => JSON.stringify(k)).join(", ")})`);
+
+function isEnvironmentLimitedFind(filter: ModuleFilter): boolean {
+    const description = describeFilter(filter);
+    return ENVIRONMENT_LIMITED_FINDS.includes(description);
+}
 
 const otherErrors: string[] = [];
 
@@ -166,6 +205,13 @@ export async function init(): Promise<void> {
             }
         } finally {
             setRecordSearchHistory(true);
+        }
+
+        for (const label of checkCoreModules()) {
+            if (!badWebpackFinds.includes(label)) {
+                badWebpackFinds.push(label);
+                console.log("[REPORTER_FIND_FAIL]", label);
+            }
         }
 
         const report: Report = {
@@ -335,9 +381,9 @@ function checkSearchEntry(kind: string, args: unknown[]): string | null {
             case "findLazy": {
                 const filter = args[0] as ModuleFilter;
                 if (typeof filter !== "function") return null;
-                return find(filter, { silent: true }) == null
-                    ? `${kind}: ${describeFilter(filter)}`
-                    : null;
+                if (find(filter, { silent: true }) != null) return null;
+                if (isEnvironmentLimitedFind(filter)) return null;
+                return `${kind}: ${describeFilter(filter)}`;
             }
             case "waitForStore":
             case "findStoreLazy": {
@@ -456,6 +502,44 @@ function findSlowPatches(): Report["slowPatches"] {
             match: timing.match,
             time: Number(timing.time.toFixed(2))
         }));
+}
+
+/**
+ * Çekirdek modüller **doğru şeye** çözüldü mü — "bulundu" yetmez.
+ *
+ * Bir arama `null` dönmediği halde YANLIŞ modüle çözülebiliyor: `React`, bir kez
+ * Discord'un i18n mesaj Proxy'sine bağlandı (o proxy her anahtara değer
+ * döndürdüğü için `byKeys(["createElement",…])` filtresini sağlıyordu).
+ * `React.createElement(...)` bir `{locale, ast}` çeviri nesnesi döndürdü, React
+ * onu render edemedi (hata #31) ve **Discord siyah ekran açıldı** — reporter ise
+ * "0 kırık arama" diyordu, çünkü hiçbir şey render etmiyor. Şekil doğrulaması bu
+ * sınıfın tamamını CI'da yakalıyor.
+ */
+function checkCoreModules(): string[] {
+    const bad: string[] = [];
+
+    const checks: Array<[string, () => boolean]> = [
+        ["React (createElement/useState/Component)", () => {
+            const react: any = getReact();
+            return typeof react?.createElement === "function"
+                && typeof react?.useState === "function"
+                && typeof react?.Component === "function";
+        }],
+        ["ReactDOM (createPortal/flushSync)", () => {
+            const dom: any = getReactDOM();
+            return typeof dom?.createPortal === "function" && typeof dom?.flushSync === "function";
+        }]
+    ];
+
+    for (const [label, check] of checks) {
+        let ok = false;
+        try {
+            ok = check();
+        } catch { /* aşağıda raporlanıyor */ }
+        if (!ok) bad.push(`çekirdek modül yanlış çözüldü: ${label}`);
+    }
+
+    return bad;
 }
 
 /**
