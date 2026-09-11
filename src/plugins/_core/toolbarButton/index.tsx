@@ -28,13 +28,13 @@ const HeaderBarIcon = findComponentByCodeLazy(".HEADER_BAR_BADGE_BOTTOM,", 'posi
 
 function Icon() {
     return (
-        <svg viewBox="0 0 24 24" width={20} height={20} aria-hidden="true">
+        <svg viewBox="0 0 24 24" width={24} height={24} aria-hidden="true">
             <text
                 x="12"
-                y="16"
+                y="16.5"
                 textAnchor="middle"
                 fill="currentColor"
-                fontSize="11"
+                fontSize="13"
                 fontWeight="700"
                 fontFamily="var(--font-primary, sans-serif)"
             >
@@ -78,10 +78,12 @@ export default definePlugin({
     ],
 
     TrailingWrapper({ children }: { children?: any }) {
+        // Buton, gelen kutusu/yardım ikonlarının SOLUNDA — bu yüzden
+        // `children`'dan önce render ediliyor.
         return (
             <>
-                {children}
                 <WrappedButton key="mcord-toolbar-button" />
+                {children}
             </>
         );
     }
