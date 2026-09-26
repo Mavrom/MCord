@@ -4,11 +4,10 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
-import { discordApi } from "../../api/net";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { Devs } from "../../utils/constants";
 import { definePlugin } from "../../utils/types";
-import { Constants, FluxDispatcher, UserProfileStore, UserStore, useState } from "../../webpack/common";
+import { Constants, FluxDispatcher, RestAPI, UserProfileStore, UserStore, useState } from "../../webpack/common";
 
 const badges: Record<string, { id: string; description: string; icon: string; link?: string; }> = {
     active_developer: { id: "active_developer", description: "Active Developer", icon: "6bdc42827a38498929a4920da12695d9", link: "https://support-dev.discord.com/hc/en-us/articles/10113997751447" },
@@ -75,8 +74,8 @@ async function getUser(id: string) {
     let userObj = UserStore.getUser(id);
     if (userObj) return userObj;
 
-    const res = await discordApi(`/users/${id}`, { method: "GET" });
-    if (!res.ok || !res.body) throw { status: res.status, body: res.body };
+    // Discord'un kendi RestAPI'si — `discordApi()` bu uç noktada 403 dönüyor.
+    const res = await RestAPI.get({ url: Constants.Endpoints.USER(id) });
     const user: any = res.body;
 
     FluxDispatcher.dispatch({ type: "USER_UPDATE", user });
@@ -104,6 +103,22 @@ async function getUser(id: string) {
     return userObj;
 }
 
+/**
+ * Bahsetmenin ham metni ("<@id>"). Önce parse edilmemiş düğümlere bakar —
+ * Discord render edilmiş çocukları bazen eleman değil düz string veriyor.
+ */
+function getMentionText(content: any, children: any): string {
+    const collect = (node: any): string =>
+        typeof node === "string" ? node
+            : Array.isArray(node) ? node.map(collect).join("")
+                : typeof node?.content === "string" ? node.content
+                    : node?.content != null ? collect(node.content)
+                        : node?.props?.children != null ? collect(node.props.children)
+                            : "";
+
+    return collect(content) || collect(children);
+}
+
 function MentionWrapper({ data, UserMention, RoleMention, parse, props }: MentionProps) {
     const [userId, setUserId] = useState(data.userId);
 
@@ -127,10 +142,7 @@ function MentionWrapper({ data, UserMention, RoleMention, parse, props }: Mentio
         <RoleMention {...data} inlinePreview={props.formatInline}>
             <span
                 onMouseEnter={() => {
-                    const mention = children?.[0]?.props?.children;
-                    if (typeof mention !== "string") return;
-
-                    const id = mention.match(/<@!?(\d+)>/)?.[1];
+                    const id = getMentionText(data.content, children).match(/<@!?(\d+)>/)?.[1];
                     if (!id || fetching.has(id)) return;
 
                     if (UserStore.getUser(id)) return setUserId(id);
