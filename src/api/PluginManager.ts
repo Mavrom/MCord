@@ -102,7 +102,9 @@ export function initPlugins(): void {
 
     for (const name in plugins) {
         const plugin = plugins[name];
-        if (!isPluginEnabled(name)) continue;
+        // Reporter tüm plugin'lerin patch'lerini doğrular (Vencord gibi); plugin'ler
+        // yine de başlatılmaz — kapalı plugin'lerin start()'ı koşuyu zaman aşımına sokuyor.
+        if (!isPluginEnabled(name) && !IS_REPORTER) continue;
 
         for (const patch of plugin.patches ?? []) {
             addPatch(patch, name);
