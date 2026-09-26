@@ -103,22 +103,6 @@ async function getUser(id: string) {
     return userObj;
 }
 
-/**
- * Bahsetmenin ham metni ("<@id>"). Önce parse edilmemiş düğümlere bakar —
- * Discord render edilmiş çocukları bazen eleman değil düz string veriyor.
- */
-function getMentionText(content: any, children: any): string {
-    const collect = (node: any): string =>
-        typeof node === "string" ? node
-            : Array.isArray(node) ? node.map(collect).join("")
-                : typeof node?.content === "string" ? node.content
-                    : node?.content != null ? collect(node.content)
-                        : node?.props?.children != null ? collect(node.props.children)
-                            : "";
-
-    return collect(content) || collect(children);
-}
-
 function MentionWrapper({ data, UserMention, RoleMention, parse, props }: MentionProps) {
     const [userId, setUserId] = useState(data.userId);
 
@@ -142,7 +126,10 @@ function MentionWrapper({ data, UserMention, RoleMention, parse, props }: Mentio
         <RoleMention {...data} inlinePreview={props.formatInline}>
             <span
                 onMouseEnter={() => {
-                    const id = getMentionText(data.content, children).match(/<@!?(\d+)>/)?.[1];
+                    const mention = children?.[0]?.props?.children;
+                    if (typeof mention !== "string") return;
+
+                    const id = mention.match(/<@!?(\d+)>/)?.[1];
                     if (!id || fetching.has(id)) return;
 
                     if (UserStore.getUser(id)) return setUserId(id);
