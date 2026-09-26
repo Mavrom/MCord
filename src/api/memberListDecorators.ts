@@ -15,8 +15,8 @@
  * kendi `try/catch`'inde çağırıyoruz (eski MCord deseni).
  */
 
-import { Logger } from "../utils/logger";
 import { McordCreateElement } from "../utils/jsx";
+import { Logger } from "../utils/logger";
 
 const logger = new Logger("Api:MemberListDecorators", "#f4b8e4");
 

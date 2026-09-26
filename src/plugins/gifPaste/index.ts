@@ -7,9 +7,9 @@
 import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin } from "../../utils/types";
+import { ExpressionPickerStore } from "../../webpack/common";
 import { byKeys } from "../../webpack/filters";
 import { find } from "../../webpack/finder";
-import { ExpressionPickerStore } from "../../webpack/common";
 
 const logger = new Logger("GifPaste", "#a6d189");
 

@@ -5,7 +5,6 @@
  */
 
 import { Logger } from "../utils/logger";
-import { getReact } from "../webpack/react";
 import {
     type DefinedSettings,
     OptionType,
@@ -13,6 +12,7 @@ import {
     type SettingsDefinition,
     type SettingsStore
 } from "../utils/types";
+import { getReact } from "../webpack/react";
 
 const logger = new Logger("Settings", "#f4b8e4");
 
