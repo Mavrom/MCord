@@ -5,8 +5,9 @@
  */
 
 import { React } from "../webpack/react";
-import { IconDownload, IconInfo, IconPuzzle, IconRestart, IconSliders, LogoMark } from "./Icons";
+import { IconDownload, IconInfo, IconPuzzle, IconRestart, IconSliders } from "./Icons";
 import { relaunchDiscord, useRestartNeeded } from "./restartState";
+import { ShadowCat } from "./ShadowCat";
 import { injectStyles } from "./styles";
 import { AboutTab } from "./tabs/AboutTab";
 import { GeneralTab } from "./tabs/GeneralTab";
@@ -106,7 +107,7 @@ export function SettingsRoot({ initialTab = "plugins" }: { initialTab?: TabId })
                         padding: `0 ${space.sm} ${space.lg}`
                     }}
                 >
-                    <LogoMark size={26} />
+                    <ShadowCat size={34} />
                     <div style={{ minWidth: 0 }}>
                         <div style={{ color: c.heading, fontWeight: 700, fontSize: "15px", letterSpacing: "-.01em" }}>
                             MCord

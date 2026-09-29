@@ -5,19 +5,17 @@
  */
 
 /**
- * Discord'un üst bar toolbar'ına (inbox / yardım ikonlarının yanı) bir **MC**
- * butonu koyar → tıkla → MCord ayarları açılır.
+ * Discord'un üst bar toolbar'ına (inbox / yardım ikonlarının yanı) MCord'un
+ * kedi maskotunu buton olarak koyar → tıkla → MCord ayarları açılır.
  *
- * Kanıtlanmış açık-kaynak istemcinin (Vencord) `VencordToolbox` plugin'iyle
- * aynı yaklaşım: **kod patch'i**. Eski MCord sürümü DOM enjeksiyonu yapıyordu
- * (`querySelector` + `MutationObserver`); `start()` DOMContentLoaded'da
- * çalıştığı için toolbar henüz yokken "Toolbar bulunamadı" uyarısı basıyor,
- * butonu ancak ilk mutasyondan sonra ekleyebiliyordu. Kod patch'i toolbar'ın
- * kendi `trailing` bölümüne giriyor — zamanlamadan bağımsız ve CI reporter
- * tarafından doğrulanıyor.
+ * Yöntem **kod patch'i**: toolbar'ın kendi `trailing` bölümüne giriyor. Eski
+ * DOM enjeksiyonu (`querySelector` + `MutationObserver`) DOMContentLoaded'da
+ * toolbar henüz yokken çalışıp butonu geç ekliyordu; patch zamanlamadan
+ * bağımsız ve CI reporter tarafından doğrulanıyor.
  */
 
 import { ErrorBoundary } from "../../../components/ErrorBoundary";
+import { ShadowCat } from "../../../components/ShadowCat";
 import { Devs } from "../../../utils/constants";
 import { definePlugin } from "../../../utils/types";
 import { useRef } from "../../../webpack/common";
@@ -27,21 +25,7 @@ import { toggleSettings } from "../settings";
 const HeaderBarIcon = findComponentByCodeLazy(".HEADER_BAR_BADGE_BOTTOM,", 'position:"bottom"');
 
 function Icon() {
-    return (
-        <svg viewBox="0 0 24 24" width={24} height={24} aria-hidden="true">
-            <text
-                x="12"
-                y="16.5"
-                textAnchor="middle"
-                fill="currentColor"
-                fontSize="13"
-                fontWeight="700"
-                fontFamily="var(--font-primary, sans-serif)"
-            >
-                MC
-            </text>
-        </svg>
-    );
+    return <ShadowCat size={24} />;
 }
 
 function McordToolbarButton() {
@@ -61,7 +45,7 @@ const WrappedButton = ErrorBoundary.wrap(McordToolbarButton, { noop: true });
 
 export default definePlugin({
     name: "ToolbarButton",
-    description: "Discord toolbar'ına MCord ayarlarını açan MC butonu ekler",
+    description: "Discord toolbar'ına MCord ayarlarını açan kedi butonu ekler",
     authors: [Devs.MCord],
     required: true,
     requiresRestart: true,
