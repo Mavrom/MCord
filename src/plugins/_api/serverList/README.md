@@ -25,8 +25,13 @@ değil** (biri tutmazsa diğeri yine çalışır):
 
 ```ts
 addServerListElement("above", "my-id", () => <MyButton />)
+addServerListElement("above", "my-id", () => <MyButton />, { first: true })  // diğerlerinden önce
 removeServerListElement("above", "my-id")   // plugin stop()'ta
 ```
+
+`first: true` elemanı, plugin'lerin başlama sırasından bağımsız olarak o
+konumun en başına koyar (kedi maskotu Discord logosunun hemen altında kalsın
+diye).
 
 ## requiresRestart
 

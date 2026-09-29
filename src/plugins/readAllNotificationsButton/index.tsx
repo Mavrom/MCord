@@ -45,29 +45,37 @@ function markAllRead(): void {
     }
 }
 
+// Sunucu şeridinde ayırıcı çizginin hemen altında, ince yatay bir dikdörtgen.
 const ReadAllButton = () => (
-    <div style={{ flex: "0 0 auto", display: "flex", justifyContent: "center", margin: "2px 0" }}>
+    <div style={{ flex: "0 0 auto", display: "flex", justifyContent: "center", margin: "0 0 2px" }}>
         <button
             type="button"
             onClick={markAllRead}
             title="Tüm sunucu bildirimlerini okundu işaretle"
             aria-label="Tüm bildirimleri okundu işaretle"
             style={{
-                width: 40,
-                height: 40,
+                width: 44,
+                height: 18,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 padding: 0,
                 border: 0,
-                borderRadius: 12,
+                borderRadius: 6,
                 cursor: "pointer",
                 color: "var(--interactive-normal, #b5bac1)",
-                background: "var(--background-secondary, #2b2d31)"
+                background: "var(--background-modifier-hover, rgba(255, 255, 255, .06))"
             }}
         >
-            <svg width="20" height="20" viewBox="0 0 24 24" style={{ pointerEvents: "none" }}>
-                <path fill="currentColor" d="M9.5 16.6 4.9 12l-1.4 1.4 6 6 12-12-1.4-1.4z" />
+            <svg width="20" height="12" viewBox="0 0 22 14" style={{ pointerEvents: "none" }}>
+                <path
+                    d="M1.5 7.5 5 11l7-8M10 10l1 1 7-8"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.9"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                />
             </svg>
         </button>
     </div>
@@ -86,10 +94,10 @@ export default definePlugin({
     renderButton: () => <ReadAllButton />,
 
     start() {
-        addServerListElement("above", "ReadAllNotificationsButton", this.renderButton);
+        addServerListElement("below", "ReadAllNotificationsButton", this.renderButton);
     },
 
     stop() {
-        removeServerListElement("above", "ReadAllNotificationsButton");
+        removeServerListElement("below", "ReadAllNotificationsButton");
     }
 });

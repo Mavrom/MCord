@@ -12,8 +12,8 @@ import { Devs } from "../../../utils/constants";
 import { definePlugin, StartAt } from "../../../utils/types";
 
 /**
- * MCord ayarları **kendi React kökümüzdeki overlay** ile açılıyor: toolbar'daki
- * MC butonu veya `Ctrl+Alt+M`.
+ * MCord ayarları **kendi React kökümüzdeki overlay** ile açılıyor: sunucu
+ * şeridindeki kedi maskotu veya `Ctrl+Alt+M`.
  *
  * Discord'un kendi ayar menüsüne sekme enjekte etme denendi (`buildLayout()`
  * patch'i) ama Discord'un güncel sürümünde ayar menüsünü komple çökertiyordu —
@@ -21,7 +21,7 @@ import { definePlugin, StartAt } from "../../../utils/types";
  */
 export default definePlugin({
     name: "Settings",
-    description: "MCord ayar arayüzünü açar (toolbar butonu + Ctrl+Alt+M)",
+    description: "MCord ayar arayüzünü açar (kedi maskotu + Ctrl+Alt+M)",
     authors: [Devs.MCord],
     required: true,
     startAt: StartAt.DOMContentLoaded,

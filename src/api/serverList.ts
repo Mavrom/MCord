@@ -28,13 +28,22 @@ const registries: Record<ServerListPosition, Map<string, ServerListRenderer>> = 
 export function addServerListElement(
     position: ServerListPosition,
     id: string,
-    render: ServerListRenderer
+    render: ServerListRenderer,
+    options: { first?: boolean; } = {}
 ): void {
     const registry = registries[position];
     if (registry.has(id)) {
         logger.warn(`Sunucu listesi elemanı "${id}" (${position}) zaten kayıtlı, üzerine yazılıyor.`);
     }
+    if (!options.first) {
+        registry.set(id, render);
+        return;
+    }
+    // `first`: plugin'lerin başlama sırasından bağımsız olarak en başa koy.
+    const rest = [...registry].filter(([key]) => key !== id);
+    registry.clear();
     registry.set(id, render);
+    for (const [key, value] of rest) registry.set(key, value);
 }
 
 export function removeServerListElement(position: ServerListPosition, id: string): boolean {

@@ -7,7 +7,8 @@
 /**
  * MCord'un maskotu: karanlığın içinden çıkan bulanık siyah kedi.
  *
- * Toolbar butonunda ve ayar penceresinin sol üstünde kullanılıyor. Nefes alır,
+ * Sunucu şeridinde (Discord logosunun altı) ve ayar penceresinin sol üstünde
+ * kullanılıyor. Nefes alır,
  * göz kırpar, gözleriyle imleci izler, kulakları seğirir, sağ alt kenarındaki
  * yanardöner parıltı ışığa göre döner. Üstüne gelince gözlerini kısar,
  * tıklanınca zıplar. Uyku hali bilerek yok — logo hep uyanık.
@@ -175,7 +176,8 @@ function animate(svg: SVGSVGElement, compact: boolean): () => void {
 export function ShadowCat({ size = 24 }: { size?: number; }) {
     const [id] = React.useState(() => `mcord-cat-${++seq}`);
     const ref = React.useRef<SVGSVGElement>(null);
-    const compact = size < 40;
+    // 48 px ve altı (toolbar, sunucu şeridi, ayar başlığı): koyu zeminde seçilsin diye canlı mod.
+    const compact = size <= 48;
 
     React.useEffect(() => {
         if (!ref.current) return;
