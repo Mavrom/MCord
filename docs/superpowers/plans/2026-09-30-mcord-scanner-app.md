@@ -1099,7 +1099,7 @@ git commit -m "scan: payload + tanım + baseline'dan durum kayıtları"
   - `findSuccessors(query: { strings: string[]; exports?: string[]; structHash?: string }, modules: Record<string, string>, limit?: number): Candidate[]`: skor ≥ 0.2, azalan sıra, varsayılan limit 3.
   - `queryFromBaseline(fp: Fingerprint, excerptText: string): { strings: string[]; exports: string[]; structHash: string }`: parmak izi string'leriyle kesitin tırnaklı string'lerinin birleşimi.
   - `alignRegion(anchorText: string, source: string): { text: string; offset: number; score: number } | null`
-  - `suggestFind(region: string, modules: Record<string, string>): string | null`
+  - `suggestFind(moduleSource: string, window: { offset: number; length: number }, modules: Record<string, string>): string | null` (uygulamada revize edildi: IDF puanlama, regex tarayıcı, tırnak-güvenli aday; aşağıdaki kod ilk taslaktır, geçerli hâli scanner repo `3809994`)
   - `looksLikeIntlHash(s: string): boolean`
 
 - [ ] **Step 1: Failing testler**
@@ -1581,7 +1581,9 @@ export async function diagnose(
         region = { text: text.text, offset: text.offset, moduleId: id };
     }
 
-    const suggestedFind = region && entry.status === "kırık-find" ? suggestFind(region.text, payload.modules) : null;
+    const suggestedFind = region && entry.status === "kırık-find"
+        ? suggestFind(payload.modules[region.moduleId], { offset: region.offset, length: region.text.length }, payload.modules)
+        : null;
     const file = entry.locations[0]?.file;
     const vc = file ? await vencord(file) : null;
 
