@@ -24,3 +24,6 @@ scripts/installer/src/gui/webview-native.generated.mjs
 CLAUDE.md
 codebase-map.md
 .claude/
+
+# yerel modül tarayıcı (GitHub'a gitmez)
+scanner/
