@@ -434,7 +434,9 @@ function collectFinds() {
 function collectModules(): Record<string, string> {
     const out: Record<string, string> = {};
     for (const id in wreq.m) {
-        try { out[id] = Function.prototype.toString.call(wreq.m[id]); } catch { /* okunamayanı atla */ }
+        // `String()` şart: fabrikalar Proxy; `Function.prototype.toString.call(proxy)`
+        // "[native code]" döner, proxy'nin `toString` tuzağı ise orijinal kaynağı verir.
+        try { out[id] = String(wreq.m[id]); } catch { /* okunamayanı atla */ }
     }
     return out;
 }
