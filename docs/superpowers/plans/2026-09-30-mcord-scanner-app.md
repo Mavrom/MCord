@@ -1640,6 +1640,8 @@ const RULES = [
     "- Geniş `.+?` / `.*` içeren match yazma; `find` modülü daraltsa bile yanlış yere uyup crash loop yapabilir.",
     "- Plugin, dosya ya da özellik SİLME. Düzeltilemeyenleri kullanıcıya raporla.",
     "- \"Eski kesit\" patch'in sağlamken tuttuğu kod, \"Yeni kesit\" güncel build'deki karşılığıdır. Farkı bul, find/match'i yeniye uyarla.",
+    "- \"(tahmini)\" işaretli konumlar sıraya göre tahmin edildi; dosyada doğru patch'i find'ına bakarak bul.",
+    "- `kaymış` kayıtlar hâlâ çalışıyor: kesitleri karşılaştır; davranış doğruysa kodu değiştirme, doğrulamayı `--accept-drift` ile koş (baseline yeni hâle geçer).",
     "- Bitince doğrula: `cd scanner && pnpm scan --branch <dal>` → bu sorunlar listede olmamalı. Sonra commit."
 ];
 
@@ -1675,7 +1677,7 @@ function issue(n: number, e: Entry, d: Diagnosis | undefined, readSource: BriefI
     const out = [
         `## ${n}. [${e.status}] ${e.plugin ?? "(arama)"} — \`${e.label.slice(0, 120)}\``,
         "",
-        `- Konum: ${e.locations.length ? e.locations.map(l => `\`${l.file}:${l.line}\``).join(", ") : "bulunamadı (çekirdek/dinamik tanım)"}`,
+        `- Konum: ${e.locations.length ? e.locations.map(l => `\`${l.file}:${l.line}\`${l.guess ? " (tahmini)" : ""}`).join(", ") : "bulunamadı (çekirdek/dinamik tanım)"}`,
         `- Ayrıntı: ${e.detail}`
     ];
     if (e.patch) {
@@ -1831,7 +1833,7 @@ import { mask } from "../util/secrets.ts";
 import { baselineUpdates, buildEntries, type Entry } from "./entries.ts";
 import type { ScanPayload } from "./payload.ts";
 
-export interface RunScanOptions { mcordRoot: string; outRoot: string; vencordCacheDir: string; fetch?: Fetch; defs?: Extracted; today?: string }
+export interface RunScanOptions { mcordRoot: string; outRoot: string; vencordCacheDir: string; fetch?: Fetch; defs?: Extracted; today?: string; acceptDrift?: boolean }
 export interface RunScanResult { outDir: string; briefPath: string; entries: Entry[]; problems: number; baselineUpdated: number }
 
 const DEF_DIRS = ["src/plugins", "src/webpack", "src/api", "src/debug", "src/components"];
@@ -1863,7 +1865,7 @@ export async function runScan(payload: ScanPayload, opts: RunScanOptions): Promi
 
     let baselineUpdated = 0;
     if (!payload.meta.partial) {
-        const updates = baselineUpdates(entries, payload);
+        const updates = baselineUpdates(entries, payload, { acceptDrift: opts.acceptDrift });
         baselineUpdated = Object.keys(updates).length;
         saveBaseline(blPath, applyUpdates(baseline, updates));
     } else {
@@ -1880,7 +1882,7 @@ export async function runScan(payload: ScanPayload, opts: RunScanOptions): Promi
 ```ts
 /**
  * Kaydedilmiş bir payload üzerinde motoru yeniden koşturur (Discord açmadan):
- *   node src/offlineCli.ts <out/.../payload.json> [--mcord <yol>]
+ *   node src/offlineCli.ts <out/.../payload.json> [--mcord <yol>] [--accept-drift]
  */
 import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -1900,7 +1902,8 @@ const mcordRoot = mcordIdx >= 0 ? resolve(args[mcordIdx + 1]) : resolve(root, ".
 
 try {
     const res = await runScan(parsePayload(readFileSync(resolve(file), "utf8")), {
-        mcordRoot, outRoot: join(root, "out"), vencordCacheDir: join(root, ".cache", "vencord")
+        mcordRoot, outRoot: join(root, "out"), vencordCacheDir: join(root, ".cache", "vencord"),
+        acceptDrift: args.includes("--accept-drift")
     });
     console.log(`Sorunlu: ${res.problems} · baseline güncellenen: ${res.baselineUpdated}`);
     console.log(`Brief: ${res.briefPath}`);
@@ -1964,7 +1967,7 @@ git commit -m "scan: orkestrasyon ve çevrimdışı CLI"
     - `collect(opts: { branch: Branch; mcordRoot: string; token: string; show: boolean; onProgress: (p: Progress) => void }): Promise<ScanPayload>`
     - `buildReporter(mcordRoot: string, onProgress): Promise<string>`: `dist/renderer.js` içeriğini döner.
   - `core.ts`: `config: { mcordRoot: string; tokens(): TokenStore; outDir: string; vencordCache: string }`, `scanOnce(branch: Branch, show: boolean, onProgress): Promise<RunScanResult>`, `arg(name: string): string | null`
-  - `main.ts` CLI: `electron app-dist/main.js --cli --branch <b> [--mcord <yol>] [--show]`. Exit kodları: 0 sorun yok, 1 sorun var, 2 hata ya da oturum yok.
+  - `main.ts` CLI: `electron app-dist/main.js --cli --branch <b> [--mcord <yol>] [--show] [--accept-drift]`. Exit kodları: 0 sorun yok, 1 sorun var, 2 hata ya da oturum yok.
 
 - [ ] **Step 1: Bağımlılıklar ve build**
 
@@ -2324,12 +2327,12 @@ export const config = {
     vencordCache: VENCORD_CACHE
 };
 
-export async function scanOnce(branch: Branch, show: boolean, onProgress: (p: Progress) => void) {
+export async function scanOnce(branch: Branch, show: boolean, onProgress: (p: Progress) => void, acceptDrift = false) {
     const token = config.tokens().get();
     if (!token) throw new Error("Kayıtlı oturum yok: önce `pnpm app` ile giriş yap.");
     const payload = await collect({ branch, mcordRoot: config.mcordRoot, token, show, onProgress });
     onProgress({ phase: "analiz", detail: "teşhis ve brief" });
-    return runScan(payload, { mcordRoot: config.mcordRoot, outRoot: config.outDir, vencordCacheDir: config.vencordCache });
+    return runScan(payload, { mcordRoot: config.mcordRoot, outRoot: config.outDir, vencordCacheDir: config.vencordCache, acceptDrift });
 }
 
 export { arg };
@@ -2346,7 +2349,7 @@ import { startUi } from "./uiMain.ts";
 async function runCli(): Promise<number> {
     const branch = (arg("--branch") ?? "stable") as Branch;
     try {
-        const res = await scanOnce(branch, process.argv.includes("--show"), p => console.log(`[${p.phase}] ${p.detail}`));
+        const res = await scanOnce(branch, process.argv.includes("--show"), p => console.log(`[${p.phase}] ${p.detail}`), process.argv.includes("--accept-drift"));
         console.log(`\nSorunlu: ${res.problems} · baseline güncellenen: ${res.baselineUpdated}`);
         console.log(`Brief: ${res.briefPath}`);
         return res.problems > 0 ? 1 : 0;
@@ -2739,7 +2742,8 @@ kaymış olanlar için Claude'a yönelik `fix-brief.md` üretir.
 2. `pnpm app` → ilk açılışta token ile ya da Discord'un giriş sayfasıyla gir (yan hesap önerilir).
 3. Dalı seç → **Tara** (3-5 dk) → **Brief'i kopyala** → Claude'a yapıştır.
 
-Komut satırı (Claude'un doğrulaması için): `pnpm scan --branch stable [--show] [--mcord <yol>]`
+Komut satırı (Claude'un doğrulaması için): `pnpm scan --branch stable [--show] [--mcord <yol>] [--accept-drift]`
+(`--accept-drift`: incelenip doğru bulunan "kaymış" kayıtların baseline'ını yeni hâle geçirir)
 (çıkış kodu: 0 sorun yok, 1 sorun var, 2 hata/oturum yok).
 Kaydedilmiş veriyle yeniden analiz: `pnpm offline out/<klasör>/payload.json`.
 
