@@ -496,6 +496,7 @@ import { exportToScanner } from "./scannerExport";
 pnpm vitest run src/debug/scannerExport.test.ts
 pnpm test
 pnpm lint
+pnpm typecheck
 pnpm buildReporter
 grep -c "MCordScannerSink" dist/renderer.js
 pnpm build
