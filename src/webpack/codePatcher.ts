@@ -30,6 +30,15 @@ export const patchTimings: Array<{
     time: number;
 }> = [];
 
+/**
+ * Scanner için patch izleri (yalnızca reporter build'i). Uygulanan patch'ler
+ * `patches`'ten düştüğü için "hangi modüle uydu / hangi match tutmadı" bilgisi
+ * ancak burada kalıyor.
+ */
+export interface PatchTrace { index: number; hits: string[]; misses: Array<{ moduleId: string; match: string }> }
+export const patchTrace = new Map<Patch, PatchTrace>();
+const pluginPatchCounts = new Map<string, number>();
+
 export function addPatch(patchDefinition: PatchDefinition, pluginName: string): void {
     const patch = { ...patchDefinition, plugin: pluginName } as Patch;
 
@@ -40,7 +49,14 @@ export function addPatch(patchDefinition: PatchDefinition, pluginName: string): 
         delete patch.group;
     }
 
-    patches.push(canonicalizePatch(patch));
+    const canonical = canonicalizePatch(patch);
+    patches.push(canonical);
+
+    if (IS_REPORTER) {
+        const index = pluginPatchCounts.get(pluginName) ?? 0;
+        pluginPatchCounts.set(pluginName, index + 1);
+        patchTrace.set(canonical, { index, hits: [], misses: [] });
+    }
 }
 
 /** Kod patch katmanını proxy'ye bağlar (Faz 3). */
@@ -128,6 +144,7 @@ function patchFactory(moduleId: PropertyKey, originalFactory: ModuleFactory): Pa
 
         // ── 2. `find` eşleşmesi ─────────────────────────────────────────────
         if (!matchesFind(patch.find, originalFactoryCode)) continue;
+        if (IS_REPORTER) patchTrace.get(patch)?.hits.push(String(moduleId));
 
         const replacements = patch.replacement as PatchReplacement[];
         const previousCode = patchedCode;
@@ -161,6 +178,9 @@ function patchFactory(moduleId: PropertyKey, originalFactory: ModuleFactory): Pa
             });
 
             if (newCode === patchedCode) {
+                if (IS_REPORTER) {
+                    patchTrace.get(patch)?.misses.push({ moduleId: String(moduleId), match: String(replacement.match) });
+                }
                 // Eşleşmedi. Grup ise **tüm** grubu geri al: yarım uygulanmış
                 // patch, hiç uygulanmamış patch'ten tehlikeli (plan §5.6).
                 if (!patch.noWarn && !replacement.noWarn) {

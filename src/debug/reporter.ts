@@ -14,6 +14,7 @@ import { getReact, getReactDOM } from "../webpack/react";
 import { recoverStoreModules, resolveStore } from "../webpack/stores";
 import type { ModuleFilter } from "../webpack/types";
 import { loadLazyChunks } from "./loadLazyChunks";
+import { exportToScanner } from "./scannerExport";
 import { getTraceSummary } from "./tracer";
 
 const logger = new Logger("Reporter", "#ca9ee6");
@@ -226,9 +227,11 @@ export async function init(): Promise<void> {
 
         console.log("[REPORTER_DONE]", JSON.stringify(report));
         logSummary(report);
+        await exportToScanner(report);
     } catch (err) {
         logger.error("Rapor koşusu başarısız:\n", err);
         console.log("[REPORTER_FAILED]", String(err));
+        (window as any).MCordScannerSink?.("failed", String(err));
     }
 }
 

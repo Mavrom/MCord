@@ -48,6 +48,9 @@ function getWebpackChunkMap(): Record<PropertyKey, string> | null {
 
 let chunksAlreadyLoaded = false;
 
+/** Worker olduğu için yüklenmeyen chunk id'leri — scanner kapsama bilgisi. */
+export const skippedLazyChunks: string[] = [];
+
 export async function loadLazyChunks(): Promise<void> {
     if (chunksAlreadyLoaded) {
         logger.log("Tembel chunk'lar zaten yüklendi.");
@@ -193,8 +196,9 @@ export async function loadLazyChunks(): Promise<void> {
             if (!isWorkerFile) await wreq.e(id);
         })));
 
+        skippedLazyChunks.push(...[...invalidChunks].map(String));
         logger.log(
-            `Tüm chunk'lar yüklendi — ${validChunks.size} geçerli, ` +
+            `Tüm chunk'lar yüklendi —${validChunks.size} geçerli, ` +
             `${invalidChunks.size} atlanan, ${chunksLeft.length} haritadan tamamlanan.`
         );
         chunksAlreadyLoaded = true;

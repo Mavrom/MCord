@@ -11,6 +11,14 @@ import { defineConfig } from "vitest/config";
 const src = (p: string) => fileURLToPath(new URL(`./src/${p}`, import.meta.url));
 
 export default defineConfig({
+    // Build zamanı `define` bayrakları: webpack katmanını import eden testler için.
+    define: {
+        IS_DEV: "false",
+        IS_REPORTER: "false",
+        IS_MAIN: "false",
+        IS_PRELOAD: "false",
+        IS_RENDERER: "true"
+    },
     test: {
         include: ["src/**/*.test.ts", "scripts/installer/src/**/*.test.mjs"],
         passWithNoTests: true,
