@@ -30,7 +30,7 @@ asıl katkısı bu teşhis katmanıdır.
 
 1. İlk açılış → giriş ekranı: **token alanı** veya **Discord'un kendi giriş sayfası** (QR / şifre+2FA).
 2. Ana ekran: dal seçimi (stable / canary / ptb) → **[Tara]** → ilerleme (chunk / modül / kontrol).
-3. Sonuç listesi: ✅ sağlam · ⚠️ kaymış · 💥 kırık · ❔ kapsama dışı.
+3. Sonuç listesi: ✅ sağlam · ⚠️ kaymış · 💥 kırık.
 4. **[Brief'i kaydet]** / **[Kopyala]** → `scanner/out/<branch>-<build>/fix-brief.md`.
 5. **[Çıkış yap]**: şifreli token'ı ve oturum profilini siler.
 
@@ -66,7 +66,9 @@ asıl katkısı bu teşhis katmanıdır.
 - Mevcut `pipeline` / `BuildIndex` / `extract` yeniden kullanılır. Kesin (runtime) sonuç statik
   sonucu ezer; statik analiz yalnızca `dosya:satır` eşlemesi (plugin + find) ve teşhis için kullanılır.
 - Durumlar: `sağlam`, `kaymış`, `kırık-find`, `kırık-match`, `çoklu`, `hata` (patch kodu patlatıyor),
-  `şekil-değişti` (finder), `kapsama-dışı` (modülün chunk'ı yüklenemedi).
+  `şekil-değişti` (finder). Bir arama hangi chunk'a ait olduğu bilinmediği için ayrı bir
+  "kapsama-dışı" durumu yok: atlanan chunk varsa ve halef modül bulunamadıysa kayda
+  "kapsama dışı olabilir" notu düşülür.
 
 ### 4. Baseline
 - Anahtar: `plugin + sha(find)` (patch) / `plugin + describe` (finder).
@@ -83,8 +85,9 @@ Kırık / kaymış / şekil-değişti her kayıt için:
    literal parçalarıyla aynı puanlama.
 2. **Bölge hizalama:** baseline kesitindeki çapa string'lerini yeni modülde bul, en iyi pencereyi
    (±400) çıkar.
-3. **`find` önerisi:** hizalanan bölgede tüm build'de tek modülde geçen en kısa çapa string'i
-   (intl ise `#{intl::KEY}` biçiminde).
+3. **`find` önerisi:** hizalanan bölgede tüm build'de tek modülde geçen en kısa çapa string'i.
+   Hash'ten intl anahtarı geri çözülemediği için intl hash'i gibi görünen öneriler brief'te
+   "`#{intl::KEY}`'e çevir" notuyla işaretlenir.
 4. **Vencord karşılığı:** aynı adlı plugin Vencord `main`'de varsa oradaki güncel `find`/`match`'ler
    (GitHub, günlük önbellek; ağ yoksa atlanır).
 5. **Güven:** yüksek / orta / düşük, kısa gerekçeyle. Halef bulunamazsa "modül kaldırılmış olabilir".
@@ -108,7 +111,7 @@ Oturum yoksa "önce app'ten giriş yap" deyip çıkar.
 - Geçersiz/süresi dolmuş token → giriş ekranı, neden gösterilir.
 - Discord yüklenmezse / reporter 15 dk'da bitmezse / 90 sn sessizlik → zaman aşımı, o ana kadarki
   veriyle kısmi brief ("eksik tarama" işaretli).
-- Yüklenemeyen chunk'lar → `kapsama-dışı`, kırık sayılmaz.
+- Atlanan chunk'lar brief başlığında listelenir; halefsiz kırık kayıtlara "kapsama dışı olabilir" notu.
 - `pnpm buildReporter` başarısız → tarama başlamaz, derleme çıktısı gösterilir.
 
 ## Test
