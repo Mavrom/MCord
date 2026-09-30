@@ -198,7 +198,7 @@ export async function loadLazyChunks(): Promise<void> {
 
         skippedLazyChunks.push(...[...invalidChunks].map(String));
         logger.log(
-            `Tüm chunk'lar yüklendi —${validChunks.size} geçerli, ` +
+            `Tüm chunk'lar yüklendi — ${validChunks.size} geçerli, ` +
             `${invalidChunks.size} atlanan, ${chunksLeft.length} haritadan tamamlanan.`
         );
         chunksAlreadyLoaded = true;

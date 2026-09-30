@@ -231,7 +231,10 @@ export async function init(): Promise<void> {
     } catch (err) {
         logger.error("Rapor koşusu başarısız:\n", err);
         console.log("[REPORTER_FAILED]", String(err));
-        (window as any).MCordScannerSink?.("failed", String(err));
+        try {
+            const sink = (window as any).MCordScannerSink;
+            if (typeof sink === "function") sink("failed", String(err));
+        } catch { /* sink patlasa da reporter'ın catch'i fırlatmasın */ }
     }
 }
 

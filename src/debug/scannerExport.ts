@@ -101,10 +101,12 @@ function collectFinds() {
     return out;
 }
 
-function collectModules(): Record<string, string> {
+export function collectModules(factories: Record<PropertyKey, unknown> = wreq.m): Record<string, string> {
     const out: Record<string, string> = {};
-    for (const id in wreq.m) {
-        try { out[id] = Function.prototype.toString.call(wreq.m[id]); } catch { /* okunamayanı atla */ }
+    for (const id in factories) {
+        // `Function.prototype.toString.call` Proxy'nin get trap'ini atlayıp
+        // "[native code]" döndürür; orijinal kaynak için `String(...)` şart.
+        try { out[id] = String(factories[id]); } catch { /* okunamayanı atla */ }
     }
     return out;
 }

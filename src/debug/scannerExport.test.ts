@@ -6,7 +6,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { chunkModules, serializePat, shapeOf } from "./scannerExport";
+import { chunkModules, collectModules, serializePat, shapeOf } from "./scannerExport";
 
 describe("scannerExport yardımcıları", () => {
     it("serializePat string ve regex'i ayırır", () => {
@@ -29,5 +29,19 @@ describe("scannerExport yardımcıları", () => {
         const mods = Object.fromEntries(Array.from({ length: 1201 }, (_, i) => [String(i), "s"]));
         const chunks = chunkModules(mods, 500);
         expect(chunks.map(c => Object.keys(c).length)).toEqual([500, 500, 201]);
+    });
+
+    it("collectModules Proxy'lenmiş fabrikadan orijinal kaynağı okur", () => {
+        function factory(module: { exports: unknown }) { module.exports = "ORIJINAL_GOVDE"; }
+        // intercept.ts'teki moduleFactoryHandler ile aynı: toString orijinale yönlenir.
+        const proxied = new Proxy(factory, {
+            get(target, p, receiver) {
+                if (p === "toString") return target.toString.bind(target);
+                return Reflect.get(target, p, receiver);
+            }
+        });
+        const out = collectModules({ 123: proxied });
+        expect(out["123"]).toContain("ORIJINAL_GOVDE");
+        expect(out["123"]).not.toContain("[native code]");
     });
 });
