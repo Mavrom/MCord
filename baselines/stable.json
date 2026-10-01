@@ -95,7 +95,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byCode(\".USER_MENTION)\")": {
    "kind": "finder",
@@ -116,7 +116,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byCode(\"Unexpected mismatch between files and file metadata\")": {
    "kind": "finder",
@@ -140,7 +140,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byCode(\"transitionTo - Transitioning to\")": {
    "kind": "finder",
@@ -166,7 +166,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byCode(\"useStateFromStores\")": {
    "kind": "finder",
@@ -224,7 +224,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"ChannelMessage\", \"SlashCommand\")": {
    "kind": "finder",
@@ -275,7 +275,7 @@
     "SlashCommand",
     "ThreadSettings"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"REPLYABLE\", \"FORWARDABLE\")": {
    "kind": "finder",
@@ -348,7 +348,7 @@
     "UNDELETABLE",
     "USER_MESSAGE"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"clearAll\", \"addFile\")": {
    "kind": "finder",
@@ -383,7 +383,7 @@
     "setUploads",
     "update"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"closeAllModals\", \"openModal\")": {
    "kind": "finder",
@@ -425,7 +425,7 @@
     "useIsModalAtTop",
     "useModalsStore"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"connectStores\")": {
    "kind": "finder",
@@ -490,7 +490,7 @@
     "initialize",
     "initialized"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"debounce\", \"cloneDeep\")": {
    "kind": "finder",
@@ -597,7 +597,7 @@
     "dropRight",
     "dropRightWhile"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"deleteMessage\", \"startEditMessage\")": {
    "kind": "finder",
@@ -697,7 +697,7 @@
     "updateEditMessage",
     "validateMessage"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"editMessage\", \"sendMessage\")": {
    "kind": "finder",
@@ -797,7 +797,7 @@
     "updateEditMessage",
     "validateMessage"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"fromTimestamp\", \"extractTimestamp\")": {
    "kind": "finder",
@@ -831,7 +831,7 @@
     "isProbablyAValidSnowflake",
     "keys"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"getGuildBannerURL\", \"getUserAvatarURL\")": {
    "kind": "finder",
@@ -903,7 +903,7 @@
     "isAnimatedIconHash",
     "makeSource"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"highlight\", \"registerLanguage\")": {
    "kind": "finder",
@@ -1008,7 +1008,7 @@
     "unregisterLanguage",
     "versionString"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"openPrivateChannel\")": {
    "kind": "finder",
@@ -1062,7 +1062,7 @@
     "updateChannel",
     "updatePermissionOverwrite"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"openUserProfileModal\", \"closeUserProfileModal\")": {
    "kind": "finder",
@@ -1088,7 +1088,7 @@
     "closeUserProfileModal",
     "openUserProfileModal"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"openUserSettings\", \"USER_SETTINGS_MODAL_KEY\")": {
    "kind": "finder",
@@ -1112,7 +1112,7 @@
     "__esModule",
     "openUserSettings"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"parseTopic\", \"parse\")": {
    "kind": "finder",
@@ -1169,7 +1169,7 @@
     "parseVoiceChannelStatus",
     "reactParserFor"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"parseTwoDigitYear\")": {
    "kind": "finder",
@@ -1269,7 +1269,7 @@
     "weekdaysMin",
     "weekdaysShort"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"resolveInvite\")": {
    "kind": "finder",
@@ -1341,7 +1341,7 @@
     "transitionToInvite",
     "transitionToInviteOnboarding"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"selectChannel\", \"selectVoiceChannel\")": {
    "kind": "finder",
@@ -1367,7 +1367,7 @@
     "selectPrivateChannel",
     "selectVoiceChannel"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"sendMessage\", \"editMessage\")": {
    "kind": "finder",
@@ -1467,7 +1467,7 @@
     "updateEditMessage",
     "validateMessage"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"setShowActivity\")": {
    "kind": "finder",
@@ -1516,7 +1516,7 @@
     "setVisibility",
     "update"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"show\", \"close\")": {
    "kind": "finder",
@@ -1537,7 +1537,7 @@
     "confirm",
     "show"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::byKeys(\"useName\", \"getGlobalName\")": {
    "kind": "finder",
@@ -1574,7 +1574,7 @@
     "useName",
     "useUserTag"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\"!0,rows:\", \"showRemainingCharacterCount:\")": {
    "kind": "finder",
@@ -1600,7 +1600,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\".CDzOFd\")": {
    "kind": "finder",
@@ -1631,7 +1631,7 @@
     "compare",
     "type"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\".GREEN,positionKeyStemOverride:\")": {
    "kind": "finder",
@@ -1656,7 +1656,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\".containerRef,{disableReturn:\")": {
    "kind": "finder",
@@ -1675,7 +1675,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\".pfChQr\", \"buttonRef\", \"submittingFinishedLabel\")": {
    "kind": "finder",
@@ -1708,7 +1708,7 @@
     "name",
     "prototype"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\".size-1.375*\")": {
    "kind": "finder",
@@ -1756,7 +1756,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\"?\\\"multiple\\\":\\\"single\\\",required:\")": {
    "kind": "finder",
@@ -1814,7 +1814,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\"MASKED_LINK)\")": {
    "kind": "finder",
@@ -1836,7 +1836,7 @@
     "compare",
     "type"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\"\\\"data-toggleable-component\\\":\\\"checkbox\")": {
    "kind": "finder",
@@ -1866,7 +1866,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\"hasContentBackground\", \"nextStep\", \"onClose?.()\")": {
    "kind": "finder",
@@ -1924,7 +1924,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\"markDash\", \"this.renderMark(\")": {
    "kind": "finder",
@@ -1981,7 +1981,7 @@
     "name",
     "prototype"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\"path:[\\\"empty\\\"]\")": {
    "kind": "finder",
@@ -2039,7 +2039,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\"ref:this.ref,\", \"renderPopout:this.renderPopout,\")": {
    "kind": "finder",
@@ -2074,7 +2074,7 @@
     "name",
     "prototype"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\"role:\\\"dialog\\\",tabIndex:-1\")": {
    "kind": "finder",
@@ -2097,7 +2097,7 @@
     "$$typeof",
     "render"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\"selectionMode:\\\"single\\\",onSelectionChange:\", \"isSelected:\")": {
    "kind": "finder",
@@ -2151,7 +2151,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\"setHasValue?.(\\\"\\\"!==\", \"=\\\"text\\\",\")": {
    "kind": "finder",
@@ -2203,7 +2203,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\"this.context?this.renderNonInteractive():\")": {
    "kind": "finder",
@@ -2230,7 +2230,7 @@
     "name",
     "prototype"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::componentByCode(\"this.renderTooltip()\", \"positionKey\")": {
    "kind": "finder",
@@ -2275,7 +2275,7 @@
     "name",
     "prototype"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::menuItems(\"Menu API only allows Items\")": {
    "kind": "finder",
@@ -2301,7 +2301,7 @@
     "rX",
     "sL"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: ActiveJoinedThreadsStore": {
    "kind": "finder",
@@ -2309,7 +2309,7 @@
    "label": "store: ActiveJoinedThreadsStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "863005",
-   "excerpt": "a][s][l],r().isEmpty(e[a][s])&&delete e[a][s]):e[a][s][l]=n)}function H(e,t,n,i){null==t||null==n||null==i||W(e,t,n,i)&&(e[t]={...e[t],[n]:{...e[t][n]}},delete e[t][n][i],r().isEmpty(e[t][n])&&delete e[t][n])}function j(e,t){return W(e,t.guild_id,t.parent_id,t.id)}function W(e,t,n,i){return t in e&&n in e[t]&&i in e[t][n]}let Y={},K={},$={},z={},X={};class q extends a.Ay.Store{static displayName=\"ActiveJoinedThreadsStore\";initialize(){this.waitFor(A.A,d.A,c.A,h.A,u.Ay,_.Ay),this.syncWith([_.Ay],x)}hasActiveJoinedUnreadThreads(e,t){return e in T&&t in T[e]}getActiveUnjoinedThreadsForParent(e,t){return e in m?m[e][t]??z:z}getActiveJoinedThreadsForParent(e,t){return e in p?p[e][t]??$:$}getAllActiveJoinedThreads(){return p}getActiveJoinedThreadsForGuild(e){return p[e]??Y}getActiveJoinedUnreadThreadsForGuild(e){return",
+   "excerpt": "=n?(delete e[a][s][l],r().isEmpty(e[a][s])&&delete e[a][s]):e[a][s][l]=n)}function H(e,t,n,i){null==t||null==n||null==i||W(e,t,n,i)&&(e[t]={...e[t],[n]:{...e[t][n]}},delete e[t][n][i],r().isEmpty(e[t][n])&&delete e[t][n])}function j(e,t){return W(e,t.guild_id,t.parent_id,t.id)}function W(e,t,n,i){return t in e&&n in e[t]&&i in e[t][n]}let Y={},K={},$={},z={},X={};class q extends a.Ay.Store{static displayName=\"ActiveJoinedThreadsStore\";initialize(){this.waitFor(A.A,d.A,c.A,h.A,u.Ay,_.Ay),this.syncWith([_.Ay],x)}hasActiveJoinedUnreadThreads(e,t){return e in T&&t in T[e]}getActiveUnjoinedThreadsForParent(e,t){return e in m?m[e][t]??z:z}getActiveJoinedThreadsForParent(e,t){return e in p?p[e][t]??$:$}getAllActiveJoinedThreads(){return p}getActiveJoinedThreadsForGuild(e){return p[e]??Y}getActiveJoinedUnreadThreadsForGuild(e){return ",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2336,7 +2336,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: ApplicationCommandIndexStore": {
    "kind": "finder",
@@ -2344,7 +2344,7 @@
    "label": "store: ApplicationCommandIndexStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "264322",
-   "excerpt": ",n(938796);var i=n(582128),r=n(91871),a=n.n(r),s=n(284009),l=n.n(s),o=n(683588),d=n(17928),c=n(228366),u=n(66834),_=n(155718),E=n(630248),A=n(626584),h=n(200662),I=n(773669),f=n(594061),p=n(280450),T=n(734057),m=n(696451),g=n(71393),S=n(287809),N=n(174459),C=n(917012),O=n(56494),R=n(26909),L=n(577700),y=n(210978),D=n(392054),v=n(168186),b=n(240591),M=n(46477),P=n(73510),U=n(652215);let w=new A.A(\"ApplicationCommandIndexStore\"),G=Symbol(\"currentUser\"),x=Symbol(\"stale\"),k=Symbol(\"current\"),F=Object.freeze({descriptors:[],commands:[],sectionedCommands:[],loading:!0}),B=Object.freeze({serverVersion:k,fetchState:{fetching:!1},result:{sections:{},sectionIdsByBotId:{},version:k}}),V=Object.freeze({serverVersion:x,fetchState:{fetching:!1}}),H={sensitivity:\"accent\",numeric:!0},j=!1,W=[];function Y(e){switch(e.type){case\"guild",
+   "excerpt": "_localized=t.description),t.name!==t.name_default&&(i.name_localized=t.name),i}),!0))){let t=a[e.applicationId];if(null==t){w.error(\"Command has no matching application\");continue}t.commands[e.id]=e}let d=i.version??k;K(n,{serverVersion:d,result:{sections:a,sectionIdsByBotId:s,version:d},fetchState:{fetching:!1}},t)}function Q(){K({type:\"user\"},{serverVersion:x})}class J extends d.Ay.Store{static displayName=\"ApplicationCommandIndexStore\";indices={};applicationIndices=new Map;applicationIndicesVersion=0;oldLocale=I.default.locale;collator=new Intl.Collator(I.default.locale,H);initialize(){this.waitFor(I.default),this.waitFor(R.Ay,E.A,p.default,T.A,m.Ay,g.A,S.default),this.syncWith([I.default],()=>{let e;(e=I.default.locale)!==ee.oldLocale&&(z(),ee.collator=new Intl.Collator(e,{sensitivity:\"accent\",numeric:!0}),ee.oldLocale=e)})}ge",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2386,7 +2386,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: ApplicationStore": {
    "kind": "finder",
@@ -2394,7 +2394,7 @@
    "label": "store: ApplicationStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "587895",
-   "excerpt": "e A.botUserIdToAppUsage[t]}}function T(e){let{applications:t}=e;if(0===t.length)return!1;for(let e of t)h(a.Ay.createFromServer(e));return!0}function m(e){let{entitlements:t}=e,n=!1;for(let{sku:e}of t)e?.application!=null&&(h(a.Ay.createFromServer(e.application)),n=!0);return n}function g(e){let{guildId:t}=e;if(!d.has(t))return!1;d.delete(t)}class S extends i.Ay.PersistedStore{static displayName=\"ApplicationStore\";static persistKey=\"ApplicationStore\";initialize(e){if(null!=e&&\"object\"==typeof e.botUserIdToAppUsage)for(let t in e.botUserIdToAppUsage){let n=e.botUserIdToAppUsage[t],i=n.applicationId,r=n.lastUsedMs;\"string\"==typeof i&&i.length>0&&\"number\"==typeof r&&r>0&&(A.botUserIdToAppUsage[t]={applicationId:i,lastUsedMs:r})}}getState(){return A}_getAllApplications(){return Array.from(l.values())}getGuild",
+   "excerpt": "a[e][0];delete A.botUserIdToAppUsage[t]}}function T(e){let{applications:t}=e;if(0===t.length)return!1;for(let e of t)h(a.Ay.createFromServer(e));return!0}function m(e){let{entitlements:t}=e,n=!1;for(let{sku:e}of t)e?.application!=null&&(h(a.Ay.createFromServer(e.application)),n=!0);return n}function g(e){let{guildId:t}=e;if(!d.has(t))return!1;d.delete(t)}class S extends i.Ay.PersistedStore{static displayName=\"ApplicationStore\";static persistKey=\"ApplicationStore\";initialize(e){if(null!=e&&\"object\"==typeof e.botUserIdToAppUsage)for(let t in e.botUserIdToAppUsage){let n=e.botUserIdToAppUsage[t],i=n.applicationId,r=n.lastUsedMs;\"string\"==typeof i&&i.length>0&&\"number\"==typeof r&&r>0&&(A.botUserIdToAppUsage[t]={applicationId:i,lastUsedMs:r})}}getState(){return A}_getAllApplications(){return Array.from(l.values())}getGuildA",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2425,7 +2425,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: ApplicationStreamPreviewStore": {
    "kind": "finder",
@@ -2433,7 +2433,7 @@
    "label": "store: ApplicationStreamPreviewStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "384200",
-   "excerpt": "384200(e,t,n){\"use strict\";n.d(t,{A:()=>A});var i=n(435558),r=n.n(i),a=n(17928),s=n(228366),l=n(652896),o=n(325278);let d={},c={},u=new Set;function _(){d={},c={}}class E extends a.Ay.Store{static displayName=\"ApplicationStreamPreviewStore\";getPreviewURL(e,t,n){let i=d[(0,l._z)({streamType:null!=e?o.U4.GUILD:o.U4.CALL,guildId:e,channelId:t,ownerId:n})];return i?.url}shouldFetchPreview(e,t,n){let i=(0,l._z)({streamType:null!=e?o.U4.GUILD:o.U4.CALL,guildId:e,channelId:t,ownerId:n}),r=d[i],a=c[i]??0,s=null!=r&&Date.now()>r.expires;return(null==r&&a<5||s)&&!u.has(i)}getPreviewURLForStreamKey(e){let{guildId:t,channelId:n,ownerId:i}=(0,l",
+   "excerpt": "384200(e,t,n){\"use strict\";n.d(t,{A:()=>A});var i=n(435558),r=n.n(i),a=n(17928),s=n(228366),l=n(652896),o=n(325278);let d={},c={},u=new Set;function _(){d={},c={}}class E extends a.Ay.Store{static displayName=\"ApplicationStreamPreviewStore\";getPreviewURL(e,t,n){let i=d[(0,l._z)({streamType:null!=e?o.U4.GUILD:o.U4.CALL,guildId:e,channelId:t,ownerId:n})];return i?.url}shouldFetchPreview(e,t,n){let i=(0,l._z)({streamType:null!=e?o.U4.GUILD:o.U4.CALL,guildId:e,channelId:t,ownerId:n}),r=d[i],a=c[i]??0,s=null!=r&&Date.now()>r.expires;return(null==r&&a<5||s)&&!u.has(i)}getPreviewURLForStreamKey(e){let{guildId:t,channelId:n,ownerId:i}=(0,l.",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2458,7 +2458,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: AuthenticationStore": {
    "kind": "finder",
@@ -2466,7 +2466,7 @@
    "label": "store: AuthenticationStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "280450",
-   "excerpt": "50(e,t,n){\"use strict\";let i,r;n.r(t),n.d(t,{default:()=>eu}),n(321073),n(142703);var a=n(247775),s=n(80703),l=n(17928),o=n(506774),d=n(228366),c=n(181658),u=n(155718);new(n(683588)).K;var _=n(15552),E=n(53943),A=n(626584),h=n(620233),I=n(636537),f=n(652215),p=n(976860);let T=function(){return!0};var m=n(252919),g=n(174459),S=n(612181),N=n(38405),C=n(115036),O=n(536802),R=n(204925);let L=new A.A(\"AuthenticationStore\"),y=\"fingerprint\",D=\"installation_id_v3\",v=\"user_id_cache\",b=null,M=null,P=null,U=null,w=null,G=null,x=null,k=null,F=f.aUe.NONE,B=!1,V=[],H=\"\",j=!1,W=null,Y=!1,K=!1,$=null,z=null,X=!1,q=!1,Z=[];function Q(e){let t=null!=a.getToken(),n=null!=o.w.get(f.ilC);L.verbose(e,{tokenManagerHasToken:t,storageHasToken:n})}function J(){let e=o.w.get(D);if(null!=e&&e.length>0)return e;let t=o.w.get(\"analytics_",
+   "excerpt": "iredActionStore\",\"LayoutStore\",\"OverlaySettingsStore\",\"ApexExperimentStore\",\"AccessibilityStore\",\"DerivedQosDataStore\"],type:e?.isSwitchingAccount?\"user-data-only\":\"all\"}),l.Ay.Store.removeAllConditionalListeners(),O.A.clearAll(),E.IU(),N.A.clearUser(),o.w.remove(v),b=null,M=null,F=e?.isSwitchingAccount?f.aUe.LOGGING_IN:f.aUe.NONE,H=\"\",W=null,j=!1,X=!1,q=!1,es()}class ec extends l.Ay.Store{static displayName=\"AuthenticationStore\";initialize(){if(b=o.w.get(v),x=J(),null==a.getToken()){let t=null==x||0===x.length,n=ee();if(t){function e(){(0,h.Tv)(null)}n.then(e,e)}}this.addChangeListener(()=>void 0)}getLoginStatus(){return F}getId(){return b}getSessionId(){return M}getAuthSessionIdHash(){return P}getStaticAuthSessionId(){return U}getToken(){return(0,S.gf)()}isAuthenticated(){return(0,S.wR)()}getFingerprint(){return w}getIn",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2526,7 +2526,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: CallStore": {
    "kind": "finder",
@@ -2534,7 +2534,7 @@
    "label": "store: CallStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "470710",
-   "excerpt": "u=n(652215);let _={},E={};function A(){let e=arguments.length>0&&void 0!==arguments[0]&&arguments[0],t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:d.Ay.getChannelId(),n=o.A.getChannel(t);return null!=n&&null==n.getGuildId()&&null!=t&&(null==_[t]||!!e)&&(_[t]=_[t]??{channelId:t,ringing:[]},l.h.dispatch({type:\"CALL_CONNECT\",channelId:t}),!0)}class h extends a.Ay.Store{static displayName=\"CallStore\";initialize(){this.waitFor(o.A,d.Ay,c.A)}getCall(e){return _[e]}getCalls(){return Object.values(_)}getMessageId(e){let t=this.getCall(e);return null!=t?t.messageId:null}isCallActive(e,t){let n=_[e];return null!=n&&!n.unavailable&&(null!=t?n.messageId===t:null!=n.region)}isCallUnavailable(e){let t=_[e];return null!=t&&t.unavailable}getInternalState(){return{calls:_,enqueuedRings:E}}}let I=new h(l.",
+   "excerpt": ",c=n(967198),u=n(652215);let _={},E={};function A(){let e=arguments.length>0&&void 0!==arguments[0]&&arguments[0],t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:d.Ay.getChannelId(),n=o.A.getChannel(t);return null!=n&&null==n.getGuildId()&&null!=t&&(null==_[t]||!!e)&&(_[t]=_[t]??{channelId:t,ringing:[]},l.h.dispatch({type:\"CALL_CONNECT\",channelId:t}),!0)}class h extends a.Ay.Store{static displayName=\"CallStore\";initialize(){this.waitFor(o.A,d.Ay,c.A)}getCall(e){return _[e]}getCalls(){return Object.values(_)}getMessageId(e){let t=this.getCall(e);return null!=t?t.messageId:null}isCallActive(e,t){let n=_[e];return null!=n&&!n.unavailable&&(null!=t?n.messageId===t:null!=n.region)}isCallUnavailable(e){let t=_[e];return null!=t&&t.unavailable}getInternalState(){return{calls:_,enqueuedRings:E}}}let I=new h(l.h",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2560,7 +2560,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: ChannelStore": {
    "kind": "finder",
@@ -2568,7 +2568,7 @@
    "label": "store: ChannelStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "734057",
-   "excerpt": "734057(e,t,n){\"use strict\";n.d(t,{A:()=>eo,D:()=>V}),n(205816);var i=n(435558),r=n.n(i),a=n(61090),s=n(17928),l=n(228366),o=n(723176),d=n(154049),c=n(531743),u=n(453001),_=n(736400),E=n(311016),A=n(626584),h=n(181079),I=n(95701),f=n(403362),p=n(935208),T=n(280450),m=n(71393),g=n(287809),S=n(652215);let N=new A.A(\"ChannelStore\"),C={},O={},R={},L={},y=null,D={},v={},b={},M=0,P={},U={},w=new Set,G={},x=0,k={},F=0,B=0;class V{static loadAllMissingChannels(){let e=m.A.getGuildIds().filter(e=>!w.has(e));return this.loadGuildIds(e)}static loadGuildFromChannelId(e){return null==e?null:V.loadGuildIds([Y(e)?.guild_id])}static loadGuildIds(e){let t=e.filter(f.Vq);if(0===t.length)return null;let n=o.A.database();if(null==n||!t.so",
+   "excerpt": ":n,channels:i}=e;t.forEach(e=>{e.forEach(e=>{er(e.thread)})}),n.forEach(er),i.forEach(e=>{let t=(0,I.UE)(e),n=null!=K(e.id),i=null!=k[e.id];t.isPrivate()&&(!n||i)?k[t.id]=t:n||$(t)})})}function er(e){null!=e&&!(e.id in D)&&I.A_.has(e.type)&&X((0,I.UE)(e))}function ea(){for(let e in U={},h.A.getFavoriteChannels()){let t=h.A.getCategoryRecord(e);null!=t&&(U[e]=t)}}class es extends s.Ay.Store{static displayName=\"ChannelStore\";initialize(){this.waitFor(T.default,u.A,h.A,m.A,g.default),this.syncWith([h.A],ea)}hasChannel(e){return null!=Y(e)}getBasicChannel(e){if(null!=e)return Y(e)}getChannel(e){if(null!=e)return K(e)}loadAllGuildAndPrivateChannelsFromDisk(){for(let e of m.A.getGuildIds())H(e,1,\"loadAllGuildAndPrivateChannelsFromDisk\");return{...O,...L}}getChannelIds(e){return(H(e,0,\"getChannelIds\"),null==e)?p.default.k",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2614,7 +2614,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: ConnectedAccountsStore": {
    "kind": "finder",
@@ -2622,7 +2622,7 @@
    "label": "store: ConnectedAccountsStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "30370",
-   "excerpt": "ken||null,this.twoWayLink=e.two_way_link||!1,this.metadata=e.metadata||null,this.metadataVisibility=e.metadata_visibility||0}toString(){return this.name}}var d=n(149790);let c=new Set([n(652215).fg2.CONTACTS]),u=!0,_=[],E=[],A={},h=new Set,I={},f={};function p(e){_=e.filter(e=>!c.has(e.type)&&s.A.isSupported(e.type)),E=e.filter(e=>c.has(e.type)),u=!1}class T extends i.Ay.Store{static displayName=\"ConnectedAccountsStore\";isJoining(e){return A[e]||!1}joinErrorMessage(e){return f[e]}isFetching(){return u}getAccounts(){return _}getLocalAccounts(){return E}getAccount(e,t){return _.find(n=>(null==e||n.id===e)&&n.type===t)}getLocalAccount(e){return E.find(t=>t.type===e)}isSuggestedAccountType(e){return I[e]||!1}addPendingAuthorizedState(e){h.add(e)}deletePendingAuthorizedState(e){h.delete(e)}hasPendingAuthorizedState(",
+   "excerpt": "n=e.access_token||null,this.twoWayLink=e.two_way_link||!1,this.metadata=e.metadata||null,this.metadataVisibility=e.metadata_visibility||0}toString(){return this.name}}var d=n(149790);let c=new Set([n(652215).fg2.CONTACTS]),u=!0,_=[],E=[],A={},h=new Set,I={},f={};function p(e){_=e.filter(e=>!c.has(e.type)&&s.A.isSupported(e.type)),E=e.filter(e=>c.has(e.type)),u=!1}class T extends i.Ay.Store{static displayName=\"ConnectedAccountsStore\";isJoining(e){return A[e]||!1}joinErrorMessage(e){return f[e]}isFetching(){return u}getAccounts(){return _}getLocalAccounts(){return E}getAccount(e,t){return _.find(n=>(null==e||n.id===e)&&n.type===t)}getLocalAccount(e){return E.find(t=>t.type===e)}isSuggestedAccountType(e){return I[e]||!1}addPendingAuthorizedState(e){h.add(e)}deletePendingAuthorizedState(e){h.delete(e)}hasPendingAuthorizedState(e",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2647,7 +2647,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: DraftStore": {
    "kind": "finder",
@@ -2655,7 +2655,7 @@
    "label": "store: DraftStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "31717",
-   "excerpt": "return!1;let i=f(n),r=i[e];if(null==r)return!1;delete r[t],a().isEmpty(r)&&delete i[e]}function m(){let e=u.default.getId();if(null==e||E.A.totalUnavailableGuilds>0)return;let t=f(e);for(let e in t)null==_.A.getChannel(e)&&delete t[e]}function g(e){let{channel:{id:t}}=e,n=u.default.getId();if(null==n)return!1;let i=f(n);return delete i[t],!1}class S extends s.Ay.PersistedStore{static displayName=\"DraftStore\";static persistKey=\"DraftStore\";static migrations=[e=>{if(null==e)return{};for(let t in e)\"timestamp\"in e[t]&&(e[t]={0:e[t]});return e},e=>{let t=u.default.getId();if(null==e||null==t)return{};let n={},i=n[t]={};for(let t in e)i[t]=e[t];return n}];initialize(e){for(let[t,n]of(I=e??{},c.default.entries(I)))for(let[e,i]of c.default.entries(n)){let n=i[0];null!=n&&(\"\"===n.draft||\"\"===n.draft.trim())",
+   "excerpt": ");if(null==n)return!1;let i=f(n),r=i[e];if(null==r)return!1;delete r[t],a().isEmpty(r)&&delete i[e]}function m(){let e=u.default.getId();if(null==e||E.A.totalUnavailableGuilds>0)return;let t=f(e);for(let e in t)null==_.A.getChannel(e)&&delete t[e]}function g(e){let{channel:{id:t}}=e,n=u.default.getId();if(null==n)return!1;let i=f(n);return delete i[t],!1}class S extends s.Ay.PersistedStore{static displayName=\"DraftStore\";static persistKey=\"DraftStore\";static migrations=[e=>{if(null==e)return{};for(let t in e)\"timestamp\"in e[t]&&(e[t]={0:e[t]});return e},e=>{let t=u.default.getId();if(null==e||null==t)return{};let n={},i=n[t]={};for(let t in e)i[t]=e[t];return n}];initialize(e){for(let[t,n]of(I=e??{},c.default.entries(I)))for(let[e,i]of c.default.entries(n)){let n=i[0];null!=n&&(\"\"===n.draft||\"\"===n.draft.trim())&",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2697,7 +2697,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: EmojiStore": {
    "kind": "finder",
@@ -2705,7 +2705,7 @@
    "label": "store: EmojiStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "236285",
-   "excerpt": "default.fromTimestamp(Date.now()-60*G.A.Millis.DAY),J=[],ee=[],et=new Set,en=2,ei=[...X],er={},ea={},es=new Map;function el(e){let t=eo()[e];return null!=t?er[t]?.getUsableEmoji(e)??void 0:void 0}function eo(){if(ed(),null==ea)for(let e in ea={},er)for(let t of er[e].emojiIds())ea[t]=e;return ea}async function ed(){if(0!==en)return;let e=h.A.database();if(null==e)return;en=1;let t=await (0,I.ES)(\"EmojiStore.loadSavedEmojis\",()=>u.A.timeAsync(\"\\uD83D\\uDCBE\",\"loadSavedEmojis\",()=>p.getAsync(e)));en=2,null!=t&&E.h.dispatch({type:\"CACHED_EMOJIS_LOADED\",emojis:t})}function ec(e){return{computeBonus:()=>100,lookupKey:e=>j.Ay.getByName(e)??el(e),afterCompute:()=>{e(),ei=[...X],o().some(er,e=>e.hasUsableEmoji())||ei.splice(X.indexOf($.R2.CUSTOM),1)},numFrequentlyItems:42}}class eu{static _lastInstance=null;",
+   "excerpt": "g\",\"white_check_mark\",\"x\"])eE.track(e)}function eT(e){if(null==e)return!1;for(let t of e){let e=t.id??t.uniqueName??t.name;null!=e&&(e_.track(e),q.pendingUsages.push({key:e,timestamp:Date.now()}))}let t=e.length>0;return t&&2===en&&e_.compute(),t}function em(e){let{guildId:t,role:{id:n}}=e,i=P.A.getRole(t,n);if(!(null!=i&&(0,N.U)(i)))return!1;ef(t),eI()}class eg extends _.Ay.PersistedStore{static displayName=\"EmojiStore\";static persistKey=\"EmojiStoreV2\";initialize(e){this.waitFor(S.A,b.Ay,M.A,P.A,R.A,D.default,H.A,U.Ay,O.A,W.A,v.A,w.default),null!=e&&(null!=e.pendingUsages&&(q.pendingUsages=e.pendingUsages),null!=e.emojiReactionPendingUsages&&(q.emojiReactionPendingUsages=e.emojiReactionPendingUsages),null!=e.expandedSectionsByGuildIds&&(q.expandedSectionsByGuildIds=new Set(e.expandedSectionsByGuildIds))),this.sy",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2757,7 +2757,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: ExperimentStore": {
    "kind": "finder",
@@ -2765,7 +2765,7 @@
    "label": "store: ExperimentStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "736056",
-   "excerpt": "ull!=n&&t===(null!=n.vanityURLCode)}},[s().v3(\"guild_in_range_by_hash\")]:e=>{let t,n;for(let[i,r]of e)switch(i){case s().v3(\"hash_key\"):t=r;break;case s().v3(\"target\"):n=parseInt(r)??0}return e=>{let i=s().v3(`${t}:${e}`);return(i>0?i+i:i>>>0)%1e4<n}}};var y=n(688151),D=n(652215);let v=\"scientist:triggered\",b=\"exerimentOverrides\",M=\"userExperimentOverrides\",P=\"guildExperimentOverrides\",U=new c.A(\"ExperimentStore\"),w=!1,G={},x=new Map,k={},F={rawUserExperiments:[],rawGuildExperiments:[]},B={},V={},H={},j={},W={},Y=null,K=\"staging\"===window.GLOBAL_ENV.RELEASE_CHANNEL||(0,d.kK)(),$={};function z(e){let t=$[e];if(void 0!==t)return t;{let t=s().v3(e);return $[e]=t,t}}function X(e){return((e.flags??0)&D.nhx.STAFF)===D.nhx.STAFF||null!=e.personal_connection_id}function q(e,t,n,i){let r=`${t.type}|${e}`,a=t.trig",
+   "excerpt": "if(null==a)return!1;if(null==n?(j={...j},delete j[t],W={...W},delete W[t]):\"user\"===a?j={...j,[t]:{type:a,revision:1,population:0,bucket:n,override:!0}}:W={...W,[t]:{type:a,revision:1,bucket:n,override:!0}},!r)for(let e of[j,W])for(let t in e)null==k[t]&&delete j[t];eu()}function eh(e){let{guild:t}=e;for(let e in H){let[n]=e.split(\":\");t.id===n&&delete H[e]}}Date.now();class eI extends _.A{static displayName=\"ExperimentStore\";static LATEST_SNAPSHOT_VERSION=1;constructor(){super({LOGOUT:eo,LOGIN_SUCCESS:ed,CONNECTION_OPEN:en,EXPERIMENTS_FETCH_SUCCESS:en,OVERLAY_INITIALIZE:es,EXPERIMENTS_FETCH_FAILURE:el,EXPERIMENT_OVERRIDE_BUCKET:eA,GUILD_CREATE:eh,GUILD_UPDATE:eh},o.A.Early)}trackExposure=J;initialize(){G=function(){let e=l.w.get(v);if(null==e||1!==e.v)return{};let t=e.e,n=Date.now(),i=!1;for(let e in t)n-t[e].time>60",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2826,7 +2826,7 @@
     "removeReactChangeListener",
     "trackExposure"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: GuildChannelStore": {
    "kind": "finder",
@@ -2834,7 +2834,7 @@
    "label": "store: GuildChannelStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "808728",
-   "excerpt": "=void 0,O===t&&k(t)}function B(e){let{channel:{guild_id:t}}=e;if(null==t)return!1;R[t]=void 0,t===O&&k(t)}function V(e){let{guildId:t}=e;R[t]=void 0,t===O&&k(t)}function H(e,t){return a.X8(A.cc({user:e,context:t,checkElevated:!1}),S.Lti)}function j(e,t){D=t;let n=e?.getGuildId()??null;return null!=n&&(R[n]=void 0,n===O&&k(n),!0)}function W(){k(S.YYv)}class Y extends s.Ay.Store{static displayName=\"GuildChannelStore\";initialize(){this.waitFor(h.default,I.A,c.A,o.A,f.Ay,p.A,T.A,g.default),this.syncWith([c.A],W)}getAllGuilds(){return R}getChannels(e){let t;return null!=e?(null==(t=R[e])&&(t=k(e)),t):M}getFirstChannelOfType(e,t,n){let i=this.getChannels(e)[n].find(t);return null!=i?i.channel:null}getFirstChannel(e,t){let n=arguments.length>2&&void 0!==arguments[2]&&arguments[2];return this.getFirstChannelOfType",
+   "excerpt": "return!1;R[t]=void 0,O===t&&k(t)}function B(e){let{channel:{guild_id:t}}=e;if(null==t)return!1;R[t]=void 0,t===O&&k(t)}function V(e){let{guildId:t}=e;R[t]=void 0,t===O&&k(t)}function H(e,t){return a.X8(A.cc({user:e,context:t,checkElevated:!1}),S.Lti)}function j(e,t){D=t;let n=e?.getGuildId()??null;return null!=n&&(R[n]=void 0,n===O&&k(n),!0)}function W(){k(S.YYv)}class Y extends s.Ay.Store{static displayName=\"GuildChannelStore\";initialize(){this.waitFor(h.default,I.A,c.A,o.A,f.Ay,p.A,T.A,g.default),this.syncWith([c.A],W)}getAllGuilds(){return R}getChannels(e){let t;return null!=e?(null==(t=R[e])&&(t=k(e)),t):M}getFirstChannelOfType(e,t,n){let i=this.getChannels(e)[n].find(t);return null!=i?i.channel:null}getFirstChannel(e,t){let n=arguments.length>2&&void 0!==arguments[2]&&arguments[2];return this.getFirstChannelOfType(",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2862,7 +2862,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: GuildMemberCountStore": {
    "kind": "finder",
@@ -2870,7 +2870,7 @@
    "label": "store: GuildMemberCountStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "498642",
-   "excerpt": "498642(e,t,n){\"use strict\";n.d(t,{A:()=>d});var i=n(17928),r=n(228366);let a={},s={};function l(e){let{invite:t}=e,{guild:n,approximate_presence_count:i}=t;if(n?.id==null||null==i)return!1;s[n.id]=i}class o extends i.Ay.Store{static displayName=\"GuildMemberCountStore\";getMemberCounts(){return a}getMemberCount(e){return null!=e?a[e]:null}getOnlineCount(e){return null!=e?s[e]:null}}let d=new o(r.h,{CONNECTION_OPEN:function(e){let{guilds:t}=e;a={},t.forEach(e=>{a[e.id]=e.member_count})},OVERLAY_INITIALIZE:function(e){a={...e.guildMemberCounts}},GUILD_CREATE:function(e){let{guild:t}=e;a[t.id]=t.member_count},GUILD_DELETE:function(e){let{guild:t}=e;if(null==a[t.id",
+   "excerpt": "498642(e,t,n){\"use strict\";n.d(t,{A:()=>d});var i=n(17928),r=n(228366);let a={},s={};function l(e){let{invite:t}=e,{guild:n,approximate_presence_count:i}=t;if(n?.id==null||null==i)return!1;s[n.id]=i}class o extends i.Ay.Store{static displayName=\"GuildMemberCountStore\";getMemberCounts(){return a}getMemberCount(e){return null!=e?a[e]:null}getOnlineCount(e){return null!=e?s[e]:null}}let d=new o(r.h,{CONNECTION_OPEN:function(e){let{guilds:t}=e;a={},t.forEach(e=>{a[e.id]=e.member_count})},OVERLAY_INITIALIZE:function(e){a={...e.guildMemberCounts}},GUILD_CREATE:function(e){let{guild:t}=e;a[t.id]=t.member_count},GUILD_DELETE:function(e){let{guild:t}=e;if(null==a[t.id]",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2895,7 +2895,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: GuildMemberStore": {
    "kind": "finder",
@@ -2903,7 +2903,7 @@
    "label": "store: GuildMemberStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "696451",
-   "excerpt": "696451(e,t,n){\"use strict\";n.d(t,{Ay:()=>ed,DL:()=>W,vg:()=>j}),n(938796),n(321073);var i=n(435558),r=n.n(i),a=n(665260),s=n(17928),l=n(228366),o=n(807605),d=n(969151),c=n(821956),u=n(628856),_=n(626584),E=n(945096),A=n(316031),h=n(264388),I=n(518782),f=n(164956),p=n(403362),T=n(7864),m=n(935208),g=n(280450),S=n(734057),N=n(317525),C=n(71393),O=n(340837);let R=new _.A(\"GuildMemberStore\"),L={},y={},D={},v={},b={},M=!1,P=0,U=0,w={},G={},x={added:[],removed:[]};function k(e,t){if(null==t.communicationDisabledUntil||!(0,A.Z)(t))return F(e,t.userId);let n=H(e,t.userId);b[n]!==t.communicationDisabledUntil&&(0,A.Z)(t)&&(b[n]=t.communicationDisabledUntil,B(n))}function F(e,t){if(null!=t){let n=H(e,t);null!=b[n]&&B(n),V(H(e,t))}else for(let t in b)W(t)===e&&(B(t),V(t))}function B(e){P+=",
+   "excerpt": ".message_reference?.guild_id)&&(n=!0)}),en(e.resolved,t)||n}function er(e){let{message:t,guildId:n}=e;return ei(t,n)}function ea(e){let t=S.A.getChannel(e.channel_id);ei(e,t?.guild_id)}function es(e){let{messages:t}=e;t.forEach(e=>ea(e))}function el(e){let{data:t}=e,n=[];t.forEach(e=>{let{messages:t}=e;t.forEach(e=>{e.forEach(e=>{n.push(e)})})}),es({messages:n})}class eo extends s.Ay.Store{static displayName=\"GuildMemberStore\";initialize(){this.waitFor(g.default,S.A,N.A,C.A,f.A)}getMutableAllGuildsAndMembers(){return L}memberOf(e){return r()(L).toPairs().filter(t=>{let[n,i]=t;return null!=i[e]}).map(e=>{let[t]=e;return t}).value()}getNicknameGuildsMapping(e){let t={};for(let n in L){let i=L[n],r=i[e]?.nick;null!=r&&(Object.prototype.hasOwnProperty.call(t,r)||(t[r]=[]),t[r].push(n))}return t}getNicknames(e){return Objec",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2931,7 +2931,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: GuildRoleStore": {
    "kind": "finder",
@@ -2939,7 +2939,7 @@
    "label": "store: GuildRoleStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "317525",
-   "excerpt": "317525(e,t,n){\"use strict\";n.d(t,{A:()=>h});var i=n(136722),r=n(867051),a=n(892842),s=n(137903),l=n(260509),o=n(34457),d=n(9865),c=n(7864);function u(e){return(0,r.yE)(o.xh,{...e,permissions:i.iu(e.permissions)})}class _ extends s.yW{static displayName=\"GuildRoleStore\";database=this.addKKVDatabase(\"guild_roles\",u);stateWrapper(){return this.database}serializeAllGuildRoles(){return this.database.mapPartitions(d.cH)}getSortedRoles=this.database.memoizedPartition((e,t)=>c.gE(Object.values(t)));getRolesSnapshot=this.database.memoizedPartition((e,t)=>({...t}));getUnsafeMutableRoles(e){return this.database.getPartition(e)}getManyRoles(e,t){return this.database.getMa",
+   "excerpt": "317525(e,t,n){\"use strict\";n.d(t,{A:()=>h});var i=n(136722),r=n(867051),a=n(892842),s=n(137903),l=n(260509),o=n(34457),d=n(9865),c=n(7864);function u(e){return(0,r.yE)(o.xh,{...e,permissions:i.iu(e.permissions)})}class _ extends s.yW{static displayName=\"GuildRoleStore\";database=this.addKKVDatabase(\"guild_roles\",u);stateWrapper(){return this.database}serializeAllGuildRoles(){return this.database.mapPartitions(d.cH)}getSortedRoles=this.database.memoizedPartition((e,t)=>c.gE(Object.values(t)));getRolesSnapshot=this.database.memoizedPartition((e,t)=>({...t}));getUnsafeMutableRoles(e){return this.database.getPartition(e)}getManyRoles(e,t){return this.database.getMan",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -2984,7 +2984,7 @@
     "state",
     "wrappedState"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: GuildScheduledEventStore": {
    "kind": "finder",
@@ -2992,7 +2992,7 @@
    "label": "store: GuildScheduledEventStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "698441",
-   "excerpt": "eptions];return i<0?r.push(t):r[i]=t,T({...n,guild_scheduled_event_exceptions:r}),!0}function L(e){return null!=e&&e?.status===u.XG.ACTIVE}function y(e){return!u.lV.has(e.status)}function D(e,t){return new Date(e.scheduled_start_time).getTime()<Date.now()+1e3*t}function v(e){return null!=e&&u.lV.has(e.status)}class b extends a.Ay.Store{initialize(){this.waitFor(o.default,d.Ay)}static displayName=\"GuildScheduledEventStore\";getGuildScheduledEvent(e){return null==e?null:E.get(e)??null}getGuildEventCountByIndex(e){return E.size(e)}getGuildScheduledEventsForGuild(e){return null==e?[]:E.values(e)}getGuildScheduledEventsByIndex(e){return E.values(e)}getRsvpVersion(){return A}getRsvp(e,t,n){return null==e?null:f[e]?.[t??I]?.[n]}isInterestedInEventRecurrence(e,t){let n=o.default.getId(),i=this.getRsvp(e,null,n),r=this.get",
+   "excerpt": "led_event_exceptions];return i<0?r.push(t):r[i]=t,T({...n,guild_scheduled_event_exceptions:r}),!0}function L(e){return null!=e&&e?.status===u.XG.ACTIVE}function y(e){return!u.lV.has(e.status)}function D(e,t){return new Date(e.scheduled_start_time).getTime()<Date.now()+1e3*t}function v(e){return null!=e&&u.lV.has(e.status)}class b extends a.Ay.Store{initialize(){this.waitFor(o.default,d.Ay)}static displayName=\"GuildScheduledEventStore\";getGuildScheduledEvent(e){return null==e?null:E.get(e)??null}getGuildEventCountByIndex(e){return E.size(e)}getGuildScheduledEventsForGuild(e){return null==e?[]:E.values(e)}getGuildScheduledEventsByIndex(e){return E.values(e)}getRsvpVersion(){return A}getRsvp(e,t,n){return null==e?null:f[e]?.[t??I]?.[n]}isInterestedInEventRecurrence(e,t){let n=o.default.getId(),i=this.getRsvp(e,null,n),r=this.getR",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3021,7 +3021,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: GuildStore": {
    "kind": "finder",
@@ -3029,7 +3029,7 @@
    "label": "store: GuildStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "71393",
-   "excerpt": "50),_=n(349828);function E(e){return(0,r.yE)(o.vI,{...e,features:(0,i.y)(e.features),joinedAt:null!=e.joinedAt?new Date(e.joinedAt):null,premiumProgressBarEnabledUserUpdatedAt:null!=e.premiumProgressBarEnabledUserUpdatedAt?new Date(e.premiumProgressBarEnabledUserUpdatedAt):null})}function A(e,t,n){let i=e.get(t);null!=i&&e.set(t,(0,r.hZ)(i,\"guildTheme\",n))}class h extends l.yW{static displayName=\"GuildStore\";database=this.addKVDatabase(\"guilds\",E);stateWrapper(){return this.database}getGuild=e=>{if(null!=e)return(0,a.ai)(e)?_._z:this.database.get(e)};getGuilds=this.database.memoized(e=>({...e}));getGuildsArray=this.database.memoized(e=>Object.values(e));getGuildIds=this.database.memoized(e=>c.default.keys(e));getGuildCount(){return this.database.length()}}let I=new h({BACKGROUND_SYNC:(e,t)=>{let{gui",
+   "excerpt": "208),u=n(280450),_=n(349828);function E(e){return(0,r.yE)(o.vI,{...e,features:(0,i.y)(e.features),joinedAt:null!=e.joinedAt?new Date(e.joinedAt):null,premiumProgressBarEnabledUserUpdatedAt:null!=e.premiumProgressBarEnabledUserUpdatedAt?new Date(e.premiumProgressBarEnabledUserUpdatedAt):null})}function A(e,t,n){let i=e.get(t);null!=i&&e.set(t,(0,r.hZ)(i,\"guildTheme\",n))}class h extends l.yW{static displayName=\"GuildStore\";database=this.addKVDatabase(\"guilds\",E);stateWrapper(){return this.database}getGuild=e=>{if(null!=e)return(0,a.ai)(e)?_._z:this.database.get(e)};getGuilds=this.database.memoized(e=>({...e}));getGuildsArray=this.database.memoized(e=>Object.values(e));getGuildIds=this.database.memoized(e=>c.default.keys(e));getGuildCount(){return this.database.length()}}let I=new h({BACKGROUND_SYNC:(e,t)=>{let{guil",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3072,7 +3072,7 @@
     "state",
     "wrappedState"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: InstantInviteStore": {
    "kind": "finder",
@@ -3080,7 +3080,7 @@
    "label": "store: InstantInviteStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "958590",
-   "excerpt": "958590(e,t,n){\"use strict\";let i;n.d(t,{A:()=>O});var r=n(189613),a=n.n(r),s=n(641733),l=n.n(s),o=n(63494),d=n.n(o),c=n(17928),u=n(228366),_=n(671759),E=n(172799);let A={},h={},I={},f={},p=!1,T=!1,m=!1,g=new Map;function S(e){return e.toLowerCase()}function N(e){let{inviteCode:t}=e,n=S(t);if(!g.has(n))return!1;(g=new Map(g)).delete(n)}class C extends c.Ay.Store{static displayName=\"InstantInviteStore\";getInvite(e){let{targetType:t,targetUserId:n,targetApplicationId:i}=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return t===E.yV.STREAM&&null!=n?h[e]?.[n]:t===E.yV.EMBEDDED_APPLICATION&&null!=i?I[e]?.[i]:A[e]}getFriendInvite(){return i}getFriendInvitesFetching(){return p}canRevokeFriendInvite(){return null!=i&&!T&&!m}getReceivedInstallationIdForInviteCode(e){return g.get(S(e))}}let ",
+   "excerpt": "958590(e,t,n){\"use strict\";let i;n.d(t,{A:()=>O});var r=n(189613),a=n.n(r),s=n(641733),l=n.n(s),o=n(63494),d=n.n(o),c=n(17928),u=n(228366),_=n(671759),E=n(172799);let A={},h={},I={},f={},p=!1,T=!1,m=!1,g=new Map;function S(e){return e.toLowerCase()}function N(e){let{inviteCode:t}=e,n=S(t);if(!g.has(n))return!1;(g=new Map(g)).delete(n)}class C extends c.Ay.Store{static displayName=\"InstantInviteStore\";getInvite(e){let{targetType:t,targetUserId:n,targetApplicationId:i}=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return t===E.yV.STREAM&&null!=n?h[e]?.[n]:t===E.yV.EMBEDDED_APPLICATION&&null!=i?I[e]?.[i]:A[e]}getFriendInvite(){return i}getFriendInvitesFetching(){return p}canRevokeFriendInvite(){return null!=i&&!T&&!m}getReceivedInstallationIdForInviteCode(e){return g.get(S(e))}}let O",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3106,7 +3106,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: InviteStore": {
    "kind": "finder",
@@ -3114,7 +3114,7 @@
    "label": "store: InviteStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "299091",
-   "excerpt": "),s=n(652215);let l=new Map,o=new Map,d={},c=new Map;function u(e,t){e=e??\"\";let n=(0,a.y$)(e),i=l.get(e),r=null!=i?{state:s.elq.RESOLVING,...i}:{state:s.elq.RESOLVING,code:n.baseCode};t(r),(l=new Map(l)).set(e,r),r.guild?.id!=null&&(d={...d,[r.guild.id]:e})}function _(e){return u(e.code,t=>{t.state=\"banned\"in e&&e.banned?s.elq.BANNED:s.elq.EXPIRED})}class E extends i.Ay.Store{static displayName=\"InviteStore\";getInvite(e){return l.get(e)}getInviteError(e){return o.get(e)}getInvites(){return l}getInviteKeyForGuildId(e){return d[e]}getFriendMemberIds(e){return c.get(e)}}let A=new E(r.h,{INVITE_RESOLVE:function(e){let{code:t}=e,n=(0,a.y$)(t);(l=new Map(l)).set(t,{code:n.baseCode,state:s.elq.RESOLVING})},INVITE_RESOLVE_SUCCESS:function(e){return u(e.code,t=>{t.state=s.elq.RESOLVED,t.guild=e.invite.guild,",
+   "excerpt": "6),a=n(842241),s=n(652215);let l=new Map,o=new Map,d={},c=new Map;function u(e,t){e=e??\"\";let n=(0,a.y$)(e),i=l.get(e),r=null!=i?{state:s.elq.RESOLVING,...i}:{state:s.elq.RESOLVING,code:n.baseCode};t(r),(l=new Map(l)).set(e,r),r.guild?.id!=null&&(d={...d,[r.guild.id]:e})}function _(e){return u(e.code,t=>{t.state=\"banned\"in e&&e.banned?s.elq.BANNED:s.elq.EXPIRED})}class E extends i.Ay.Store{static displayName=\"InviteStore\";getInvite(e){return l.get(e)}getInviteError(e){return o.get(e)}getInvites(){return l}getInviteKeyForGuildId(e){return d[e]}getFriendMemberIds(e){return c.get(e)}}let A=new E(r.h,{INVITE_RESOLVE:function(e){let{code:t}=e,n=(0,a.y$)(t);(l=new Map(l)).set(t,{code:n.baseCode,state:s.elq.RESOLVING})},INVITE_RESOLVE_SUCCESS:function(e){return u(e.code,t=>{t.state=s.elq.RESOLVED,t.guild=e.invite.guild,t",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3140,7 +3140,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: LocaleStore": {
    "kind": "finder",
@@ -3148,7 +3148,7 @@
    "label": "store: LocaleStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "773669",
-   "excerpt": "nc function d(){if(s.A?.app?.getPreferredSystemLanguages!=null){let e=await s.A.app.getPreferredSystemLanguages().then(e=>e[0]);if(null!=e&&\"\"!==e)return e}return o.systemLocale}let c=o.intl.currentLocale,u=o.systemLocale;function _(){let e=l.A.settings.localization?.locale?.value;return null!=e&&\"\"!==e&&e!==c&&(c=e,(0,a.Av)(c),!0)}d().then(e=>{u=e});class E extends i.Ay.Store{static displayName=\"LocaleStore\";initialize(){this.waitFor(l.A),_(),(0,a.Av)(c)}get locale(){return c}get systemLocale(){return u}}let A=new E(r.h,{OVERLAY_INITIALIZE:_,CACHE_LOADED:_,CONNECTION_OPEN:_,USER_SETTINGS_PROTO_UPDATE:_,USER_SETTINGS_LOCALE_OVERRIDE:function(e){c=e.locale,(0,a.Av)(c)}})}",
+   "excerpt": "n(375708);async function d(){if(s.A?.app?.getPreferredSystemLanguages!=null){let e=await s.A.app.getPreferredSystemLanguages().then(e=>e[0]);if(null!=e&&\"\"!==e)return e}return o.systemLocale}let c=o.intl.currentLocale,u=o.systemLocale;function _(){let e=l.A.settings.localization?.locale?.value;return null!=e&&\"\"!==e&&e!==c&&(c=e,(0,a.Av)(c),!0)}d().then(e=>{u=e});class E extends i.Ay.Store{static displayName=\"LocaleStore\";initialize(){this.waitFor(l.A),_(),(0,a.Av)(c)}get locale(){return c}get systemLocale(){return u}}let A=new E(r.h,{OVERLAY_INITIALIZE:_,CACHE_LOADED:_,CONNECTION_OPEN:_,USER_SETTINGS_PROTO_UPDATE:_,USER_SETTINGS_LOCALE_OVERRIDE:function(e){c=e.locale,(0,a.Av)(c)}})}",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3173,7 +3173,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: MessageStore": {
    "kind": "finder",
@@ -3181,7 +3181,7 @@
    "label": "store: MessageStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "232835",
-   "excerpt": "8602);function h(e){let{type:t}=e;return t!==A.A.AUTO_MODERATION_MESSAGE&&t!==A.A.AUTO_MODERATION_NOTIFICATION}var I=n(164956),f=n(931480),p=n(320095),T=n(697470),m=(n(763754),n(491001)),g=n(815807),S=n(773669),N=n(935208),C=n(280450),O=n(734057),R=n(72314),L=n(808728),y=n(696451),D=n(71393),v=n(576705),b=n(994500),M=n(309010),P=n(967198),U=n(287809),w=n(652215);let G=new Set,x=new Map,k=new _.A(\"MessageStore\"),F=!1;function B(e,t){if(t.hasMoreAfter)return t;let n=f.A.getMessages(e);if(0===n.length)return t;let i=t.hasMoreBefore?t.first():null,r=n.filter(e=>!t.has(e.id)&&(null==i||N.default.compare(e.id,i.id)>0));return 0===r.length?t:t.mutate(e=>{e._merge(r),e._array.sort((e,t)=>N.default.compare(e.id,t.id))},!0)}function V(){d.A.forEach(e=>{d.A.commit(e.mutate({ready:!1,loadingMore:!1}))}),G.clear()",
+   "excerpt": "nType:s,isDMChannel:o}):n.removeReaction(a,c,s)),d.A.commit(l)}function q(e){let{type:t,messageData:n}=e,{message:i}=n,r=(0,c.cR)(n),s=i.channelId,l=d.A.getOrCreate(s);if(!l.has(r))return!1;l=l.update(r,e=>(e.embeds?.filter(h).length>0&&(e=e.set(\"embeds\",[])),\"MESSAGE_SEND_FAILED_AUTOMOD\"===t&&(e=e.set(\"flags\",(0,a.UI)(e.flags,w.pr7.EPHEMERAL))),e)),d.A.commit(l)}class Z extends s.Ay.Store{static displayName=\"MessageStore\";initialize(){this.waitFor(C.default,O.A,R.A,f.A,L.Ay,y.Ay,D.A,I.A,S.default,v.A,b.A,M.Ay,P.A,U.default),this.syncWith([I.A],()=>{})}getMessages(e){if(I.A.hasViewingRoles()){let t=O.A.getChannel(e),n=t?.getGuildId();if(I.A.isViewingRoles(n)&&!v.A.can(w.xBc.VIEW_CHANNEL,t))return new d.A(e)}return d.A.getOrCreate(e)}getMessage(e,t){return d.A.getOrCreate(e).get(t)}getAutomodRemovalNotice(e){return ",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3221,7 +3221,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: NotificationSettingsStore": {
    "kind": "finder",
@@ -3229,7 +3229,7 @@
    "label": "store: NotificationSettingsStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "803224",
-   "excerpt": "t,{A:()=>u});var i=n(17928),r=n(228366),a=n(723702),s=n(652215);let l={desktopType:a.isPlatformEmbedded?s.nRU.ALL:s.nRU.NEVER,disableAllSounds:!1,disabledSounds:[],ttsType:s.aVn.NEVER,disableUnreadBadge:!1,taskbarFlash:!0,notifyMessagesInSelectedChannel:!1,screenDowntimeReminder:!0},o=l;function d(e){let{desktopType:t}=e;o.desktopType=t}class c extends i.Ay.DeviceSettingsStore{static displayName=\"NotificationSettingsStore\";static persistKey=\"notifications\";static migrations=[e=>{let t={...e};return t.disabledSounds=t.disabledSounds||[],t.disableUnreadBadge=t.disableUnreadBadge||!1,t.taskbarFlash=null==t.taskbarFlash||t.taskbarFlash,t.ttsType=t.ttsType||s.aVn.NEVER,null==t.desktopType&&(t.desktopType=a.isPlatformEmbedded?s.nRU.ALL:s.nRU.NEVER),t}];initialize(e){o={...l,...e}}getUserAgnosticState(){return o}getDeskt",
+   "excerpt": " strict\";n.d(t,{A:()=>u});var i=n(17928),r=n(228366),a=n(723702),s=n(652215);let l={desktopType:a.isPlatformEmbedded?s.nRU.ALL:s.nRU.NEVER,disableAllSounds:!1,disabledSounds:[],ttsType:s.aVn.NEVER,disableUnreadBadge:!1,taskbarFlash:!0,notifyMessagesInSelectedChannel:!1,screenDowntimeReminder:!0},o=l;function d(e){let{desktopType:t}=e;o.desktopType=t}class c extends i.Ay.DeviceSettingsStore{static displayName=\"NotificationSettingsStore\";static persistKey=\"notifications\";static migrations=[e=>{let t={...e};return t.disabledSounds=t.disabledSounds||[],t.disableUnreadBadge=t.disableUnreadBadge||!1,t.taskbarFlash=null==t.taskbarFlash||t.taskbarFlash,t.ttsType=t.ttsType||s.aVn.NEVER,null==t.desktopType&&(t.desktopType=a.isPlatformEmbedded?s.nRU.ALL:s.nRU.NEVER),t}];initialize(e){o={...l,...e}}getUserAgnosticState(){return o}getDeskto",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3258,7 +3258,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: OverridePremiumTypeStore": {
    "kind": "finder",
@@ -3266,7 +3266,7 @@
    "label": "store: OverridePremiumTypeStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "683760",
-   "excerpt": "683760(e,t,n){\"use strict\";n.d(t,{A:()=>_});var i=n(17928),r=n(228366),a=n(572009),s=n(349871),l=n(202541);let o=\"OverridePremiumTypeStore\",d={premiumTypeOverride:l.$I,premiumTypeActual:l.$I,createdAtOverride:l.lk,perksActual:null};function c(e){let t=function(e){let{user:t,type:n}=e;if(\"CURRENT_USER_UPDATE\"===n&&void 0===t.premium_type)return!1;d.premiumTypeActual=(0,a.nq)(t.premium_type)}(e),n=function(e){var t;let{user:n,type:i}=e;if(\"CURRENT_USER_UPDATE\"===i&&void 0===n.perks)return!1;d.perksActual=null==(t=n.perks)?null:\"active",
+   "excerpt": "683760(e,t,n){\"use strict\";n.d(t,{A:()=>_});var i=n(17928),r=n(228366),a=n(572009),s=n(349871),l=n(202541);let o=\"OverridePremiumTypeStore\",d={premiumTypeOverride:l.$I,premiumTypeActual:l.$I,createdAtOverride:l.lk,perksActual:null};function c(e){let t=function(e){let{user:t,type:n}=e;if(\"CURRENT_USER_UPDATE\"===n&&void 0===t.premium_type)return!1;d.premiumTypeActual=(0,a.nq)(t.premium_type)}(e),n=function(e){var t;let{user:n,type:i}=e;if(\"CURRENT_USER_UPDATE\"===i&&void 0===n.perks)return!1;d.perksActual=null==(t=n.perks)?null:\"activeP",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3296,7 +3296,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: PermissionStore": {
    "kind": "finder",
@@ -3304,7 +3304,7 @@
    "label": "store: PermissionStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "576705",
-   "excerpt": "E.YB){if(E.Le.has(e.type)){let r=T.A.getChannel(e.parent_id);return null==r?p.x3:p.TJ(e,H(r,t,n,i),u.A.hasJoined(e.id),m.Ay.isCurrentUserGuest(e.guild_id))}r=b(e.id)}else(0,f.fh)(e)&&(r=D(e.id));return void 0!==t||void 0!==n||void 0!==i?p.cc({user:S.default.getCurrentUser(),context:e,overwrites:t,roles:n,checkElevated:!0,excludeGuildPermissions:i}):r}class j extends s.Ay.Store{static displayName=\"PermissionStore\";initialize(){this.waitFor(T.A,m.Ay,g.A,o.A,u.A,d.A,c.A,S.default)}getChannelPermissions(e){return E.Le.has(e.type)?v(e.id):b(e.id)}getGuildPermissions(e){return D(e.id)}getGuildPermissionProps(e){let t=S.default.getCurrentUser();return{canManageGuild:this.can(N.xBc.MANAGE_GUILD,e),canManageChannels:this.can(N.xBc.MANAGE_CHANNELS,e),canManageRoles:this.can(N.xBc.MANAGE_ROLES,e),canManageBans:this",
+   "excerpt": "e instanceof E.YB){if(E.Le.has(e.type)){let r=T.A.getChannel(e.parent_id);return null==r?p.x3:p.TJ(e,H(r,t,n,i),u.A.hasJoined(e.id),m.Ay.isCurrentUserGuest(e.guild_id))}r=b(e.id)}else(0,f.fh)(e)&&(r=D(e.id));return void 0!==t||void 0!==n||void 0!==i?p.cc({user:S.default.getCurrentUser(),context:e,overwrites:t,roles:n,checkElevated:!0,excludeGuildPermissions:i}):r}class j extends s.Ay.Store{static displayName=\"PermissionStore\";initialize(){this.waitFor(T.A,m.Ay,g.A,o.A,u.A,d.A,c.A,S.default)}getChannelPermissions(e){return E.Le.has(e.type)?v(e.id):b(e.id)}getGuildPermissions(e){return D(e.id)}getGuildPermissionProps(e){let t=S.default.getCurrentUser();return{canManageGuild:this.can(N.xBc.MANAGE_GUILD,e),canManageChannels:this.can(N.xBc.MANAGE_CHANNELS,e),canManageRoles:this.can(N.xBc.MANAGE_ROLES,e),canManageBans:this.",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3333,7 +3333,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: PopoutWindowStore": {
    "kind": "finder",
@@ -3341,7 +3341,7 @@
    "label": "store: PopoutWindowStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "567249",
-   "excerpt": "567249(e,t,n){\"use strict\";n.d(t,{A:()=>G}),n(323874),n(14289),n(35956),n(596829);var i=n(284009),r=n.n(i),a=n(435558),s=n.n(a),l=n(379800),o=n(17928),d=n(228366),c=n(626584),u=n(777334),_=n(41984),E=n(111162),A=n(723702),h=n(19575),I=n(475815),f=n(652215);let p=new c.A(\"PopoutWindowStore\"),T={},m={},g={},S={},N={},C=new Set,O=\"app-mount\";function R(){return w.emitChange()}let L=s().debounce(R,150);function y(e){let t=g[e];null==t||t.closed||(T[e]={x:t.screenX,y:t.screenY,width:t.innerWidth,height:t.innerHeight,alwaysOnTop:!!A.isPlatformEmbedded&&m[e]})}function D(e,t,i){let a=e.document,s=new URL(t).origin,l=new URL(`${window.location.protocol}//${window.location.host}`).origin,o",
+   "excerpt": "egrity);let a=(0,l.createRoot)(i.getElementById(O));r()(null!=a,\"No render target for popout!\"),S[e]=a,a.render(n(e))}(i),C.delete(i),w.emitChange()));case f.hK1.UNLOADED:return v(n.key)}}function M(e){if(null!=e&&!e.closed)try{e.close()}catch(e){p.error(\"Error closing popout window\",e)}}function P(){for(let e of Object.keys(g)){let t=g[e];null!=t&&M(t)}}class U extends o.Ay.PersistedStore{static displayName=\"PopoutWindowStore\";static persistKey=\"PopoutWindowStore\";initialize(e){this.waitFor(E.default),window.addEventListener(\"message\",b),window.addEventListener(\"beforeunload\",P),T=e??{}}getWindow(e){return g[e]}getWindowState(e){return T[e]}getWindowKeys(){return Object.keys(g)}getWindowOpen(e){let t=g[e];return null!=t&&!t.closed}getIsAlwaysOnTop(e){return!!m[e]}getWindowFocused(e){let t=g[e];return t?.document?.hasFo",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3393,7 +3393,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: PresenceStore": {
    "kind": "finder",
@@ -3401,7 +3401,7 @@
    "label": "store: PresenceStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "290863",
-   "excerpt": "AtTimestamp:l};else{let e=a.length>1?[...a].sort(C):a,n=y(s??[]);d[t]={status:i,clientStatus:r,activities:e,hiddenActivities:n,processedAtTimestamp:l}}}function M(e,t){if(t===u.default.getId())return!1;let n=h[t];if(null==n||null==n[e])return!1;delete n[e],0===Object.keys(n).length&&delete h[t],L(t)}function P(e){for(let t of c.default.keys(h))M(e,t)}class U extends l.Ay.Store{static displayName=\"PresenceStore\";initialize(){this.waitFor(u.default,_.default)}setCurrentUserOnConnectionOpen(e,t){I[u.default.getId()]=e,R(u.default.getId(),[...t].sort(C))}getStatus(e){let t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null,n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:E.clD.OFFLINE,i=_.default.getUser(e);if(null!=i&&i.hasFlag(E.nhx.BOT_HTTP_INTERACTIONS)&&(n=E.clD.UNKNOWN),null==t)retur",
+   "excerpt": "s:A,processedAtTimestamp:l};else{let e=a.length>1?[...a].sort(C):a,n=y(s??[]);d[t]={status:i,clientStatus:r,activities:e,hiddenActivities:n,processedAtTimestamp:l}}}function M(e,t){if(t===u.default.getId())return!1;let n=h[t];if(null==n||null==n[e])return!1;delete n[e],0===Object.keys(n).length&&delete h[t],L(t)}function P(e){for(let t of c.default.keys(h))M(e,t)}class U extends l.Ay.Store{static displayName=\"PresenceStore\";initialize(){this.waitFor(u.default,_.default)}setCurrentUserOnConnectionOpen(e,t){I[u.default.getId()]=e,R(u.default.getId(),[...t].sort(C))}getStatus(e){let t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null,n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:E.clD.OFFLINE,i=_.default.getUser(e);if(null!=i&&i.hasFlag(E.nhx.BOT_HTTP_INTERACTIONS)&&(n=E.clD.UNKNOWN),null==t)return",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3426,7 +3426,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: PrivateChannelSortStore": {
    "kind": "finder",
@@ -3434,7 +3434,7 @@
    "label": "store: PrivateChannelSortStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "645959",
-   "excerpt": "rivateChannels()).forEach(e=>{g.set(e.id,S(e))})}function C(){let e=h.A.getMutablePrivateChannels();for(let t in e)g.set(t,S(e[t]))}let O=(i=[],r=[],a=[],()=>{let e=g.values(\"FAVORITE\"),t=g.values(\"DEFAULT\");return(i!==e||r!==t)&&(a=[],e.forEach(e=>{let{channelId:t}=e;return a.push(t)}),i=e,t.forEach(e=>{let{channelId:t}=e;return a.push(t)}),r=t),a});class R extends o.Ay.Store{static displayName=\"PrivateChannelSortStore\";initialize(){this.waitFor(h.A,I.A,_.A,f.Ay,E.A,p.Ay,T.default),this.syncWith([p.Ay,_.A],N)}getPrivateChannelIds(){return O()}getSortedChannels(){return[g.values(\"FAVORITE\"),g.values(\"DEFAULT\")]}serializeForOverlay(){let e={};return g.values().forEach(t=>{let{channelId:n,lastMessageId:i}=t;e[n]=i}),e}}let L=new R(c.h,{CONNECTION_OPEN:N,CONNECTION_OPEN_SUPPLEMENTAL:N,OVERLAY_INITIALIZE:N,CACHE_LOA",
+   "excerpt": "A.getMutablePrivateChannels()).forEach(e=>{g.set(e.id,S(e))})}function C(){let e=h.A.getMutablePrivateChannels();for(let t in e)g.set(t,S(e[t]))}let O=(i=[],r=[],a=[],()=>{let e=g.values(\"FAVORITE\"),t=g.values(\"DEFAULT\");return(i!==e||r!==t)&&(a=[],e.forEach(e=>{let{channelId:t}=e;return a.push(t)}),i=e,t.forEach(e=>{let{channelId:t}=e;return a.push(t)}),r=t),a});class R extends o.Ay.Store{static displayName=\"PrivateChannelSortStore\";initialize(){this.waitFor(h.A,I.A,_.A,f.Ay,E.A,p.Ay,T.default),this.syncWith([p.Ay,_.A],N)}getPrivateChannelIds(){return O()}getSortedChannels(){return[g.values(\"FAVORITE\"),g.values(\"DEFAULT\")]}serializeForOverlay(){let e={};return g.values().forEach(t=>{let{channelId:n,lastMessageId:i}=t;e[n]=i}),e}}let L=new R(c.h,{CONNECTION_OPEN:N,CONNECTION_OPEN_SUPPLEMENTAL:N,OVERLAY_INITIALIZE:N,CACHE_LOAD",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3461,7 +3461,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: RTCConnectionStore": {
    "kind": "finder",
@@ -3469,7 +3469,7 @@
    "label": "store: RTCConnectionStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "763827",
-   "excerpt": ",this.totalParticipants=new Set([this.userId]);let t=Object.keys(_.A.getVoiceStatesForChannel(this.channelId));t.forEach(e=>this.totalParticipants.add(e)),this.maxVoiceStateCount=t.length,this.speaking=A.ME.NONE,this.maxListenerCount=0,this.totalListeners=new Set,this.maxSpeakerCount=0,this.totalSpeakers={}}}var I=n(626584),f=n(643501),p=n(75076),T=n(844981),m=n(280450),g=n(652215);let S=new I.A(\"RTCConnectionStore\"),N=[],C=null,O=null,R=null,L=null,y=!1,D=!1,v=null,b=null,M=!1,P=null,U=null;function w(e,t,i){if(null==r)throw Error(\"Creating RTCConnection without session.\");let a=m.default.getId(),s=new(n(730248)).A({userId:a,sessionId:r,guildId:e,channelId:t,joinVoiceId:P,createdTime:i});return s.on(d.q.State,(e,t,n)=>{o.h.wait(()=>o.h.dispatch({type:\"RTC_CONNECTION_STATE\",state:e,...t,...n}))}),s.on(d.q.V",
+   "excerpt": "eAnalytics:L,channelId:i.channelId},o.h.dispatch({type:\"MEDIA_ENGINE_CONNECTION_STATS_HISTORY_RESET\",mediaEngineConnectionId:i.getMediaEngineConnectionId()}),i.destroy(),i=null,L=null,M=!1,e&&(v=null)}function x(){null!=U&&(U.timeout.stop(),U=null)}function k(){C=null}function F(e){let{channel:t}=e;if(null==i||i.channelId!==t.id)return!1;G()}function B(){return!0}class V extends a.Ay.Store{static displayName=\"RTCConnectionStore\";initialize(){this.waitFor(m.default,f.default,E.Ay),(0,p.I)(this.getRTCConnectionId,this.getMediaSessionId)}getRTCConnection(){return i}getState(){return null!=i?i.state:g.S7L.DISCONNECTED}isConnected(){return this.getState()===g.S7L.RTC_CONNECTED}isDisconnected(){return this.getState()===g.S7L.DISCONNECTED}getRemoteDisconnectVoiceChannelId(){return C}getLastSessionVoiceChannelId(){return R}setLa",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3509,7 +3509,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: RelationshipStore": {
    "kind": "finder",
@@ -3517,7 +3517,7 @@
    "label": "store: RelationshipStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "994500",
-   "excerpt": "E.delete(e)&&C()}let D=new Map;function v(e,t){let n=o.get(e);if(n===t)return;null!=n&&D.get(n)?.delete(e),o.set(e,t);let i=D.get(t);null!=i?i.add(e):D.set(t,new Set([e])),N(n),N(t)}function b(e){let t=o.get(e);null!=t&&(o.delete(e),D.get(t)?.delete(e),N(t))}function M(){T=_.size,m=A.size,p=Math.max((D.get(l.eA$.PENDING_INCOMING)?.size??0)-T-m,0),I++}class P extends i.Ay.Store{static displayName=\"RelationshipStore\";initialize(){this.waitFor(s.default)}isFriend(e){return null!=e&&o.get(e)===l.eA$.FRIEND}isBlockedOrIgnored(e){return this.isBlocked(e)||this.isIgnored(e)}isBlockedOrIgnoredForMessage(e){return this.isBlockedForMessage(e)||this.isIgnoredForMessage(e)}isBlocked(e){return null!=e&&o.get(e)===l.eA$.BLOCKED}isBlockedForMessage(e){if(null!=e.author&&o.get(e.author.id)===l.eA$.BLOCKED)return!0;if(e in",
+   "excerpt": "unction y(e){E.delete(e)&&C()}let D=new Map;function v(e,t){let n=o.get(e);if(n===t)return;null!=n&&D.get(n)?.delete(e),o.set(e,t);let i=D.get(t);null!=i?i.add(e):D.set(t,new Set([e])),N(n),N(t)}function b(e){let t=o.get(e);null!=t&&(o.delete(e),D.get(t)?.delete(e),N(t))}function M(){T=_.size,m=A.size,p=Math.max((D.get(l.eA$.PENDING_INCOMING)?.size??0)-T-m,0),I++}class P extends i.Ay.Store{static displayName=\"RelationshipStore\";initialize(){this.waitFor(s.default)}isFriend(e){return null!=e&&o.get(e)===l.eA$.FRIEND}isBlockedOrIgnored(e){return this.isBlocked(e)||this.isIgnored(e)}isBlockedOrIgnoredForMessage(e){return this.isBlockedForMessage(e)||this.isIgnoredForMessage(e)}isBlocked(e){return null!=e&&o.get(e)===l.eA$.BLOCKED}isBlockedForMessage(e){if(null!=e.author&&o.get(e.author.id)===l.eA$.BLOCKED)return!0;if(e ins",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3547,7 +3547,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: SelectedChannelStore": {
    "kind": "finder",
@@ -3555,7 +3555,7 @@
    "label": "store: SelectedChannelStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "309010",
-   "excerpt": "309010(e,t,n){\"use strict\";let i,r,a,s,l,o,d;n.d(t,{Ay:()=>z,cX:()=>F});var c=n(435558),u=n.n(c),_=n(136722),E=n(17928),A=n(506774),h=n(228366),I=n(717125),f=n(891897),p=n(976860),T=n(95701),m=n(403362),g=n(280450),S=n(734057),N=n(808728),C=n(71393),O=n(25578),R=n(576705),L=n(967198),y=n(652215),D=n(746080);let v=\"SelectedChannelStore\",b={},M={},P={},U=new Set;function w(e){return String(e)}function G(){__OVERLAY__||A.w.set(v,{selectedChannelId:a,selectedVoiceChannelId:l,lastChannelFollowingDestination:s,lastConnectedTime:o,selectedChannelIds:b,mostRecentSelectedTextChannelIds:P,knownThreadIds:u()(b).values().concat(u().values(P)).filter(m.Vq).uniq().filter(e=>{let t=S.A.getBasicChannel(e);return U.has(e)||null!=t&&T.Le.has(t.",
+   "excerpt": ".guild_id,n.parent_id,\"THREAD_DELETE\"===t)}function j(e){return e.isScheduledForDeletion()||!(0,f.A)(e)}function W(e){if(!j(e))return!1;let t=T.Le.has(e.type),n=t?S.A.getChannel(e.parent_id):null,i=null==n||j(n)?null:n.id;return V(e.id,e.guild_id,i,t,!1),!0}function Y(e){let t=S.A.getChannel(b[w(e)]);return null!=t&&W(t)}function K(e){let{guildId:t}=e;return Y(t)}class $ extends E.Ay.Store{static displayName=\"SelectedChannelStore\";initialize(){if(!__OVERLAY__){let e=A.w.get(v)??{selectedChannelId:a,selectedVoiceChannelId:l,lastChannelFollowingDestination:s,lastConnectedTime:o,selectedChannelIds:b,mostRecentSelectedTextChannelIds:P};null!=e.knownThreadIds&&(U=new Set(e.knownThreadIds)),l=e.selectedVoiceChannelId,s=e.lastChannelFollowingDestination,o=e.lastConnectedTime,P=e.mostRecentSelectedTextChannelIds??{},null!=e.select",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3583,7 +3583,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: SelectedGuildStore": {
    "kind": "finder",
@@ -3591,7 +3591,7 @@
    "label": "store: SelectedGuildStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "967198",
-   "excerpt": "),u=n(71393),_=n(652215);let E=null,A=null,h={};function I(){null!=E&&null==u.A.getGuild(E)&&null==a.A.getRequest(E)&&(E=null),null!=A&&null==u.A.getGuild(A)&&null==a.A.getRequest(A)&&(A=null),f(E)}function f(e){null!=e&&(h[e]=Date.now())}function p(e){let t=!1;return delete h[e],A===e&&(A=null,t=!0),E===e&&(E=null,(0,o.bG)(_.BVt.ME),t=!0),t}class T extends i.Ay.PersistedStore{static displayName=\"SelectedGuildStore\";static persistKey=\"SelectedGuildStore\";initialize(e){this.mustEmitChanges(e=>\"CONNECTION_OPEN\"!==e.type),this.waitFor(d.default,c.A,u.A,a.A),h=e?.selectedGuildTimestampMillis??{},E=e?.selectedGuildId??null,A=e?.lastSelectedGuildId??null;let t=c.A.lastNonVoiceRoute,n=(0,l.B)(t,{path:_.BVt.CHANNEL(s.pv.guildId())});n?.params?.guildId,_.ME}getState(){return{selectedGuildTimestampMillis:h,selectedGu",
+   "excerpt": "0),c=n(650048),u=n(71393),_=n(652215);let E=null,A=null,h={};function I(){null!=E&&null==u.A.getGuild(E)&&null==a.A.getRequest(E)&&(E=null),null!=A&&null==u.A.getGuild(A)&&null==a.A.getRequest(A)&&(A=null),f(E)}function f(e){null!=e&&(h[e]=Date.now())}function p(e){let t=!1;return delete h[e],A===e&&(A=null,t=!0),E===e&&(E=null,(0,o.bG)(_.BVt.ME),t=!0),t}class T extends i.Ay.PersistedStore{static displayName=\"SelectedGuildStore\";static persistKey=\"SelectedGuildStore\";initialize(e){this.mustEmitChanges(e=>\"CONNECTION_OPEN\"!==e.type),this.waitFor(d.default,c.A,u.A,a.A),h=e?.selectedGuildTimestampMillis??{},E=e?.selectedGuildId??null,A=e?.lastSelectedGuildId??null;let t=c.A.lastNonVoiceRoute,n=(0,l.B)(t,{path:_.BVt.CHANNEL(s.pv.guildId())});n?.params?.guildId,_.ME}getState(){return{selectedGuildTimestampMillis:h,selectedGui",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3620,7 +3620,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: SessionsStore": {
    "kind": "finder",
@@ -3628,7 +3628,7 @@
    "label": "store: SessionsStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "528767",
-   "excerpt": "528767(e,t,n){\"use strict\";n.d(t,{A:()=>_});var i=n(435558),r=n.n(i),a=n(17928),s=n(228366),l=n(280450);let o=Object.freeze([]),d={};function c(e){d={},e.sessions.forEach(e=>{d[e.sessionId]=e})}class u extends a.Ay.Store{static displayName=\"SessionsStore\";initialize(){this.waitFor(l.default)}getSessions(){return d}getSession(){let e=l.default.getSessionId();return null!=e?this.getSessionById(e):null}getRemoteActivities(){let e=l.default.getSessionId(),t=r().find(d,t=>t.active&&t.sessionId!==e);return null!=t?t.activities:o}getHiddenActivities(){let e=l.default.getSessionId(),t=r().find(d,t=>t.active&&t.sessionId!==e);return null!=t&&null!=t.hidde",
+   "excerpt": "528767(e,t,n){\"use strict\";n.d(t,{A:()=>_});var i=n(435558),r=n.n(i),a=n(17928),s=n(228366),l=n(280450);let o=Object.freeze([]),d={};function c(e){d={},e.sessions.forEach(e=>{d[e.sessionId]=e})}class u extends a.Ay.Store{static displayName=\"SessionsStore\";initialize(){this.waitFor(l.default)}getSessions(){return d}getSession(){let e=l.default.getSessionId();return null!=e?this.getSessionById(e):null}getRemoteActivities(){let e=l.default.getSessionId(),t=r().find(d,t=>t.active&&t.sessionId!==e);return null!=t?t.activities:o}getHiddenActivities(){let e=l.default.getSessionId(),t=r().find(d,t=>t.active&&t.sessionId!==e);return null!=t&&null!=t.hidden",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3653,7 +3653,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: SoundboardStore": {
    "kind": "finder",
@@ -3661,7 +3661,7 @@
    "label": "store: SoundboardStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "209932",
-   "excerpt": "D_SETTINGS,{volume:Math.round((0,h.M)(e)),location_stack:t,voice_guild_id:_.A.getGuildId()??null}),c.dG.updateSetting({volume:e})},1e3);function k(){w=c.dG.getSetting()?.volume===0}function F(e){let t=e?.audioContextSettings?.user??{};for(let[e,n]of Object.entries(t))n.soundboardMuted?O.add(e):O.delete(e);for(let e of O.keys())null==t[e]&&O.delete(e)}class B extends l.Ay.Store{static displayName=\"SoundboardStore\";initialize(){this.waitFor(_.A,p.A,u.A,E.default),F(u.A.settings),k()}getOverlaySerializedState(){return{soundboardSounds:Object.fromEntries(S),favoritedSoundIds:Array.from(y),orderedFavoritedSoundIds:Array.from(D),localSoundboardMutes:Array.from(O)}}getSounds(){return S}getSoundsForGuild(e){return S.get(e)}getSound(e,t){return(S.get(e)??[]).find(e=>e.soundId===t)}getSoundById(e){return Array.fro",
+   "excerpt": "ATE_SOUNDBOARD_SETTINGS,{volume:Math.round((0,h.M)(e)),location_stack:t,voice_guild_id:_.A.getGuildId()??null}),c.dG.updateSetting({volume:e})},1e3);function k(){w=c.dG.getSetting()?.volume===0}function F(e){let t=e?.audioContextSettings?.user??{};for(let[e,n]of Object.entries(t))n.soundboardMuted?O.add(e):O.delete(e);for(let e of O.keys())null==t[e]&&O.delete(e)}class B extends l.Ay.Store{static displayName=\"SoundboardStore\";initialize(){this.waitFor(_.A,p.A,u.A,E.default),F(u.A.settings),k()}getOverlaySerializedState(){return{soundboardSounds:Object.fromEntries(S),favoritedSoundIds:Array.from(y),orderedFavoritedSoundIds:Array.from(D),localSoundboardMutes:Array.from(O)}}getSounds(){return S}getSoundsForGuild(e){return S.get(e)}getSound(e,t){return(S.get(e)??[]).find(e=>e.soundId===t)}getSoundById(e){return Array.from",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3687,7 +3687,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: SpellcheckStore": {
    "kind": "finder",
@@ -3695,7 +3695,7 @@
    "label": "store: SpellcheckStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "638128",
-   "excerpt": "638128(e,t,n){n.d(t,{A:()=>C});var r=n(377941),l=n.n(r),u=n(17928),a=n(506774),i=n(228366),s=n(724066),c=n(900582);let o=\"SpellcheckStore\",d=!0,f=new Set;function h(){a.w.set(o,{enabled:d,learnedWords:f})}class p extends u.Ay.Store{static displayName=\"SpellcheckStore\";initialize(){let e=a.w.get(o);null!=e&&(d=e.enabled,f=new Set(e.learnedWords),(0,c.kv)(d),(0,c.d1)(f)),(0,s.I)(c.Av)}isEnabled(){return d}hasLearnedWord(e){return f.has(e.toLocaleLowerCase())}findLearnedWordIn(e){if(\"\"===e||0===f.size)return null;let t=e.toLocaleLower",
+   "excerpt": "638128(e,t,n){n.d(t,{A:()=>C});var r=n(377941),l=n.n(r),u=n(17928),a=n(506774),i=n(228366),s=n(724066),c=n(900582);let o=\"SpellcheckStore\",d=!0,f=new Set;function h(){a.w.set(o,{enabled:d,learnedWords:f})}class p extends u.Ay.Store{static displayName=\"SpellcheckStore\";initialize(){let e=a.w.get(o);null!=e&&(d=e.enabled,f=new Set(e.learnedWords),(0,c.kv)(d),(0,c.d1)(f)),(0,s.I)(c.Av)}isEnabled(){return d}hasLearnedWord(e){return f.has(e.toLocaleLowerCase())}findLearnedWordIn(e){if(\"\"===e||0===f.size)return null;let t=e.toLocaleLowerCase();for(let e of f)if(RegExp(`(?<![\\\\p{L}\\\\p{N}_])${l()(e)}(?![\\\\p{L}\\\\p{N}_])`,\"u\").test(t))return e;return null}}let C=new p(i",
    "fingerprint": {
     "strings": [
      "SpellcheckStore"
@@ -3719,7 +3719,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: StickersStore": {
    "kind": "finder",
@@ -3727,7 +3727,7 @@
    "label": "store: StickersStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "750385",
-   "excerpt": "delete(e,i)}};var c=n(184989),u=n(71393),_=n(41237),E=n(514983);let A=1;async function h(){if(0!==A)return;let e=s.A.database();if(null==e)return;A=1;let t=await (0,l.ES)(\"StickerStore.loadSavedGuildStickers\",()=>i.A.timeAsync(\"\\uD83D\\uDCBE\",\"loadSavedGuildStickers\",()=>d.getAsync(e)));null!=t&&a.h.dispatch({type:\"CACHED_STICKERS_LOADED\",stickers:t})}class I extends r.Ay.Store{static displayName=\"StickersStore\";initialize(){this.waitFor(c.A,_.A,u.A,E.A),this.syncWith([_.A,E.A],()=>!0)}get isLoaded(){return 0!==A}get loadState(){return A}getStickerMetadataArrays(){return h(),[_.A.getStickerMetadataMap(),E.A.getStickerMetadataMap()]}get hasLoadedStickerPacks(){return E.A.hasLoadedStickerPacks}get isFetchingStickerPacks(){return E.A.isFetchingStickerPacks}getStickerById(e){return h(),_.A.getStickerById(e)",
+   "excerpt": "ll(e,t),n))r.delete(e,i)}};var c=n(184989),u=n(71393),_=n(41237),E=n(514983);let A=1;async function h(){if(0!==A)return;let e=s.A.database();if(null==e)return;A=1;let t=await (0,l.ES)(\"StickerStore.loadSavedGuildStickers\",()=>i.A.timeAsync(\"\\uD83D\\uDCBE\",\"loadSavedGuildStickers\",()=>d.getAsync(e)));null!=t&&a.h.dispatch({type:\"CACHED_STICKERS_LOADED\",stickers:t})}class I extends r.Ay.Store{static displayName=\"StickersStore\";initialize(){this.waitFor(c.A,_.A,u.A,E.A),this.syncWith([_.A,E.A],()=>!0)}get isLoaded(){return 0!==A}get loadState(){return A}getStickerMetadataArrays(){return h(),[_.A.getStickerMetadataMap(),E.A.getStickerMetadataMap()]}get hasLoadedStickerPacks(){return E.A.hasLoadedStickerPacks}get isFetchingStickerPacks(){return E.A.isFetchingStickerPacks}getStickerById(e){return h(),_.A.getStickerById(e)?",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3761,7 +3761,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: StreamerModeStore": {
    "kind": "finder",
@@ -3769,7 +3769,7 @@
    "label": "store: StreamerModeStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "351906",
-   "excerpt": "=n(17928),r=n(228366),a=n(589051),s=n(174459),l=n(280450),o=n(652215);function d(e,t){s.default.track(o.HAw.STREAMER_MODE_TOGGLE,{enabled:e,automatic:t})}let c={enabled:!1,autoToggle:!0,hideInstantInvites:!0,hidePersonalInformation:!0,disableSounds:!0,disableNotifications:!0,disabledOverlayWidgets:[],enableContentProtection:!1},u={},_={...c};class E extends i.Ay.PersistedStore{static displayName=\"StreamerModeStore\";static persistKey=\"StreamerModeStore\";static migrations=[e=>{let t=l.default.getId();return null==e||null==t?{}:{[t]:{...e}}}];initialize(e){Object.assign(u,e),this.syncWith([l.default],()=>{let e,t=l.default.getId();_=null!=t?(null==(e=u[t])&&(e=u[t]={...c}),e):{...c}})}getState(){return u}getSettings(){return _}get enabled(){return _.enabled}get autoToggle(){return _.autoToggle}get hideInstant",
+   "excerpt": "()=>A});var i=n(17928),r=n(228366),a=n(589051),s=n(174459),l=n(280450),o=n(652215);function d(e,t){s.default.track(o.HAw.STREAMER_MODE_TOGGLE,{enabled:e,automatic:t})}let c={enabled:!1,autoToggle:!0,hideInstantInvites:!0,hidePersonalInformation:!0,disableSounds:!0,disableNotifications:!0,disabledOverlayWidgets:[],enableContentProtection:!1},u={},_={...c};class E extends i.Ay.PersistedStore{static displayName=\"StreamerModeStore\";static persistKey=\"StreamerModeStore\";static migrations=[e=>{let t=l.default.getId();return null==e||null==t?{}:{[t]:{...e}}}];initialize(e){Object.assign(u,e),this.syncWith([l.default],()=>{let e,t=l.default.getId();_=null!=t?(null==(e=u[t])&&(e=u[t]={...c}),e):{...c}})}getState(){return u}getSettings(){return _}get enabled(){return _.enabled}get autoToggle(){return _.autoToggle}get hideInstantI",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3799,7 +3799,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: ThemeStore": {
    "kind": "finder",
@@ -3807,7 +3807,7 @@
    "label": "store: ThemeStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "363195",
-   "excerpt": ".customUserThemeSettings:s?.clientThemeSettings?.customUserThemeSettings;return u.Ay.useSystemTheme===A.Q_.ON&&e!==A.Fc.NO_PREFERENCE?n?t[e]:(0,d.GX)(t[e],h):null!=a?(0,d.GX)(a,r?.clientThemeSettings?.customUserThemeSettings):(0,d.GX)(i[s?.theme??l.Sx.UNSET],s?.clientThemeSettings?.customUserThemeSettings)}(N,S,L):O;return e!==C&&(p(C=e),!0)}class D extends i.Ay.PersistedStore{static displayName=\"ThemeStore\";static persistKey=\"ThemeStore\";static migrations=[e=>{let t=e.theme;return\"amoled\"===t&&(t=E.NJ8.ONYX),{...e,theme:t}},e=>e];initialize(e){e?.theme!=null&&(g=1,p(C=e.theme),null!=e.preferences&&(S=e.preferences),null!=e.syncedClientThemes&&(R=e.syncedClientThemes),null!=e.syncedThemesEnabled&&(L=e.syncedThemesEnabled),(0,r.M)(C)&&(S[A.Fc.DARK]=C)),this.waitFor(u.Ay,c.A,_.A)}getState(){return{the",
+   "excerpt": "hemeSettings?.customUserThemeSettings:s?.clientThemeSettings?.customUserThemeSettings;return u.Ay.useSystemTheme===A.Q_.ON&&e!==A.Fc.NO_PREFERENCE?n?t[e]:(0,d.GX)(t[e],h):null!=a?(0,d.GX)(a,r?.clientThemeSettings?.customUserThemeSettings):(0,d.GX)(i[s?.theme??l.Sx.UNSET],s?.clientThemeSettings?.customUserThemeSettings)}(N,S,L):O;return e!==C&&(p(C=e),!0)}class D extends i.Ay.PersistedStore{static displayName=\"ThemeStore\";static persistKey=\"ThemeStore\";static migrations=[e=>{let t=e.theme;return\"amoled\"===t&&(t=E.NJ8.ONYX),{...e,theme:t}},e=>e];initialize(e){e?.theme!=null&&(g=1,p(C=e.theme),null!=e.preferences&&(S=e.preferences),null!=e.syncedClientThemes&&(R=e.syncedClientThemes),null!=e.syncedThemesEnabled&&(L=e.syncedThemesEnabled),(0,r.M)(C)&&(S[A.Fc.DARK]=C)),this.waitFor(u.Ay,c.A,_.A)}getState(){return{them",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3839,7 +3839,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: TypingStore": {
    "kind": "finder",
@@ -3847,7 +3847,7 @@
    "label": "store: TypingStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "741961",
-   "excerpt": "t,n){let l=g[e];if(null==l)return;let i=l[t];if(null==i||null==i[n])return;let s={...i};delete s[n];let r={...l};0===Object.keys(s).length?delete r[t]:r[t]=s,0===Object.keys(r).length?delete g[e]:g[e]=r}(l,t,n),n in x&&!Object.values(p).some(e=>n in e)){let e={...x};delete e[n],x=e}}function S(){p={},g={},x={}}class v extends i.Ay.Store{initialize(){this.waitFor(u.default,c.A)}static displayName=\"TypingStore\";getTypingUsers(e){return p[e]??A}getTypingUsersByGuild(e){return g[e]??C}isTyping(e,t){return null!=(p[e]??A)[t]}getCustomTypingIndicatorConfig(e){return x[e]??null}}let N=new v(r.h,{TYPING_START:I,TYPING_STOP:y,TYPING_START_LOCAL:function(e){let{channelId:t}=e,n=u.default.getId();if(null==n||t===a.E)return!1;null!=l&&l.channelId!==t&&(null!=l.timeout&&clearTimeout(l.timeout),l=null);let i=Date.",
+   "excerpt": "&&function(e,t,n){let l=g[e];if(null==l)return;let i=l[t];if(null==i||null==i[n])return;let s={...i};delete s[n];let r={...l};0===Object.keys(s).length?delete r[t]:r[t]=s,0===Object.keys(r).length?delete g[e]:g[e]=r}(l,t,n),n in x&&!Object.values(p).some(e=>n in e)){let e={...x};delete e[n],x=e}}function S(){p={},g={},x={}}class v extends i.Ay.Store{initialize(){this.waitFor(u.default,c.A)}static displayName=\"TypingStore\";getTypingUsers(e){return p[e]??A}getTypingUsersByGuild(e){return g[e]??C}isTyping(e,t){return null!=(p[e]??A)[t]}getCustomTypingIndicatorConfig(e){return x[e]??null}}let N=new v(r.h,{TYPING_START:I,TYPING_STOP:y,TYPING_START_LOCAL:function(e){let{channelId:t}=e,n=u.default.getId();if(null==n||t===a.E)return!1;null!=l&&l.channelId!==t&&(null!=l.timeout&&clearTimeout(l.timeout),l=null);let i=Date.n",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3874,7 +3874,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: UploadAttachmentStore": {
    "kind": "finder",
@@ -3882,7 +3882,7 @@
    "label": "store: UploadAttachmentStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "522602",
-   "excerpt": "522602(e,t,n){\"use strict\";n.d(t,{A:()=>T}),n(321073);var i=n(435558),r=n.n(i),a=n(17928),s=n(228366),l=n(157559),o=n(280889),d=n(972711),c=n(31717),u=n(652215),_=n(375708);let E=new Map,A=[];function h(e,t){return I(e)?.get(t)??A}function I(e){return E.get(e)??new Map}function f(e,t,n){let i=I(e);i.set(t,n),E.set(e,i)}class p extends a.Ay.Store{static displayName=\"UploadAttachmentStore\";getFirstUpload(e,t){let n=h(e,t);return n.length>0?n[0]:null}hasAdditionalUploads(e,t){return(h(e,t).length??0)>1}getUploads(e,t){return h(e,t)}getUploadCount(e,t){return h(e,t).length??0}getUpload(e,t,n){return h(e,n).find(e=>e.id===t)}findUpload(e,t,n){return h(e,t).find(n)}}let T=new p(s.h,{UPLOAD_ATTACHMENT_POP_FILE:function(e){let{channelId:t}=e,n=[...h(t,c.C.ChannelMessage)];n.shift(),f(t,",
+   "excerpt": "522602(e,t,n){\"use strict\";n.d(t,{A:()=>T}),n(321073);var i=n(435558),r=n.n(i),a=n(17928),s=n(228366),l=n(157559),o=n(280889),d=n(972711),c=n(31717),u=n(652215),_=n(375708);let E=new Map,A=[];function h(e,t){return I(e)?.get(t)??A}function I(e){return E.get(e)??new Map}function f(e,t,n){let i=I(e);i.set(t,n),E.set(e,i)}class p extends a.Ay.Store{static displayName=\"UploadAttachmentStore\";getFirstUpload(e,t){let n=h(e,t);return n.length>0?n[0]:null}hasAdditionalUploads(e,t){return(h(e,t).length??0)>1}getUploads(e,t){return h(e,t)}getUploadCount(e,t){return h(e,t).length??0}getUpload(e,t,n){return h(e,n).find(e=>e.id===t)}findUpload(e,t,n){return h(e,t).find(n)}}let T=new p(s.h,{UPLOAD_ATTACHMENT_POP_FILE:function(e){let{channelId:t}=e,n=[...h(t,c.C.ChannelMessage)];n.shift(),f(t,c",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3908,7 +3908,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: UserAffinitiesV2Store": {
    "kind": "finder",
@@ -3916,7 +3916,7 @@
    "label": "store: UserAffinitiesV2Store",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "427358",
-   "excerpt": "427358(e,t,n){\"use strict\";n.d(t,{A:()=>E});var i=n(17928),r=n(228366),a=n(994500);let s=8*n(927813).A.Millis.HOUR,l=new Map,o=!1,d=Object.freeze({userAffinities:[],lastFetched:0}),c={...d};function u(){l=new Map(c.userAffinities.filter(e=>!a.A.isBlockedOrIgnored(e.otherUserId)).map(e=>[e.otherUserId,e]))}class _ extends i.Ay.PersistedStore{static displayName=\"UserAffinitiesV2Store\";static persistKey=\"UserAffinitiesStoreV2\";initialize(e){this.waitFor(a.A),e?.userAffinities!=null&&(c.userAffinities=e.userAffinities,c.lastFetched=e.lastFetched,u()),this.syncWith([a.A],u)}shouldFetch(){if(!o)return Date.now()-c.lastFetched>s}isFetching(){return o}getUserAffinities(){return c.userAffinities}getUserAffinitiesMap(){return l}compare(e,t){return(l.get(t)?.communicationProbability??",
+   "excerpt": "427358(e,t,n){\"use strict\";n.d(t,{A:()=>E});var i=n(17928),r=n(228366),a=n(994500);let s=8*n(927813).A.Millis.HOUR,l=new Map,o=!1,d=Object.freeze({userAffinities:[],lastFetched:0}),c={...d};function u(){l=new Map(c.userAffinities.filter(e=>!a.A.isBlockedOrIgnored(e.otherUserId)).map(e=>[e.otherUserId,e]))}class _ extends i.Ay.PersistedStore{static displayName=\"UserAffinitiesV2Store\";static persistKey=\"UserAffinitiesStoreV2\";initialize(e){this.waitFor(a.A),e?.userAffinities!=null&&(c.userAffinities=e.userAffinities,c.lastFetched=e.lastFetched,u()),this.syncWith([a.A],u)}shouldFetch(){if(!o)return Date.now()-c.lastFetched>s}isFetching(){return o}getUserAffinities(){return c.userAffinities}getUserAffinitiesMap(){return l}compare(e,t){return(l.get(t)?.communicationProbability??0",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3945,7 +3945,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: UserGuildJoinRequestStore": {
    "kind": "finder",
@@ -3953,7 +3953,7 @@
    "label": "store: UserGuildJoinRequestStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "212455",
-   "excerpt": "t:e.actioned_at,actionedByUser:e.actioned_by_user,lastSeen:e.last_seen,interviewChannelId:e.interview_channel_id}}function E(e){delete d[e],o===e&&(o=null)}function A(e){let{guildId:t,request:n}=e;if(null==n)return;let i=_(n),r=a.default.getCurrentUser();if(null!=r&&i.userId!==r.id)return!1;(0,l.NK)(i)?E(t):d[t]=i}class h extends i.Ay.Store{initialize(){this.waitFor(a.default)}static displayName=\"UserGuildJoinRequestStore\";getRequest(e){return d[e]}computeGuildIds(){return Object.values(d).map(e=>e?.guildId).filter(e=>null!=e)}getJoinRequestGuild(e){return null!=u[e]?(0,s.yF)(u[e]):null}get hasFetchedRequestToJoinGuilds(){return c}hasJoinRequestCoackmark(){return null!=o}}let I=new h(r.h,{CONNECTION_OPEN:function(e){let{guildJoinRequests:t}=e;c=!1,u={},d={},t.forEach(e=>{let{guild_id:t}=e;null!=t&&(d[t]=_(e))})},G",
+   "excerpt": "tus,actionedAt:e.actioned_at,actionedByUser:e.actioned_by_user,lastSeen:e.last_seen,interviewChannelId:e.interview_channel_id}}function E(e){delete d[e],o===e&&(o=null)}function A(e){let{guildId:t,request:n}=e;if(null==n)return;let i=_(n),r=a.default.getCurrentUser();if(null!=r&&i.userId!==r.id)return!1;(0,l.NK)(i)?E(t):d[t]=i}class h extends i.Ay.Store{initialize(){this.waitFor(a.default)}static displayName=\"UserGuildJoinRequestStore\";getRequest(e){return d[e]}computeGuildIds(){return Object.values(d).map(e=>e?.guildId).filter(e=>null!=e)}getJoinRequestGuild(e){return null!=u[e]?(0,s.yF)(u[e]):null}get hasFetchedRequestToJoinGuilds(){return c}hasJoinRequestCoackmark(){return null!=o}}let I=new h(r.h,{CONNECTION_OPEN:function(e){let{guildJoinRequests:t}=e;c=!1,u={},d={},t.forEach(e=>{let{guild_id:t}=e;null!=t&&(d[t]=_(e))})},GU",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -3978,7 +3978,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: UserGuildSettingsStore": {
    "kind": "finder",
@@ -3986,7 +3986,7 @@
    "label": "store: UserGuildSettingsStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "543465",
-   "excerpt": " e instanceof Array?r().keyBy(e,\"channel_id\"):e}function W(e){return m[e]??H(e)}function Y(e){S=a.Lt(e.flags,f.i.USE_NEW_NOTIFICATIONS),N=a.Lt(e.flags,f.i.MENTION_ON_ALL_MESSAGES),C=e}function K(e){return new Set(null!=e.channel_overrides?r()(e.channel_overrides).filter(e=>(0,o.tG)(e)).map(e=>e.channel_id).value():null)}function $(){return!0}class z extends s.Ay.PersistedStore{static displayName=\"UserGuildSettingsStore\";static persistKey=\"collapsedGuilds\";initialize(e){this.waitFor(E.A,A.A,d.A,c.A,h.default),null!=e&&(S=e.useNewNotifications??!1,\"userGuildSettings\"in e&&(m=e.userGuildSettings,v=r().mapValues(e.optedInChannelsByGuild??{},e=>new Set(e)),r().forEach(m,(e,t)=>{D[t]=K(e)})))}getState(){return{useNewNotifications:S}}get mentionOnAllMessages(){return N}isSuppressEveryoneEnabled(e){return W(e).suppress",
+   "excerpt": "[0]:{};return e instanceof Array?r().keyBy(e,\"channel_id\"):e}function W(e){return m[e]??H(e)}function Y(e){S=a.Lt(e.flags,f.i.USE_NEW_NOTIFICATIONS),N=a.Lt(e.flags,f.i.MENTION_ON_ALL_MESSAGES),C=e}function K(e){return new Set(null!=e.channel_overrides?r()(e.channel_overrides).filter(e=>(0,o.tG)(e)).map(e=>e.channel_id).value():null)}function $(){return!0}class z extends s.Ay.PersistedStore{static displayName=\"UserGuildSettingsStore\";static persistKey=\"collapsedGuilds\";initialize(e){this.waitFor(E.A,A.A,d.A,c.A,h.default),null!=e&&(S=e.useNewNotifications??!1,\"userGuildSettings\"in e&&(m=e.userGuildSettings,v=r().mapValues(e.optedInChannelsByGuild??{},e=>new Set(e)),r().forEach(m,(e,t)=>{D[t]=K(e)})))}getState(){return{useNewNotifications:S}}get mentionOnAllMessages(){return N}isSuppressEveryoneEnabled(e){return W(e).suppress_",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -4020,7 +4020,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: UserProfileStore": {
    "kind": "finder",
@@ -4028,7 +4028,7 @@
    "label": "store: UserProfileStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "321191",
-   "excerpt": "n er(e){return el(e.user.id)}function ea(e){return el(e.relationship.id)}function es(){L.clear(),y.clear(),D.clear(),v.clear()}function el(e){if(null==e)return!1;let t=D.get(e);if(null==t)return!1;t.fetchStartedAt=0,t.fetchEndedAt=0,t.fetchError=void 0;let n=v.get(e);if(null!=n)for(let e of n.values())e.fetchStartedAt=0,e.fetchEndedAt=0,e.fetchError=void 0}class eo extends A.A{static displayName=\"UserProfileStore\";static LATEST_SNAPSHOT_VERSION=1;constructor(){super({CACHE_LOADED_LAZY:()=>this.loadCache(),USER_PROFILE_FETCH_START:X,USER_PROFILE_FETCH_FAILURE:q,USER_PROFILE_FETCH_SUCCESS:$,USER_PROFILE_UPDATE_START:Z,USER_PROFILE_UPDATE_SUCCESS:Q,USER_PROFILE_UPDATE_FAILURE:J,WIDGET_PENDING_SAVE_SUCCESS:ee,USER_PROFILE_PIN_BADGES_ON_CLIENT:et,MUTUAL_FRIENDS_FETCH_START:j,MUTUAL_FRIENDS_FETCH_SUCCESS:K,MUTU",
+   "excerpt": "e,!1)}function er(e){return el(e.user.id)}function ea(e){return el(e.relationship.id)}function es(){L.clear(),y.clear(),D.clear(),v.clear()}function el(e){if(null==e)return!1;let t=D.get(e);if(null==t)return!1;t.fetchStartedAt=0,t.fetchEndedAt=0,t.fetchError=void 0;let n=v.get(e);if(null!=n)for(let e of n.values())e.fetchStartedAt=0,e.fetchEndedAt=0,e.fetchError=void 0}class eo extends A.A{static displayName=\"UserProfileStore\";static LATEST_SNAPSHOT_VERSION=1;constructor(){super({CACHE_LOADED_LAZY:()=>this.loadCache(),USER_PROFILE_FETCH_START:X,USER_PROFILE_FETCH_FAILURE:q,USER_PROFILE_FETCH_SUCCESS:$,USER_PROFILE_UPDATE_START:Z,USER_PROFILE_UPDATE_SUCCESS:Q,USER_PROFILE_UPDATE_FAILURE:J,WIDGET_PENDING_SAVE_SUCCESS:ee,USER_PROFILE_PIN_BADGES_ON_CLIENT:et,MUTUAL_FRIENDS_FETCH_START:j,MUTUAL_FRIENDS_FETCH_SUCCESS:K,MUTUA",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -4063,7 +4063,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: UserSettingsProtoStore": {
    "kind": "finder",
@@ -4071,7 +4071,7 @@
    "label": "store: UserSettingsProtoStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "617617",
-   "excerpt": "a=i?.proto??\"\",s=(0,A.ii)(t.ProtoClass,a);if(null==s)return;t.proto=s,r()(\"string\"!=typeof t.proto,\"UserSettingsProto cannot be a string\");let l=i?.protoToSave??null;if(null==l||null==i.offlineEditDataVersion)return;let o=(0,A.ii)(t.ProtoClass,l);null!=o&&(t.editInfo.protoToSave=o,t.editInfo.offlineEditDataVersion=i.offlineEditDataVersion)})}class O extends l.Ay.PersistedStore{static displayName=\"UserSettingsProtoStore\";static persistKey=\"UserSettingsProtoStore-Cache\";initialize(e){C(e)}getState(){return this.computeState()}computeState(){return s().mapValues(p,e=>{let t={proto:(0,A.ob)(e.ProtoClass,e.proto)};return null!=e.editInfo.offlineEditDataVersion&&null!=e.editInfo.protoToSave&&(t.protoToSave=(0,A.ob)(e.ProtoClass,e.editInfo.protoToSave),t.offlineEditDataVersion=e.editInfo.offlineEditDataVersion),t})}ha",
+   "excerpt": "i)return;let a=i?.proto??\"\",s=(0,A.ii)(t.ProtoClass,a);if(null==s)return;t.proto=s,r()(\"string\"!=typeof t.proto,\"UserSettingsProto cannot be a string\");let l=i?.protoToSave??null;if(null==l||null==i.offlineEditDataVersion)return;let o=(0,A.ii)(t.ProtoClass,l);null!=o&&(t.editInfo.protoToSave=o,t.editInfo.offlineEditDataVersion=i.offlineEditDataVersion)})}class O extends l.Ay.PersistedStore{static displayName=\"UserSettingsProtoStore\";static persistKey=\"UserSettingsProtoStore-Cache\";initialize(e){C(e)}getState(){return this.computeState()}computeState(){return s().mapValues(p,e=>{let t={proto:(0,A.ob)(e.ProtoClass,e.proto)};return null!=e.editInfo.offlineEditDataVersion&&null!=e.editInfo.protoToSave&&(t.protoToSave=(0,A.ob)(e.ProtoClass,e.editInfo.protoToSave),t.offlineEditDataVersion=e.editInfo.offlineEditDataVersion),t})}has",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -4105,7 +4105,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: UserStore": {
    "kind": "finder",
@@ -4113,7 +4113,7 @@
    "label": "store: UserStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "287809",
-   "excerpt": "ationStatus\",a.Tk.CLIENT_ONLY_PENDING),!0)}function ex(e){let{status:t}=e,n=S[p.default.getId()];return null!=n&&n.ageVerificationStatus===a.Tk.CLIENT_ONLY_PENDING&&(S[p.default.getId()]=n.set(\"ageVerificationStatus\",t),!0)}function ek(e){let{resolved:t}=e;return M(t,!0)}function eF(e){let{stickers:t}=e;return t.reduce((e,t)=>null!=t.user&&D(t.user)||e,!1)}class eB extends T.A{static displayName=\"UserStore\";static LATEST_SNAPSHOT_VERSION=1;constructor(){super({CONNECTION_OPEN:U,CONNECTION_OPEN_SUPPLEMENTAL:w,UPDATE_CLIENT_PREMIUM_TYPE:H,OVERLAY_INITIALIZE:x,CACHE_LOADED:e=>this.handleLoadCache(e),USER_UPDATE:k,USER_RESTRICTED_SCHEDULE_UPDATE:F,USER_PROFILE_FETCH_SUCCESS:B,CURRENT_USER_UPDATE:V,PRESENCE_UPDATES:es,SEARCH_MESSAGES_SUCCESS:z,SMART_SEARCH_FETCH_SUCCESS:X,MOD_VIEW_SEARCH_MESSAGES_SUCCES",
+   "excerpt": "t(\"ageVerificationStatus\",a.Tk.CLIENT_ONLY_PENDING),!0)}function ex(e){let{status:t}=e,n=S[p.default.getId()];return null!=n&&n.ageVerificationStatus===a.Tk.CLIENT_ONLY_PENDING&&(S[p.default.getId()]=n.set(\"ageVerificationStatus\",t),!0)}function ek(e){let{resolved:t}=e;return M(t,!0)}function eF(e){let{stickers:t}=e;return t.reduce((e,t)=>null!=t.user&&D(t.user)||e,!1)}class eB extends T.A{static displayName=\"UserStore\";static LATEST_SNAPSHOT_VERSION=1;constructor(){super({CONNECTION_OPEN:U,CONNECTION_OPEN_SUPPLEMENTAL:w,UPDATE_CLIENT_PREMIUM_TYPE:H,OVERLAY_INITIALIZE:x,CACHE_LOADED:e=>this.handleLoadCache(e),USER_UPDATE:k,USER_RESTRICTED_SCHEDULE_UPDATE:F,USER_PROFILE_FETCH_SUCCESS:B,CURRENT_USER_UPDATE:V,PRESENCE_UPDATES:es,SEARCH_MESSAGES_SUCCESS:z,SMART_SEARCH_FETCH_SUCCESS:X,MOD_VIEW_SEARCH_MESSAGES_SUCCESS",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -4152,7 +4152,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: VoiceStateStore": {
    "kind": "finder",
@@ -4160,7 +4160,7 @@
    "label": "store: VoiceStateStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "977997",
-   "excerpt": "tToSpeakTimestamp,selfDeaf:t.selfDeaf,selfMute:t.selfMute,selfStream:t.selfStream,selfVideo:t.selfVideo,sessionId:t.sessionId,suppress:t.suppress,userId:t.userId,discoverable:t.discoverable,connectedAt:t.connectedAt};return null!=e?e.merge(n):new c.A(n)}})}function L(e){let{guild:t}=e;s().forEach(h[t.id],e=>{O(t.id,e.userId,()=>null)}),delete h[t.id]}class y extends l.Ay.Store{static displayName=\"VoiceStateStore\";getAllVoiceStates(){return h}getVoiceStateVersion(){return A}getVoiceStates(e){return S(h,e??u.ME)}getVoiceStatesForChannel(e){return S(p,e)}getVideoVoiceStatesForChannel(e){return S(T,e)}getVoiceState(e,t){return this.getVoiceStates(e)[t]}getDiscoverableVoiceState(e,t){let n=this.getVoiceState(e,t);return null==n||!1===n.discoverable?null:n}getVoiceStateForChannel(e){let t=arguments.length>1&&v",
+   "excerpt": "tamp:t.requestToSpeakTimestamp,selfDeaf:t.selfDeaf,selfMute:t.selfMute,selfStream:t.selfStream,selfVideo:t.selfVideo,sessionId:t.sessionId,suppress:t.suppress,userId:t.userId,discoverable:t.discoverable,connectedAt:t.connectedAt};return null!=e?e.merge(n):new c.A(n)}})}function L(e){let{guild:t}=e;s().forEach(h[t.id],e=>{O(t.id,e.userId,()=>null)}),delete h[t.id]}class y extends l.Ay.Store{static displayName=\"VoiceStateStore\";getAllVoiceStates(){return h}getVoiceStateVersion(){return A}getVoiceStates(e){return S(h,e??u.ME)}getVoiceStatesForChannel(e){return S(p,e)}getVideoVoiceStatesForChannel(e){return S(T,e)}getVoiceState(e,t){return this.getVoiceStates(e)[t]}getDiscoverableVoiceState(e,t){let n=this.getVoiceState(e,t);return null==n||!1===n.discoverable?null:n}getVoiceStateForChannel(e){let t=arguments.length>1&&vo",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -4186,7 +4186,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "finder::store: WindowStore": {
    "kind": "finder",
@@ -4194,7 +4194,7 @@
    "label": "store: WindowStore",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "531685",
-   "excerpt": "531685(e,t,n){\"use strict\";n.d(t,{A:()=>A});var i=n(284009),r=n.n(i),a=n(17928),s=n(228366),l=n(365971);let o=null,d=new Map,c=new Set;function u(e){let t=d.get(e);return null==t?(c.has(e)||console.warn(\"Window state not initialized\",e),{isElementFullscreen:!1,focused:!1,windowSize:{width:0,height:0},visible:!1}):t}class _ extends a.Ay.Store{static displayName=\"WindowStore\";isFocused(){let e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:(0,l.Xg)();return u(e).focused}isAppFocused(){return null!=this.getFocusedWindowId()}isVisible(){let e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:(0,l.Xg)();return u(e).visible}getFocusedWindowId(){let e=null;return d.forEach((t,n)=>{t.focused&&(e=n)}),e}getLastFocusedWindowId(){return o}isElementFullScreen(){le",
+   "excerpt": "531685(e,t,n){\"use strict\";n.d(t,{A:()=>A});var i=n(284009),r=n.n(i),a=n(17928),s=n(228366),l=n(365971);let o=null,d=new Map,c=new Set;function u(e){let t=d.get(e);return null==t?(c.has(e)||console.warn(\"Window state not initialized\",e),{isElementFullscreen:!1,focused:!1,windowSize:{width:0,height:0},visible:!1}):t}class _ extends a.Ay.Store{static displayName=\"WindowStore\";isFocused(){let e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:(0,l.Xg)();return u(e).focused}isAppFocused(){return null!=this.getFocusedWindowId()}isVisible(){let e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:(0,l.Xg)();return u(e).visible}getFocusedWindowId(){let e=null;return d.forEach((t,n)=>{t.focused&&(e=n)}),e}getLastFocusedWindowId(){return o}isElementFullScreen(){let",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -4223,7 +4223,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::AlwaysAnimate::.O8lDI2": {
    "kind": "patch",
@@ -4263,7 +4263,7 @@
     "structHash": "95cb994565824e8b"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::AlwaysAnimate::.pclUFJ),children:": {
    "kind": "patch",
@@ -4294,7 +4294,7 @@
     "structHash": "983cdcd4954c680f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::AlwaysAnimate::canAnimate:": {
    "kind": "patch",
@@ -4350,7 +4350,7 @@
     "structHash": "1e700328bbe9d951"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::AlwaysExpandRoles::hasDeveloperContextMenu:": {
    "kind": "patch",
@@ -4388,7 +4388,7 @@
     "structHash": "75a5ddf3b2627269"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::AlwaysTrust::=\"MaskedLinkStore\",": {
    "kind": "patch",
@@ -4426,7 +4426,7 @@
     "structHash": "7328beddaa86eb0d"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::AlwaysTrust::bitbucket.org": {
    "kind": "patch",
@@ -4482,7 +4482,7 @@
     "structHash": "fde9e0a448698c87"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::AnonymiseFileNames::async uploadFiles(": {
    "kind": "patch",
@@ -4507,7 +4507,7 @@
     "structHash": "99ebcdf6e76b1ec2"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::BadgesAPI::getLegacyUsername(){": {
    "kind": "patch",
@@ -4522,7 +4522,7 @@
     "structHash": "fa0eac8f6c4cb140"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::BetterGifAltText::.I5gL2H": {
    "kind": "patch",
@@ -4578,7 +4578,7 @@
     "structHash": "e017feeeb8f2e70a"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::BetterGifAltText::.modalContext})};": {
    "kind": "patch",
@@ -4634,7 +4634,7 @@
     "structHash": "b6aa0aa4ac859555"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::BetterGifPicker::renderHeaderContent(){": {
    "kind": "patch",
@@ -4670,7 +4670,7 @@
     "structHash": "9676b5a39c770ada"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::BetterRoleDot::\"dot\"===": {
    "kind": "patch",
@@ -4690,7 +4690,7 @@
     "structHash": "953935ba99ddf318"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::BetterRoleDot::M0 4C0 1.79086 1.79086 0 4 0H16C18.2091": {
    "kind": "patch",
@@ -4727,7 +4727,7 @@
     "structHash": "c5fe908cf0ff45e7"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::BetterSessions::.cDHCNY": {
    "kind": "patch",
@@ -4783,7 +4783,47 @@
     "structHash": "d15e52dbdf3aa722"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
+  },
+  "patch::BetterSettings::\"USER_SETTINGS_MODAL_MODAL_KEY\"": {
+   "kind": "patch",
+   "plugin": "BetterSettings",
+   "label": "\"USER_SETTINGS_MODAL_MODAL_KEY\"",
+   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "moduleId": "766075",
+   "excerpt": "766075(e,t,n){\"use strict\";n.r(t),n.d(t,{USER_SETTINGS_MODAL_KEY:()=>E,openUserSettings:()=>A});var i=n(477900),r=n(192308),a=n(231723),s=n(228366),l=n(790284),o=n(272053),d=n(280450),c=n(843010),u=n(402651),_=n(355097);let E=\"USER_SETTINGS_MODAL_MODAL_KEY\";async function A(e){let{path:t,stackingBehavior:A=\"replaceAll\",searchParams:h,analyticsLocations:I}=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},f=arguments.length>2?arguments[2]:void 0;if(d.default.isAuthenticated()){if(null!=t&&t===_.od.SUBSCRIPTIONS_ROLE_SUBSCRIPTIONS&&l.A.setState({subsection:_.nR}),u.A.setState({source:h?.source,analyticsLocations:I??[]}),s.h.dispatch({type:\"USE",
+   "fingerprint": {
+    "strings": [
+     "use strict",
+     "USER_SETTINGS_MODAL_MODAL_KEY",
+     "replaceAll",
+     "USER_SETTINGS_MODAL_OPEN"
+    ],
+    "exports": [],
+    "structHash": "98f1f79d2548dcc4"
+   },
+   "shape": null,
+   "updatedAt": "2026-10-01T13:33:44.202Z"
+  },
+  "patch::BetterSettings::.buildLayout().map": {
+   "kind": "patch",
+   "plugin": "BetterSettings",
+   "label": ".buildLayout().map",
+   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "moduleId": "419954",
+   "excerpt": "419954(e,t,n){n.d(t,{AK:()=>_,D1:()=>O,E2:()=>p,FW:()=>E,Hn:()=>D,Hr:()=>o,Qx:()=>R,Tf:()=>A,WI:()=>l,bd:()=>d,gN:()=>C,hl:()=>i,i4:()=>a,sN:()=>y,t0:()=>f,t_:()=>s,v_:()=>I,zC:()=>c,zD:()=>h,zY:()=>N,zZ:()=>T});var r=n(963935);function i(e){return function e(t){if(\"buildLayout\"in t&&\"function\"==typeof t.buildLayout){let n=t.buildLayout().map(e),{buildLayout:r,...i}=t,u={...i,layout:n};return n.forEach(e=>e.parent=u),u}return t}(e)}function u(e,t,n){return{...n,key:e,type:t}}function o(e){return u(\"$Root\",r.Z6.ROOT,e)}function l(e,t){return u(e,r.Z6.SECTION,t)}function a(e,t){return u(e,r.Z6.SIDEBAR_ITEM,t)}function s(e,t){return u(e,r.Z6.PANEL,t)}function c(e,t){return u(e,r.Z6.SPLIT,t)}function T(e,t){return u(e,r.Z6.CATEGORY,t)}fun",
+   "fingerprint": {
+    "strings": [
+     "buildLayout",
+     "function",
+     "$Root",
+     "single"
+    ],
+    "exports": [],
+    "structHash": "648249f3c45f27ca"
+   },
+   "shape": null,
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::BetterUploadButton::.CHAT_INPUT_BUTTON_NOTIFICATION,": {
    "kind": "patch",
@@ -4816,7 +4856,7 @@
     "structHash": "5b09b399903f040f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::BlurNSFW::}renderStickersAccessories(": {
    "kind": "patch",
@@ -4872,7 +4912,7 @@
     "structHash": "1eaa8d9761744452"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::CallTimer::\"RTCConnectionMenu\"": {
    "kind": "patch",
@@ -4928,7 +4968,7 @@
     "structHash": "b9e59436a4d0aedc"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::CharacterCounter::.CREATE_FORUM_POST||": {
    "kind": "patch",
@@ -4984,7 +5024,7 @@
     "structHash": "74781a93d22b5a6f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ChatComponentsAPI::\"sticker\")": {
    "kind": "patch",
@@ -5023,7 +5063,7 @@
     "structHash": "d9f19746a1f424de"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ColorSighted::.AVATAR_STATUS_MOBILE_16;": {
    "kind": "patch",
@@ -5069,7 +5109,7 @@
     "structHash": "487dd15242a468b2"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ColorSighted::Masks.STATUS_ONLINE": {
    "kind": "patch",
@@ -5089,7 +5129,7 @@
     "structHash": "01d7f47990ef2768"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::CommandsAPI::,\"tableflip\",\"unflip\"": {
    "kind": "patch",
@@ -5142,7 +5182,7 @@
     "structHash": "58eab7877690f1bc"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::CommandsAPI::[\"0mI72g\"]": {
    "kind": "patch",
@@ -5192,7 +5232,7 @@
     "structHash": "f19482069de73f35"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ConsoleJanitor::Tried getting Dispatch instance before instantiated": {
    "kind": "patch",
@@ -5234,7 +5274,7 @@
     "structHash": "c622f09535610ce4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ConsoleJanitor::Unable to determine render window for element": {
    "kind": "patch",
@@ -5269,7 +5309,7 @@
     "structHash": "d0be9af021e892a7"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ConsoleJanitor::Window state not initialized": {
    "kind": "patch",
@@ -5291,7 +5331,7 @@
     "structHash": "15d8bf0d336d94d9"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::CopyFileContents::[\"1+gGcK\"]": {
    "kind": "patch",
@@ -5347,7 +5387,7 @@
     "structHash": "b6aa0aa4ac859555"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::CrashHandler::.tx8CkI": {
    "kind": "patch",
@@ -5369,7 +5409,7 @@
     "structHash": "16781f24b9e96b06"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::CustomIdle::type:\"IDLE\",idle:": {
    "kind": "patch",
@@ -5397,7 +5437,7 @@
     "structHash": "ce6c02cfb614dd3c"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::DisableCallIdle::handleIdleUpdate(){": {
    "kind": "patch",
@@ -5453,7 +5493,7 @@
     "structHash": "b9e59436a4d0aedc"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::DisableCallIdle::this.idleTimeout.start(": {
    "kind": "patch",
@@ -5470,7 +5510,7 @@
     "structHash": "05deda727c5ec7cc"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::Experiments::Object.defineProperties(this,{isDeveloper": {
    "kind": "patch",
@@ -5491,7 +5531,7 @@
     "structHash": "ca8e2c76f121bca3"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::Experiments::type:\"user\",revision": {
    "kind": "patch",
@@ -5544,7 +5584,7 @@
     "structHash": "3023c28cc3a46d14"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::FavoriteEmojiFirst::numEmojiResults:": {
    "kind": "patch",
@@ -5600,7 +5640,7 @@
     "structHash": "425c40a482b8bea4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::FavoriteEmojiFirst::renderResults({results:": {
    "kind": "patch",
@@ -5628,7 +5668,7 @@
     "structHash": "6ec5c045d5da3d98"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::FixCodeblockGap::/^```(?:([a-z0-9_+\\-.#]+?)\\n)?\\n*([^\\n][^]*?)\\n*```": {
    "kind": "patch",
@@ -5684,7 +5724,7 @@
     "structHash": "9d5ddc9f0d9de026"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::FixImagesQuality::.handleImageLoad)": {
    "kind": "patch",
@@ -5713,7 +5753,7 @@
     "structHash": "ea349c44d925d735"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ForceOwnerCrown::.pclUFJ),children:": {
    "kind": "patch",
@@ -5744,7 +5784,7 @@
     "structHash": "983cdcd4954c680f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::FullUserInChatbox::\"text\":\"locked\"": {
    "kind": "patch",
@@ -5800,7 +5840,7 @@
     "structHash": "19d66169abb2ce7f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::GameActivityToggle::[\"5fWB8U\"]": {
    "kind": "patch",
@@ -5856,7 +5896,7 @@
     "structHash": "30da565383a13caf"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::GifPaste::handleSelectGIF=": {
    "kind": "patch",
@@ -5892,7 +5932,7 @@
     "structHash": "9676b5a39c770ada"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::GreetStickerPicker::Wumpus waves hello": {
    "kind": "patch",
@@ -5948,7 +5988,7 @@
     "structHash": "20be74dbf487378c"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::HideAttachments::this.renderAttachments(": {
    "kind": "patch",
@@ -6004,7 +6044,7 @@
     "structHash": "1eaa8d9761744452"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ILoveSpam::hasFlag:{writable": {
    "kind": "patch",
@@ -6023,7 +6063,7 @@
     "structHash": "f5a07386ebcdf514"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ImageFilename::.RESPONSIVE?": {
    "kind": "patch",
@@ -6063,7 +6103,7 @@
     "structHash": "d135b5a12804133a"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ImageLink::={linkCount:0,onlyLinks:!1};function ": {
    "kind": "patch",
@@ -6078,7 +6118,7 @@
     "structHash": "a6294a78bfef4ffb"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::IrcColors::.pclUFJ),children:": {
    "kind": "patch",
@@ -6109,7 +6149,7 @@
     "structHash": "983cdcd4954c680f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::IrcColors::=\"SYSTEM_TAG\"": {
    "kind": "patch",
@@ -6138,7 +6178,7 @@
     "structHash": "a604e1aecce6886f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::LoadingQuotes::.v0R1Lh": {
    "kind": "patch",
@@ -6194,7 +6234,7 @@
     "structHash": "b9e59436a4d0aedc"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::MCord Reporter::\"Could not find app-mount\"": {
    "kind": "patch",
@@ -6250,7 +6290,7 @@
     "structHash": "b9e59436a4d0aedc"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::MemberCount::{isSidebarVisible:": {
    "kind": "patch",
@@ -6282,7 +6322,7 @@
     "structHash": "dcb3013130dbb707"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::MemberListDecoratorsAPI::.pclUFJ),children:": {
    "kind": "patch",
@@ -6313,7 +6353,7 @@
     "structHash": "983cdcd4954c680f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::MemberListDecoratorsAPI::PrivateChannel.renderAvatar": {
    "kind": "patch",
@@ -6347,7 +6387,7 @@
     "structHash": "77b90ccccd2a6089"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::MentionAvatars::.USER_MENTION)": {
    "kind": "patch",
@@ -6366,7 +6406,7 @@
     "structHash": "10b9b178b4de7f66"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::MessageAccessoriesAPI::.faHmO3": {
    "kind": "patch",
@@ -6422,7 +6462,7 @@
     "structHash": "1eaa8d9761744452"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::MessageDecorationsAPI::[\"AeYyL+\"]": {
    "kind": "patch",
@@ -6478,7 +6518,7 @@
     "structHash": "f4ffab350494a853"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::MessageLatency::showCommunicationDisabledStyles": {
    "kind": "patch",
@@ -6534,7 +6574,7 @@
     "structHash": "f4ffab350494a853"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::MessageLogger::\"MessageStore\"": {
    "kind": "patch",
@@ -6567,7 +6607,7 @@
     "structHash": "1a5939c5e14fc395"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::MessageLogger::.C8sXIM": {
    "kind": "patch",
@@ -6587,7 +6627,7 @@
     "structHash": "cd4f09aa7cc0c9d0"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::MessageLogger::this.truncateTop": {
    "kind": "patch",
@@ -6608,7 +6648,7 @@
     "structHash": "436c3deb88a2b5d8"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::MessagePopoverAPI::.Lv7LxN),children": {
    "kind": "patch",
@@ -6664,7 +6704,7 @@
     "structHash": "b9e56ccac4c3bee4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::MessageUpdaterAPI::}renderStickersAccessories(": {
    "kind": "patch",
@@ -6720,7 +6760,7 @@
     "structHash": "1eaa8d9761744452"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::MoreQuickReactions::.Lv7LxN),children": {
    "kind": "patch",
@@ -6776,7 +6816,7 @@
     "structHash": "b9e56ccac4c3bee4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoBlockedMessages::\"MessageStore\"": {
    "kind": "patch",
@@ -6809,7 +6849,7 @@
     "structHash": "1a5939c5e14fc395"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoBlockedMessages::\"ReadStateStore\"": {
    "kind": "patch",
@@ -6854,7 +6894,7 @@
     "structHash": "6757e3364afc4e21"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoBlockedMessages::.__invalid_blocked,": {
    "kind": "patch",
@@ -6910,7 +6950,7 @@
     "structHash": "b9e56ccac4c3bee4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoF1::,\"f1\"],comboKeysBindGlobal:": {
    "kind": "patch",
@@ -6966,7 +7006,7 @@
     "structHash": "02f6c7e3ed9c7b1e"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoMaskedUrlPaste::.selection,preventEmojiSurrogates:": {
    "kind": "patch",
@@ -7014,7 +7054,76 @@
     "structHash": "a872e17fd83c3058"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
+  },
+  "patch::NoMirroredCamera::bStreamId:this.props.streamId": {
+   "kind": "patch",
+   "plugin": "NoMirroredCamera",
+   "label": "bStreamId:this.props.streamId",
+   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "moduleId": "712577",
+   "excerpt": "712577(e,t,n){\"use strict\";n.d(t,{A:()=>d});var i=n(477900),r=n(582128),a=n(503698),s=n.n(a),l=n(323627);class o extends r.PureComponent{static defaultProps={paused:!0};state={aStreamId:null,aReady:!1,bStreamId:this.props.streamId,bReady:!0};handleReady=()=>{this.state.aReady?this.setState({bReady:!0,aStreamId:null,aReady:!1}):this.setState({aReady:!0,bStreamId:null,bReady:!1})};static getDerivedStateFromProps(e,t){let{streamId:n}=e;if(t.aReady){if(n!==t.aStreamId)if(null==n)return{bStreamId:n,bReady:!0,aStreamId:null,aReady:!1};else return{bStreamId:n,bReady:!1}}else if(n!==t.bStreamId)if(null==n)return{aStreamId:n,aReady",
+   "fingerprint": {
+    "strings": [
+     "use strict",
+     "none"
+    ],
+    "exports": [],
+    "structHash": "8ec1dbe97d9f5f3f"
+   },
+   "shape": null,
+   "updatedAt": "2026-10-01T13:33:44.202Z"
+  },
+  "patch::NoMirroredCamera::emptyPreviewAspectRatio:(?:[A-Za-z_$][\\w$]*)=\"16 \\/ 9\"": {
+   "kind": "patch",
+   "plugin": "NoMirroredCamera",
+   "label": "emptyPreviewAspectRatio:(?:[A-Za-z_$][\\w$]*)=\"16 \\/ 9\"",
+   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "moduleId": "51092",
+   "excerpt": "),c=n(451988),d=n(684339),m=n(276208),p=n(927813),g=n(37965);let f=20*p.A.Millis.SECOND;var x=n(821589),h=n(950183),A=((l={}).CONTAIN=\"contain\",l.COVER=\"cover\",l.COVER_LANDSCAPE=\"cover-landscape\",l);let v=s.memo(function(e){let{streamId:t,onResize:n,wrapperClassName:l,videoComponent:r,className:p,fit:A=\"contain\",mirror:v=!1,paused:E=!1,streamPreviewURL:C,videoSpinnerContext:j,userId:I,streamKey:S,emptyPreviewAspectRatio:_=\"16 / 9\"}=e,[N,b]=s.useState(!0),[y,k]=s.useState(null),D=s.useCallback(e=>{\"cover-landscape\"===A&&k(e),n?.(e)},[A,n]),R=\"cover-landscape\"===A?null==y||y.width>=y.height?\"cover\":\"contain\":A;!function(e){let{location:t,videoSpinnerContext:n,userId:l,streamId:i,loading:r,paused:a=!1}=e,[o]=s.useState(()=>new d.M(t));s.useEffect(()=>{a||(r?o.onSpinnerStarted():null!=i&&o.tra",
+   "fingerprint": {
+    "strings": [
+     "contain",
+     "cover",
+     "cover-landscape",
+     "VideoStream",
+     "video",
+     ",{src:C,alt:",
+     ",className:h.previewImage}):(0,i.jsx)(",
+     ",{className:h.emptyPreviewWrapper,style:{aspectRatio:_},children:(0,i.jsx)("
+    ],
+    "exports": [],
+    "structHash": "af086a8b4807f1f7"
+   },
+   "shape": null,
+   "updatedAt": "2026-10-01T13:33:44.202Z"
+  },
+  "patch::NoMirroredCamera::reportContainerResized:!1}": {
+   "kind": "patch",
+   "plugin": "NoMirroredCamera",
+   "label": "reportContainerResized:!1}",
+   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "moduleId": "117029",
+   "excerpt": "lassName:r()(C.ne,{[C.Ge]:O||$}),onMouseEnter:B,onMouseLeave:Y,onClick:j,children:[(O||$)&&(0,l.jsx)(u.D,{onClick:j,onMouseEnter:B,onMouseLeave:Y,children:(0,l.jsxs)(\"div\",{ref:W,className:C.Wc,style:Z,onPointerDown:function(e){I(e)&&e.currentTarget.setPointerCapture(e.pointerId)},onMouseDown:K,onMouseMove:X,onMouseUp:q,children:[(0,l.jsx)(J,{className:r()(C.BZ,{[E.mirror]:t}),streamId:n,paused:s,reportContainerResized:!1}),(0,l.jsx)(\"div\",{className:C.xq,style:ee})]})}),(0,l.jsxs)(\"div\",{className:C.xu,children:[(O||$)&&(0,l.jsxs)(l.Fragment,{children:[(0,l.jsx)(c.m,{text:v.intl.string(v.t.M6Cmwy),position:\"top\",children:(0,l.jsx)(d.K,{icon:m.V,onClick:et,disabled:y<=k,variant:\"overlay-secondary\",size:\"sm\",\"aria-label\":v.intl.string(v.t.M6Cmwy)})}),(0,l.jsx)(p.A,{minValue:k,maxValue:D,initialValue:y,value:y,asValu",
+   "fingerprint": {
+    "strings": [
+     "interact",
+     "none",
+     "top 0.1s ease-out, left 0.1s ease-out, width 0.1s ease-out, height 0.1s ease-out",
+     "button",
+     "slider",
+     ",{className:C.xq,style:ee})]})}),(0,l.jsxs)(",
+     ",children:(0,l.jsx)(d.K,{icon:m.V,onClick:et,disabled:y<=k,variant:",
+     ",size:",
+     "aria-label",
+     "9hMafy",
+     ",children:(0,l.jsx)(d.K,{icon:g.r,onClick:en,disabled:y>=D,variant:"
+    ],
+    "exports": [],
+    "structHash": "640455816ddfa626"
+   },
+   "shape": null,
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoOnboardingDelay::[\"Alcl/e\"]": {
    "kind": "patch",
@@ -7048,7 +7157,7 @@
     "structHash": "e7067dd73cb0a5e8"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoPendingCount::.getSpamChannelsCount();return": {
    "kind": "patch",
@@ -7065,7 +7174,7 @@
     "structHash": "7704fbbf3c359991"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoPendingCount::showProgressBadge:": {
    "kind": "patch",
@@ -7121,7 +7230,7 @@
     "structHash": "1e700328bbe9d951"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoProfileThemes::hasThemeColors(){": {
    "kind": "patch",
@@ -7136,7 +7245,7 @@
     "structHash": "fa0eac8f6c4cb140"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoReplyMention::,\"Message\")}function": {
    "kind": "patch",
@@ -7154,7 +7263,7 @@
     "structHash": "bfb532c0783d2e63"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoServerEmojis::}searchWithoutFetchingLatest(": {
    "kind": "patch",
@@ -7199,7 +7308,7 @@
     "structHash": "c87d43aa8806eb3e"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoSystemBadge::,setSystemTrayApplications": {
    "kind": "patch",
@@ -7255,7 +7364,7 @@
     "structHash": "d8440609a3e5b541"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoTrack::.METRICS_V2": {
    "kind": "patch",
@@ -7289,7 +7398,7 @@
     "structHash": "820902c3534dea37"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoTrack::AnalyticsActionHandlers.handle": {
    "kind": "patch",
@@ -7306,7 +7415,7 @@
     "structHash": "08a098636b4db428"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoTypingAnimation::dotCycle": {
    "kind": "patch",
@@ -7328,7 +7437,7 @@
     "structHash": "9c9d9a86cccf9175"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoUnblockToJump::[\"8t8doK\"]": {
    "kind": "patch",
@@ -7350,7 +7459,7 @@
     "structHash": "ea346f55f70028f2"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NoticesAPI::\"NoticeStore\"": {
    "kind": "patch",
@@ -7399,7 +7508,7 @@
     "structHash": "a2e05d8c10c23682"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::NotificationVolume::ensureAudio(){": {
    "kind": "patch",
@@ -7426,7 +7535,7 @@
     "structHash": "7a77b1ede53da5b5"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::OnePingPerDM::\"NotificationStore\"": {
    "kind": "patch",
@@ -7468,7 +7577,7 @@
     "structHash": "32a0edca6b6c8163"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::OpenInApp::trackAnnouncementMessageLinkClicked({": {
    "kind": "patch",
@@ -7506,7 +7615,7 @@
     "structHash": "7328beddaa86eb0d"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::OverrideForumDefaults::getDefaultLayout(){": {
    "kind": "patch",
@@ -7534,7 +7643,7 @@
     "structHash": "b247a3a10b47316c"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::PermissionFreeWill::.bTS5lf": {
    "kind": "patch",
@@ -7590,7 +7699,7 @@
     "structHash": "b131e1465680eac7"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::PermissionFreeWill::[\"Zaz+un\"]": {
    "kind": "patch",
@@ -7607,7 +7716,7 @@
     "structHash": "37a3e04c2b4b5e8a"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::PictureInPicture::[\"VIDEO\",\"CLIP\",\"AUDIO\"]": {
    "kind": "patch",
@@ -7646,7 +7755,7 @@
     "structHash": "fab725655ff5b384"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ReactErrorDecoder::React has blocked a javascript: URL as a security precaution.": {
    "kind": "patch",
@@ -7702,7 +7811,7 @@
     "structHash": "52a08f6895f81347"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::Recovery::.tx8CkI": {
    "kind": "patch",
@@ -7724,7 +7833,7 @@
     "structHash": "16781f24b9e96b06"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::RelationshipNotifier::async leaveGuild(": {
    "kind": "patch",
@@ -7762,7 +7871,7 @@
     "structHash": "f5589734590c353d"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::RelationshipNotifier::removeRelationship:(": {
    "kind": "patch",
@@ -7788,7 +7897,7 @@
     "structHash": "2c39967b0553c678"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ReplyTimestamp::[\"1i+hMi\"]": {
    "kind": "patch",
@@ -7826,7 +7935,7 @@
     "structHash": "ef12c467da8b73aa"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::RevealAllSpoilers::.removeObscurity,": {
    "kind": "patch",
@@ -7860,7 +7969,7 @@
     "structHash": "4133a44487dee305"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::RoleColorEverywhere::.USER_MENTION)": {
    "kind": "patch",
@@ -7879,7 +7988,7 @@
     "structHash": "10b9b178b4de7f66"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::RoleColorEverywhere::[\"pFO/Ph\"])]": {
    "kind": "patch",
@@ -7930,7 +8039,7 @@
     "structHash": "5bca7a99a55c76d8"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ServerListAPI::.Be8Q5E": {
    "kind": "patch",
@@ -7986,7 +8095,7 @@
     "structHash": "1e700328bbe9d951"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ServerListAPI::.setGuildsTree(": {
    "kind": "patch",
@@ -8042,7 +8151,7 @@
     "structHash": "1e700328bbe9d951"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ShowAllMessageButtons::.Lv7LxN),children": {
    "kind": "patch",
@@ -8098,7 +8207,7 @@
     "structHash": "b9e56ccac4c3bee4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ShowHiddenThings::,checkElevated:!1}\\),(?:[A-Za-z_$][\\w$]*)\\.(?:[A-Za-z_$][\\w$]*)\\)}(?<=getCurrentUser\\(\\);return.+?)": {
    "kind": "patch",
@@ -8113,7 +8222,7 @@
     "structHash": "2735c97fbe725a59"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ShowHiddenThings::INVITES_DISABLED)||": {
    "kind": "patch",
@@ -8128,7 +8237,7 @@
     "structHash": "d05338833011432d"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ShowHiddenThings::[\"93S+lG\"]),children:": {
    "kind": "patch",
@@ -8184,7 +8293,7 @@
     "structHash": "0fb8dff151ba7023"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ShowHiddenThings::action:\"PRESS_MOD_VIEW\",icon:": {
    "kind": "patch",
@@ -8211,7 +8320,7 @@
     "structHash": "32d6870a499fee77"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ShowHiddenThings::showCommunicationDisabledStyles": {
    "kind": "patch",
@@ -8267,7 +8376,7 @@
     "structHash": "f4ffab350494a853"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ShowMeYourName::=\"SYSTEM_TAG\"": {
    "kind": "patch",
@@ -8296,7 +8405,7 @@
     "structHash": "a604e1aecce6886f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ShowTimeoutDuration::[\"AeYyL+\"]": {
    "kind": "patch",
@@ -8352,7 +8461,7 @@
     "structHash": "f4ffab350494a853"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::SilentTyping::.dispatch({type:\"TYPING_START_LOCAL\"": {
    "kind": "patch",
@@ -8370,7 +8479,7 @@
     "structHash": "dacb60249640aa1b"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::SortFriendRequests::getRelationshipCounts(){": {
    "kind": "patch",
@@ -8387,7 +8496,7 @@
     "structHash": "e7142c54db45e396"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::SpotifyCrack::dispatch({type:\"SPOTIFY_PROFILE_UPDATE\"": {
    "kind": "patch",
@@ -8415,7 +8524,7 @@
     "structHash": "2a15283d22b9f9f5"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::SpotifyCrack::}getPlayableComputerDevices(){": {
    "kind": "patch",
@@ -8455,7 +8564,7 @@
     "structHash": "daf7ba0a6f67e74f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::StickerPaste::.stickers,previewSticker:": {
    "kind": "patch",
@@ -8487,7 +8596,7 @@
     "structHash": "f4beac7260d4910c"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::SuperReactionTweaks::,BURST_REACTION_EFFECT_PLAY": {
    "kind": "patch",
@@ -8508,7 +8617,7 @@
     "structHash": "9cf3421d5bd7ef20"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::SuperReactionTweaks::.EMOJI_PICKER_CONSTANTS_EMOJI_CONTAINER_PADDING_HORIZONTAL)": {
    "kind": "patch",
@@ -8564,7 +8673,7 @@
     "structHash": "947b517878990856"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::TypingIndicator::M0 15H2c0 1.6569": {
    "kind": "patch",
@@ -8620,7 +8729,7 @@
     "structHash": "c9a4816ad29d3672"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::TypingIndicator::UNREAD_IMPORTANT:": {
    "kind": "patch",
@@ -8653,7 +8762,7 @@
     "structHash": "f00b39e1ac712318"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::TypingTweaks::.Q8lUnE": {
    "kind": "patch",
@@ -8693,7 +8802,7 @@
     "structHash": "09618b5d3b2293ae"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::UnlockedAvatarZoom::.DxAYCF": {
    "kind": "patch",
@@ -8749,7 +8858,7 @@
     "structHash": "2f11730a2a8e9386"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::UserSettingsAPI::,updateSetting:": {
    "kind": "patch",
@@ -8805,7 +8914,7 @@
     "structHash": "dd894b7fc86431ce"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ValidReply::ReferencedMessageStore": {
    "kind": "patch",
@@ -8827,7 +8936,7 @@
     "structHash": "085bd8501d16ca03"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ValidReply::[\"1i+hMi\"]": {
    "kind": "patch",
@@ -8865,7 +8974,7 @@
     "structHash": "ef12c467da8b73aa"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ValidUser::\"@here\"===": {
    "kind": "patch",
@@ -8885,7 +8994,7 @@
     "structHash": "93534aa3ed1c6039"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::ValidUser::unknownUserMentionPlaceholder:": {
    "kind": "patch",
@@ -8914,7 +9023,7 @@
     "structHash": "2e933f317c0b6ae7"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::VoiceChatDoubleClick::.handleClickChat": {
    "kind": "patch",
@@ -8970,7 +9079,7 @@
     "structHash": "c9a4816ad29d3672"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::VoiceChatDoubleClick::className:\"channelMention\",children:[null!=": {
    "kind": "patch",
@@ -8989,7 +9098,7 @@
     "structHash": "0832f22803b1a14a"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::VoiceDownload::.LgCPMt": {
    "kind": "patch",
@@ -9045,7 +9154,7 @@
     "structHash": "b6aa0aa4ac859555"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::VolumeBooster::.m7TNdF": {
    "kind": "patch",
@@ -9063,7 +9172,7 @@
     "structHash": "b06a0ba97ba9eda9"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::VolumeBooster::=\"MediaEngineStore\",": {
    "kind": "patch",
@@ -9119,7 +9228,7 @@
     "structHash": "40d0d772d8ed76eb"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::VolumeBooster::AudioContextSettingsMigrated": {
    "kind": "patch",
@@ -9137,7 +9246,7 @@
     "structHash": "2fe853c52673b20c"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::VolumeBooster::currentVolume:": {
    "kind": "patch",
@@ -9152,7 +9261,7 @@
     "structHash": "22c53e6e9c3cc779"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   },
   "patch::WhoReacted::,reactionRef:": {
    "kind": "patch",
@@ -9197,7 +9306,7 @@
     "structHash": "c597bca3d9cdcbe0"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:33:44.202Z"
   }
  }
 }
