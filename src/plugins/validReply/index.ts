@@ -34,8 +34,11 @@ export default definePlugin({
             find: "ReferencedMessageStore",
             reason: "Yanıt önbelleği dışarı aktarılmayan store örneğinin özel map'inde tutuluyor.",
             replacement: {
+                // `_channelCaches` artık bir sınıf alanı: sınıf gövdesine düz ifade
+                // yazılamaz, yakalamayı ikinci bir alan başlatıcısıyla yapıyoruz
+                // (Vencord ile aynı).
                 match: /_channelCaches=new Map;/,
-                replace: "$&$self.captureStore(this);"
+                replace: "$&_=$self.captureStore(this);"
             }
         }
     ],
