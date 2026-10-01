@@ -55,13 +55,18 @@ export default definePlugin({
         // için predicate patch anında deterministik.
         predicate: () => !plugins.Recovery,
         replacement: {
-            match: /this\.setState\((.+?)\)/,
-            replace: "$self.handleCrash(this,$1);"
+            // Hata sınırının tek `this.setState(...)` çağrısını Recovery zaten
+            // tüketiyor; reporter predicate'leri kaldırıp ikisini de uyguladığında
+            // bu patch boşa düşüyordu. Çökme yolunun girişine (`componentDidCatch`
+            // ve `window.DiscordErrors.softCrash` ikisi de buradan geçiyor)
+            // yalnızca kurtarmayı zamanlayan bir çağrı ekliyoruz; hata state'ini
+            // Discord'un kendi setState'i uyguluyor — davranış öncekiyle aynı.
+            match: /triggerSoftCrash\(\i,\i\)\{/,
+            replace: "$&$self.handleCrash(this);"
         }
     }],
 
-    handleCrash(boundary: any, errorState: any): void {
-        boundary.setState(errorState);
+    handleCrash(boundary: any): void {
         if (!settings.store.attemptRecovery || recovering || Date.now() - lastRecovery < 1500) return;
 
         recovering = true;
