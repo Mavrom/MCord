@@ -13,6 +13,7 @@ import { mapMangledModule } from "../webpack/mangled";
 import { getReact, getReactDOM } from "../webpack/react";
 import { recoverStoreModules, resolveStore } from "../webpack/stores";
 import type { ModuleFilter } from "../webpack/types";
+import { isEnvironmentLimitedFind, isEnvironmentLimitedStore } from "./environmentLimited";
 import { loadLazyChunks } from "./loadLazyChunks";
 import { exportToScanner } from "./scannerExport";
 import { getTraceSummary } from "./tracer";
@@ -54,59 +55,6 @@ export function registerReporterPatch(): void {
             replace: "(Mcord.Reporter.init(),$&)"
         }
     }, "MCord Reporter");
-}
-
-/**
- * Bu ortamda (headless tarayici, giris yok, native ses motoru yok) Discord'un
- * hic olusturmadigi store'lar. Gercek masaustu istemcide calisiyorlar; CI
- * sinyalini kirletmemeleri icin "kirik" saymiyoruz.
- *
- *  - ReadStateStore   : okunma durumu, oturum gerektiriyor
- *  - MediaEngineStore : Discord'un native ses motoru (headless'ta yok)
- *  - ChannelRTCStore  : RTC/ses baglantisi
- */
-const ENVIRONMENT_LIMITED_STORES = new Set([
-    "ReadStateStore",
-    "MediaEngineStore",
-    "ChannelRTCStore"
-]);
-
-/**
- * Bu ortamda modülü **hiç yüklenmeyen** aramalar.
- *
- * `ENVIRONMENT_LIMITED_STORES` ile aynı gerekçe, aramalar için. Ölçüm (2026-09-10,
- * stable, `loadLazyChunks` sonrası): bu anahtar kümelerini sağlayan **gerçek**
- * modül sayısı `0`, buna karşılık her anahtara cevap veren Discord loader
- * proxy'si (`$$loader`/`$$baseObject`, `Symbol.toStringTag === "IntlMessagesProxy"`)
- * sayısı `63`. Yani modüller oturum arkasında; `/login` sayfasında yoklar.
- *
- * DİKKAT — bunlar bir ara "bulunuyor" görünüyordu: `find` cache'i
- * `Object.getOwnPropertyNames` ile gezdiği için `_blacklistBadModules`'ün
- * non-enumerable yaptığı O PROXY'LERE eşleşiyorlardı. Sahte bir yeşildi ve
- * gerçek istemcide `React`'in i18n proxy'sine bağlanıp Discord'u siyah ekrana
- * düşürmesiyle patladı. Doğrusu: proxy'yi eleyip burada dürüstçe
- * "doğrulanamıyor" demek.
- */
-const ENVIRONMENT_LIMITED_FINDS = [
-    ["editMessage", "sendMessage"],
-    ["sendMessage", "editMessage"],
-    ["clearCache", "_channelMessages"],
-    ["deleteMessage", "startEditMessage"],
-    ["open", "saveAccountChanges"],
-    ["open", "setSection", "saveAccountChanges"],
-    ["useDefaultUserSettingsSections"],
-    ["ModalRoot", "ModalHeader", "ModalContent"],
-    ["MenuGroup", "MenuItem", "MenuSeparator"],
-    ["SUPPORTS_COPY", "copy"],
-    ["setHangStatus", "clearHangStatus"],
-    ["getVideoDeviceId", "mirror"],
-    // stable'da bulunuyor, canary'de o chunk `/login`'de yüklenmiyor.
-    ["selectChannel", "selectVoiceChannel"]
-].map(keys => `byKeys(${keys.map(k => JSON.stringify(k)).join(", ")})`);
-
-function isEnvironmentLimitedFind(filter: ModuleFilter): boolean {
-    const description = describeFilter(filter);
-    return ENVIRONMENT_LIMITED_FINDS.includes(description);
 }
 
 const otherErrors: string[] = [];
@@ -397,7 +345,7 @@ function checkSearchEntry(kind: string, args: unknown[]): string | null {
                 // Kanıtlanmış açık-kaynak istemcinin `findStore` yolu: önce Flux'un
                 // statik kaydı, sonra webpack araması.
                 if (resolveStore(name) != null) return null;
-                if (ENVIRONMENT_LIMITED_STORES.has(name)) return null;
+                if (isEnvironmentLimitedStore(name)) return null;
                 return find(byStoreName(name), { silent: true }) == null ? `store: ${name}` : null;
             }
             case "mapMangledModule":

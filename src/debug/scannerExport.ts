@@ -20,6 +20,7 @@ import { find, findModuleId } from "../webpack/finder";
 import { lazyWebpackSearchHistory, setRecordSearchHistory, wreq } from "../webpack/intercept";
 import { resolveStore } from "../webpack/stores";
 import type { ModuleFilter } from "../webpack/types";
+import { isEnvironmentLimitedLabel } from "./environmentLimited";
 import { skippedLazyChunks } from "./loadLazyChunks";
 import type { Report } from "./reporter";
 
@@ -81,7 +82,7 @@ const FIND_YIELD_EVERY = 20;
 async function collectFinds(sink: Sink) {
     const history = [...lazyWebpackSearchHistory];
     const total = history.length;
-    const out: Array<{ kind: string; label: string; moduleId: string | null; shape: string[] | null; ok: boolean }> = [];
+    const out: Array<{ kind: string; label: string; moduleId: string | null; shape: string[] | null; ok: boolean; envLimited: boolean }> = [];
     setRecordSearchHistory(false);
     try {
         for (let i = 0; i < total; i++) {
@@ -97,16 +98,18 @@ async function collectFinds(sink: Sink) {
                     const name = String(args[0]);
                     const store = resolveStore(name) ?? find(byStoreName(name), { silent: true });
                     const id = findModuleId(byStoreName(name), { silent: true });
-                    out.push({ kind, label: `store: ${name}`, moduleId: id == null ? null : String(id), shape: shapeOf(store), ok: store != null });
+                    const label = `store: ${name}`;
+                    out.push({ kind, label, moduleId: id == null ? null : String(id), shape: shapeOf(store), ok: store != null, envLimited: isEnvironmentLimitedLabel(label) });
                     continue;
                 }
                 const filter = args[0] as ModuleFilter;
                 if (typeof filter !== "function") continue;
                 const value = find(filter, { silent: true });
                 const id = findModuleId(filter, { silent: true });
-                out.push({ kind, label: describeFilter(filter), moduleId: id == null ? null : String(id), shape: shapeOf(value), ok: value != null });
+                const label = describeFilter(filter);
+                out.push({ kind, label, moduleId: id == null ? null : String(id), shape: shapeOf(value), ok: value != null, envLimited: isEnvironmentLimitedLabel(label) });
             } catch (err) {
-                out.push({ kind, label: `${kind}: doğrulama hata verdi — ${String(err)}`, moduleId: null, shape: null, ok: false });
+                out.push({ kind, label: `${kind}: doğrulama hata verdi — ${String(err)}`, moduleId: null, shape: null, ok: false, envLimited: false });
             }
         }
     } finally {
