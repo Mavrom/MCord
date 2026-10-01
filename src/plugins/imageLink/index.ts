@@ -19,7 +19,10 @@ export default definePlugin({
         reason: "Salt görsel bağlantısını gizleme kararı mesaj içerik render'ında yerel embed kontrolü.",
         replacement: {
             // SimpleEmbedTypes.has(embed.type) && isEmbedInline(embed)
-            match: /\i\.has\(\i\.type\)&&\(0,\i\.\i\)\(\i\)/,
+            // Set artık import üyesi (`i.h5.has(...)`): baştaki `\i` bir `.`'dan
+            // sonra başlayamaz, yoksa eşleşme üye ifadesinin ortasından başlayıp
+            // `i.false` üretiyor. Tüm ifade (`i.h5.has` / `h5.has`) değişiyor.
+            match: /(?<![\w$.])\i(?:\.\i)?\.has\(\i\.type\)&&\(0,\i\.\i\)\(\i\)/,
             replace: "false"
         }
     }]
