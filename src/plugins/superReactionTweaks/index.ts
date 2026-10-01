@@ -49,9 +49,12 @@ export default definePlugin({
             find: ".EMOJI_PICKER_CONSTANTS_EMOJI_CONTAINER_PADDING_HORIZONTAL)",
             reason: "Reaksiyon picker'ının burst başlangıç state'i yerel useState çağrısında sabit false.",
             replacement: {
-                match: /(openPopoutType:void 0(?=.+?isBurstReaction:(\i).+?;(\i===\i\.\i\.REACTION)&&\i\.push\().+?\[\2,\i\]=\i\.useState\()!1\)/,
-                replace: (_matched, prefix, _burstVariable, reactionIntent) =>
-                    `${prefix}$self.defaultToSuper&&${reactionIntent})`
+                // Niyet karşılaştırması artık `ref.current.intention===REACTION`; picker
+                // niyetinin değişkeni `pickerIntention:` destructure'ından alınıyor
+                // (Vencord ile aynı).
+                match: /(openPopoutType:void 0(?=.+?isBurstReaction:(\i).+?\.intention===(\i\.\i\.REACTION)).+?\[\2,\i\]=\i\.useState\()!1\)(?<=pickerIntention:(\i).+?)/,
+                replace: (_matched, prefix, _burstVariable, reactionIntent, pickerIntention) =>
+                    `${prefix}$self.defaultToSuper&&${pickerIntention}===${reactionIntent})`
             }
         }
     ],
