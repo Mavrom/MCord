@@ -324,7 +324,19 @@ export const Forms = {
 
 // ── Util modülleri ─────────────────────────────────────
 
-export const Clipboard = findByPropsLazy("SUPPORTS_COPY", "copy");
+/**
+ * Discord'un `{ SUPPORTS_COPY, copy }` modülü artık yok. Vencord da kendi
+ * `copyToClipboard`'ını kullanıyor: masaüstünde `DiscordNative.clipboard`,
+ * yoksa `navigator.clipboard`. Şekil (`SUPPORTS_COPY`, `copy`) korunuyor.
+ */
+export const Clipboard = {
+    SUPPORTS_COPY: true,
+    copy(text: string): Promise<void> {
+        const native = (window as any).DiscordNative?.clipboard;
+        if (typeof native?.copy === "function") return Promise.resolve(native.copy(text));
+        return navigator.clipboard.writeText(text);
+    }
+};
 
 export const UploadHandler = {
     promptToUpload: findByCodeLazy("Unexpected mismatch between files and file metadata") as
