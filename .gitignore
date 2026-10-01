@@ -27,3 +27,5 @@ codebase-map.md
 
 # yerel modül tarayıcı (GitHub'a gitmez)
 scanner/
+# scanner baseline'ının atomik yazım ara dosyası
+baselines/*.tmp

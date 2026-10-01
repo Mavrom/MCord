@@ -10,6 +10,7 @@ import { join } from "node:path";
 import esbuild from "esbuild";
 
 import {
+    assertSafeDist,
     commonOpts,
     DIST,
     globPlugins,
@@ -22,6 +23,7 @@ import {
     watch
 } from "./build/common.mjs";
 
+assertSafeDist();
 rmSync(DIST, { recursive: true, force: true });
 mkdirSync(DIST, { recursive: true });
 

@@ -33,11 +33,34 @@ export const patchTimings: Array<{
 /**
  * Scanner için patch izleri (yalnızca reporter build'i). Uygulanan patch'ler
  * `patches`'ten düştüğü için "hangi modüle uydu / hangi match tutmadı" bilgisi
- * ancak burada kalıyor.
+ * ancak burada kalıyor. `errors`: replace'in fırlattığı ya da patch'lenmiş kodun
+ * eval edilemediği (sözdizimi) durumlar; bunlar miss sayılmaz, ayrı izlenir.
  */
-export interface PatchTrace { index: number; hits: string[]; misses: Array<{ moduleId: string; match: string }> }
+export interface PatchTraceError { moduleId: string; match: string; error: string }
+export interface PatchTrace {
+    index: number;
+    hits: string[];
+    misses: Array<{ moduleId: string; match: string }>;
+    errors: PatchTraceError[];
+}
 export const patchTrace = new Map<Patch, PatchTrace>();
 const pluginPatchCounts = new Map<string, number>();
+
+const TRACE_ERROR_MAX = 500;
+
+function traceError(patch: Patch, moduleId: PropertyKey, replacement: PatchReplacement, err: unknown): void {
+    let error: string;
+    try {
+        error = String(err);
+    } catch {
+        error = "(hata metni okunamadı)";
+    }
+    patchTrace.get(patch)?.errors.push({
+        moduleId: String(moduleId),
+        match: String(replacement.match),
+        error: error.slice(0, TRACE_ERROR_MAX)
+    });
+}
 
 export function addPatch(patchDefinition: PatchDefinition, pluginName: string): void {
     const patch = { ...patchDefinition, plugin: pluginName } as Patch;
@@ -55,7 +78,7 @@ export function addPatch(patchDefinition: PatchDefinition, pluginName: string): 
     if (IS_REPORTER) {
         const index = pluginPatchCounts.get(pluginName) ?? 0;
         pluginPatchCounts.set(pluginName, index + 1);
-        patchTrace.set(canonical, { index, hits: [], misses: [] });
+        patchTrace.set(canonical, { index, hits: [], misses: [], errors: [] });
     }
 }
 
@@ -164,6 +187,7 @@ function patchFactory(moduleId: PropertyKey, originalFactory: ModuleFactory): Pa
                 newCode = executeReplacement(patchedCode, replacement);
             } catch (err) {
                 logger.error(`${patch.plugin}: replacement çalıştırılamadı (modül ${String(moduleId)}):\n`, err);
+                if (IS_REPORTER) traceError(patch, moduleId, replacement, err);
                 shouldRestorePrevious = patch.group === true;
                 if (shouldRestorePrevious) break;
                 continue;
@@ -212,6 +236,7 @@ function patchFactory(moduleId: PropertyKey, originalFactory: ModuleFactory): Pa
                     `${patch.plugin}: patch'lenmiş modül ${String(moduleId)} eval edilemedi ` +
                     "(muhtemelen sözdizimi hatası):\n", err
                 );
+                if (IS_REPORTER) traceError(patch, moduleId, replacement, err);
                 if (IS_DEV) logDiff(lastCode, newCode);
 
                 patchedCode = lastCode;

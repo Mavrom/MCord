@@ -7,7 +7,7 @@
 import { execSync } from "node:child_process";
 import { readdirSync, readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
-import { dirname, isAbsolute, join, relative, resolve } from "node:path";
+import { dirname, isAbsolute, join, parse, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -15,6 +15,31 @@ export const SRC = join(ROOT, "src");
 // `MCORD_DIST`: scanner reporter build'ini kendi klasörüne yazar; kullanıcının gerçek
 // `dist/`'i (inject/installer'ın kullandığı) ezilmez. Verilmezse davranış aynı.
 export const DIST = process.env.MCORD_DIST ? resolve(process.env.MCORD_DIST) : join(ROOT, "dist");
+
+/**
+ * Build `DIST`'i silip yeniden kurar; yanlış bir `MCORD_DIST` (ör. `.`) repo'yu silmesin.
+ * Repo kökü, onun bir atası, `src/` (ya da altı) ve dosya sistemi kökü reddedilir.
+ */
+export function assertSafeDist(dist = DIST, root = ROOT) {
+    const norm = p => {
+        const r = resolve(p);
+        return process.platform === "win32" ? r.toLowerCase() : r;
+    };
+    const d = norm(dist);
+    const r = norm(root);
+    const src = norm(join(root, "src"));
+    const contains = (parent, child) => {
+        const rel = relative(parent, child);
+        return rel === "" || (!rel.startsWith("..") && !isAbsolute(rel));
+    };
+    let why = null;
+    if (d === parse(d).root) why = "dosya sistemi kökü";
+    else if (contains(d, r)) why = "MCord repo kökü ya da onun bir üst dizini";
+    else if (contains(src, d)) why = "MCord kaynak dizini (src/)";
+    if (why) {
+        throw new Error(`MCORD_DIST güvensiz: ${resolve(dist)} (${why}). Build bu dizini silip yeniden kurar; ayrı, boş bir çıktı dizini ver.`);
+    }
+}
 
 export const PackageJson = JSON.parse(readFileSync(join(ROOT, "package.json"), "utf-8"));
 

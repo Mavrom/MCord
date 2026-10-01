@@ -10,6 +10,8 @@
  * `window.MCordScannerSink` yoksa (CI koşusu) hiçbir şey yapmaz.
  *
  * JSON şekli scanner'daki `src/scan/payload.ts` (`mcord-scan/1`) ile aynıdır.
+ * Akış: `meta` → `patches` → (`progress`)* → `finds` → `report` → `modules`* → `done`.
+ * `progress` ({ done, total }) yalnızca kalp atışıdır; payload'a girmez.
  */
 
 import { getBuildNumber, patchTrace } from "../webpack/codePatcher";
@@ -67,17 +69,29 @@ function collectPatches() {
             matches: replacements.map(r => serializePat(r.match)),
             all: patch.all === true,
             hits: trace.hits,
-            misses: trace.misses
+            misses: trace.misses,
+            errors: trace.errors
         };
     });
 }
 
-function collectFinds() {
+/** Kaç aramada bir olay döngüsüne yer açılıp kalp atışı gönderilir. */
+const FIND_YIELD_EVERY = 20;
+
+async function collectFinds(sink: Sink) {
     const history = [...lazyWebpackSearchHistory];
+    const total = history.length;
     const out: Array<{ kind: string; label: string; moduleId: string | null; shape: string[] | null; ok: boolean }> = [];
     setRecordSearchHistory(false);
     try {
-        for (const [kind, args] of history) {
+        for (let i = 0; i < total; i++) {
+            // Her arama 20 bin modül tarıyor: tek blokta sayfa donar ve scanner'ın
+            // sessizlik sayacı dolar. Belli aralıklarla kalp atışı + olay döngüsü.
+            if (i > 0 && i % FIND_YIELD_EVERY === 0) {
+                sink("progress", { done: i, total });
+                await new Promise(r => setTimeout(r, 0));
+            }
+            const [kind, args] = history[i];
             try {
                 if (kind === "waitForStore" || kind === "findStoreLazy") {
                     const name = String(args[0]);
@@ -130,7 +144,7 @@ export async function exportToScanner(report: Report): Promise<void> {
         });
         sink("patches", collectPatches());
         await new Promise(r => setTimeout(r, 0));
-        sink("finds", collectFinds());
+        sink("finds", await collectFinds(sink));
         sink("report", {
             badPatches: report.badPatches,
             erroredPatches: report.erroredPatches,
