@@ -4,7 +4,8 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
-import { byCode, byKeys, bySource, componentByCode } from "./filters";
+import { byCode, byKeys, bySource, componentByCode, getModuleSource } from "./filters";
+import { findModuleIdBySource, requireModule } from "./finder";
 import {
     findByCodeLazy,
     findByPropsLazy,
@@ -12,11 +13,12 @@ import {
     findExportedComponentLazy,
     findLazy,
     findStoreLazy,
+    reportFinder,
     waitFor
 } from "./lazy";
 import { mapMangledModuleLazy, mapperByRegex } from "./mangled";
 import { getReactDOMClient, React, ReactDOM } from "./react";
-import type { ModuleExports } from "./types";
+import { FilterSymbol, type ModuleExports, type ModuleFilter } from "./types";
 
 /**
  * Discord'un ortak modülleri — Discord'un webpack modül kataloğu.
@@ -271,8 +273,99 @@ export const ModalSize: any = new Proxy({}, { get: (_t, p) => (ModalComponents a
 
 // ── Menü bileşenleri ────────────────────────────────────────────────────────
 
+/*
+ * Discord menü öğesi bileşenlerini (`MenuItem`, `MenuGroup`, …) artık adlarıyla
+ * dışa vermiyor: hepsi tek bir modülde birbirinin aynısı `function(){return null}`
+ * taslakları, koda bakarak ayırt edilemiyor. Hangisinin hangi öğe olduğunu
+ * yalnız menü modülü söylüyor: `if(n.type===L.sL)return t.push({type:"checkbox"…`.
+ * Vencord bunu menü modülüne patch atıp (`ContextMenuAPI`) çıkarıyor; biz aynı
+ * eşlemeyi (`type` → ad) menü modülünün **kaynağından** okuyoruz — kod patch'i yok.
+ */
+const MENU_MODULE_MARKER = "Menu API only allows Items";
+
+/** Menü modülündeki `type:"…"` → öğe bileşeni adı (Vencord `ContextMenuAPI` `nameMap`'i). */
+const MENU_ITEM_NAMES: Record<string, string> = {
+    radio: "MenuRadioItem",
+    separator: "MenuSeparator",
+    checkbox: "MenuCheckboxItem",
+    groupstart: "MenuGroup",
+    control: "MenuControlItem",
+    compositecontrol: "MenuControlItem",
+    item: "MenuItem",
+    customitem: "MenuItem"
+};
+
+interface MenuItemMap { exports: ModuleExports; keys: Record<string, string> }
+let menuItemMap: MenuItemMap | null = null;
+let menuItemsFailedAt = -Infinity;
+
+/** Menü öğesi taslak modülü ve `ad → mangle export anahtarı` eşlemesi. */
+function resolveMenuItems(): MenuItemMap | null {
+    if (menuItemMap != null) return menuItemMap;
+    // Başarısız çözümleme tüm fabrika kaynaklarını tarıyor; `find` bu filtreyi
+    // modül başına çağırdığı için arka arkaya denemeyi kısıyoruz.
+    if (performance.now() - menuItemsFailedAt < 1000) return null;
+    menuItemMap = demangleMenuItems();
+    if (menuItemMap == null) menuItemsFailedAt = performance.now();
+    return menuItemMap;
+}
+
+function demangleMenuItems(): MenuItemMap | null {
+
+    const menuModuleId = findModuleIdBySource(MENU_MODULE_MARKER);
+    if (menuModuleId == null) return null;
+    const source = getModuleSource(menuModuleId);
+
+    // `n.type===L.sL)` ardından en geç ~100 karakter içinde `type:"checkbox"`.
+    const typeCheck = /\.type===([\w$]+)\.([\w$]+)\)/g;
+    const pushType = /type:"(\w+)"/g;
+    const keys: Record<string, string> = {};
+    let namespace: string | undefined;
+    for (let check = typeCheck.exec(source); check != null; check = typeCheck.exec(source)) {
+        pushType.lastIndex = typeCheck.lastIndex;
+        const push = pushType.exec(source);
+        if (push == null || push.index - typeCheck.lastIndex > 100) continue;
+        const name = MENU_ITEM_NAMES[push[1]];
+        if (name == null) continue;
+        namespace ??= check[1];
+        if (check[1] !== namespace) continue;
+        keys[name] ??= check[2];
+    }
+    if (namespace == null) return null;
+
+    // `var L=n(477782)` — taslak modülünün id'si.
+    const escaped = namespace.replace(/\$/g, "\\$");
+    const importMatch = new RegExp(`[,\\s]${escaped}=[\\w$]+\\((\\d+)\\)`).exec(source);
+    if (importMatch == null) return null;
+
+    const exports = requireModule(importMatch[1]);
+    if (exports == null) return null;
+
+    return { exports, keys };
+}
+
+/** Reporter/scanner doğrulaması için: taslak modülünü bulan, okunur adlı filtre. */
+const menuItemsFilter: ModuleFilter = Object.assign(
+    (exports: ModuleExports) => exports != null && exports === resolveMenuItems()?.exports,
+    { [FilterSymbol]: { name: "menuItems", args: [MENU_MODULE_MARKER] } }
+);
+reportFinder(menuItemsFilter);
+
 /** `<Menu.Menu>`, `<Menu.MenuItem>`, `<Menu.MenuGroup>`, `<Menu.MenuCheckboxItem>` … */
-export const Menu: any = findByPropsLazy("MenuGroup", "MenuItem", "MenuSeparator");
+export const Menu: any = {
+    // Vencord: `componentByCode('path:["empty"]')`.
+    Menu: findComponentByCodeLazy('path:["empty"]')
+};
+for (const name of new Set(Object.values(MENU_ITEM_NAMES))) {
+    Object.defineProperty(Menu, name, {
+        enumerable: true,
+        get() {
+            const items = resolveMenuItems();
+            const key = items?.keys[name];
+            return key == null ? undefined : items!.exports[key];
+        }
+    });
+}
 
 // ── Discord UI bileşenleri (canlı Discord finder'ları) ─────────────────────
 //
