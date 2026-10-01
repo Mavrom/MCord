@@ -84,7 +84,9 @@ export default definePlugin({
         {
             // `openUserSettings(target)`: hedef verilmezse Discord hesap
             // paneline düşüyor. Hedef yalnız modal render'ında `target` prop'u.
-            find: '"USER_SETTINGS_MODAL_MODAL_KEY"',
+            // Modal anahtarı sabiti (`"USER_SETTINGS_MODAL_MODAL_KEY"`, Discord'un
+            // gerçek değeri) ayrı modüle taşındı; açılış dispatch'i burada kaldı.
+            find: 'type:"USER_SETTINGS_MODAL_OPEN"',
             reason: "`openUserSettings` ESM getter export'u, çalışma zamanında sarılamıyor; eski `open`/`setSection` modülü bölündü. Açılış hedefi yalnız modal render fonksiyonundaki `target` prop'unda.",
             replacement: {
                 match: /(?<=\{\.\.\.\i,target:)\i(?=\}\))/,
