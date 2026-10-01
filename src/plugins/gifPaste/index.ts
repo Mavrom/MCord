@@ -23,7 +23,8 @@ export default definePlugin({
         find: "handleSelectGIF=",
         reason: "GIF picker seçimi sınıf alanı olarak tanımlı ve gönderme davranışı yerel callback içinde.",
         replacement: {
-            match: /handleSelectGIF=(\i)=>\{/,
+            // İmza `(gif)` → `(gif, extra)` oldu (Vencord ile aynı).
+            match: /handleSelectGIF=\((\i),\i\)=>\{/,
             replace: "$&if(!this?.props?.className)return $self.insertGif($1);"
         }
     }],
