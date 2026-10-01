@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
-import { byCode, byKeys, bySource } from "./filters";
+import { byCode, byKeys, bySource, componentByCode } from "./filters";
 import {
     findByCodeLazy,
     findByPropsLazy,
@@ -247,8 +247,21 @@ export const openModalLazy: (render: () => Promise<any>, options?: any) => Promi
 export const closeModal: (key: string) => void = (...args: any[]) => (Modals as any).closeModal(...args);
 export const closeAllModals: () => void = () => (Modals as any).closeAllModals();
 
-/** `ModalRoot`, `ModalHeader`, `ModalContent`, `ModalFooter`, `ModalCloseButton`, `ModalSize`. */
-export const ModalComponents = findByPropsLazy("ModalRoot", "ModalHeader", "ModalContent") as any;
+/**
+ * `ModalRoot`, `ModalHeader`, `ModalContent`, `ModalFooter`, `ModalCloseButton`, `ModalSize`.
+ *
+ * Discord bu bileşenleri artık adlarıyla dışa vermiyor (mangle edilmiş
+ * export'lar). Vencord'un `utils/modal.tsx` eşlemesinin aynısı: eski modal
+ * modülü `.MODAL_ROOT_LEGACY,` ile bulunup her bileşen koduyla ayırt ediliyor.
+ */
+export const ModalComponents = mapMangledModuleLazy(".MODAL_ROOT_LEGACY,", {
+    ModalRoot: componentByCode('.MODAL,"aria-labelledby":'),
+    ModalHeader: componentByCode(",id:"),
+    ModalContent: componentByCode("scrollbarType:"),
+    ModalFooter: componentByCode(".HORIZONTAL_REVERSE,"),
+    ModalCloseButton: componentByCode(".withCircleBackground"),
+    ModalSize: (m: any) => m?.SMALL === "small" && m?.LARGE === "large" && m?.DYNAMIC === "dynamic"
+}) as any;
 export const ModalRoot: any = new Proxy((() => null) as any, { get: (_t, p) => (ModalComponents as any).ModalRoot?.[p], apply: (_t, _th, a) => (ModalComponents as any).ModalRoot(...a) });
 export const ModalHeader: any = new Proxy((() => null) as any, { get: (_t, p) => (ModalComponents as any).ModalHeader?.[p], apply: (_t, _th, a) => (ModalComponents as any).ModalHeader(...a) });
 export const ModalContent: any = new Proxy((() => null) as any, { get: (_t, p) => (ModalComponents as any).ModalContent?.[p], apply: (_t, _th, a) => (ModalComponents as any).ModalContent(...a) });
