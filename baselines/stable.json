@@ -2,10 +2,65 @@
  "version": 1,
  "branch": "stable",
  "entries": {
-  "finder::<anonim filtre>": {
+  "finder::<anonim filtre 30b442d1: (m) => m && typeof m === \"object\" && typeof m.del === \"funct>": {
    "kind": "finder",
    "plugin": null,
-   "label": "<anonim filtre>",
+   "label": "<anonim filtre 30b442d1: (m) => m && typeof m === \"object\" && typeof m.del === \"funct>",
+   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "moduleId": "636537",
+   "excerpt": ",headers:a,retryAfter:s},...l){const o=t.replace(/\\d+/g,\"xxx\");super(`${e.toUpperCase()} ${o} [${n}]`,...l),this.name=\"HTTPResponseError\",this.method=e,this.url=t,this.ok=!1,this.status=n,this.body=i,this.text=r,this.headers=a,this.retryAfter=s}}function I(e,t){let n=e?.[\"retry-after\"]??e?.[\"Retry-After\"];if(\"string\"==typeof n){let e=parseInt(n,10);if(Number.isFinite(e)&&e>0)return e}if(null!=t&&\"object\"==typeof t){let e=t.retry_after;if(\"number\"==typeof e&&Number.isFinite(e)&&e>0)return e}}function f(e,t,n,i,s,l){if(t.signal?.aborted){let e=Object.assign(Error(\"Request aborted\",{cause:l}),{code:\"ABORTED\"});m(t),i(e),null!=s&&s({ok:!1,hasErr:!0,err:e});return}let o=r()[e](t.url);if(null!=t.onRequestCreated&&t.onRequestCreated(o),null!=t.query){let e=t.query;if(\"object\"==typeof e){let t={...e};Ob",
+   "fingerprint": {
+    "strings": [
+     "use strict",
+     "_errors",
+     "An unexpected error occurred.",
+     "string",
+     "HTTPUtils",
+     ");super(`${e.toUpperCase()} ${o} [${n}]`,...l),this.name=",
+     "retry-after",
+     "Retry-After",
+     "object",
+     "number",
+     "Request aborted",
+     "ABORTED",
+     "X-Audit-Log-Reason",
+     "base64",
+     "X-Context-Properties",
+     "X-Failed-Requests",
+     "blob",
+     "progress",
+     "abort",
+     "rateLimitExpirationHandler: rate limit for",
+     "expired, but record was already removed",
+     "rateLimitExpirationHandler: removing key for",
+     "rateLimitExpirationHandler: moving to next record for ",
+     "cleanupRequestEntry: already has rate limit for ",
+     "cleanupRequestEntry: extending rate limit for ",
+     "cleanupRequestEntry: rate limit for ",
+     "expired",
+     ",headers:{}}))}null!=s?(_.verbose(",
+     "),N=g.bind(null,",
+     "),C=g.bind(null,",
+     "),O=g.bind(null,",
+     "),R=g.bind(null,",
+     "https:"
+    ],
+    "exports": [],
+    "structHash": "f7dbe7d7e9b9c803"
+   },
+   "shape": [
+    "del",
+    "get",
+    "patch",
+    "post",
+    "put"
+   ],
+   "updatedAt": "2026-10-01T13:38:07.991Z"
+  },
+  "finder::<anonim filtre 623c0e73: (m) => m?.Store?.getAll && m?.connectStores>": {
+   "kind": "finder",
+   "plugin": null,
+   "label": "<anonim filtre 623c0e73: (m) => m?.Store?.getAll && m?.connectStores>",
    "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
    "moduleId": "17928",
    "excerpt": "17928(e,t,n){\"use strict\";let i;n.d(t,{My:()=>x.My,mk:()=>h,UT:()=>Y,V5:()=>k,Ay:()=>K,il:()=>O,yK:()=>x.yK,bG:()=>x.bG,cf:()=>x.cf,ru:()=>r.r});var r=n(968441);n(321073);var a=n(840320),s=n(284009),l=n.n(s),o=n(61090);n(423034),n.g.performance;var d=n(941426),c=n(390225),u=n(39304),_=n(294997);let E=new Set([\"APP_STATE_UPDATE\",\"CLEAR_CACHES\",\"CONNECTION_CLOSED\",\"CONNECTION_OPEN\",\"CONNECTION_RESUM",
@@ -65,7 +120,181 @@
     "initialize",
     "initialized"
    ],
-   "updatedAt": "2026-10-01T12:15:33.587Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
+  },
+  "finder::<anonim filtre 79e6f06a: (m) => typeof m?.ADMINISTRATOR === \"bigint\">": {
+   "kind": "finder",
+   "plugin": null,
+   "label": "<anonim filtre 79e6f06a: (m) => typeof m?.ADMINISTRATOR === \"bigint\">",
+   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "moduleId": "652215",
+   "excerpt": "652215(e,t,n){\"use strict\";n.d(t,{$4X:()=>nJ,$8o:()=>nO,$OG:()=>i1,$aF:()=>iv,$jw:()=>rz,$pd:()=>ic,AD1:()=>tW.AD,AKn:()=>az,AMi:()=>rd,AO_:()=>rW,Ahp:()=>iG,Ajs:()=>aZ,An1:()=>aj,AnalyticsObjectTypes:()=>i0,Auw:()=>tU.A,BBH:()=>iK,BEX:()=>tQ,BIo:()=>rP,BRT:()=>ad,BVt:()=>tH.BV,BYE:()=>rE,CS1:()=>nq,CT4:()=>tY.CT,CUs:()=>r1,CmT:()=>tW.Cm,D0I:()=>nU,D2K:()=>rk,DUB:()=>rF,DYY:()=>tW.DY,Dmq:()=>rR,Dp",
+   "fingerprint": {
+    "strings": [
+     "use strict",
+     "NONE",
+     "LOGGING_IN",
+     "ACCOUNT_SCHEDULED_FOR_DELETION",
+     "ACCOUNT_DISABLED",
+     "FORGOT_PASSWORD",
+     "MFA_STEP",
+     "LOGGING_IN_MFA",
+     "MFA_SMS_STEP",
+     "LOGGING_IN_MFA_SMS",
+     "LOGIN_AGE_GATE",
+     "PASSWORD_RECOVERY_VERIFY_PHONE",
+     "PHONE_IP_AUTHORIZATION",
+     "OPEN",
+     "SUBMITTING",
+     "CLOSED",
+     "SERVER_NEXT",
+     "SERVER_PREV",
+     "CHANNEL_NEXT",
+     "CHANNEL_PREV",
+     "NAVIGATE_BACK",
+     "NAVIGATE_FORWARD",
+     "UNREAD_NEXT",
+     "UNREAD_PREV",
+     "MENTION_CHANNEL_NEXT",
+     "MENTION_CHANNEL_PREV",
+     "JUMP_TO_CURRENT_CALL",
+     "TOGGLE_SETTINGS",
+     "TOGGLE_HELP",
+     "TOGGLE_USERS",
+     "TOGGLE_INBOX",
+     "MARK_TOP_INBOX_CHANNEL_READ",
+     "TOGGLE_CHANNEL_PINS",
+     "TOGGLE_PREVIOUS_GUILD",
+     "TOGGLE_MUTE",
+     "TOGGLE_DEAFEN",
+     "TOGGLE_CAMERA",
+     "TOGGLE_HOTKEYS",
+     "TOGGLE_CATEGORY_COLLAPSED",
+     "SEARCH_SOUNDBOARD"
+    ],
+    "exports": [],
+    "structHash": "fcddd0fdb267714b"
+   },
+   "shape": [
+    "ADD_REACTIONS",
+    "ADMINISTRATOR",
+    "ATTACH_FILES",
+    "BAN_MEMBERS",
+    "BYPASS_SLOWMODE",
+    "CHANGE_NICKNAME",
+    "CONNECT",
+    "CREATE_EVENTS",
+    "CREATE_GUILD_EXPRESSIONS",
+    "CREATE_INSTANT_INVITE",
+    "CREATE_PRIVATE_THREADS",
+    "CREATE_PUBLIC_THREADS",
+    "DEAFEN_MEMBERS",
+    "EMBED_LINKS",
+    "KICK_MEMBERS",
+    "MANAGE_CHANNELS",
+    "MANAGE_EVENTS",
+    "MANAGE_GUILD",
+    "MANAGE_GUILD_EXPRESSIONS",
+    "MANAGE_MESSAGES",
+    "MANAGE_NICKNAMES",
+    "MANAGE_OFFICIAL_MESSAGES",
+    "MANAGE_ROLES",
+    "MANAGE_THREADS",
+    "MANAGE_WEBHOOKS",
+    "MENTION_EVERYONE",
+    "MODERATE_MEMBERS",
+    "MOVE_MEMBERS",
+    "MUTE_MEMBERS",
+    "PIN_MESSAGES",
+    "PRIORITY_SPEAKER",
+    "READ_MESSAGE_HISTORY",
+    "REQUEST_TO_SPEAK",
+    "SEND_MESSAGES",
+    "SEND_MESSAGES_IN_THREADS",
+    "SEND_POLLS",
+    "SEND_TTS_MESSAGES",
+    "SEND_VOICE_MESSAGES",
+    "SET_VOICE_CHANNEL_STATUS",
+    "SPEAK",
+    "STREAM",
+    "USE_APPLICATION_COMMANDS",
+    "USE_EMBEDDED_ACTIVITIES",
+    "USE_EXTERNAL_APPS",
+    "USE_EXTERNAL_EMOJIS",
+    "USE_EXTERNAL_SOUNDS",
+    "USE_EXTERNAL_STICKERS",
+    "USE_SOUNDBOARD",
+    "USE_VAD",
+    "VIEW_AUDIT_LOG"
+   ],
+   "updatedAt": "2026-10-01T13:38:07.991Z"
+  },
+  "finder::<anonim filtre bd1f7641: (m) => m.show && m.dismiss && !m.suppressAll>": {
+   "kind": "finder",
+   "plugin": null,
+   "label": "<anonim filtre bd1f7641: (m) => m.show && m.dismiss && !m.suppressAll>",
+   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "moduleId": "912851",
+   "excerpt": "912851(e,t,n){\"use strict\";n.d(t,{A:()=>r});var i=n(228366);let r={show(e,t,n,r,a){i.h.dispatch({type:\"NOTICE_SHOW\",notice:{id:a,type:e,message:t,buttonText:n,callback:r}})},dismiss(e){i.h.dispatch({type:\"NOTICE_DISMISS\",...e})}}}",
+   "fingerprint": {
+    "strings": [
+     "use strict",
+     "NOTICE_SHOW",
+     "NOTICE_DISMISS"
+    ],
+    "exports": [],
+    "structHash": "9a75be348f1ab28a"
+   },
+   "shape": [
+    "dismiss",
+    "show"
+   ],
+   "updatedAt": "2026-10-01T13:38:07.991Z"
+  },
+  "finder::<anonim filtre e510d92d: (m) => m?.prototype?.shouldShowTooltip && m.prototype.render>": {
+   "kind": "finder",
+   "plugin": null,
+   "label": "<anonim filtre e510d92d: (m) => m?.prototype?.shouldShowTooltip && m.prototype.render>",
+   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "moduleId": "900002",
+   "excerpt": "900002(e,t,n){\"use strict\";n.d(t,{ST:()=>y,oM:()=>T});var i,r=n(477900),a=n(582128),s=n(503698),l=n.n(s),o=n(333007),d=n(202091),c=n(607399),u=n(621466),_=n(844222),E=n(866323),A=n(451988);let h={tension:2400,friction:52};var I=n(775602),f=n(750506),p=n(233680),T=((i={}).PRIMARY=\"primary\",i.GREY=\"grey\",i.BRAND=\"brand\",i.GREEN=\"green\",i.RED=\"red\",i);let m=Object.freeze({}),g=Object.freeze({top:p.dn",
+   "fingerprint": {
+    "strings": [
+     "use strict",
+     "primary",
+     "grey",
+     "brand",
+     "green",
+     "left",
+     "right",
+     ",a=n;return t===(i?",
+     "center",
+     "string",
+     "data-mtctest-ignore",
+     ",{className:l()(p.xQ,p.yH,T),style:S(t??i,n,E)}),(0,r.jsx)(",
+     ",{className:l()(p.xQ,T),style:S(t??i,n,E)}),(0,r.jsx)(",
+     "tooltip",
+     "empty",
+     "animate-always",
+     "data-migration-pending",
+     ",color:",
+     "VoidTooltip cannot find DOM node",
+     "aria-label",
+     "span",
+     "none"
+    ],
+    "exports": [],
+    "structHash": "6fdcae1cbee03a46"
+   },
+   "shape": [
+    "Colors",
+    "defaultProps",
+    "getDerivedStateFromProps",
+    "length",
+    "name",
+    "prototype"
+   ],
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byCode(\".USER(\")": {
    "kind": "finder",
@@ -95,7 +324,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byCode(\".USER_MENTION)\")": {
    "kind": "finder",
@@ -116,7 +345,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byCode(\"Unexpected mismatch between files and file metadata\")": {
    "kind": "finder",
@@ -140,7 +369,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byCode(\"transitionTo - Transitioning to\")": {
    "kind": "finder",
@@ -166,7 +395,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byCode(\"useStateFromStores\")": {
    "kind": "finder",
@@ -224,7 +453,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"ChannelMessage\", \"SlashCommand\")": {
    "kind": "finder",
@@ -275,7 +504,7 @@
     "SlashCommand",
     "ThreadSettings"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"REPLYABLE\", \"FORWARDABLE\")": {
    "kind": "finder",
@@ -348,7 +577,7 @@
     "UNDELETABLE",
     "USER_MESSAGE"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"clearAll\", \"addFile\")": {
    "kind": "finder",
@@ -383,7 +612,7 @@
     "setUploads",
     "update"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"closeAllModals\", \"openModal\")": {
    "kind": "finder",
@@ -425,7 +654,7 @@
     "useIsModalAtTop",
     "useModalsStore"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"connectStores\")": {
    "kind": "finder",
@@ -490,7 +719,7 @@
     "initialize",
     "initialized"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"debounce\", \"cloneDeep\")": {
    "kind": "finder",
@@ -597,7 +826,7 @@
     "dropRight",
     "dropRightWhile"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"deleteMessage\", \"startEditMessage\")": {
    "kind": "finder",
@@ -697,7 +926,7 @@
     "updateEditMessage",
     "validateMessage"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"editMessage\", \"sendMessage\")": {
    "kind": "finder",
@@ -797,7 +1026,7 @@
     "updateEditMessage",
     "validateMessage"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"fromTimestamp\", \"extractTimestamp\")": {
    "kind": "finder",
@@ -831,7 +1060,7 @@
     "isProbablyAValidSnowflake",
     "keys"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"getGuildBannerURL\", \"getUserAvatarURL\")": {
    "kind": "finder",
@@ -903,7 +1132,7 @@
     "isAnimatedIconHash",
     "makeSource"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"highlight\", \"registerLanguage\")": {
    "kind": "finder",
@@ -1008,7 +1237,7 @@
     "unregisterLanguage",
     "versionString"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"openPrivateChannel\")": {
    "kind": "finder",
@@ -1062,7 +1291,7 @@
     "updateChannel",
     "updatePermissionOverwrite"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"openUserProfileModal\", \"closeUserProfileModal\")": {
    "kind": "finder",
@@ -1088,7 +1317,7 @@
     "closeUserProfileModal",
     "openUserProfileModal"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"openUserSettings\", \"USER_SETTINGS_MODAL_KEY\")": {
    "kind": "finder",
@@ -1112,7 +1341,7 @@
     "__esModule",
     "openUserSettings"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"parseTopic\", \"parse\")": {
    "kind": "finder",
@@ -1169,7 +1398,7 @@
     "parseVoiceChannelStatus",
     "reactParserFor"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"parseTwoDigitYear\")": {
    "kind": "finder",
@@ -1269,7 +1498,7 @@
     "weekdaysMin",
     "weekdaysShort"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"resolveInvite\")": {
    "kind": "finder",
@@ -1341,7 +1570,7 @@
     "transitionToInvite",
     "transitionToInviteOnboarding"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"selectChannel\", \"selectVoiceChannel\")": {
    "kind": "finder",
@@ -1367,7 +1596,7 @@
     "selectPrivateChannel",
     "selectVoiceChannel"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"sendMessage\", \"editMessage\")": {
    "kind": "finder",
@@ -1467,7 +1696,7 @@
     "updateEditMessage",
     "validateMessage"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"setShowActivity\")": {
    "kind": "finder",
@@ -1516,7 +1745,7 @@
     "setVisibility",
     "update"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"show\", \"close\")": {
    "kind": "finder",
@@ -1537,7 +1766,7 @@
     "confirm",
     "show"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::byKeys(\"useName\", \"getGlobalName\")": {
    "kind": "finder",
@@ -1574,7 +1803,7 @@
     "useName",
     "useUserTag"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\"!0,rows:\", \"showRemainingCharacterCount:\")": {
    "kind": "finder",
@@ -1600,7 +1829,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\".CDzOFd\")": {
    "kind": "finder",
@@ -1631,7 +1860,7 @@
     "compare",
     "type"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\".GREEN,positionKeyStemOverride:\")": {
    "kind": "finder",
@@ -1656,7 +1885,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\".containerRef,{disableReturn:\")": {
    "kind": "finder",
@@ -1675,7 +1904,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\".pfChQr\", \"buttonRef\", \"submittingFinishedLabel\")": {
    "kind": "finder",
@@ -1708,7 +1937,7 @@
     "name",
     "prototype"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\".size-1.375*\")": {
    "kind": "finder",
@@ -1756,7 +1985,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\"?\\\"multiple\\\":\\\"single\\\",required:\")": {
    "kind": "finder",
@@ -1814,7 +2043,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\"MASKED_LINK)\")": {
    "kind": "finder",
@@ -1836,7 +2065,7 @@
     "compare",
     "type"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\"\\\"data-toggleable-component\\\":\\\"checkbox\")": {
    "kind": "finder",
@@ -1866,7 +2095,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\"hasContentBackground\", \"nextStep\", \"onClose?.()\")": {
    "kind": "finder",
@@ -1924,7 +2153,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\"markDash\", \"this.renderMark(\")": {
    "kind": "finder",
@@ -1981,7 +2210,7 @@
     "name",
     "prototype"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\"path:[\\\"empty\\\"]\")": {
    "kind": "finder",
@@ -2039,7 +2268,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\"ref:this.ref,\", \"renderPopout:this.renderPopout,\")": {
    "kind": "finder",
@@ -2074,7 +2303,7 @@
     "name",
     "prototype"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\"role:\\\"dialog\\\",tabIndex:-1\")": {
    "kind": "finder",
@@ -2097,7 +2326,7 @@
     "$$typeof",
     "render"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\"selectionMode:\\\"single\\\",onSelectionChange:\", \"isSelected:\")": {
    "kind": "finder",
@@ -2151,7 +2380,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\"setHasValue?.(\\\"\\\"!==\", \"=\\\"text\\\",\")": {
    "kind": "finder",
@@ -2203,7 +2432,7 @@
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\"this.context?this.renderNonInteractive():\")": {
    "kind": "finder",
@@ -2230,7 +2459,7 @@
     "name",
     "prototype"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::componentByCode(\"this.renderTooltip()\", \"positionKey\")": {
    "kind": "finder",
@@ -2275,7 +2504,7 @@
     "name",
     "prototype"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::menuItems(\"Menu API only allows Items\")": {
    "kind": "finder",
@@ -2301,7 +2530,7 @@
     "rX",
     "sL"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: ActiveJoinedThreadsStore": {
    "kind": "finder",
@@ -2336,7 +2565,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: ApplicationCommandIndexStore": {
    "kind": "finder",
@@ -2386,7 +2615,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: ApplicationStore": {
    "kind": "finder",
@@ -2425,7 +2654,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: ApplicationStreamPreviewStore": {
    "kind": "finder",
@@ -2458,7 +2687,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: AuthenticationStore": {
    "kind": "finder",
@@ -2526,7 +2755,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: CallStore": {
    "kind": "finder",
@@ -2560,7 +2789,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: ChannelStore": {
    "kind": "finder",
@@ -2614,7 +2843,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: ConnectedAccountsStore": {
    "kind": "finder",
@@ -2647,7 +2876,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: DraftStore": {
    "kind": "finder",
@@ -2697,7 +2926,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: EmojiStore": {
    "kind": "finder",
@@ -2757,7 +2986,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: ExperimentStore": {
    "kind": "finder",
@@ -2826,7 +3055,7 @@
     "removeReactChangeListener",
     "trackExposure"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: GuildChannelStore": {
    "kind": "finder",
@@ -2862,7 +3091,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: GuildMemberCountStore": {
    "kind": "finder",
@@ -2895,7 +3124,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: GuildMemberStore": {
    "kind": "finder",
@@ -2931,7 +3160,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: GuildRoleStore": {
    "kind": "finder",
@@ -2984,7 +3213,7 @@
     "state",
     "wrappedState"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: GuildScheduledEventStore": {
    "kind": "finder",
@@ -3021,7 +3250,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: GuildStore": {
    "kind": "finder",
@@ -3072,7 +3301,7 @@
     "state",
     "wrappedState"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: InstantInviteStore": {
    "kind": "finder",
@@ -3106,7 +3335,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: InviteStore": {
    "kind": "finder",
@@ -3140,7 +3369,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: LocaleStore": {
    "kind": "finder",
@@ -3173,7 +3402,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: MessageStore": {
    "kind": "finder",
@@ -3221,7 +3450,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: NotificationSettingsStore": {
    "kind": "finder",
@@ -3258,7 +3487,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: OverridePremiumTypeStore": {
    "kind": "finder",
@@ -3296,7 +3525,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: PermissionStore": {
    "kind": "finder",
@@ -3333,7 +3562,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: PopoutWindowStore": {
    "kind": "finder",
@@ -3393,7 +3622,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: PresenceStore": {
    "kind": "finder",
@@ -3426,7 +3655,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: PrivateChannelSortStore": {
    "kind": "finder",
@@ -3461,7 +3690,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: RTCConnectionStore": {
    "kind": "finder",
@@ -3509,7 +3738,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: RelationshipStore": {
    "kind": "finder",
@@ -3547,7 +3776,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: SelectedChannelStore": {
    "kind": "finder",
@@ -3583,7 +3812,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: SelectedGuildStore": {
    "kind": "finder",
@@ -3620,7 +3849,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: SessionsStore": {
    "kind": "finder",
@@ -3653,7 +3882,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: SoundboardStore": {
    "kind": "finder",
@@ -3687,7 +3916,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: SpellcheckStore": {
    "kind": "finder",
@@ -3719,7 +3948,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: StickersStore": {
    "kind": "finder",
@@ -3761,7 +3990,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: StreamerModeStore": {
    "kind": "finder",
@@ -3799,7 +4028,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: ThemeStore": {
    "kind": "finder",
@@ -3839,7 +4068,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: TypingStore": {
    "kind": "finder",
@@ -3874,7 +4103,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: UploadAttachmentStore": {
    "kind": "finder",
@@ -3908,7 +4137,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: UserAffinitiesV2Store": {
    "kind": "finder",
@@ -3945,7 +4174,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: UserGuildJoinRequestStore": {
    "kind": "finder",
@@ -3978,7 +4207,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: UserGuildSettingsStore": {
    "kind": "finder",
@@ -4020,7 +4249,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: UserProfileStore": {
    "kind": "finder",
@@ -4063,7 +4292,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: UserSettingsProtoStore": {
    "kind": "finder",
@@ -4105,7 +4334,7 @@
     "removeReactChangeListener",
     "throttledCallback"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: UserStore": {
    "kind": "finder",
@@ -4152,7 +4381,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: VoiceStateStore": {
    "kind": "finder",
@@ -4186,7 +4415,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "finder::store: WindowStore": {
    "kind": "finder",
@@ -4223,7 +4452,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::AlwaysAnimate::.O8lDI2": {
    "kind": "patch",
@@ -4263,7 +4492,7 @@
     "structHash": "95cb994565824e8b"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::AlwaysAnimate::.pclUFJ),children:": {
    "kind": "patch",
@@ -4294,7 +4523,7 @@
     "structHash": "983cdcd4954c680f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::AlwaysAnimate::canAnimate:": {
    "kind": "patch",
@@ -4350,7 +4579,7 @@
     "structHash": "1e700328bbe9d951"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::AlwaysExpandRoles::hasDeveloperContextMenu:": {
    "kind": "patch",
@@ -4388,7 +4617,7 @@
     "structHash": "75a5ddf3b2627269"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::AlwaysTrust::=\"MaskedLinkStore\",": {
    "kind": "patch",
@@ -4426,7 +4655,7 @@
     "structHash": "7328beddaa86eb0d"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::AlwaysTrust::bitbucket.org": {
    "kind": "patch",
@@ -4482,7 +4711,7 @@
     "structHash": "fde9e0a448698c87"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::AnonymiseFileNames::async uploadFiles(": {
    "kind": "patch",
@@ -4507,7 +4736,7 @@
     "structHash": "99ebcdf6e76b1ec2"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::BadgesAPI::getLegacyUsername(){": {
    "kind": "patch",
@@ -4522,7 +4751,7 @@
     "structHash": "fa0eac8f6c4cb140"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::BetterGifAltText::.I5gL2H": {
    "kind": "patch",
@@ -4578,7 +4807,7 @@
     "structHash": "e017feeeb8f2e70a"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::BetterGifAltText::.modalContext})};": {
    "kind": "patch",
@@ -4634,7 +4863,7 @@
     "structHash": "b6aa0aa4ac859555"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::BetterGifPicker::renderHeaderContent(){": {
    "kind": "patch",
@@ -4670,7 +4899,7 @@
     "structHash": "9676b5a39c770ada"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::BetterRoleDot::\"dot\"===": {
    "kind": "patch",
@@ -4690,7 +4919,7 @@
     "structHash": "953935ba99ddf318"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::BetterRoleDot::M0 4C0 1.79086 1.79086 0 4 0H16C18.2091": {
    "kind": "patch",
@@ -4727,7 +4956,7 @@
     "structHash": "c5fe908cf0ff45e7"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::BetterSessions::.cDHCNY": {
    "kind": "patch",
@@ -4783,7 +5012,7 @@
     "structHash": "d15e52dbdf3aa722"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::BetterSettings::\"USER_SETTINGS_MODAL_MODAL_KEY\"": {
    "kind": "patch",
@@ -4803,7 +5032,7 @@
     "structHash": "98f1f79d2548dcc4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::BetterSettings::.buildLayout().map": {
    "kind": "patch",
@@ -4823,7 +5052,7 @@
     "structHash": "648249f3c45f27ca"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::BetterUploadButton::.CHAT_INPUT_BUTTON_NOTIFICATION,": {
    "kind": "patch",
@@ -4856,7 +5085,7 @@
     "structHash": "5b09b399903f040f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::BlurNSFW::}renderStickersAccessories(": {
    "kind": "patch",
@@ -4912,7 +5141,7 @@
     "structHash": "1eaa8d9761744452"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::CallTimer::\"RTCConnectionMenu\"": {
    "kind": "patch",
@@ -4968,7 +5197,7 @@
     "structHash": "b9e59436a4d0aedc"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::CharacterCounter::.CREATE_FORUM_POST||": {
    "kind": "patch",
@@ -5024,7 +5253,7 @@
     "structHash": "74781a93d22b5a6f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ChatComponentsAPI::\"sticker\")": {
    "kind": "patch",
@@ -5063,7 +5292,7 @@
     "structHash": "d9f19746a1f424de"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ColorSighted::.AVATAR_STATUS_MOBILE_16;": {
    "kind": "patch",
@@ -5109,7 +5338,7 @@
     "structHash": "487dd15242a468b2"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ColorSighted::Masks.STATUS_ONLINE": {
    "kind": "patch",
@@ -5129,7 +5358,7 @@
     "structHash": "01d7f47990ef2768"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::CommandsAPI::,\"tableflip\",\"unflip\"": {
    "kind": "patch",
@@ -5182,7 +5411,7 @@
     "structHash": "58eab7877690f1bc"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::CommandsAPI::[\"0mI72g\"]": {
    "kind": "patch",
@@ -5232,7 +5461,7 @@
     "structHash": "f19482069de73f35"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ConsoleJanitor::Tried getting Dispatch instance before instantiated": {
    "kind": "patch",
@@ -5274,7 +5503,7 @@
     "structHash": "c622f09535610ce4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ConsoleJanitor::Unable to determine render window for element": {
    "kind": "patch",
@@ -5309,7 +5538,7 @@
     "structHash": "d0be9af021e892a7"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ConsoleJanitor::Window state not initialized": {
    "kind": "patch",
@@ -5331,7 +5560,7 @@
     "structHash": "15d8bf0d336d94d9"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::CopyFileContents::[\"1+gGcK\"]": {
    "kind": "patch",
@@ -5387,7 +5616,7 @@
     "structHash": "b6aa0aa4ac859555"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::CrashHandler::.tx8CkI": {
    "kind": "patch",
@@ -5409,7 +5638,7 @@
     "structHash": "16781f24b9e96b06"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::CustomIdle::type:\"IDLE\",idle:": {
    "kind": "patch",
@@ -5437,7 +5666,7 @@
     "structHash": "ce6c02cfb614dd3c"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::DisableCallIdle::handleIdleUpdate(){": {
    "kind": "patch",
@@ -5493,7 +5722,7 @@
     "structHash": "b9e59436a4d0aedc"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::DisableCallIdle::this.idleTimeout.start(": {
    "kind": "patch",
@@ -5510,7 +5739,7 @@
     "structHash": "05deda727c5ec7cc"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::Experiments::Object.defineProperties(this,{isDeveloper": {
    "kind": "patch",
@@ -5531,7 +5760,7 @@
     "structHash": "ca8e2c76f121bca3"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::Experiments::type:\"user\",revision": {
    "kind": "patch",
@@ -5584,7 +5813,7 @@
     "structHash": "3023c28cc3a46d14"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::FavoriteEmojiFirst::numEmojiResults:": {
    "kind": "patch",
@@ -5640,7 +5869,7 @@
     "structHash": "425c40a482b8bea4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::FavoriteEmojiFirst::renderResults({results:": {
    "kind": "patch",
@@ -5668,7 +5897,7 @@
     "structHash": "6ec5c045d5da3d98"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::FixCodeblockGap::/^```(?:([a-z0-9_+\\-.#]+?)\\n)?\\n*([^\\n][^]*?)\\n*```": {
    "kind": "patch",
@@ -5724,7 +5953,7 @@
     "structHash": "9d5ddc9f0d9de026"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::FixImagesQuality::.handleImageLoad)": {
    "kind": "patch",
@@ -5753,7 +5982,7 @@
     "structHash": "ea349c44d925d735"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ForceOwnerCrown::.pclUFJ),children:": {
    "kind": "patch",
@@ -5784,7 +6013,7 @@
     "structHash": "983cdcd4954c680f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::FullUserInChatbox::\"text\":\"locked\"": {
    "kind": "patch",
@@ -5840,7 +6069,7 @@
     "structHash": "19d66169abb2ce7f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::GameActivityToggle::[\"5fWB8U\"]": {
    "kind": "patch",
@@ -5896,7 +6125,7 @@
     "structHash": "30da565383a13caf"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::GifPaste::handleSelectGIF=": {
    "kind": "patch",
@@ -5932,7 +6161,7 @@
     "structHash": "9676b5a39c770ada"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::GreetStickerPicker::Wumpus waves hello": {
    "kind": "patch",
@@ -5988,7 +6217,7 @@
     "structHash": "20be74dbf487378c"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::HideAttachments::this.renderAttachments(": {
    "kind": "patch",
@@ -6044,7 +6273,7 @@
     "structHash": "1eaa8d9761744452"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ILoveSpam::hasFlag:{writable": {
    "kind": "patch",
@@ -6063,7 +6292,7 @@
     "structHash": "f5a07386ebcdf514"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ImageFilename::.RESPONSIVE?": {
    "kind": "patch",
@@ -6103,7 +6332,7 @@
     "structHash": "d135b5a12804133a"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ImageLink::={linkCount:0,onlyLinks:!1};function ": {
    "kind": "patch",
@@ -6118,7 +6347,7 @@
     "structHash": "a6294a78bfef4ffb"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::IrcColors::.pclUFJ),children:": {
    "kind": "patch",
@@ -6149,7 +6378,7 @@
     "structHash": "983cdcd4954c680f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::IrcColors::=\"SYSTEM_TAG\"": {
    "kind": "patch",
@@ -6178,7 +6407,7 @@
     "structHash": "a604e1aecce6886f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::LoadingQuotes::.v0R1Lh": {
    "kind": "patch",
@@ -6234,7 +6463,7 @@
     "structHash": "b9e59436a4d0aedc"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::MCord Reporter::\"Could not find app-mount\"": {
    "kind": "patch",
@@ -6290,7 +6519,7 @@
     "structHash": "b9e59436a4d0aedc"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::MemberCount::{isSidebarVisible:": {
    "kind": "patch",
@@ -6322,7 +6551,7 @@
     "structHash": "dcb3013130dbb707"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::MemberListDecoratorsAPI::.pclUFJ),children:": {
    "kind": "patch",
@@ -6353,7 +6582,7 @@
     "structHash": "983cdcd4954c680f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::MemberListDecoratorsAPI::PrivateChannel.renderAvatar": {
    "kind": "patch",
@@ -6387,7 +6616,7 @@
     "structHash": "77b90ccccd2a6089"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::MentionAvatars::.USER_MENTION)": {
    "kind": "patch",
@@ -6406,7 +6635,7 @@
     "structHash": "10b9b178b4de7f66"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::MessageAccessoriesAPI::.faHmO3": {
    "kind": "patch",
@@ -6462,7 +6691,7 @@
     "structHash": "1eaa8d9761744452"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::MessageDecorationsAPI::[\"AeYyL+\"]": {
    "kind": "patch",
@@ -6518,7 +6747,7 @@
     "structHash": "f4ffab350494a853"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::MessageLatency::showCommunicationDisabledStyles": {
    "kind": "patch",
@@ -6574,7 +6803,7 @@
     "structHash": "f4ffab350494a853"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::MessageLogger::\"MessageStore\"": {
    "kind": "patch",
@@ -6607,7 +6836,7 @@
     "structHash": "1a5939c5e14fc395"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::MessageLogger::.C8sXIM": {
    "kind": "patch",
@@ -6627,7 +6856,7 @@
     "structHash": "cd4f09aa7cc0c9d0"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::MessageLogger::this.truncateTop": {
    "kind": "patch",
@@ -6648,7 +6877,7 @@
     "structHash": "436c3deb88a2b5d8"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::MessagePopoverAPI::.Lv7LxN),children": {
    "kind": "patch",
@@ -6704,7 +6933,7 @@
     "structHash": "b9e56ccac4c3bee4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::MessageUpdaterAPI::}renderStickersAccessories(": {
    "kind": "patch",
@@ -6760,7 +6989,7 @@
     "structHash": "1eaa8d9761744452"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::MoreQuickReactions::.Lv7LxN),children": {
    "kind": "patch",
@@ -6816,7 +7045,7 @@
     "structHash": "b9e56ccac4c3bee4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoBlockedMessages::\"MessageStore\"": {
    "kind": "patch",
@@ -6849,7 +7078,7 @@
     "structHash": "1a5939c5e14fc395"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoBlockedMessages::\"ReadStateStore\"": {
    "kind": "patch",
@@ -6894,7 +7123,7 @@
     "structHash": "6757e3364afc4e21"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoBlockedMessages::.__invalid_blocked,": {
    "kind": "patch",
@@ -6950,7 +7179,7 @@
     "structHash": "b9e56ccac4c3bee4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoF1::,\"f1\"],comboKeysBindGlobal:": {
    "kind": "patch",
@@ -7006,7 +7235,7 @@
     "structHash": "02f6c7e3ed9c7b1e"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoMaskedUrlPaste::.selection,preventEmojiSurrogates:": {
    "kind": "patch",
@@ -7054,7 +7283,7 @@
     "structHash": "a872e17fd83c3058"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoMirroredCamera::bStreamId:this.props.streamId": {
    "kind": "patch",
@@ -7072,7 +7301,7 @@
     "structHash": "8ec1dbe97d9f5f3f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoMirroredCamera::emptyPreviewAspectRatio:(?:[A-Za-z_$][\\w$]*)=\"16 \\/ 9\"": {
    "kind": "patch",
@@ -7096,7 +7325,7 @@
     "structHash": "af086a8b4807f1f7"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoMirroredCamera::reportContainerResized:!1}": {
    "kind": "patch",
@@ -7123,7 +7352,7 @@
     "structHash": "640455816ddfa626"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoOnboardingDelay::[\"Alcl/e\"]": {
    "kind": "patch",
@@ -7157,7 +7386,7 @@
     "structHash": "e7067dd73cb0a5e8"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoPendingCount::.getSpamChannelsCount();return": {
    "kind": "patch",
@@ -7174,7 +7403,7 @@
     "structHash": "7704fbbf3c359991"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoPendingCount::showProgressBadge:": {
    "kind": "patch",
@@ -7230,7 +7459,7 @@
     "structHash": "1e700328bbe9d951"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoProfileThemes::hasThemeColors(){": {
    "kind": "patch",
@@ -7245,7 +7474,7 @@
     "structHash": "fa0eac8f6c4cb140"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoReplyMention::,\"Message\")}function": {
    "kind": "patch",
@@ -7263,7 +7492,7 @@
     "structHash": "bfb532c0783d2e63"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoServerEmojis::}searchWithoutFetchingLatest(": {
    "kind": "patch",
@@ -7308,7 +7537,7 @@
     "structHash": "c87d43aa8806eb3e"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoSystemBadge::,setSystemTrayApplications": {
    "kind": "patch",
@@ -7364,7 +7593,7 @@
     "structHash": "d8440609a3e5b541"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoTrack::.METRICS_V2": {
    "kind": "patch",
@@ -7398,7 +7627,7 @@
     "structHash": "820902c3534dea37"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoTrack::AnalyticsActionHandlers.handle": {
    "kind": "patch",
@@ -7415,7 +7644,7 @@
     "structHash": "08a098636b4db428"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoTypingAnimation::dotCycle": {
    "kind": "patch",
@@ -7437,7 +7666,7 @@
     "structHash": "9c9d9a86cccf9175"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoUnblockToJump::[\"8t8doK\"]": {
    "kind": "patch",
@@ -7459,7 +7688,7 @@
     "structHash": "ea346f55f70028f2"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NoticesAPI::\"NoticeStore\"": {
    "kind": "patch",
@@ -7508,7 +7737,7 @@
     "structHash": "a2e05d8c10c23682"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::NotificationVolume::ensureAudio(){": {
    "kind": "patch",
@@ -7535,7 +7764,7 @@
     "structHash": "7a77b1ede53da5b5"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::OnePingPerDM::\"NotificationStore\"": {
    "kind": "patch",
@@ -7577,7 +7806,7 @@
     "structHash": "32a0edca6b6c8163"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::OpenInApp::trackAnnouncementMessageLinkClicked({": {
    "kind": "patch",
@@ -7615,7 +7844,7 @@
     "structHash": "7328beddaa86eb0d"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::OverrideForumDefaults::getDefaultLayout(){": {
    "kind": "patch",
@@ -7643,7 +7872,7 @@
     "structHash": "b247a3a10b47316c"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::PermissionFreeWill::.bTS5lf": {
    "kind": "patch",
@@ -7699,7 +7928,7 @@
     "structHash": "b131e1465680eac7"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::PermissionFreeWill::[\"Zaz+un\"]": {
    "kind": "patch",
@@ -7716,7 +7945,7 @@
     "structHash": "37a3e04c2b4b5e8a"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::PictureInPicture::[\"VIDEO\",\"CLIP\",\"AUDIO\"]": {
    "kind": "patch",
@@ -7755,7 +7984,7 @@
     "structHash": "fab725655ff5b384"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ReactErrorDecoder::React has blocked a javascript: URL as a security precaution.": {
    "kind": "patch",
@@ -7811,7 +8040,7 @@
     "structHash": "52a08f6895f81347"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::Recovery::.tx8CkI": {
    "kind": "patch",
@@ -7833,7 +8062,7 @@
     "structHash": "16781f24b9e96b06"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::RelationshipNotifier::async leaveGuild(": {
    "kind": "patch",
@@ -7871,7 +8100,7 @@
     "structHash": "f5589734590c353d"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::RelationshipNotifier::removeRelationship:(": {
    "kind": "patch",
@@ -7897,7 +8126,7 @@
     "structHash": "2c39967b0553c678"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ReplyTimestamp::[\"1i+hMi\"]": {
    "kind": "patch",
@@ -7935,7 +8164,7 @@
     "structHash": "ef12c467da8b73aa"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::RevealAllSpoilers::.removeObscurity,": {
    "kind": "patch",
@@ -7969,7 +8198,7 @@
     "structHash": "4133a44487dee305"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::RoleColorEverywhere::.USER_MENTION)": {
    "kind": "patch",
@@ -7988,7 +8217,7 @@
     "structHash": "10b9b178b4de7f66"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::RoleColorEverywhere::[\"pFO/Ph\"])]": {
    "kind": "patch",
@@ -8039,7 +8268,7 @@
     "structHash": "5bca7a99a55c76d8"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ServerListAPI::.Be8Q5E": {
    "kind": "patch",
@@ -8095,7 +8324,7 @@
     "structHash": "1e700328bbe9d951"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ServerListAPI::.setGuildsTree(": {
    "kind": "patch",
@@ -8151,7 +8380,7 @@
     "structHash": "1e700328bbe9d951"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ShowAllMessageButtons::.Lv7LxN),children": {
    "kind": "patch",
@@ -8207,7 +8436,7 @@
     "structHash": "b9e56ccac4c3bee4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ShowHiddenThings::,checkElevated:!1}\\),(?:[A-Za-z_$][\\w$]*)\\.(?:[A-Za-z_$][\\w$]*)\\)}(?<=getCurrentUser\\(\\);return.+?)": {
    "kind": "patch",
@@ -8222,7 +8451,7 @@
     "structHash": "2735c97fbe725a59"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ShowHiddenThings::INVITES_DISABLED)||": {
    "kind": "patch",
@@ -8237,7 +8466,7 @@
     "structHash": "d05338833011432d"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ShowHiddenThings::[\"93S+lG\"]),children:": {
    "kind": "patch",
@@ -8293,7 +8522,7 @@
     "structHash": "0fb8dff151ba7023"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ShowHiddenThings::action:\"PRESS_MOD_VIEW\",icon:": {
    "kind": "patch",
@@ -8320,7 +8549,7 @@
     "structHash": "32d6870a499fee77"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ShowHiddenThings::showCommunicationDisabledStyles": {
    "kind": "patch",
@@ -8376,7 +8605,7 @@
     "structHash": "f4ffab350494a853"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ShowMeYourName::=\"SYSTEM_TAG\"": {
    "kind": "patch",
@@ -8405,7 +8634,7 @@
     "structHash": "a604e1aecce6886f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ShowTimeoutDuration::[\"AeYyL+\"]": {
    "kind": "patch",
@@ -8461,7 +8690,7 @@
     "structHash": "f4ffab350494a853"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::SilentTyping::.dispatch({type:\"TYPING_START_LOCAL\"": {
    "kind": "patch",
@@ -8479,7 +8708,7 @@
     "structHash": "dacb60249640aa1b"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::SortFriendRequests::getRelationshipCounts(){": {
    "kind": "patch",
@@ -8496,7 +8725,7 @@
     "structHash": "e7142c54db45e396"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::SpotifyCrack::dispatch({type:\"SPOTIFY_PROFILE_UPDATE\"": {
    "kind": "patch",
@@ -8524,7 +8753,7 @@
     "structHash": "2a15283d22b9f9f5"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::SpotifyCrack::}getPlayableComputerDevices(){": {
    "kind": "patch",
@@ -8564,7 +8793,7 @@
     "structHash": "daf7ba0a6f67e74f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::StickerPaste::.stickers,previewSticker:": {
    "kind": "patch",
@@ -8596,7 +8825,7 @@
     "structHash": "f4beac7260d4910c"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::SuperReactionTweaks::,BURST_REACTION_EFFECT_PLAY": {
    "kind": "patch",
@@ -8617,7 +8846,7 @@
     "structHash": "9cf3421d5bd7ef20"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::SuperReactionTweaks::.EMOJI_PICKER_CONSTANTS_EMOJI_CONTAINER_PADDING_HORIZONTAL)": {
    "kind": "patch",
@@ -8673,7 +8902,7 @@
     "structHash": "947b517878990856"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::TypingIndicator::M0 15H2c0 1.6569": {
    "kind": "patch",
@@ -8729,7 +8958,7 @@
     "structHash": "c9a4816ad29d3672"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::TypingIndicator::UNREAD_IMPORTANT:": {
    "kind": "patch",
@@ -8762,7 +8991,7 @@
     "structHash": "f00b39e1ac712318"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::TypingTweaks::.Q8lUnE": {
    "kind": "patch",
@@ -8802,7 +9031,7 @@
     "structHash": "09618b5d3b2293ae"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::UnlockedAvatarZoom::.DxAYCF": {
    "kind": "patch",
@@ -8858,7 +9087,7 @@
     "structHash": "2f11730a2a8e9386"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::UserSettingsAPI::,updateSetting:": {
    "kind": "patch",
@@ -8914,7 +9143,7 @@
     "structHash": "dd894b7fc86431ce"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ValidReply::ReferencedMessageStore": {
    "kind": "patch",
@@ -8936,7 +9165,7 @@
     "structHash": "085bd8501d16ca03"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ValidReply::[\"1i+hMi\"]": {
    "kind": "patch",
@@ -8974,7 +9203,7 @@
     "structHash": "ef12c467da8b73aa"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ValidUser::\"@here\"===": {
    "kind": "patch",
@@ -8994,7 +9223,7 @@
     "structHash": "93534aa3ed1c6039"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::ValidUser::unknownUserMentionPlaceholder:": {
    "kind": "patch",
@@ -9023,7 +9252,7 @@
     "structHash": "2e933f317c0b6ae7"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::VoiceChatDoubleClick::.handleClickChat": {
    "kind": "patch",
@@ -9079,7 +9308,7 @@
     "structHash": "c9a4816ad29d3672"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::VoiceChatDoubleClick::className:\"channelMention\",children:[null!=": {
    "kind": "patch",
@@ -9098,7 +9327,7 @@
     "structHash": "0832f22803b1a14a"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::VoiceDownload::.LgCPMt": {
    "kind": "patch",
@@ -9154,7 +9383,7 @@
     "structHash": "b6aa0aa4ac859555"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::VolumeBooster::.m7TNdF": {
    "kind": "patch",
@@ -9172,7 +9401,7 @@
     "structHash": "b06a0ba97ba9eda9"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::VolumeBooster::=\"MediaEngineStore\",": {
    "kind": "patch",
@@ -9228,7 +9457,7 @@
     "structHash": "40d0d772d8ed76eb"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::VolumeBooster::AudioContextSettingsMigrated": {
    "kind": "patch",
@@ -9246,7 +9475,7 @@
     "structHash": "2fe853c52673b20c"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::VolumeBooster::currentVolume:": {
    "kind": "patch",
@@ -9261,7 +9490,7 @@
     "structHash": "22c53e6e9c3cc779"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   },
   "patch::WhoReacted::,reactionRef:": {
    "kind": "patch",
@@ -9306,7 +9535,7 @@
     "structHash": "c597bca3d9cdcbe0"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:33:44.202Z"
+   "updatedAt": "2026-10-01T13:38:07.991Z"
   }
  }
 }
