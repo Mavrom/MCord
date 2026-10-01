@@ -56,7 +56,6 @@ export const ENVIRONMENT_LIMITED_FINDS = [
     ["MenuGroup", "MenuItem", "MenuSeparator"],
     ["SUPPORTS_COPY", "copy"],
     ["setHangStatus", "clearHangStatus"],
-    ["getVideoDeviceId", "mirror"],
     // stable'da bulunuyor, canary'de o chunk `/login`'de yüklenmiyor.
     ["selectChannel", "selectVoiceChannel"]
 ].map(keys => `byKeys(${keys.map(k => JSON.stringify(k)).join(", ")})`);
