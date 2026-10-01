@@ -14,7 +14,9 @@ export default definePlugin({
     tags: ["mesaj", "görünüm"],
 
     patches: [{
-        find: "#{intl::MESSAGE_UTILITIES_A11Y_LABEL}",
+        // Anahtar artık bağlam menüsü modülünde de geçiyor; `),children` yalnız
+        // hover araç çubuğunun `aria-label`'ında (Vencord ile aynı).
+        find: "#{intl::MESSAGE_UTILITIES_A11Y_LABEL}),children",
         reason: "Mesaj işlem çubuğunun genişletilmiş hali inline Shift koşuluyla seçiliyor.",
         replacement: {
             match: /isExpanded:\i&&(.+?),/,
