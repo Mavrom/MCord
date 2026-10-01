@@ -25,7 +25,9 @@ export default definePlugin({
     settings,
 
     patches: [{
-        find: "#{intl::MESSAGE_UTILITIES_A11Y_LABEL}",
+        // Anahtar artık bağlam menüsü modülünde de geçiyor; `),children` yalnız
+        // hover araç çubuğunun `aria-label`'ında (Vencord ile aynı).
+        find: "#{intl::MESSAGE_UTILITIES_A11Y_LABEL}),children",
         reason: "Hızlı reaksiyon dizisi mesaj hover araç çubuğunda üç öğeye inline dilimleniyor.",
         replacement: {
             match: /(?<=length>=3\?.{0,50})\.slice\(0,3\)/,
