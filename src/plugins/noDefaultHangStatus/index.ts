@@ -6,17 +6,26 @@
 
 import { Devs } from "../../utils/constants";
 import { definePlugin, StartAt } from "../../utils/types";
-import { byKeys } from "../../webpack/filters";
-import { reportFinder, waitFor } from "../../webpack/lazy";
+import { findStoreLazy, waitForStore } from "../../webpack/lazy";
 
 /** Modul kapsaminda kayit: plugin kapaliyken de CI dogruluyor. */
-const HANG_STATUS = reportFinder(byKeys(["setHangStatus", "clearHangStatus"]));
+findStoreLazy("SelfPresenceStore");
+
+/** Discord'un `ActivityTypes.HANG_STATUS` değeri (sabit gateway sözleşmesi). */
+const HANG_STATUS = 6;
 
 /**
- * SCAFFOLD — bilinen bir istemci modundaki aynı işlevin MCord API'siyle
- * yeniden yazımı. Kullanılan webpack aramaları ve patch noktaları canlı
- * Discord'da doğrulanmalı; Discord modülü yeniden adlandırdıysa `start`
- * sessizce uyarı basar ve plugin no-op olur (güvenli mod ilkesi).
+ * Discord güncel istemciden hang status ayarlayıcılarını (`setHangStatus`,
+ * `clearHangStatus`) ve otomatik seçimi tamamen kaldırdı; build'de yalnız
+ * başkalarının durumlarını süzen `HANG_STATUS` filtreleri kaldı. Vencord'daki
+ * eski `noDefaultHangStatus` da aynı sebeple silindi, taşınacak bir karşılık yok.
+ *
+ * Özelliği koruyan en dar nokta: gateway'e giden kendi varlık bilgimiz.
+ * `SelfPresenceStore.getLocalPresence()` bağlantının `PRESENCE_UPDATE`
+ * gönderdiği tek kaynak; oradan `HANG_STATUS` tipindeki aktiviteleri
+ * süzüyoruz. Discord bir gün otomatik hang status'u geri getirirse bile
+ * başkalarına gitmiyor. Bugünkü build'de süzülecek bir şey olmadığı için
+ * davranış değişmiyor.
  */
 export default definePlugin({
     name: "NoDefaultHangStatus",
@@ -29,12 +38,21 @@ export default definePlugin({
     cancel: undefined as (() => void) | undefined,
 
     start() {
-        // waitFor: modul yuklenene kadar bekler VE reporter'a kaydolur.
-        // Eski eager findByKeys, modul o an yuklu olmadigi icin hic calismiyordu.
-        this.cancel = waitFor(HANG_STATUS, (HangStatus: any) => {
-            if (typeof HangStatus?.setHangStatus !== "function") return;
-            this.patcher.instead(HangStatus, "setHangStatus", () => undefined);
-        }, { silent: true });
+        this.cancel = waitForStore("SelfPresenceStore", (store: any) => {
+            if (typeof store?.getLocalPresence !== "function") return;
+
+            this.patcher.after(store, "getLocalPresence", (_self, _args, presence) => {
+                const activities = presence?.activities;
+                if (!Array.isArray(activities)) return presence;
+
+                const filtered = activities.filter((activity: any) => activity?.type !== HANG_STATUS);
+                // Değişiklik yoksa aynı nesne: Discord'un "değişti mi"
+                // karşılaştırması gereksiz yere presence göndermesin.
+                return filtered.length === activities.length
+                    ? presence
+                    : { ...presence, activities: filtered };
+            });
+        });
     },
 
     stop() {
