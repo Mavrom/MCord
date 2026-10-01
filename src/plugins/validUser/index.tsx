@@ -171,7 +171,9 @@ export default definePlugin({
 
     patches: [
         {
-            find: 'className:"mention"',
+            // `className:"mention"` artık üç modülde geçiyor; `"@here"===` yalnız
+            // bahsetme kuralının react() rol/kullanıcı ayrımında var.
+            find: '"@here"===',
             reason: "Bahsetme kuralının react() fonksiyonu RoleMention/UserMention seçimini burada yapıyor.",
             replacement: {
                 // mention = { react: function (data, parse, props) { if (data.userId == null) return RoleMention() else return UserMention()
