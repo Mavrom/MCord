@@ -165,12 +165,14 @@ export const moment: any = findByPropsLazy("parseTwoDigitYear");
 export const lodash: any = findByPropsLazy("debounce", "cloneDeep");
 
 /**
- * Kullanıcı ayarlarını açan modül: `openUserSettings(section)` +
- * `USER_SETTINGS_MODAL_KEY`. Eski `open`/`saveAccountChanges` modülü Discord'da
- * artık yok (Vencord da bu anahtarları arıyor). Eski tanımdaki `??` geri dönüşü
- * hiç çalışmıyordu: tembel proxy asla `null` olmaz.
+ * Kullanıcı ayarlarını açan modül: `openUserSettings(section)`. Eski
+ * `open`/`saveAccountChanges` modülü Discord'da artık yok. Stable 222f262f'de
+ * modal anahtarı (`"USER_SETTINGS_MODAL_MODAL_KEY"`) kendi küçük modülüne
+ * taşındı; bu modül yalnız `openUserSettings` export ediyor (Vencord hâlâ
+ * `USER_SETTINGS_MODAL_KEY`'i de arıyor, yeni build'de o arama boş dönüyor).
+ * Eski tanımdaki `??` geri dönüşü hiç çalışmıyordu: tembel proxy asla `null` olmaz.
  */
-export const SettingsRouter = findByPropsLazy("openUserSettings", "USER_SETTINGS_MODAL_KEY") as any;
+export const SettingsRouter = findByPropsLazy("openUserSettings") as any;
 
 const ToastsExports = mapMangledModuleLazy(".currentToastMap.has(", {
     showToast: byCode(".currentToastMap.has("),
