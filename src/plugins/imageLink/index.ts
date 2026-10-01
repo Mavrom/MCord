@@ -14,9 +14,11 @@ export default definePlugin({
     tags: ["medya", "bağlantı"],
 
     patches: [{
-        find: "unknownUserMentionPlaceholder:",
+        // Embed kontrolü render modülünden küçük bir util modülüne taşındı (Vencord ile aynı find).
+        find: "={linkCount:0,onlyLinks:!1};function ",
         reason: "Salt görsel bağlantısını gizleme kararı mesaj içerik render'ında yerel embed kontrolü.",
         replacement: {
+            // SimpleEmbedTypes.has(embed.type) && isEmbedInline(embed)
             match: /\i\.has\(\i\.type\)&&\(0,\i\.\i\)\(\i\)/,
             replace: "false"
         }
