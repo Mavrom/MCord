@@ -52,8 +52,6 @@ export const ENVIRONMENT_LIMITED_FINDS = [
     ["clearCache", "_channelMessages"],
     ["deleteMessage", "startEditMessage"],
     ["open", "saveAccountChanges"],
-    ["open", "setSection", "saveAccountChanges"],
-    ["useDefaultUserSettingsSections"],
     ["ModalRoot", "ModalHeader", "ModalContent"],
     ["MenuGroup", "MenuItem", "MenuSeparator"],
     ["SUPPORTS_COPY", "copy"],

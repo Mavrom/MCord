@@ -22,7 +22,9 @@ describe("ortam kısıtlı işaretleme", () => {
 
     it("byKeys aramalarını describeFilter biçimiyle tanır", () => {
         expect(isEnvironmentLimitedLabel('byKeys("clearCache", "_channelMessages")')).toBe(true);
-        expect(isEnvironmentLimitedDescription('byKeys("useDefaultUserSettingsSections")')).toBe(true);
+        expect(isEnvironmentLimitedDescription('byKeys("deleteMessage", "startEditMessage")')).toBe(true);
+        // Kod patch'ine taşınan eski aramalar artık gizlenmiyor.
+        expect(isEnvironmentLimitedDescription('byKeys("useDefaultUserSettingsSections")')).toBe(false);
         expect(isEnvironmentLimitedLabel('byKeys("clearCache")')).toBe(false);
         expect(isEnvironmentLimitedLabel('byProps("clearCache", "_channelMessages")')).toBe(false);
         for (const d of ENVIRONMENT_LIMITED_FINDS) expect(isEnvironmentLimitedLabel(d)).toBe(true);
