@@ -126,7 +126,7 @@
    "kind": "finder",
    "plugin": null,
    "label": "<anonim filtre 79e6f06a: (m) => typeof m?.ADMINISTRATOR === \"bigint\">",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "652215",
    "excerpt": "652215(e,t,n){\"use strict\";n.d(t,{$4X:()=>nJ,$8o:()=>nO,$OG:()=>i1,$aF:()=>iv,$jw:()=>rz,$pd:()=>ic,AD1:()=>tW.AD,AKn:()=>az,AMi:()=>rd,AO_:()=>rW,Ahp:()=>iG,Ajs:()=>aZ,An1:()=>aj,AnalyticsObjectTypes:()=>i0,Auw:()=>tU.A,BBH:()=>iK,BEX:()=>tQ,BIo:()=>rP,BRT:()=>ad,BVt:()=>tH.BV,BYE:()=>rE,CS1:()=>nq,CT4:()=>tY.CT,CUs:()=>r1,CmT:()=>tW.Cm,D0I:()=>nU,D2K:()=>rk,DUB:()=>rF,DYY:()=>tW.DY,Dmq:()=>rR,Dp",
    "fingerprint": {
@@ -173,7 +173,7 @@
      "SEARCH_SOUNDBOARD"
     ],
     "exports": [],
-    "structHash": "fcddd0fdb267714b"
+    "structHash": "144325f686a9e9fb"
    },
    "shape": [
     "ADD_REACTIONS",
@@ -227,7 +227,7 @@
     "USE_VAD",
     "VIEW_AUDIT_LOG"
    ],
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "finder::<anonim filtre bd1f7641: (m) => m.show && m.dismiss && !m.suppressAll>": {
    "kind": "finder",
@@ -330,9 +330,9 @@
    "kind": "finder",
    "plugin": null,
    "label": "byCode(\".USER_MENTION)\")",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "288539",
-   "excerpt": ",async()=>{let{default:e}=await Promise.all([n.e(\"926132\"),n.e(\"146652\"),n.e(\"660829\")]).then(n.bind(n,446828));return n=>(0,l.jsx)(e,{...n,userId:t})})},[t]);return(0,l.jsx)(d.A,{className:s,onClick:o,onContextMenu:u,children:r})}function E(e){let{className:t,userId:c,channelId:E,parsedUserId:I,content:y,inlinePreview:S=!1,viewingChannelId:v}=e,N=i.useRef(null),{analyticsLocations:_}=(0,u.Ay)(o.A.USER_MENTION),j=(0,r.bG)([g.default],()=>g.default.getUser(c)),b=(0,r.bG)([m.A],()=>m.A.getChannel(E)),T=null!=b?b.getGuildId():null,R=S||null==j||null==E||null==b?void 0:e=>{null!=T?(0,a.L3)(e,async()=>{let{default:e}=await Promise.all([n.e(\"403382\"),n.e(\"207322\"),n.e(\"622936\"),n.e(\"216947\"),n.e(\"463317\"),n.e(\"326692\"),n.e(\"834552\"),n.e(\"708757\"),n.e(\"993103\"),n.e(\"585968\"),n.e(\"893190\"),n.e(\"21921\"),n.e(\"676",
+   "excerpt": ",async()=>{let{default:e}=await Promise.all([n.e(\"926132\"),n.e(\"146652\"),n.e(\"660829\")]).then(n.bind(n,446828));return n=>(0,l.jsx)(e,{...n,userId:t})})},[t]);return(0,l.jsx)(d.A,{className:s,onClick:o,onContextMenu:u,children:r})}function E(e){let{className:t,userId:c,channelId:E,parsedUserId:I,content:y,inlinePreview:S=!1,viewingChannelId:v}=e,N=i.useRef(null),{analyticsLocations:_}=(0,u.Ay)(o.A.USER_MENTION),j=(0,r.bG)([g.default],()=>g.default.getUser(c)),b=(0,r.bG)([h.A],()=>h.A.getChannel(E)),T=null!=b?b.getGuildId():null,R=S||null==j||null==E||null==b?void 0:e=>{null!=T?(0,a.L3)(e,async()=>{let{default:e}=await Promise.all([n.e(\"403382\"),n.e(\"597981\"),n.e(\"622936\"),n.e(\"216947\"),n.e(\"463317\"),n.e(\"326692\"),n.e(\"993103\"),n.e(\"834552\"),n.e(\"708757\"),n.e(\"585968\"),n.e(\"893190\"),n.e(\"21921\"),n.e(\"571",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -340,12 +340,12 @@
      "right"
     ],
     "exports": [],
-    "structHash": "10b9b178b4de7f66"
+    "structHash": "8ac7ec393f5a1fdc"
    },
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "finder::byCode(\"Unexpected mismatch between files and file metadata\")": {
    "kind": "finder",
@@ -832,7 +832,7 @@
    "kind": "finder",
    "plugin": null,
    "label": "byKeys(\"deleteMessage\", \"startEditMessage\")",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "148494",
    "excerpt": "has(E.body.code)?o.h.dispatch({type:\"MESSAGE_SEND_FAILED_AUTOMOD\",messageData:ec,errorResponseBody:{code:E.body.code,message:E.body.message}}):E.body.code===D.t02.POGGERMODE_TEMPORARILY_DISABLED?o.h.dispatch({type:\"POGGERMODE_TEMPORARILY_DISABLED\"}):E.body.code===D.t02.EXPLICIT_CONTENT?t=eB.ty.EXPLICIT_CONTENT:null!=R||Q||null!=b||ez.sendClydeError(e,E.body.code);r?null!=eO.A.getMessage(e,ea)&&ez.deleteMessage(e,ea,!0):(null!=i&&o.h.dispatch({type:\"UPLOAD_FAIL\",channelId:e,file:i._file,messageId:ea,reason:t,noSendFailed:!0}),E.hasErr||t!==eB.ty.EXPLICIT_CONTENT||ez.sendExplicitMediaClydeError(e,E.body?.attachments,N.SW.EXPLICIT_MEDIA_MESSAGE_SEND_BLOCKED),o.h.dispatch({type:\"MESSAGE_SEND_FAILED\",messageId:ea,channelId:e,shouldNotify:!n.doNotNotifyOnError,reason:t}),(0,er.O)({failureCode:E.hasErr?void 0",
    "fingerprint": {
@@ -879,7 +879,7 @@
      ",discriminator:D.h3J,avatar:"
     ],
     "exports": [],
-    "structHash": "9b2733d74df53d75"
+    "structHash": "aa8889c2589a0038"
    },
    "shape": [
     "_sendMessage",
@@ -926,13 +926,13 @@
     "updateEditMessage",
     "validateMessage"
    ],
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "finder::byKeys(\"editMessage\", \"sendMessage\")": {
    "kind": "finder",
    "plugin": null,
    "label": "byKeys(\"editMessage\", \"sendMessage\")",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "148494",
    "excerpt": ".join(\"\\n\");o.h.dispatch({type:\"MESSAGE_START_EDIT\",channelId:e,messageId:t.id,content:r,source:n});return}}o.h.dispatch({type:\"MESSAGE_START_EDIT\",channelId:e,messageId:t.id,content:t.content,source:n})},updateEditMessage(e,t,n){o.h.dispatch({type:\"MESSAGE_UPDATE_EDIT\",channelId:e,textValue:t,richValue:n})},endEditMessage(e,t){o.h.dispatch({type:\"MESSAGE_END_EDIT\",channelId:e,response:t})},async editMessage(e,t,n){let i,{content:r,components:a}=n;await eT.A.unarchiveThreadIfNecessary(e);let s=function(e,t){let n=eO.A.getMessage(e,t);if(null==n||n.type!==D.lAJ.REPLY)return;let i=eA.A.getMessageByReference(n.messageReference);if(i.state===eA.a.LOADED&&!n.mentions.includes(i.message.author.id))return{parse:Object.values(D.uw8),replied_user:!1}}(e,t),d=null!=(i=eO.A.getMessage(e,t))&&i.hasFlag(D.pr7.CRO",
    "fingerprint": {
@@ -979,7 +979,7 @@
      ",discriminator:D.h3J,avatar:"
     ],
     "exports": [],
-    "structHash": "9b2733d74df53d75"
+    "structHash": "aa8889c2589a0038"
    },
    "shape": [
     "_sendMessage",
@@ -1026,21 +1026,21 @@
     "updateEditMessage",
     "validateMessage"
    ],
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "finder::byKeys(\"fromTimestamp\", \"extractTimestamp\")": {
    "kind": "finder",
    "plugin": null,
    "label": "byKeys(\"fromTimestamp\", \"extractTimestamp\")",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "935208",
-   "excerpt": "overflow: ${this.seq}`);return this.seq++}willOverflowNext(){return this.seq>4095}reset(){this.seq=0}}let u={age:function(e){return Date.now()-o(e)},extractTimestamp:function(e){return o(e)},compare:function(e,t){return e===t?0:null==t?1:null==e?-1:e.length>t.length?1:e.length<t.length?-1:e>t?1:-1},atPreviousMillisecond:function(e){return d(o(e)-1)},atNextMillisecond:function(e){return d(o(e)+1)},fromTimestamp:function(e){return d(e)},fromTimestampWithSequence:function(e,t){let n;return n=e-l,s()(n<=0?0:n).shiftLeft(22).add(t.next()).toString()},keys:function(e){return Object.keys(e)},forEach:function(e,t){r().forEach(e,(e,n)=>t(e,n))},forEachKey:function(e,t){for(let n in e)t(n)},entries:function(e){return Object.entries(e)},isProbablyAValidSnowflake:function(e){if(null==e||!/^\\d{17,19}$/.test(e))retu",
+   "excerpt": "mestamp:function(e){return o(e)},getNonTimestampBits:function(e){return s()(e).and(c).toJSNumber()},setNonTimestampBits:function(e,t){return s()(e).and(c.not()).or(s()(t).and(c)).toString()},compare:function(e,t){return e===t?0:null==t?1:null==e?-1:e.length>t.length?1:e.length<t.length?-1:e>t?1:-1},atPreviousMillisecond:function(e){return d(o(e)-1)},atNextMillisecond:function(e){return d(o(e)+1)},fromTimestamp:function(e){return d(e)},fromTimestampWithSequence:function(e,t){let n;return n=e-l,s()(n<=0?0:n).shiftLeft(22).add(t.next()).toString()},keys:function(e){return Object.keys(e)},forEach:function(e,t){r().forEach(e,(e,n)=>t(e,n))},forEachKey:function(e,t){for(let n in e)t(n)},entries:function(e){return Object.entries(e)},isProbablyAValidSnowflake:function(e){if(null==e||!/^\\d{17,19}$/.test(e))retu",
    "fingerprint": {
     "strings": [
      "use strict"
     ],
     "exports": [],
-    "structHash": "10e401b6e6a76a3c"
+    "structHash": "c55f0df8d9df6c3e"
    },
    "shape": [
     "age",
@@ -1057,10 +1057,12 @@
     "forEachKey",
     "fromTimestamp",
     "fromTimestampWithSequence",
+    "getNonTimestampBits",
     "isProbablyAValidSnowflake",
-    "keys"
+    "keys",
+    "setNonTimestampBits"
    ],
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "finder::byKeys(\"getGuildBannerURL\", \"getUserAvatarURL\")": {
    "kind": "finder",
@@ -1319,6 +1321,28 @@
    ],
    "updatedAt": "2026-10-01T13:38:07.991Z"
   },
+  "finder::byKeys(\"openUserSettings\")": {
+   "kind": "finder",
+   "plugin": null,
+   "label": "byKeys(\"openUserSettings\")",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "766075",
+   "excerpt": "766075(e,t,n){\"use strict\";n.r(t),n.d(t,{openUserSettings:()=>A});var i=n(477900),r=n(192308),a=n(231723),s=n(228366),l=n(790284),o=n(272053),d=n(280450),c=n(843010),u=n(402651),_=n(355097),E=n(941933);async function A(e){let{path:t,stackingBehavior:A=\"replaceAll\",searchParams:h,analyticsLocations:I}=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},f=arguments.length>2?arguments[2]:void 0;if(d.default.isAuthenticated()){if(null!=t&&t===_.od.SUB",
+   "fingerprint": {
+    "strings": [
+     "use strict",
+     "replaceAll",
+     "USER_SETTINGS_MODAL_OPEN"
+    ],
+    "exports": [],
+    "structHash": "b71f1f0861086fe1"
+   },
+   "shape": [
+    "__esModule",
+    "openUserSettings"
+   ],
+   "updatedAt": "2026-10-01T22:03:11.268Z"
+  },
   "finder::byKeys(\"openUserSettings\", \"USER_SETTINGS_MODAL_KEY\")": {
    "kind": "finder",
    "plugin": null,
@@ -1347,9 +1371,9 @@
    "kind": "finder",
    "plugin": null,
    "label": "byKeys(\"parseTopic\", \"parse\")",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "46054",
-   "excerpt": "AndInjectMentionRule:d,createReactRules:r.Ay,defaultReactRuleOptions:h,get defaultRules(){return m()},get guildEventRules(){return S()},get guildEventLocationRules(){return v()},get notifCenterV2MessagePreviewRules(){return _()},lockscreenWidgetMessageRules:j,astParserFor:s.X,reactParserFor:s.aV,parse:function(){for(var e=arguments.length,t=Array(e),n=0;n<e;n++)t[n]=arguments[n];return b()(...t)},parseTopic:(e,t,n,l)=>T()(e,t,{allowLinks:!0,allowGameMentions:!0,...n},l),parseTruncatedTopic:(e,t,n,l)=>R()(e,t,{allowLinks:!0,allowGameMentions:!0,...n},l),parseVoiceChannelStatus:function(){for(var e=arguments.length,t=Array(e),n=0;n<e;n++)t[n]=arguments[n];return O()(...t)},parseEmbedTitle:function(){for(var e=arguments.length,t=Array(e),n=0;n<e;n++)t[n]=arguments[n];return M()(...t)},parseEmbedTitleWi",
+   "excerpt": "AndInjectMentionRule:d,createReactRules:r.Ay,defaultReactRuleOptions:m,get defaultRules(){return h()},get guildEventRules(){return S()},get guildEventLocationRules(){return v()},get notifCenterV2MessagePreviewRules(){return _()},lockscreenWidgetMessageRules:j,astParserFor:s.X,reactParserFor:s.aV,parse:function(){for(var e=arguments.length,t=Array(e),n=0;n<e;n++)t[n]=arguments[n];return b()(...t)},parseTopic:(e,t,n,l)=>T()(e,t,{allowLinks:!0,allowGameMentions:!0,...n},l),parseTruncatedTopic:(e,t,n,l)=>R()(e,t,{allowLinks:!0,allowGameMentions:!0,...n},l),parseVoiceChannelStatus:function(){for(var e=arguments.length,t=Array(e),n=0;n<e;n++)t[n]=arguments[n];return O()(...t)},parseEmbedTitle:function(){for(var e=arguments.length,t=Array(e),n=0;n<e;n++)t[n]=arguments[n];return L()(...t)},parseEmbedTitleWi",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -1367,7 +1391,7 @@
      "heading"
     ],
     "exports": [],
-    "structHash": "b21fc2f0de973a33"
+    "structHash": "ef69931ff7025cdf"
    },
    "shape": [
     "astParserFor",
@@ -1398,7 +1422,7 @@
     "parseVoiceChannelStatus",
     "reactParserFor"
    ],
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "finder::byKeys(\"parseTwoDigitYear\")": {
    "kind": "finder",
@@ -1576,7 +1600,7 @@
    "kind": "finder",
    "plugin": null,
    "label": "byKeys(\"selectChannel\", \"selectVoiceChannel\")",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "730852",
    "excerpt": "=n(323073),a=n(469802),s=n(643501),l=n(574172),o=n(976860),d=n(288254),c=n(734057),u=n(25578),_=n(132500),E=n(192308),A=n(890615),h=n(51758),I=n(776781),f=n(96566),p=n(712711),T=n(95561),m=n(329551),g=n(912630),S=n(965162),N=n(763827),C=n(309010),O=n(287809),R=n(53857),L=n(71393),y=n(834942),D=n(576705),v=n(977997),b=n(147036);let M={fromGuildId:void 0,fromChannelId:void 0};var P=n(652215);let U={selectChannel(e){let{guildId:t,channelId:n,messageId:r,jumpType:a,source:s,skipMessageFetch:l,opensChannel:o}=e,{fromGuildId:d,fromChannelId:c}=M;i.h.dispatch({type:\"CHANNEL_SELECT\",guildId:t===P.ME?null:t,channelId:n,fromGuildId:d,fromChannelId:c,messageId:r,jumpType:a,source:s,skipMessageFetch:l,opensChannel:o})},selectPrivateChannel(e){(0,o.pX)(P.BVt.CHANNEL(P.ME,e))},selectVoiceChannel(e){let t=arguments.l",
    "fingerprint": {
@@ -1588,7 +1612,7 @@
      "VOICE_CHANNEL_SELECT"
     ],
     "exports": [],
-    "structHash": "3dc1f7d7cb7ee030"
+    "structHash": "df2650a8afada853"
    },
    "shape": [
     "disconnect",
@@ -1596,13 +1620,13 @@
     "selectPrivateChannel",
     "selectVoiceChannel"
    ],
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "finder::byKeys(\"sendMessage\", \"editMessage\")": {
    "kind": "finder",
    "plugin": null,
    "label": "byKeys(\"sendMessage\", \"editMessage\")",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "148494",
    "excerpt": "\"CLOUD_UPLOAD_NOT_FOUND\",messageGetter:()=>eV.intl.string(eV.t.bQldfH)},[D.t02.INVALID_PERMISSIONS]:{messageName:\"INVALID_PERMISSIONS\",messageGetter:()=>eV.intl.string(eV.t.zl4Weq)}},ez={receiveMessage(e,t){let n=arguments.length>2&&void 0!==arguments[2]&&arguments[2],i=arguments.length>3&&void 0!==arguments[3]?arguments[3]:{};o.h.dispatch({type:\"MESSAGE_CREATE\",channelId:e,message:t,optimistic:n,sendMessageOptions:i,isPushNotification:!1})},sendBotMessage(e,t,n,i){null!=n&&_.Ay.trackWithMetadata(D.HAw.AUTOMATED_MESSAGE_RECEIVED,{message_author:\"Clyde\",message_name:n}),ez.receiveMessage(e,(0,en.pO)({messageId:i,channelId:e,content:t,loggingName:n}))},sendNitroSystemMessage(e,t,n){let i=(0,en.Ay)({channelId:e,nonce:n,type:D.lAJ.NITRO_NOTIFICATION,content:t,flags:D.pr7.EPHEMERAL,author:{id:D.oIV,userna",
    "fingerprint": {
@@ -1649,7 +1673,7 @@
      ",discriminator:D.h3J,avatar:"
     ],
     "exports": [],
-    "structHash": "9b2733d74df53d75"
+    "structHash": "aa8889c2589a0038"
    },
    "shape": [
     "_sendMessage",
@@ -1696,7 +1720,7 @@
     "updateEditMessage",
     "validateMessage"
    ],
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "finder::byKeys(\"setShowActivity\")": {
    "kind": "finder",
@@ -2101,7 +2125,7 @@
    "kind": "finder",
    "plugin": null,
    "label": "componentByCode(\"hasContentBackground\", \"nextStep\", \"onClose?.()\")",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "887909",
    "excerpt": "ring(en.t[\"Z+hCVU\"])}),(0,i.jsx)(T.y,{})]}),(0,i.jsx)(eq.$,{removeChildWrapper:!0,children:(0,i.jsx)(\"div\",{className:e0.ah,children:e})})}return(0,i.jsx)(eq.$,{removeChildWrapper:!0,children:(0,i.jsx)(e3,{transitionState:f.i.ENTERED,...t,showLogout:!0,isExternalStandaloneOAuthPage:!0,hideHeader:!0})})}function e3(e){let{label:t,title:n,subtitle:r,header:a,body:l,actions:o,nextStep:d,appDetails:c,hasContentBackground:u,noPadding:_,modalSize:E,obscured:A}=e7({...e}),h=null!=a||null!=l||null!=c?(0,i.jsxs)(\"div\",{className:e0.Gq,children:[a,(0,i.jsx)(\"div\",{className:e0.FG,children:(0,i.jsxs)(\"div\",{className:s()(e0.Qs,u?e0.cw:null,_?e0.pN:null),children:[l,null==d?c:null]})})]}):null;return(0,i.jsx)(eq.f,{...e,onClose:()=>Promise.resolve(e.onClose?.()),size:E,actions:o,title:n,subtitle:r,\"aria-label\":t,children",
    "fingerprint": {
@@ -2148,12 +2172,12 @@
      "heading-xxl/bold"
     ],
     "exports": [],
-    "structHash": "2727743a18df4e47"
+    "structHash": "c6c7352b7e7e8b49"
    },
    "shape": [
     "<function>"
    ],
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "finder::componentByCode(\"markDash\", \"this.renderMark(\")": {
    "kind": "finder",
@@ -2689,6 +2713,44 @@
    ],
    "updatedAt": "2026-10-01T13:38:07.991Z"
   },
+  "finder::store: ApplicationStreamingStore": {
+   "kind": "finder",
+   "plugin": null,
+   "label": "store: ApplicationStreamingStore",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "616356",
+   "excerpt": ".(0,A.Iy)(n),state:o?y.XYD.PAUSED:y.XYD.ACTIVE}),a[n]={streamKey:n,region:r,viewerIds:s}}function k(e,t){let n=g.A.getBasicChannel(t);return e===D.U4.CALL||null!=n&&C.A.canBasicChannel(y.hVb.VIEW_CHANNEL,n)}function F(e){if(k(e.streamType,e.channelId))return!0;let t=g.A.getBasicChannel(e.channelId);return null!=t&&(0,h.eo)(t,L.A,S.A,C.A,_.default)[0]}U();class B extends c.Ay.PersistedStore{static displayName=\"ApplicationStreamingStore\";static persistKey=\"ApplicationStreamingStore\";initialize(e){this.syncWith([C.A],()=>!0),this.waitFor(m.default,g.A,C.A,O.A,E.Ay,R.Ay),e?.selfStreamParticipantsHidden!==void 0&&Object.assign(b,e?.selfStreamParticipantsHidden)}getState(){return{selfStreamParticipantsHidden:b}}isSelfStreamHidden(e){return b[e]??!1}getLastActiveStream(){return(0,I.A)(N.Ay)?Array.from(i.values()).pop()??null:null}getA",
+   "fingerprint": {
+    "strings": [
+     "use strict",
+     "ApplicationStreamingStore",
+     "string",
+     "prepicked:"
+    ],
+    "exports": [],
+    "structHash": "3a7e1417b7e72d7d"
+   },
+   "shape": [
+    "_changeCallbacks",
+    "_dispatchToken",
+    "_dispatcher",
+    "_isInitialized",
+    "_mustEmitChanges",
+    "_reactChangeCallbacks",
+    "_syncWiths",
+    "_version",
+    "addChangeListener",
+    "addConditionalChangeListener",
+    "addReactChangeListener",
+    "callback",
+    "doEmitChanges",
+    "removeAllConditionalChangeListeners",
+    "removeChangeListener",
+    "removeReactChangeListener",
+    "throttledCallback"
+   ],
+   "updatedAt": "2026-10-01T22:03:11.268Z"
+  },
   "finder::store: AuthenticationStore": {
    "kind": "finder",
    "plugin": null,
@@ -2790,6 +2852,52 @@
     "removeReactChangeListener"
    ],
    "updatedAt": "2026-10-01T13:38:07.991Z"
+  },
+  "finder::store: ChannelMemberStore": {
+   "kind": "finder",
+   "plugin": null,
+   "label": "store: ChannelMemberStore",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "963307",
+   "excerpt": ")});else{let n=this._guildLists[e];null!=n&&a().forEach(n,t)}}delete(e){delete this._guildLists[e]}reset(){this._guildLists={}}};function P(){M.reset()}let U=[];function w(){let e=E.A.getAllApplicationStreams(),t=U.concat(e);U=e,t.forEach(e=>{M.forEach(null,t=>t.rebuildMember(e.ownerId))})}function G(){let e=A.default.getId();M.forEach(null,t=>t.rebuildMember(e))}class x extends d.Ay.Store{static displayName=\"ChannelMemberStore\";initialize(){this.waitFor(S.default,T.A,p.A,h.A,f.Ay,m.A,g.A,A.default,I.A,E.A,u.A),this.syncWith([g.A],G),this.syncWith([E.A],w)}getProps(e,t){let n=M.get(e,v(t));return{listId:`${n.guildId}:${n.listId}`,groups:n.groups,rows:n.rows,version:n.version}}getRows(e,t){return M.get(e,v(t)).rows}}let k=new x(c.h,{CONNECTION_OPEN:P,OVERLAY_INITIALIZE:P,GUILD_MEMBER_LIST_UPDATE:function(e){let t=M.get(e.",
+   "fingerprint": {
+    "strings": [
+     "use strict",
+     "everyone",
+     "GROUP",
+     "MEMBER",
+     "CONTENT_INVENTORY",
+     "CONTENT_INVENTORY_GROUP",
+     "HIDDEN_CONTENT_INVENTORY",
+     "CONTENT_INVENTORY_LEADERBOARD",
+     "UQMV/E",
+     "ChannelMemberStore",
+     "SYNC",
+     "INVALIDATE",
+     "INSERT",
+     "UPDATE",
+     "DELETE"
+    ],
+    "exports": [],
+    "structHash": "48d1aed6b369b4bd"
+   },
+   "shape": [
+    "_changeCallbacks",
+    "_dispatchToken",
+    "_dispatcher",
+    "_isInitialized",
+    "_mustEmitChanges",
+    "_reactChangeCallbacks",
+    "_syncWiths",
+    "addChangeListener",
+    "addConditionalChangeListener",
+    "addReactChangeListener",
+    "doEmitChanges",
+    "removeAllConditionalChangeListeners",
+    "removeChangeListener",
+    "removeReactChangeListener"
+   ],
+   "updatedAt": "2026-10-01T22:07:51.457Z"
   },
   "finder::store: ChannelStore": {
    "kind": "finder",
@@ -3922,9 +4030,9 @@
    "kind": "finder",
    "plugin": null,
    "label": "store: SpellcheckStore",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "638128",
-   "excerpt": "638128(e,t,n){n.d(t,{A:()=>C});var r=n(377941),l=n.n(r),u=n(17928),a=n(506774),i=n(228366),s=n(724066),c=n(900582);let o=\"SpellcheckStore\",d=!0,f=new Set;function h(){a.w.set(o,{enabled:d,learnedWords:f})}class p extends u.Ay.Store{static displayName=\"SpellcheckStore\";initialize(){let e=a.w.get(o);null!=e&&(d=e.enabled,f=new Set(e.learnedWords),(0,c.kv)(d),(0,c.d1)(f)),(0,s.I)(c.Av)}isEnabled(){return d}hasLearnedWord(e){return f.has(e.toLocaleLowerCase())}findLearnedWordIn(e){if(\"\"===e||0===f.size)return null;let t=e.toLocaleLowerCase();for(let e of f)if(RegExp(`(?<![\\\\p{L}\\\\p{N}_])${l()(e)}(?![\\\\p{L}\\\\p{N}_])`,\"u\").test(t))return e;return null}}let C=new p(i",
+   "excerpt": "638128(e,t,n){n.d(t,{A:()=>m});var l=n(377941),r=n.n(l),i=n(17928),a=n(506774),s=n(228366),u=n(724066),o=n(900582);let c=\"SpellcheckStore\",d=!0,f=new Set;function h(){a.w.set(c,{enabled:d,learnedWords:f})}class p extends i.Ay.Store{static displayName=\"SpellcheckStore\";initialize(){let e=a.w.get(c);null!=e&&(d=e.enabled,f=new Set(e.learnedWords),(0,o.kv)(d),(0,o.d1)(f)),(0,u.I)(o.Av)}isEnabled(){return d}hasLearnedWord(e){return f.has(e.toLocaleLowerCase())}findLearnedWordIn(e){if(\"\"===e||0===f.size)return null;let t=e.toLocaleLowerCase();for(let e of f)if(RegExp(`(?<![\\\\p{L}\\\\p{N}_])${r()(e)}(?![\\\\p{L}\\\\p{N}_])`,\"u\").test(t))return e;return null}}let m=new p(s",
    "fingerprint": {
     "strings": [
      "SpellcheckStore"
@@ -3948,7 +4056,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "finder::store: StickersStore": {
    "kind": "finder",
@@ -4074,9 +4182,9 @@
    "kind": "finder",
    "plugin": null,
    "label": "store: TypingStore",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "741961",
-   "excerpt": "&&function(e,t,n){let l=g[e];if(null==l)return;let i=l[t];if(null==i||null==i[n])return;let s={...i};delete s[n];let r={...l};0===Object.keys(s).length?delete r[t]:r[t]=s,0===Object.keys(r).length?delete g[e]:g[e]=r}(l,t,n),n in x&&!Object.values(p).some(e=>n in e)){let e={...x};delete e[n],x=e}}function S(){p={},g={},x={}}class v extends i.Ay.Store{initialize(){this.waitFor(u.default,c.A)}static displayName=\"TypingStore\";getTypingUsers(e){return p[e]??A}getTypingUsersByGuild(e){return g[e]??C}isTyping(e,t){return null!=(p[e]??A)[t]}getCustomTypingIndicatorConfig(e){return x[e]??null}}let N=new v(r.h,{TYPING_START:I,TYPING_STOP:y,TYPING_START_LOCAL:function(e){let{channelId:t}=e,n=u.default.getId();if(null==n||t===a.E)return!1;null!=l&&l.channelId!==t&&(null!=l.timeout&&clearTimeout(l.timeout),l=null);let i=Date.n",
+   "excerpt": "&&function(e,t,n){let l=g[e];if(null==l)return;let i=l[t];if(null==i||null==i[n])return;let s={...i};delete s[n];let r={...l};0===Object.keys(s).length?delete r[t]:r[t]=s,0===Object.keys(r).length?delete g[e]:g[e]=r}(l,t,n),n in x&&!Object.values(f).some(e=>n in e)){let e={...x};delete e[n],x=e}}function S(){f={},g={},x={}}class v extends i.Ay.Store{initialize(){this.waitFor(u.default,c.A)}static displayName=\"TypingStore\";getTypingUsers(e){return f[e]??A}getTypingUsersByGuild(e){return g[e]??C}isTyping(e,t){return null!=(f[e]??A)[t]}getCustomTypingIndicatorConfig(e){return x[e]??null}}let N=new v(r.h,{TYPING_START:I,TYPING_STOP:y,TYPING_START_LOCAL:function(e){let{channelId:t}=e,n=u.default.getId();if(null==n||t===a.E)return!1;null!=l&&l.channelId!==t&&(null!=l.timeout&&clearTimeout(l.timeout),l=null);let i=Date.n",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -4085,7 +4193,7 @@
      "SLOWMODE_SET_COOLDOWN"
     ],
     "exports": [],
-    "structHash": "9ae23e0d76791e49"
+    "structHash": "dedbad7fde3f84d8"
    },
    "shape": [
     "_changeCallbacks",
@@ -4103,7 +4211,7 @@
     "removeChangeListener",
     "removeReactChangeListener"
    ],
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "finder::store: UploadAttachmentStore": {
    "kind": "finder",
@@ -4498,9 +4606,9 @@
    "kind": "patch",
    "plugin": "AlwaysAnimate",
    "label": ".pclUFJ),children:",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "589158",
-   "excerpt": "424265\"),n.e(\"39038\"),n.e(\"919885\"),n.e(\"655602\"),n.e(\"867160\")]).then(n.bind(n,198525)),webpackId:198525,name:\"QuestMembersListPopout\",renderLoader:()=>null});(0,J.xI)(u.A.MEMBER_LIST_ITEM_AVATAR_DECORATION_PADDING);let el=s.memo(function(e){let{isOwner:t,lostPermissionTooltipText:n,ownerTooltipText:l}=e;return null!=t&&t&&null==n?(0,i.jsx)(c.m,{__unsupportedReactNodeAsText:l??ee.intl.string(ee.t.pclUFJ),children:(0,i.jsx)(d.CrownIcon,{size:\"md\",color:\"currentColor\",className:et.Dd,\"aria-label\":l??ee.intl.string(ee.t.pclUFJ)})}):null}),ei=s.memo(function(e){let{premiumSince:t,onClickPremiumGuildIcon:n}=e;return null==t?null:(0,i.jsx)(c.m,{text:ee.intl.formatToPlainString(ee.t.IWkAq7,{date:t}),asContainer:!0,children:(0,i.jsx)(h.D,{onClick:n,tabIndex:-1,children:(0,i.jsx)(m._,{color:f.A.unsafe_rawColors.GUI",
+   "excerpt": "424265\"),n.e(\"39038\"),n.e(\"806295\"),n.e(\"655602\"),n.e(\"867160\")]).then(n.bind(n,198525)),webpackId:198525,name:\"QuestMembersListPopout\",renderLoader:()=>null});(0,J.xI)(u.A.MEMBER_LIST_ITEM_AVATAR_DECORATION_PADDING);let el=s.memo(function(e){let{isOwner:t,lostPermissionTooltipText:n,ownerTooltipText:l}=e;return null!=t&&t&&null==n?(0,i.jsx)(c.m,{__unsupportedReactNodeAsText:l??ee.intl.string(ee.t.pclUFJ),children:(0,i.jsx)(d.CrownIcon,{size:\"md\",color:\"currentColor\",className:et.Dd,\"aria-label\":l??ee.intl.string(ee.t.pclUFJ)})}):null}),ei=s.memo(function(e){let{premiumSince:t,onClickPremiumGuildIcon:n}=e;return null==t?null:(0,i.jsx)(c.m,{text:ee.intl.formatToPlainString(ee.t.IWkAq7,{date:t}),asContainer:!0,children:(0,i.jsx)(m.D,{onClick:n,tabIndex:-1,children:(0,i.jsx)(h._,{color:p.A.unsafe_rawColors.GUI",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -4520,16 +4628,16 @@
      "span"
     ],
     "exports": [],
-    "structHash": "983cdcd4954c680f"
+    "structHash": "9c8e224c4393c014"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::AlwaysAnimate::canAnimate:": {
    "kind": "patch",
    "plugin": "AlwaysAnimate",
    "label": "canAnimate:",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "24594",
    "excerpt": "adge:(0,a.jsx)(e9.fk,{icon:(0,tJ.k)(t0.A),disableColor:!0,className:t2._}),children:(0,a.jsx)(P.j,{name:e.name,onMouseEnter:function(){i(!0)},onMouseLeave:function(){i(!1)},onClick:function(){(0,tm.openModalLazy)(async()=>{let{default:t}=await n.e(\"642945\").then(n.bind(n,537560));return n=>(0,a.jsx)(t,{name:e.name,guildId:e.id,...n})})},icon:null!=e.icon?t1.Ay.getGuildIconURL({id:e.id,icon:e.icon,canAnimate:!1,size:42}):null,...r})})})})}var t5=n(696292),t6=n(836480),t4=n(533129),t7=n(726845),t8=n(837057),t9=n(310419),ne=n(488995),nt=n(324580),nn=n(190107);let ni=s.forwardRef(function(e,t){let{selected:n,onClick:i,questId:r,className:l}=e,o=s.useCallback(()=>{(0,t4.WL)({source:ne.GlobalDiscoveryAnalyticsLocations.GUILDS_BAR_ICON});let e=void 0!==r?ne.GlobalDiscoveryTab.QUESTS:t7.A.getField(\"selectedT",
    "fingerprint": {
@@ -4576,10 +4684,10 @@
      "scale"
     ],
     "exports": [],
-    "structHash": "1e700328bbe9d951"
+    "structHash": "85e9c13ad0e64d7f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::AlwaysExpandRoles::hasDeveloperContextMenu:": {
    "kind": "patch",
@@ -4813,21 +4921,21 @@
    "kind": "patch",
    "plugin": "BetterGifAltText",
    "label": ".modalContext})};",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
-   "moduleId": "85935",
-   "excerpt": ",contentType:g,originalContentType:x}=this.props;(0,c.vq)(e.currentTarget)&&e.currentTarget.blur(),(0,b.R)({onClose:this.onCloseImage,items:[{url:s,width:a,height:o,type:\"IMAGE\",alt:i,contentType:g,originalContentType:x,zoomThumbnailPlaceholder:n,animated:u,srcIsAnimated:d,children:h,trigger:l,sourceMetadata:f,original:r??s}],shouldHideMediaOptions:m,location:p??\"LazyImageZoomable\",contextKey:this.modalContext})};render(){let{appContext:e,isWindowFocused:t,...n}=this.props;return(0,i.jsx)(j.Ay,{...n,onZoom:this.onZoom,onMouseEnter:this.onMouseEnter,shouldAnimate:t})}}function M(e){let t=(0,_.Us)(),n=(0,R.j)();return(0,i.jsx)(O,{...e,isWindowFocused:n,appContext:t})}var L=n(9578),k=n(56562),w=n(475743),P=n(564771),D=n(692051),U=n(915089),V=n(611371),G=n(453771),F=n(994064);class H extends s.PureComponent{re",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "684519",
+   "excerpt": ",contentType:g,originalContentType:x}=this.props;(0,c.vq)(e.currentTarget)&&e.currentTarget.blur(),(0,b.R)({onClose:this.onCloseImage,items:[{url:s,width:a,height:o,type:\"IMAGE\",alt:i,contentType:g,originalContentType:x,zoomThumbnailPlaceholder:n,animated:u,srcIsAnimated:d,children:m,trigger:l,sourceMetadata:p,original:r??s}],shouldHideMediaOptions:h,location:f??\"LazyImageZoomable\",contextKey:this.modalContext})};render(){let{appContext:e,isWindowFocused:t,...n}=this.props;return(0,i.jsx)(j.Ay,{...n,onZoom:this.onZoom,onMouseEnter:this.onMouseEnter,shouldAnimate:t})}}function L(e){let t=(0,_.Us)(),n=(0,R.j)();return(0,i.jsx)(O,{...e,isWindowFocused:n,appContext:t})}var M=n(9578),k=n(56562),w=n(475743),P=n(564771),D=n(692051),U=n(915089),V=n(611371),G=n(453771),F=n(440014);class B extends s.PureComponent{re",
    "fingerprint": {
     "strings": [
      "use strict",
      "IMAGE",
      "LazyImageZoomable",
-     "user",
+     "utf-8",
      "markdown",
      "mkdown",
      "PlaintextFileMarkdownPreview",
      ",variant:",
      ",onClick:()=>n?.(!t),",
-     ",{className:ef.VI,children:[(0,i.jsx)(",
+     ",{className:eh.VI,children:[(0,i.jsx)(",
      "text-sm/normal",
      "text-default",
      "text-xs/normal",
@@ -4835,7 +4943,7 @@
      "LanguageSelect",
      "left",
      "aria-label",
-     ",{className:ef.md,children:(0,i.jsxs)(q.iS,{selectionMode:",
+     ",{className:eh.md,children:(0,i.jsxs)(q.iS,{selectionMode:",
      ",color:",
      ",align:",
      ",renderPopout:e=>{let{closePopout:s}=e;return(0,i.jsx)($.W,{",
@@ -4847,23 +4955,23 @@
      "render-markdown",
      "UKOtz+",
      "0PQYk3",
-     "),E=C?.length??0,I=r?100:6,S=0===x,v=m&&f&&ep.has(u),N=",
-     "+em.intl.formatToPlainString(em.t.DQnFp2,{lines:E-I}):N+=",
-     "+em.intl.formatToPlainString(em.t[",
-     "],{formattedBytes:(0,eu.up)(x)}));let _=C?.slice(0,I).join(",
-     ",j=r||I<E;return(0,i.jsxs)(",
-     ",{className:ef.qr,role:",
-     ",{className:ef.Kb}),(0,i.jsx)(eE,{language:u,setLanguage:c,align:",
+     "),C=A?.length??0,E=r?100:6,I=0===f,S=h&&ep.has(u),v=",
+     "+ec.intl.formatToPlainString(ec.t.DQnFp2,{lines:C-E}):v+=",
+     "+ec.intl.formatToPlainString(ec.t[",
+     "],{formattedBytes:(0,eo.up)(f)}));let N=A?.slice(0,E).join(",
+     ",_=r||E<C;return(0,i.jsxs)(",
+     ",{className:eh.qr,role:",
+     ",{className:eh.Kb}),(0,i.jsx)(eC,{language:u,setLanguage:c,align:",
      "1+gGcK",
      ";return s.useEffect(()=>{function e(e){if((e.metaKey||e.ctrlKey)&&",
      "keydown",
      "qxQjc+"
     ],
     "exports": [],
-    "structHash": "b6aa0aa4ac859555"
+    "structHash": "46d8f03db48b6254"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::BetterGifPicker::renderHeaderContent(){": {
    "kind": "patch",
@@ -4962,9 +5070,9 @@
    "kind": "patch",
    "plugin": "BetterSessions",
    "label": ".cDHCNY",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
-   "moduleId": "661007",
-   "excerpt": "btle\",children:i})]}),(0,A.jsx)(H.E,{variant:\"text-sm/normal\",color:\"text-muted\",children:s})]}),l]})}function _u(e){let{session:t,current:n}=e,{location:i,platform:s,os:l,Icon:r,lastActive:a}=function(e,t){let n=e.client_info?.location??e.client_info?.ip,i=e.client_info?.platform,{text:s,icon:l}=function(e){switch(e?.toLowerCase().trim()){case null:case void 0:case\"\":return{text:R.intl.string(R.t.cDHCNY),icon:ST.k};case\"ios\":case\"android\":return{text:e,icon:_l.u};case\"horizon os\":return{text:e,icon:_r.G};default:return{text:e,icon:ST.k}}}(e.client_info?.os);return{location:n,platform:i,os:s,Icon:l,lastActive:t?null:_i(e.approx_last_used_time)}}(t,n),o=[i,a].filter(io.Vq);return(0,A.jsx)(_o,{icon:r,label:l,subLabel:s,description:o.join(\" \\xb7 \"),children:!n&&(0,A.jsx)(n4.D,{className:_a.X,onClick",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "598387",
+   "excerpt": "btle\",children:i})]}),(0,A.jsx)(H.E,{variant:\"text-sm/normal\",color:\"text-muted\",children:s})]}),l]})}function Ir(e){let{session:t,current:n}=e,{location:i,platform:s,os:l,Icon:r,lastActive:a}=function(e,t){let n=e.client_info?.location??e.client_info?.ip,i=e.client_info?.platform,{text:s,icon:l}=function(e){switch(e?.toLowerCase().trim()){case null:case void 0:case\"\":return{text:R.intl.string(R.t.cDHCNY),icon:SE.k};case\"ios\":case\"android\":return{text:e,icon:In.u};case\"horizon os\":return{text:e,icon:Ii.G};default:return{text:e,icon:SE.k}}}(e.client_info?.os);return{location:n,platform:i,os:s,Icon:l,lastActive:t?null:Ie(e.approx_last_used_time)}}(t,n),o=[i,a].filter(io.Vq);return(0,A.jsx)(Il,{icon:r,label:l,subLabel:s,description:o.join(\" \\xb7 \"),children:!n&&(0,A.jsx)(n4.D,{className:Is.X,onClick",
    "fingerprint": {
     "strings": [
      "preview",
@@ -5009,10 +5117,10 @@
      "7iegX4"
     ],
     "exports": [],
-    "structHash": "d15e52dbdf3aa722"
+    "structHash": "633ae8b612144d59"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::BetterSettings::\"USER_SETTINGS_MODAL_MODAL_KEY\"": {
    "kind": "patch",
@@ -5054,13 +5162,32 @@
    "shape": null,
    "updatedAt": "2026-10-01T13:38:07.991Z"
   },
+  "patch::BetterSettings::type:\"USER_SETTINGS_MODAL_OPEN\"": {
+   "kind": "patch",
+   "plugin": "BetterSettings",
+   "label": "type:\"USER_SETTINGS_MODAL_OPEN\"",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "766075",
+   "excerpt": "n(941933);async function A(e){let{path:t,stackingBehavior:A=\"replaceAll\",searchParams:h,analyticsLocations:I}=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},f=arguments.length>2?arguments[2]:void 0;if(d.default.isAuthenticated()){if(null!=t&&t===_.od.SUBSCRIPTIONS_ROLE_SUBSCRIPTIONS&&l.A.setState({subsection:_.nR}),u.A.setState({source:h?.source,analyticsLocations:I??[]}),s.h.dispatch({type:\"USER_SETTINGS_MODAL_OPEN\"}),(0,c.f)()){if(null==e)return;o.A.navigate(e)}else await (0,r.openModalLazy)(async()=>{let{default:t}=await Promise.all([n.e(\"459368\"),n.e(\"120239\"),n.e(\"955410\"),n.e(\"812720\"),n.e(\"251400\"),n.e(\"203112\"),n.e(\"37821\"),n.e(\"618416\"),n.e(\"490743\"),n.e(\"571702\"),n.e(\"415695\"),n.e(\"371496\"),n.e(\"552653\"),n.e(\"85427\"),n.e(\"275363\"),n.e(\"560570\"),n.e(\"334324\"),n.e(\"915170\"),n.e(\"35328\"),n.e(\"400088\"),",
+   "fingerprint": {
+    "strings": [
+     "use strict",
+     "replaceAll",
+     "USER_SETTINGS_MODAL_OPEN"
+    ],
+    "exports": [],
+    "structHash": "b71f1f0861086fe1"
+   },
+   "shape": null,
+   "updatedAt": "2026-10-01T22:03:11.268Z"
+  },
   "patch::BetterUploadButton::.CHAT_INPUT_BUTTON_NOTIFICATION,": {
    "kind": "patch",
    "plugin": "BetterUploadButton",
    "label": ".CHAT_INPUT_BUTTON_NOTIFICATION,",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "767089",
-   "excerpt": ":g,children:x,onClick:A,onDoubleClick:C,isActive:E,onMouseEnter:I,onMouseLeave:y,onFocus:S,onBlur:v,pulse:N,sparkle:_,notification:j,\"aria-label\":b,\"aria-expanded\":T,\"aria-haspopup\":R,\"aria-controls\":O,noHover:M}=e,L=(0,o.p)(null!=x,{...p,keys:e=>e?\"children\":\"icon\"});function k(e){let{component:t}=e;return null!=j?(0,l.jsxs)(\"div\",{className:f.IO,children:[(0,l.jsx)(c.Ay,{className:f.SA,mask:c.hW.CHAT_INPUT_BUTTON_NOTIFICATION,width:20,height:20,children:t}),(0,l.jsx)(\"span\",{className:f.T3})]}):t}return(0,l.jsxs)(u.D,{innerRef:t,\"aria-label\":b,\"aria-expanded\":T,\"aria-haspopup\":R,\"aria-controls\":O,\"aria-disabled\":i,tabIndex:i?-1:0,className:r()(n,f.x6,{[f.vu]:E,[f.CK]:M,[f.s0]:N,[f.r9]:i}),onClick:i?void 0:A,onDoubleClick:i?void 0:C,onMouseEnter:I,onMouseLeave:y,onFocus:S,onBlur:v,focusProps:{offset:{top:4,bottom:4}},ch",
+   "excerpt": ":g,children:x,onClick:A,onDoubleClick:C,isActive:E,onMouseEnter:I,onMouseLeave:y,onFocus:S,onBlur:v,pulse:N,sparkle:_,notification:j,\"aria-label\":b,\"aria-expanded\":T,\"aria-haspopup\":R,\"aria-controls\":O,noHover:L}=e,M=(0,o.p)(null!=x,{...f,keys:e=>e?\"children\":\"icon\"});function k(e){let{component:t}=e;return null!=j?(0,l.jsxs)(\"div\",{className:p.IO,children:[(0,l.jsx)(c.Ay,{className:p.SA,mask:c.hW.CHAT_INPUT_BUTTON_NOTIFICATION,width:20,height:20,children:t}),(0,l.jsx)(\"span\",{className:p.T3})]}):t}return(0,l.jsxs)(u.D,{innerRef:t,\"aria-label\":b,\"aria-expanded\":T,\"aria-haspopup\":R,\"aria-controls\":O,\"aria-disabled\":i,tabIndex:i?-1:0,className:r()(n,p.x6,{[p.vu]:E,[p.CK]:L,[p.s0]:N,[p.r9]:i}),onClick:i?void 0:A,onDoubleClick:i?void 0:C,onMouseEnter:I,onMouseLeave:y,onFocus:S,onBlur:v,focusProps:{offset:{top:4,bottom:4}},ch",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -5069,7 +5196,7 @@
      ",children:[(0,l.jsx)(",
      ",{className:s,d:",
      ",fill:i}),(0,l.jsx)(",
-     ",fill:i})]})}function m(e){let{width:t=10,height:n=10,color:i=",
+     ",fill:i})]})}function h(e){let{width:t=10,height:n=10,color:i=",
      ",foreground:s,...r}=e;return(0,l.jsx)(",
      ",children:(0,l.jsx)(",
      "aria-label",
@@ -5082,18 +5209,18 @@
      "aria-disabled"
     ],
     "exports": [],
-    "structHash": "5b09b399903f040f"
+    "structHash": "05c7cd2af05a622b"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::BlurNSFW::}renderStickersAccessories(": {
    "kind": "patch",
    "plugin": "BlurNSFW",
    "label": "}renderStickersAccessories(",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "230797",
-   "excerpt": "is.props;return i?null:(0,s.jsx)(dV.A,{channel:t,message:e,hideParty:!1,hideInviteEmbedBanner:n})}renderPublishBump(e){return this.props.channel.type!==W.rbe.GUILD_ANNOUNCEMENT||this.props.isMessageSnapshot?null:(0,s.jsx)(tg,{channelId:e.channel_id,messageId:e.id})}renderEphemeralAccessories(e){return(0,a0.ec)(e)?(0,s.jsx)(rI.A,{message:e,onDeleteMessage:()=>{x.A.dismissAutomatedMessage(e)}}):null}renderStickersAccessories(e){let t=(0,lz.o6)(e),{channel:n,isInteracting:i}=this.props;return 0===t.length?null:t.map(e=>(0,s.jsx)(aa,{channel:n,isInteracting:i,renderableSticker:e},e.id))}renderThreadAccessories(e){if(e.hasFlag(W.pr7.HAS_THREAD)&&!1!==this.props.renderThreadAccessory)return(0,s.jsx)(aj,{message:e,compact:this.props.compact})}renderThreadRoleMentionWarning(e){if(e.hasFlag(W.pr7.FAILED_TO_MENTION_SOME_ROLES",
+   "excerpt": "is.props;return i?null:(0,s.jsx)(dV.A,{channel:t,message:e,hideParty:!1,hideInviteEmbedBanner:n})}renderPublishBump(e){return this.props.channel.type!==W.rbe.GUILD_ANNOUNCEMENT||this.props.isMessageSnapshot?null:(0,s.jsx)(tg,{channelId:e.channel_id,messageId:e.id})}renderEphemeralAccessories(e){return(0,a0.ec)(e)?(0,s.jsx)(rI.A,{message:e,onDeleteMessage:()=>{x.A.dismissAutomatedMessage(e)}}):null}renderStickersAccessories(e){let t=(0,lJ.o6)(e),{channel:n,isInteracting:i}=this.props;return 0===t.length?null:t.map(e=>(0,s.jsx)(ar,{channel:n,isInteracting:i,renderableSticker:e},e.id))}renderThreadAccessories(e){if(e.hasFlag(W.pr7.HAS_THREAD)&&!1!==this.props.renderThreadAccessory)return(0,s.jsx)(aj,{message:e,compact:this.props.compact})}renderThreadRoleMentionWarning(e){if(e.hasFlag(W.pr7.FAILED_TO_MENTION_SOME_ROLES",
    "fingerprint": {
     "strings": [
      "text-xs/normal",
@@ -5125,7 +5252,7 @@
      ",children:t})]}),eY.p5&&(0,s.jsx)(eM.K,{",
      ":X.intl.string(X.t.WqhZss),icon:()=>(0,s.jsx)(eL.LinkIcon,{size:",
      "}),size:",
-     ",onClick:()=>{(0,eY.C)(l,()=>{(0,eO.P0)((0,eP.o)(X.intl.string(X.t[",
+     ",onClick:()=>{(0,eY.C)(l,()=>{(0,eO.P)((0,eP.o)(X.intl.string(X.t[",
      "]),eD.Ck.SUCCESS)),o()})},variant:",
      "})]}),(0,s.jsxs)(",
      ",{className:e$.Qs,children:[(0,s.jsxs)(",
@@ -5138,18 +5265,18 @@
      "ChannelFollowingBumpChannels"
     ],
     "exports": [],
-    "structHash": "1eaa8d9761744452"
+    "structHash": "1790cd4f63cf617b"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::CallTimer::\"RTCConnectionMenu\"": {
    "kind": "patch",
    "plugin": "CallTimer",
    "label": "\"RTCConnectionMenu\"",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
-   "moduleId": "423189",
-   "excerpt": "){e.stopPropagation(),Od.A.channelListScrollTo(t.guild_id??F.ME,t.id),(0,OT.X)(nS.A.RTC_PANEL,OT.O.CHANNEL_LINK)},onContextMenu:function(e){(0,oH.L3)(e,async()=>{let{default:e}=await Promise.all([n.e(\"343266\"),n.e(\"309004\"),n.e(\"544058\"),n.e(\"360536\"),n.e(\"993720\"),n.e(\"157550\")]).then(n.bind(n,576701));return n=>(0,y.jsx)(sb.f5,{value:i,children:(0,y.jsx)(e,{...n,channel:t,onInteraction:(0,Om.s)(\"RTCConnectionMenu\",nS.A.RTC_PANEL)})})})},children:(0,y.jsx)(C2.A,{className:O$.Ix,children:(0,y.jsx)(iV.E,{variant:\"text-xs/medium\",color:\"text-subtle\",lineClamp:1,children:u})})})})})}function RP(){OM.sF(RN._.VOICE_PANEL_INTRODUCTION)}function RU(){return(0,y.jsxs)(\"div\",{className:to()(O$.SC,\"theme-light\"),children:[(0,y.jsx)(aZ.D,{className:O$.oN,variant:\"heading-md/semibold\",children:tS.intl.string(tS.t[\"ba/rL",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "649718",
+   "excerpt": "){e.stopPropagation(),Oh.A.channelListScrollTo(t.guild_id??F.ME,t.id),(0,OO.X)(nS.A.RTC_PANEL,OO.O.CHANNEL_LINK)},onContextMenu:function(e){(0,oj.L3)(e,async()=>{let{default:e}=await Promise.all([n.e(\"343266\"),n.e(\"309004\"),n.e(\"544058\"),n.e(\"360536\"),n.e(\"993720\"),n.e(\"157550\")]).then(n.bind(n,576701));return n=>(0,y.jsx)(sM.f5,{value:i,children:(0,y.jsx)(e,{...n,channel:t,onInteraction:(0,OR.s)(\"RTCConnectionMenu\",nS.A.RTC_PANEL)})})})},children:(0,y.jsx)(C8.A,{className:OJ.Ix,children:(0,y.jsx)(iV.E,{variant:\"text-xs/medium\",color:\"text-subtle\",lineClamp:1,children:u})})})})})}function RF(){Ok.sF(RD._.VOICE_PANEL_INTRODUCTION)}function RB(){return(0,y.jsxs)(\"div\",{className:to()(OJ.SC,\"theme-light\"),children:[(0,y.jsx)(aQ.D,{className:OJ.oN,variant:\"heading-md/semibold\",children:tS.intl.string(tS.t[\"ba/rL",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -5194,16 +5321,16 @@
      "[FILTERED]"
     ],
     "exports": [],
-    "structHash": "b9e59436a4d0aedc"
+    "structHash": "de4c61b5a6bf00d3"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::CharacterCounter::.CREATE_FORUM_POST||": {
    "kind": "patch",
    "plugin": "CharacterCounter",
    "label": ".CREATE_FORUM_POST||",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "959070",
    "excerpt": ":l}=e,i=(n&&t.submit?.clearOnSubmit)??!1,o=null!=s.current;i&&(a!==eG.Ay.getChannelId()?x.A.saveDraft(a,\"\",t.drafts.type):o&&(s.current?.clearValue(),r.current?.hide())),o&&(u(!1),(0,ex.v8)(),l&&s.current?.focus())})},[s,r,e,o,t,a]);return{submitting:o,submit:c,handleSubmit:i.useCallback(e=>{s?.current?.submit(e)},[s])}}function t0(e,t,n){return i.useCallback((l,i)=>{if(i?.shiftKey===!0||t===e$.oU.CREATE_FORUM_POST||t===e$.oU.CREATE_ANNOUNCEMENT_POST)n.current?.insertGIF(l);else{let t={gif_provider:l.provider??eE.jQ,load_id:eW.A.getAnalyticsID(),source_object:\"GIF Picker\",gif_url:l.url,gif_id:l.id};e(l.url,void 0,void 0,!0,void 0,t)}(0,ex.v8)(),n.current?.focus()},[n,e,t])}function t1(e){return i.useCallback(t=>{let{emoji:n,willClose:l}=t,i=e.current;null!=n&&null!=i&&i.insertEmoji({emoji:n,willClose:l}),l&&(",
    "fingerprint": {
@@ -5217,7 +5344,7 @@
      "3CNGLK",
      ",{className:en.uW,children:[(0,l.jsx)(X.m,{text:i.name,position:",
      ",asContainer:!0,children:(0,l.jsx)(Q.D,{",
-     ":i.name,onClick:()=>{u(i)},children:h})}),m?(0,l.jsx)(",
+     ":i.name,onClick:()=>{u(i)},children:m})}),h?(0,l.jsx)(",
      "channel",
      ",{role:",
      "listbox",
@@ -5245,23 +5372,23 @@
      ":!0})]}),(0,l.jsx)(ti,{onClick:function(e){e.stopPropagation(),(0,e4.Jx)(o.id)},",
      ",{className:td.Tz,children:a.map(e=>(0,l.jsxs)(",
      ",{className:td.Nk,children:(0,l.jsx)(tn.a,{size:",
-     ",{className:r()(o,tp.M0),onContextMenu:m,children:[(0,l.jsxs)(",
-     ",{className:tp.iz,children:[(0,l.jsx)(eQ.E,{variant:",
+     ",{className:r()(o,tf.M0),onContextMenu:h,children:[(0,l.jsxs)(",
+     ",{className:tf.iz,children:[(0,l.jsx)(eQ.E,{variant:",
      ",tag:"
     ],
     "exports": [],
-    "structHash": "74781a93d22b5a6f"
+    "structHash": "6f8f0b4596a1ad19"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::ChatComponentsAPI::\"sticker\")": {
    "kind": "patch",
    "plugin": "ChatComponentsAPI",
    "label": "\"sticker\")",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "123583",
-   "excerpt": "gnorePreference||_),J=null==D||null!=U&&U.type!==a.n4.ATTACHMENT;return(!s.Fr&&(x.gifts?.button!=null&&null==D&&!V&&(null==K||k.Ay.isPremiumEligible(K))&&B.push((0,l.jsx)(q.A,{disabled:A,channel:C},\"gift\")),x.gifs?.button!=null&&null==D&&y&&T&&!S&&B.push((0,l.jsx)(Y,{disabled:A,type:x,channel:C},\"gif\")),x.stickers?.button!=null&&null==D&&y&&w&&!S&&B.push((0,l.jsx)(et,{disabled:A,type:x,channel:C},\"sticker\"))),x.emojis?.button!=null&&!S&&J&&(y||S?b&&B.push((0,l.jsx)(F,{disabled:A,type:x,channelId:C.id},\"emoji\")):B.push((0,l.jsx)(H.A,{disabled:A,type:x,channel:C},\"expression\"))),z&&j&&B.push((0,l.jsx)(R,{channelId:C.id,type:x},\"appLauncher\")),Z&&B.push((0,l.jsx)(X,{onClick:E,disabled:A||P},\"submit\")),0===B.length)?null:(0,l.jsx)(\"div\",{className:G.Uo,children:B})})}",
+   "excerpt": "gnorePreference||_),J=null==D||null!=U&&U.type!==a.n4.ATTACHMENT;return(!s.Fr&&(x.gifts?.button!=null&&null==D&&!V&&(null==K||k.Ay.isPremiumEligible(K))&&H.push((0,l.jsx)(q.A,{disabled:A,channel:C},\"gift\")),x.gifs?.button!=null&&null==D&&y&&T&&!S&&H.push((0,l.jsx)(Y,{disabled:A,type:x,channel:C},\"gif\")),x.stickers?.button!=null&&null==D&&y&&w&&!S&&H.push((0,l.jsx)(et,{disabled:A,type:x,channel:C},\"sticker\"))),x.emojis?.button!=null&&!S&&J&&(y||S?b&&H.push((0,l.jsx)(F,{disabled:A,type:x,channelId:C.id},\"emoji\")):H.push((0,l.jsx)(B.A,{disabled:A,type:x,channel:C},\"expression\"))),z&&j&&H.push((0,l.jsx)(R,{channelId:C.id,type:x},\"appLauncher\")),Z&&H.push((0,l.jsx)(X,{onClick:E,disabled:A||P},\"submit\")),0===H.length)?null:(0,l.jsx)(\"div\",{className:G.Uo,children:H})})}",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -5292,7 +5419,7 @@
     "structHash": "d9f19746a1f424de"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::ColorSighted::.AVATAR_STATUS_MOBILE_16;": {
    "kind": "patch",
@@ -5417,9 +5544,9 @@
    "kind": "patch",
    "plugin": "CommandsAPI",
    "label": "[\"0mI72g\"]",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "659280",
-   "excerpt": "0,l.jsxs)(l.Fragment,{children:[(0,l.jsx)(d.D,{className:w.Ki,variant:\"heading-deprecated-12/semibold\",children:k.intl.string(k.t[\"5C107K\"])}),a.map(e=>P(e,n?.[e.name],s))]}):null,m=o.length>0?(0,l.jsx)(y.m,{__unsupportedReactNodeAsText:u,\"aria-label\":!1,delay:200,children:(0,l.jsx)(I.E,{className:w.kP,color:\"text-muted\",variant:\"text-sm/normal\",children:0===a.length?k.intl.formatToPlainString(k.t[\"0mI72g\"],{count:o.length}):k.intl.formatToPlainString(k.t.BP8N0K,{count:o.length})})}):null;return(0,l.jsxs)(l.Fragment,{children:[c,null!=h||null!=m?(0,l.jsxs)(\"div\",{className:w.gM,children:[h,m]}):null]})}function U(e){let t,{command:n,activeOptionName:s,channel:a,showOptions:o,showImage:u,optionStates:c,onOptionClick:d,section:h,isSelectable:m=!0}=e,f=i.useMemo(()=>n?.options?.find(e=>e.name===s),[s,n",
+   "excerpt": "0,l.jsxs)(l.Fragment,{children:[(0,l.jsx)(d.D,{className:w.Ki,variant:\"heading-deprecated-12/semibold\",children:k.intl.string(k.t[\"5C107K\"])}),a.map(e=>P(e,n?.[e.name],s))]}):null,h=o.length>0?(0,l.jsx)(y.m,{__unsupportedReactNodeAsText:u,\"aria-label\":!1,delay:200,children:(0,l.jsx)(I.E,{className:w.kP,color:\"text-muted\",variant:\"text-sm/normal\",children:0===a.length?k.intl.formatToPlainString(k.t[\"0mI72g\"],{count:o.length}):k.intl.formatToPlainString(k.t.BP8N0K,{count:o.length})})}):null;return(0,l.jsxs)(l.Fragment,{children:[c,null!=m||null!=h?(0,l.jsxs)(\"div\",{className:w.gM,children:[m,h]}):null]})}function U(e){let t,{command:n,activeOptionName:s,channel:a,showOptions:o,showImage:u,optionStates:c,onOptionClick:d,section:m,isSelectable:h=!0}=e,p=i.useMemo(()=>n?.options?.find(e=>e.name===s),[s,n",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -5438,7 +5565,7 @@
      "option",
      "aria-selected",
      ",{className:S.E3,children:this.renderContent()})}):(0,l.jsx)(",
-     ",{className:r()(S.vk,n,t),id:eh(i)??void 0,role:",
+     ",{className:r()(S.vk,n,t),id:em(i)??void 0,role:",
      ",children:(0,l.jsx)(",
      "number",
      ",{className:S.E3,",
@@ -5461,13 +5588,13 @@
     "structHash": "f19482069de73f35"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::ConsoleJanitor::Tried getting Dispatch instance before instantiated": {
    "kind": "patch",
    "plugin": "ConsoleJanitor",
    "label": "Tried getting Dispatch instance before instantiated",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "962052",
    "excerpt": "962052(e,t,n){\"use strict\";let i,r;n.d(t,{A:()=>T});var a=n(228366),s=n(274593),l=n(626584),o=n(287809),d=n(422033),c=n(174459),u=n(723702),_=n(19575),E=n(652215),A=n(613057);let h=new l.A(\"NativeDispatchUtils\");function I(){return null==r&&h.warn(\"Tried getting Dispatch instance before instantiated\"),r}function f(e){let t=JSON.parse(e);return h.log(\"Native Dispatch error\",t),new s.A(t)}function p(e,t){\"\"!==e&&f(e)}let T={init(e){let{userToken:t,userId:n,installPaths:a,platform:s,stateCallback:l,errorCallback:d}=e;null==r&&(null!=i?Promise.resolve(i):(0,u.isDesktop)()?Promise.all([_.Ay.ensureModule(\"discord_dispatch\"),_.Ay.ensureModule(\"discord_modules\")]).then(()=>{_.Ay.requireModule(\"disco",
    "fingerprint": {
@@ -5500,10 +5627,10 @@
      "Launch"
     ],
     "exports": [],
-    "structHash": "c622f09535610ce4"
+    "structHash": "274315cf57dd010b"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::ConsoleJanitor::Unable to determine render window for element": {
    "kind": "patch",
@@ -5566,21 +5693,21 @@
    "kind": "patch",
    "plugin": "CopyFileContents",
    "label": "[\"1+gGcK\"]",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
-   "moduleId": "85935",
-   "excerpt": ",fileSize:l,fileContents:s,expanded:r,setExpanded:o,language:u,setLanguage:c,wordWrap:d,setWordWrap:h,markdownEnabled:m,renderMarkdown:f,setRenderMarkdown:p,bytesLeft:x,className:A}=e,C=s?.split(\"\\n\"),E=C?.length??0,I=r?100:6,S=0===x,v=m&&f&&ep.has(u),N=\"\";S&&r&&E>I?N=\"\\n...\":S||(N=\"...\"),\"\"!==N&&(S?N+=\" \"+em.intl.formatToPlainString(em.t.DQnFp2,{lines:E-I}):N+=\" \"+em.intl.formatToPlainString(em.t[\"1+gGcK\"],{formattedBytes:(0,eu.up)(x)}));let _=C?.slice(0,I).join(\"\\n\")??\"\",j=r||I<E;return(0,i.jsxs)(\"div\",{className:a()(A,ef.kL),children:[(0,i.jsx)(y.Ip,{className:a()(ef.FS,{[ef.KQ]:!r&&!v}),style:{\"--custom-plaintext-preview-collapsed-lines\":6},children:null==s?(0,i.jsx)(g.y,{className:ef.u1}):v?(0,i.jsx)(eg,{text:_,notice:N.trim()}):(0,i.jsx)(ex,{text:_+N,language:u,wordWrap:d})}),(0,i.jsxs)(\"div\",",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "684519",
+   "excerpt": "{let{url:t,fileName:n,fileSize:l,fileContents:s,expanded:r,setExpanded:o,language:u,setLanguage:c,wordWrap:d,setWordWrap:m,renderMarkdown:h,setRenderMarkdown:p,bytesLeft:f,className:x}=e,A=s?.split(\"\\n\"),C=A?.length??0,E=r?100:6,I=0===f,S=h&&ep.has(u),v=\"\";I&&r&&C>E?v=\"\\n...\":I||(v=\"...\"),\"\"!==v&&(I?v+=\" \"+ec.intl.formatToPlainString(ec.t.DQnFp2,{lines:C-E}):v+=\" \"+ec.intl.formatToPlainString(ec.t[\"1+gGcK\"],{formattedBytes:(0,eo.up)(f)}));let N=A?.slice(0,E).join(\"\\n\")??\"\",_=r||E<C;return(0,i.jsxs)(\"div\",{className:a()(x,eh.kL),children:[(0,i.jsx)(y.Ip,{className:a()(eh.FS,{[eh.KQ]:!r&&!S}),style:{\"--custom-plaintext-preview-collapsed-lines\":6},children:null==s?(0,i.jsx)(g.y,{className:eh.u1}):S?(0,i.jsx)(ef,{text:N,notice:v.trim()}):(0,i.jsx)(eg,{text:N+v,language:u,wordWrap:d})}),(0,i.jsxs)(\"div\",",
    "fingerprint": {
     "strings": [
      "use strict",
      "IMAGE",
      "LazyImageZoomable",
-     "user",
+     "utf-8",
      "markdown",
      "mkdown",
      "PlaintextFileMarkdownPreview",
      ",variant:",
      ",onClick:()=>n?.(!t),",
-     ",{className:ef.VI,children:[(0,i.jsx)(",
+     ",{className:eh.VI,children:[(0,i.jsx)(",
      "text-sm/normal",
      "text-default",
      "text-xs/normal",
@@ -5588,7 +5715,7 @@
      "LanguageSelect",
      "left",
      "aria-label",
-     ",{className:ef.md,children:(0,i.jsxs)(q.iS,{selectionMode:",
+     ",{className:eh.md,children:(0,i.jsxs)(q.iS,{selectionMode:",
      ",color:",
      ",align:",
      ",renderPopout:e=>{let{closePopout:s}=e;return(0,i.jsx)($.W,{",
@@ -5600,31 +5727,31 @@
      "render-markdown",
      "UKOtz+",
      "0PQYk3",
-     "),E=C?.length??0,I=r?100:6,S=0===x,v=m&&f&&ep.has(u),N=",
-     "+em.intl.formatToPlainString(em.t.DQnFp2,{lines:E-I}):N+=",
-     "+em.intl.formatToPlainString(em.t[",
-     "],{formattedBytes:(0,eu.up)(x)}));let _=C?.slice(0,I).join(",
-     ",j=r||I<E;return(0,i.jsxs)(",
-     ",{className:ef.qr,role:",
-     ",{className:ef.Kb}),(0,i.jsx)(eE,{language:u,setLanguage:c,align:",
+     "),C=A?.length??0,E=r?100:6,I=0===f,S=h&&ep.has(u),v=",
+     "+ec.intl.formatToPlainString(ec.t.DQnFp2,{lines:C-E}):v+=",
+     "+ec.intl.formatToPlainString(ec.t[",
+     "],{formattedBytes:(0,eo.up)(f)}));let N=A?.slice(0,E).join(",
+     ",_=r||E<C;return(0,i.jsxs)(",
+     ",{className:eh.qr,role:",
+     ",{className:eh.Kb}),(0,i.jsx)(eC,{language:u,setLanguage:c,align:",
      "1+gGcK",
      ";return s.useEffect(()=>{function e(e){if((e.metaKey||e.ctrlKey)&&",
      "keydown",
      "qxQjc+"
     ],
     "exports": [],
-    "structHash": "b6aa0aa4ac859555"
+    "structHash": "46d8f03db48b6254"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::CrashHandler::.tx8CkI": {
    "kind": "patch",
    "plugin": "CrashHandler",
    "label": ".tx8CkI",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "670735",
-   "excerpt": ")}componentDidMount(){null==window.DiscordErrors&&(window.DiscordErrors={softCrash:e=>{this.triggerSoftCrash(e)}},this.discordErrorsSet=!0)}componentWillUnmount(){this.discordErrorsSet&&(window.DiscordErrors=null,this.discordErrorsSet=!1)}render(){let{children:e,renderCustomMessage:t}=this.props;if(null!==this.state.error){let e=(0,r.jsxs)(\"div\",{children:[(0,r.jsx)(\"p\",{children:N.intl.string(N.t.tx8CkI)}),(0,r.jsx)(\"p\",{children:N.intl.string(N.t.CvQlAH)})]}),n=(0,r.jsxs)(g.e,{children:[(0,r.jsx)(f.$,{variant:\"primary\",size:\"md\",text:N.intl.string(N.t[\"+hivLW\"]),onClick:this._handleSubmitReport}),(0,r.jsx)(_,{})]});return(0,r.jsx)(C.A,{title:N.intl.string(N.t[\"3h+n+8\"]),note:null!=t?t():e,action:n,className:O.W,illustration:(0,r.jsx)(\"div\",{className:O.b,children:(0,r.jsx)(h.e,{alt:\"\",ariaHidde",
+   "excerpt": ")}componentDidMount(){null==window.DiscordErrors&&(window.DiscordErrors={softCrash:e=>{this.triggerSoftCrash(e)}},this.discordErrorsSet=!0)}componentWillUnmount(){this.discordErrorsSet&&(window.DiscordErrors=null,this.discordErrorsSet=!1)}render(){let{children:e,renderCustomMessage:t}=this.props;if(null!==this.state.error){let e=(0,r.jsxs)(\"div\",{children:[(0,r.jsx)(\"p\",{children:N.intl.string(N.t.tx8CkI)}),(0,r.jsx)(\"p\",{children:N.intl.string(N.t.CvQlAH)})]}),n=(0,r.jsxs)(p.e,{children:[(0,r.jsx)(f.$,{variant:\"primary\",size:\"md\",text:N.intl.string(N.t[\"+hivLW\"]),onClick:this._handleSubmitReport}),(0,r.jsx)(_,{})]});return(0,r.jsx)(C.A,{title:N.intl.string(N.t[\"3h+n+8\"]),note:null!=t?t():e,action:n,className:O.W,illustration:(0,r.jsx)(\"div\",{className:O.b,children:(0,r.jsx)(h.e,{alt:\"\",ariaHidde",
    "fingerprint": {
     "strings": [
      "primary",
@@ -5638,7 +5765,7 @@
     "structHash": "16781f24b9e96b06"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::CustomIdle::type:\"IDLE\",idle:": {
    "kind": "patch",
@@ -5672,9 +5799,9 @@
    "kind": "patch",
    "plugin": "DisableCallIdle",
    "label": "handleIdleUpdate(){",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
-   "moduleId": "423189",
-   "excerpt": "A.removeChangeListener(Gx),Rt.A.removeChangeListener(Gx),nR.A.removeChangeListener(Gx),eU.Ay.removeChangeListener(Gx),oc.Ay.removeChangeListener(Gx),t_.A.removeChangeListener(Gx)}}let GF=new Gk;var GB=n(885576);let GV=new nA.Ep,GH=new nA.Ep;class Gj extends nt.A{_initialize(){U.h.subscribe(\"IDLE\",this.handleIdleUpdate)}_terminate(){GV.stop(),GH.stop(),U.h.unsubscribe(\"IDLE\",this.handleIdleUpdate)}handleIdleUpdate(){let e=GB.A.getIdleSince();if(!eG.isPlatformEmbedded)return;for(let e of(GV.stop(),GH.stop(),Rt.A.getAllActiveStreams()))if(e.state!==F.XYD.ENDED)return;if(null==e)return;let t=rE.A.getChannelId();if(null==t)return;GH.start(18e6,()=>{tX.default.selectVoiceChannel(null)});let n=eZ.A.getGuild(rE.A.getGuildId());if(null==n||null==n.afkChannelId||n.afkChannelId===t||null==n.afkTimeout)return;let i=n$.A",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "649718",
+   "excerpt": "A.removeChangeListener(Gj),Rl.A.removeChangeListener(Gj),nR.A.removeChangeListener(Gj),eU.Ay.removeChangeListener(Gj),ou.Ay.removeChangeListener(Gj),t_.A.removeChangeListener(Gj)}}let GY=new GW;var GK=n(885576);let G$=new nA.Ep,Gz=new nA.Ep;class GX extends nt.A{_initialize(){U.h.subscribe(\"IDLE\",this.handleIdleUpdate)}_terminate(){G$.stop(),Gz.stop(),U.h.unsubscribe(\"IDLE\",this.handleIdleUpdate)}handleIdleUpdate(){let e=GK.A.getIdleSince();if(!eG.isPlatformEmbedded)return;for(let e of(G$.stop(),Gz.stop(),Rl.A.getAllActiveStreams()))if(e.state!==F.XYD.ENDED)return;if(null==e)return;let t=rA.A.getChannelId();if(null==t)return;Gz.start(18e6,()=>{tX.default.selectVoiceChannel(null)});let n=eZ.A.getGuild(rA.A.getGuildId());if(null==n||null==n.afkChannelId||n.afkChannelId===t||null==n.afkTimeout)return;let i=n$.A",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -5719,10 +5846,10 @@
      "[FILTERED]"
     ],
     "exports": [],
-    "structHash": "b9e59436a4d0aedc"
+    "structHash": "de4c61b5a6bf00d3"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::DisableCallIdle::this.idleTimeout.start(": {
    "kind": "patch",
@@ -5875,9 +6002,9 @@
    "kind": "patch",
    "plugin": "FavoriteEmojiFirst",
    "label": "renderResults({results:",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "305070",
-   "excerpt": "edActivityForChannel(n.id),t=h.Ay.getActivityPanelMode();return(0,d.AX)(n)&&null!=e&&(0,m.H)(e.location)===n.id&&t===U.Gd.PANEL},[n]),ee=i.useMemo(()=>X?.top==null&&X?.left==null&&X?.bottom==null&&X?.right==null?\"\":String(Date.now()),[X?.top,X?.left,X?.bottom,X?.right]);if(i.useEffect(()=>{F(Z.isVisible)},[F,Z.isVisible]),!Z.isVisible||null==Z.query||void 0===X)return null;let et=Z.query.typeInfo.renderResults({results:Z.query.results,selectedIndex:Z.selectedIndex,channel:n,guild:K,query:Z.query.queryText,options:Z.query.options,onHover:e=>Y.onResultHover(e),onClick:e=>Y.onResultClick(e)})??null;if(null==et)return null;let en={[V.pK]:null==X,[V.YB]:null!=X,[V.sQ]:null==X&&\"bottom\"===e.position,[V.mO]:Q},el=490;null!=X&&(el=s.autocomplete?.small?200:Z.query?.type===E.DB.EMOJIS_AND_STICKERS?490:245);let ei=Math.ma",
+   "excerpt": "edActivityForChannel(n.id),t=m.Ay.getActivityPanelMode();return(0,d.AX)(n)&&null!=e&&(0,h.H)(e.location)===n.id&&t===U.Gd.PANEL},[n]),ee=i.useMemo(()=>X?.top==null&&X?.left==null&&X?.bottom==null&&X?.right==null?\"\":String(Date.now()),[X?.top,X?.left,X?.bottom,X?.right]);if(i.useEffect(()=>{F(Z.isVisible)},[F,Z.isVisible]),!Z.isVisible||null==Z.query||void 0===X)return null;let et=Z.query.typeInfo.renderResults({results:Z.query.results,selectedIndex:Z.selectedIndex,channel:n,guild:K,query:Z.query.queryText,options:Z.query.options,onHover:e=>Y.onResultHover(e),onClick:e=>Y.onResultClick(e)})??null;if(null==et)return null;let en={[V.pK]:null==X,[V.YB]:null!=X,[V.sQ]:null==X&&\"bottom\"===e.position,[V.mO]:Q},el=490;null!=X&&(el=s.autocomplete?.small?200:Z.query?.type===E.DB.EMOJIS_AND_STICKERS?490:245);let ei=Math.ma",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -5897,7 +6024,7 @@
     "structHash": "6ec5c045d5da3d98"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::FixCodeblockGap::/^```(?:([a-z0-9_+\\-.#]+?)\\n)?\\n*([^\\n][^]*?)\\n*```": {
    "kind": "patch",
@@ -5959,7 +6086,7 @@
    "kind": "patch",
    "plugin": "FixImagesQuality",
    "label": ".handleImageLoad)",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "619517",
    "excerpt": "getRatio(),v.isAnimated(this.props)))&&(this.state.readyState=A.Rv1.READY)}componentDidMount(){let{readyState:e}=this.state;if(e===A.Rv1.LOADING)if(_.getConfig({location:\"LazyImage_componentDidMount\"}).enabled){let e=this._imageRef.current;null!=e&&null!=v._lazyLoadIO?(v._lazyLoadTargets.set(e,this),v._lazyLoadIO.observe(e)):this.loadImage(this.getSrc(this.getRatio(),v.isAnimated(this.props)),this.handleImageLoad)}else this.loadImage(this.getSrc(this.getRatio(),v.isAnimated(this.props)),this.handleImageLoad);v.isAnimated(this.props)&&this.observeVisibility()}componentDidUpdate(e){let t=v.isAnimated(this.props);v.isAnimated(e)!==t&&(t?this.observeVisibility():this.unobserveVisibility())}componentWillUnmount(){this._unmounted=!0;let e=this._imageRef.current;null!=e&&(v._lazyLoadIO?.unobserve(e),v._lazyLoadTa",
    "fingerprint": {
@@ -5979,18 +6106,18 @@
      "user"
     ],
     "exports": [],
-    "structHash": "ea349c44d925d735"
+    "structHash": "c7e7746cae92109c"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::ForceOwnerCrown::.pclUFJ),children:": {
    "kind": "patch",
    "plugin": "ForceOwnerCrown",
    "label": ".pclUFJ),children:",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "589158",
-   "excerpt": "424265\"),n.e(\"39038\"),n.e(\"919885\"),n.e(\"655602\"),n.e(\"867160\")]).then(n.bind(n,198525)),webpackId:198525,name:\"QuestMembersListPopout\",renderLoader:()=>null});(0,J.xI)(u.A.MEMBER_LIST_ITEM_AVATAR_DECORATION_PADDING);let el=s.memo(function(e){let{isOwner:t,lostPermissionTooltipText:n,ownerTooltipText:l}=e;return null!=t&&t&&null==n?(0,i.jsx)(c.m,{__unsupportedReactNodeAsText:l??ee.intl.string(ee.t.pclUFJ),children:(0,i.jsx)(d.CrownIcon,{size:\"md\",color:\"currentColor\",className:et.Dd,\"aria-label\":l??ee.intl.string(ee.t.pclUFJ)})}):null}),ei=s.memo(function(e){let{premiumSince:t,onClickPremiumGuildIcon:n}=e;return null==t?null:(0,i.jsx)(c.m,{text:ee.intl.formatToPlainString(ee.t.IWkAq7,{date:t}),asContainer:!0,children:(0,i.jsx)(h.D,{onClick:n,tabIndex:-1,children:(0,i.jsx)(m._,{color:f.A.unsafe_rawColors.GUI",
+   "excerpt": "424265\"),n.e(\"39038\"),n.e(\"806295\"),n.e(\"655602\"),n.e(\"867160\")]).then(n.bind(n,198525)),webpackId:198525,name:\"QuestMembersListPopout\",renderLoader:()=>null});(0,J.xI)(u.A.MEMBER_LIST_ITEM_AVATAR_DECORATION_PADDING);let el=s.memo(function(e){let{isOwner:t,lostPermissionTooltipText:n,ownerTooltipText:l}=e;return null!=t&&t&&null==n?(0,i.jsx)(c.m,{__unsupportedReactNodeAsText:l??ee.intl.string(ee.t.pclUFJ),children:(0,i.jsx)(d.CrownIcon,{size:\"md\",color:\"currentColor\",className:et.Dd,\"aria-label\":l??ee.intl.string(ee.t.pclUFJ)})}):null}),ei=s.memo(function(e){let{premiumSince:t,onClickPremiumGuildIcon:n}=e;return null==t?null:(0,i.jsx)(c.m,{text:ee.intl.formatToPlainString(ee.t.IWkAq7,{date:t}),asContainer:!0,children:(0,i.jsx)(m.D,{onClick:n,tabIndex:-1,children:(0,i.jsx)(h._,{color:p.A.unsafe_rawColors.GUI",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -6010,18 +6137,18 @@
      "span"
     ],
     "exports": [],
-    "structHash": "983cdcd4954c680f"
+    "structHash": "9c8e224c4393c014"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::FullUserInChatbox::\"text\":\"locked\"": {
    "kind": "patch",
    "plugin": "FullUserInChatbox",
    "label": "\"text\":\"locked\"",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "655098",
-   "excerpt": "{targetElementRef:u,preload:async()=>{await (0,L.a)(n,t)},renderPopout:e=>(0,l.jsx)(G.Y,{guildId:n,channelId:s,roleId:t,popoutProps:e}),position:\"top\",children:m})}function el(e){let{id:t}=e,n=(0,E.bG)([H.A],()=>H.A.getChannel(t)),i=J.intl.string(J.t.zLZPmk).toLowerCase(),s=\"text\",r=!0;return(null!=n&&(i=(0,k.nc)(n)?(0,T.m1)(n,z.default,W.A):J.intl.string(J.t[\"/YzI63\"]),s=(0,k.nc)(n)?(0,Z.QG)(n)??\"text\":\"locked\",r=(0,w.Y)(n.type)),r)?(0,l.jsx)(U.A,{iconType:s,children:i}):(0,l.jsx)(\"span\",{children:\"#\"+i})}function ei(e){let{id:t,itemId:n,guildId:i}=e,s=(0,P.Q)(t),r=(0,E.bG)([B.A],()=>(0,P.f)(B.A,t,n,i),[t,n,i]);return(0,l.jsxs)(U.A,{iconType:t,children:[s,null!=r&&(0,l.jsx)(V.A,{}),r]})}function es(e){let{text:t,id:n}=e;return(0,l.jsxs)(U.A,{children:[t,\"(\",n,\")\"]})}function er(e){let{timestamp:t}=e;ret",
+   "excerpt": "{targetElementRef:u,preload:async()=>{await (0,M.a)(n,t)},renderPopout:e=>(0,l.jsx)(G.Y,{guildId:n,channelId:s,roleId:t,popoutProps:e}),position:\"top\",children:h})}function el(e){let{id:t}=e,n=(0,E.bG)([B.A],()=>B.A.getChannel(t)),i=J.intl.string(J.t.zLZPmk).toLowerCase(),s=\"text\",r=!0;return(null!=n&&(i=(0,k.nc)(n)?(0,T.m1)(n,z.default,W.A):J.intl.string(J.t[\"/YzI63\"]),s=(0,k.nc)(n)?(0,Z.QG)(n)??\"text\":\"locked\",r=(0,w.Y)(n.type)),r)?(0,l.jsx)(U.A,{iconType:s,children:i}):(0,l.jsx)(\"span\",{children:\"#\"+i})}function ei(e){let{id:t,itemId:n,guildId:i}=e,s=(0,P.Q)(t),r=(0,E.bG)([H.A],()=>(0,P.f)(H.A,t,n,i),[t,n,i]);return(0,l.jsxs)(U.A,{iconType:t,children:[s,null!=r&&(0,l.jsx)(V.A,{}),r]})}function es(e){let{text:t,id:n}=e;return(0,l.jsxs)(U.A,{children:[t,\"(\",n,\")\"]})}function er(e){let{timestamp:t}=e;ret",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -6045,9 +6172,9 @@
      ");switch(o.type){case",
      ":if(o.codeBlockState?.isInCodeBlock)return(0,l.jsx)(",
      ",{...s,children:a});case",
-     ":{let e=r()(em.h,em.MN);return(0,l.jsxs)(",
+     ":{let e=r()(eh.h,eh.MN);return(0,l.jsxs)(",
      ",{...s,className:e,children:[(0,l.jsx)(",
-     ",{contentEditable:!1,className:em.r}),(0,l.jsx)(",
+     ",{contentEditable:!1,className:eh.r}),(0,l.jsx)(",
      ",{children:a})]})}case",
      "customEmoji",
      "textMention",
@@ -6069,15 +6196,15 @@
     "structHash": "19d66169abb2ce7f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::GameActivityToggle::[\"5fWB8U\"]": {
    "kind": "patch",
    "plugin": "GameActivityToggle",
    "label": "[\"5fWB8U\"]",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "44137",
-   "excerpt": "_WIDGET_COACHMARK:void 0].filter(nf.Vq),void 0,!0),el=l.useId();return(0,i.jsx)(O.f5,{value:A,children:(0,i.jsx)(tV.of,{value:v,openedAt:o,fetchStartedAt:p?.fetchStartedAt,fetchEndedAt:p?.fetchEndedAt,isLoaded:p?.isLoaded,children:(0,i.jsxs)(ep.l,{ref:E,\"aria-labelledby\":el,className:s()(ek.jC,u),\"data-layer\":\"base\",children:[(0,i.jsx)(g.A,{children:(0,i.jsx)(eg.H,{id:el,children:V.intl.string(V.t[\"5fWB8U\"])})}),(0,i.jsxs)(eg.F,{children:[(0,i.jsxs)(tQ.A,{className:ek.BK,user:t,displayProfile:p,themeType:nX.d.POPOUT,children:[(0,i.jsxs)(\"div\",{className:nJ.wx,children:[(0,i.jsx)(tK.A,{user:t,displayProfile:p,themeType:nX.d.POPOUT}),(0,i.jsx)(tW.A,{user:t,displayProfile:p,avatarSize:nQ.T[nX.d.POPOUT].avatarSize,onOpenProfile:f?void 0:q}),(0,i.jsx)(t8.A,{ref:D,user:t,themeType:nX.d.POPOUT,onCloseProfi",
+   "excerpt": "_WIDGET_COACHMARK:void 0].filter(nf.Vq),void 0,!0),ea=l.useId();return(0,i.jsx)(O.f5,{value:A,children:(0,i.jsx)(tV.of,{value:v,openedAt:o,fetchStartedAt:p?.fetchStartedAt,fetchEndedAt:p?.fetchEndedAt,isLoaded:p?.isLoaded,children:(0,i.jsxs)(ep.l,{ref:E,\"aria-labelledby\":ea,className:s()(ek.jC,u),\"data-layer\":\"base\",children:[(0,i.jsx)(g.A,{children:(0,i.jsx)(eg.H,{id:ea,children:V.intl.string(V.t[\"5fWB8U\"])})}),(0,i.jsxs)(eg.F,{children:[(0,i.jsxs)(tQ.A,{className:ek.BK,user:t,displayProfile:p,themeType:nX.d.POPOUT,children:[(0,i.jsxs)(\"div\",{className:nJ.wx,children:[(0,i.jsx)(tK.A,{user:t,displayProfile:p,themeType:nX.d.POPOUT}),(0,i.jsx)(tW.A,{user:t,displayProfile:p,avatarSize:nQ.T[nX.d.POPOUT].avatarSize,onOpenProfile:f?void 0:Y}),(0,i.jsx)(t8.A,{ref:D,user:t,themeType:nX.d.POPOUT,onCloseProfi",
    "fingerprint": {
     "strings": [
      "translate3d(0, 107%, 0)",
@@ -6102,7 +6229,7 @@
      ",{className:ek.ap,children:(0,i.jsx)(eR._,{size:",
      "})})]}):(0,i.jsx)(p.D,{className:ek.ef,onClick:g,children:j()}),(0,i.jsx)(",
      ",{ref:C,className:ek.jG,children:t})}return _?(0,i.jsx)(",
-     ",{className:ek.j$,children:T()})}function eP(e){let{children:t,",
+     ",{className:ek.j$,children:T()})}function eL(e){let{children:t,",
      ":n}=e;return(0,i.jsx)(",
      ",{className:tl.mY,children:[(0,i.jsx)(te.z,{}),(0,i.jsx)(e4.k,{})]}),(0,i.jsxs)(",
      ",{className:tl.E_,children:[(0,i.jsx)(e9,{onBeforeEdit:a,variant:",
@@ -6122,10 +6249,10 @@
      ",{className:tc.p$,children:[(0,i.jsx)(eM.E,{variant:"
     ],
     "exports": [],
-    "structHash": "30da565383a13caf"
+    "structHash": "190f3878de088fa2"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::GifPaste::handleSelectGIF=": {
    "kind": "patch",
@@ -6167,9 +6294,9 @@
    "kind": "patch",
    "plugin": "GreetStickerPicker",
    "label": "Wumpus waves hello",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "3083",
-   "excerpt": "en:m})}function tk(e){let{message:t,channel:n,compact:i}=e,{type:l}=t;return l===tE.l.REPORT_TO_MOD_BAN_USER||l===tE.l.REPORT_TO_MOD_KICK_USER||l===tE.l.REPORT_TO_MOD_TIMEOUT_USER?(0,s.jsx)(tb,{message:t,channel:n,compact:i}):(0,s.jsx)(tR,{message:t,channel:n,compact:i})}var tM=n(849736),tL=n(63995),tO=n(105530),tP=n(353202),tD=n(747926);let tU=[{id:\"749054660769218631\",format_type:3,description:\"Wumpus waves hello\",name:\"Wave\"},{id:\"751606379340365864\",format_type:3,description:\"Nelly peeks around a wall and waves hello\",name:\"Wave\"},{id:\"754108890559283200\",format_type:3,description:\"Clyde cheerfully waving\",name:\"Wave\"},{id:\"781291131828699156\",format_type:2,description:\"Choco waves in greeting\",name:\"Wave\"},{id:\"816087792291282944\",format_type:3,description:\"Doggo spins and greets you\",name:\"Sup\"},{id:\"",
+   "excerpt": "en:m})}function tM(e){let{message:t,channel:n,compact:i}=e,{type:l}=t;return l===tI.l.REPORT_TO_MOD_BAN_USER||l===tI.l.REPORT_TO_MOD_KICK_USER||l===tI.l.REPORT_TO_MOD_TIMEOUT_USER?(0,s.jsx)(tR,{message:t,channel:n,compact:i}):(0,s.jsx)(tk,{message:t,channel:n,compact:i})}var tL=n(849736),tO=n(63995),tP=n(105530),tD=n(353202),tU=n(747926);let tG=[{id:\"749054660769218631\",format_type:3,description:\"Wumpus waves hello\",name:\"Wave\"},{id:\"751606379340365864\",format_type:3,description:\"Nelly peeks around a wall and waves hello\",name:\"Wave\"},{id:\"754108890559283200\",format_type:3,description:\"Clyde cheerfully waving\",name:\"Wave\"},{id:\"781291131828699156\",format_type:2,description:\"Choco waves in greeting\",name:\"Wave\"},{id:\"816087792291282944\",format_type:3,description:\"Doggo spins and greets you\",name:\"Sup\"},{id:\"",
    "fingerprint": {
     "strings": [
      ",{...(0,O.A)(l),width:t,height:n,viewBox:`0 0 ${t} ${n}`,fill:",
@@ -6214,16 +6341,16 @@
      ",{className:er._X,children:(0,s.jsx)(k.E,{tag:"
     ],
     "exports": [],
-    "structHash": "20be74dbf487378c"
+    "structHash": "0d00d90fa4da7e27"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::HideAttachments::this.renderAttachments(": {
    "kind": "patch",
    "plugin": "HideAttachments",
    "label": "this.renderAttachments(",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "230797",
    "excerpt": "){let{className:e,message:t,poll:n,compact:i}=this.props,{showSuppressModal:l,showRemoveAttachmentModal:a}=this.state;if(!0===this.props.restrictedPreview){let n=this.renderForwardedMessage(t);return null!=n?(0,s.jsx)(\"div\",{id:(0,dF.XL)(t),className:o()(e,d5.kL),children:n}):this.renderRestrictedHiddenMedia(t)}let r=this.renderEditedTag(t,i),d=this.renderCodedLinks(t),c=this.renderGiftCodes(t),u=this.renderAttachments(t),m=this.renderCtaButtons(),h=this.renderEmbeds(t),g=this.renderActivityInvite(t),p=this.renderReactions(t),A=this.renderPublishBump(t),x=this.renderEphemeralAccessories(t),f=this.renderStickersAccessories(t),E=this.renderThreadAccessories(t),I=this.renderComponentAccessories(t),C=this.renderThreadRoleMentionWarning(t),_=this.renderEmbeddedApplicationInstanceEmbed(t),v=this.renderInteractionPremi",
    "fingerprint": {
@@ -6257,7 +6384,7 @@
      ",children:t})]}),eY.p5&&(0,s.jsx)(eM.K,{",
      ":X.intl.string(X.t.WqhZss),icon:()=>(0,s.jsx)(eL.LinkIcon,{size:",
      "}),size:",
-     ",onClick:()=>{(0,eY.C)(l,()=>{(0,eO.P0)((0,eP.o)(X.intl.string(X.t[",
+     ",onClick:()=>{(0,eY.C)(l,()=>{(0,eO.P)((0,eP.o)(X.intl.string(X.t[",
      "]),eD.Ck.SUCCESS)),o()})},variant:",
      "})]}),(0,s.jsxs)(",
      ",{className:e$.Qs,children:[(0,s.jsxs)(",
@@ -6270,10 +6397,10 @@
      "ChannelFollowingBumpChannels"
     ],
     "exports": [],
-    "structHash": "1eaa8d9761744452"
+    "structHash": "1790cd4f63cf617b"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::ILoveSpam::hasFlag:{writable": {
    "kind": "patch",
@@ -6353,9 +6480,9 @@
    "kind": "patch",
    "plugin": "IrcColors",
    "label": ".pclUFJ),children:",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "589158",
-   "excerpt": "424265\"),n.e(\"39038\"),n.e(\"919885\"),n.e(\"655602\"),n.e(\"867160\")]).then(n.bind(n,198525)),webpackId:198525,name:\"QuestMembersListPopout\",renderLoader:()=>null});(0,J.xI)(u.A.MEMBER_LIST_ITEM_AVATAR_DECORATION_PADDING);let el=s.memo(function(e){let{isOwner:t,lostPermissionTooltipText:n,ownerTooltipText:l}=e;return null!=t&&t&&null==n?(0,i.jsx)(c.m,{__unsupportedReactNodeAsText:l??ee.intl.string(ee.t.pclUFJ),children:(0,i.jsx)(d.CrownIcon,{size:\"md\",color:\"currentColor\",className:et.Dd,\"aria-label\":l??ee.intl.string(ee.t.pclUFJ)})}):null}),ei=s.memo(function(e){let{premiumSince:t,onClickPremiumGuildIcon:n}=e;return null==t?null:(0,i.jsx)(c.m,{text:ee.intl.formatToPlainString(ee.t.IWkAq7,{date:t}),asContainer:!0,children:(0,i.jsx)(h.D,{onClick:n,tabIndex:-1,children:(0,i.jsx)(m._,{color:f.A.unsafe_rawColors.GUI",
+   "excerpt": "424265\"),n.e(\"39038\"),n.e(\"806295\"),n.e(\"655602\"),n.e(\"867160\")]).then(n.bind(n,198525)),webpackId:198525,name:\"QuestMembersListPopout\",renderLoader:()=>null});(0,J.xI)(u.A.MEMBER_LIST_ITEM_AVATAR_DECORATION_PADDING);let el=s.memo(function(e){let{isOwner:t,lostPermissionTooltipText:n,ownerTooltipText:l}=e;return null!=t&&t&&null==n?(0,i.jsx)(c.m,{__unsupportedReactNodeAsText:l??ee.intl.string(ee.t.pclUFJ),children:(0,i.jsx)(d.CrownIcon,{size:\"md\",color:\"currentColor\",className:et.Dd,\"aria-label\":l??ee.intl.string(ee.t.pclUFJ)})}):null}),ei=s.memo(function(e){let{premiumSince:t,onClickPremiumGuildIcon:n}=e;return null==t?null:(0,i.jsx)(c.m,{text:ee.intl.formatToPlainString(ee.t.IWkAq7,{date:t}),asContainer:!0,children:(0,i.jsx)(m.D,{onClick:n,tabIndex:-1,children:(0,i.jsx)(h._,{color:p.A.unsafe_rawColors.GUI",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -6375,10 +6502,10 @@
      "span"
     ],
     "exports": [],
-    "structHash": "983cdcd4954c680f"
+    "structHash": "9c8e224c4393c014"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::IrcColors::=\"SYSTEM_TAG\"": {
    "kind": "patch",
@@ -6413,9 +6540,9 @@
    "kind": "patch",
    "plugin": "LoadingQuotes",
    "label": ".v0R1Lh",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
-   "moduleId": "423189",
-   "excerpt": "\"200ms\",\"--connecting-content-fade-duration\":\"150ms\"},children:[(0,y.jsxs)(\"div\",{className:Dr.Qs,children:[(0,y.jsx)(Di.A,{autoPlay:!0,loop:!e,setRef:this.setVideoRef,onReady:this.handleReady,className:to()(Dr.bE,this.state.ready?Dr.Gc:\"\")}),(0,y.jsxs)(\"div\",{className:Dr.Qq,children:[null!=t?null:(0,y.jsx)(iV.E,{variant:\"text-xs/semibold\",color:\"none\",className:Dr.mu,children:tS.intl.string(tS.t.v0R1Lh)}),(0,y.jsx)(\"div\",{className:null!=t?Dr.DD:Dr.uN,children:i}),(0,y.jsx)(\"div\",{className:Dr.rf,children:r})]})]}),(0,y.jsxs)(\"div\",{className:to()(Dr.Bk,{[Dr.ly]:this.state.problems}),children:[(0,y.jsx)(\"div\",{className:Dr.u1,children:tS.intl.string(tS.t.AG2zPM)}),(0,y.jsxs)(\"div\",{children:[(0,y.jsxs)(eI.Anchor,{className:Dr.AR,href:F.qF7.TWITTER_SUPPORT,target:\"_blank\",children:[(0,y.jsx)(mX.",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "649718",
+   "excerpt": "\"200ms\",\"--connecting-content-fade-duration\":\"150ms\"},children:[(0,y.jsxs)(\"div\",{className:Dc.Qs,children:[(0,y.jsx)(Dd.A,{autoPlay:!0,loop:!e,setRef:this.setVideoRef,onReady:this.handleReady,className:to()(Dc.bE,this.state.ready?Dc.Gc:\"\")}),(0,y.jsxs)(\"div\",{className:Dc.Qq,children:[null!=t?null:(0,y.jsx)(iV.E,{variant:\"text-xs/semibold\",color:\"none\",className:Dc.mu,children:tS.intl.string(tS.t.v0R1Lh)}),(0,y.jsx)(\"div\",{className:null!=t?Dc.DD:Dc.uN,children:i}),(0,y.jsx)(\"div\",{className:Dc.rf,children:r})]})]}),(0,y.jsxs)(\"div\",{className:to()(Dc.Bk,{[Dc.ly]:this.state.problems}),children:[(0,y.jsx)(\"div\",{className:Dc.u1,children:tS.intl.string(tS.t.AG2zPM)}),(0,y.jsxs)(\"div\",{children:[(0,y.jsxs)(eI.Anchor,{className:Dc.AR,href:F.qF7.TWITTER_SUPPORT,target:\"_blank\",children:[(0,y.jsx)(mZ.",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -6460,18 +6587,18 @@
      "[FILTERED]"
     ],
     "exports": [],
-    "structHash": "b9e59436a4d0aedc"
+    "structHash": "de4c61b5a6bf00d3"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::MCord Reporter::\"Could not find app-mount\"": {
    "kind": "patch",
    "plugin": "MCord Reporter",
    "label": "\"Could not find app-mount\"",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
-   "moduleId": "423189",
-   "excerpt": "}}});function V$(){VK.getConfig({location:\"web_app_entrypoint\"}).enabled||(Vj&&(Vj=!1,null!=VW&&(Node.prototype.removeChild=VW),null!=VY&&(Node.prototype.insertBefore=VY)),xX.A.removeChangeListener(V$))}var Vz=n(394072);wu.default.cssDebuggingEnabled&&n.e(\"836050\").then(n.t.bind(n,581929,19)),(0,VH.pF)(),(0,Vz.tO)();let VX=5*nh.A.Millis.MINUTE,Vq=document.getElementById(\"app-mount\");e8()(null!=Vq,\"Could not find app-mount\"),Vq.className=__OVERLAY__?\"\":VV.l,!Vj&&(0,eG.isWeb)()&&\"function\"==typeof Node&&null!=Node.prototype&&(Vj=!0,VW=Node.prototype.removeChild,Node.prototype.removeChild=function(e){return e.parentNode!==this?e:VW.call(this,e)},VY=Node.prototype.insertBefore,Node.prototype.insertBefore=function(e,t){return null!=t&&t.parentNode!==this?e:VY.call(this,e,t)}),(0,eG.isWeb)()&&(xX.A.addChangeListener(V$),",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "649718",
+   "excerpt": "}}});function VJ(){VQ.getConfig({location:\"web_app_entrypoint\"}).enabled||(VX&&(VX=!1,null!=Vq&&(Node.prototype.removeChild=Vq),null!=VZ&&(Node.prototype.insertBefore=VZ)),x1.A.removeChangeListener(VJ))}var V0=n(394072);wf.default.cssDebuggingEnabled&&n.e(\"836050\").then(n.t.bind(n,581929,19)),(0,Vz.pF)(),(0,V0.tO)();let V1=5*nh.A.Millis.MINUTE,V2=document.getElementById(\"app-mount\");e8()(null!=V2,\"Could not find app-mount\"),V2.className=__OVERLAY__?\"\":V$.l,!VX&&(0,eG.isWeb)()&&\"function\"==typeof Node&&null!=Node.prototype&&(VX=!0,Vq=Node.prototype.removeChild,Node.prototype.removeChild=function(e){return e.parentNode!==this?e:Vq.call(this,e)},VZ=Node.prototype.insertBefore,Node.prototype.insertBefore=function(e,t){return null!=t&&t.parentNode!==this?e:VZ.call(this,e,t)}),(0,eG.isWeb)()&&(x1.A.addChangeListener(VJ),",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -6516,10 +6643,10 @@
      "[FILTERED]"
     ],
     "exports": [],
-    "structHash": "b9e59436a4d0aedc"
+    "structHash": "de4c61b5a6bf00d3"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::MemberCount::{isSidebarVisible:": {
    "kind": "patch",
@@ -6557,9 +6684,9 @@
    "kind": "patch",
    "plugin": "MemberListDecoratorsAPI",
    "label": ".pclUFJ),children:",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "589158",
-   "excerpt": "424265\"),n.e(\"39038\"),n.e(\"919885\"),n.e(\"655602\"),n.e(\"867160\")]).then(n.bind(n,198525)),webpackId:198525,name:\"QuestMembersListPopout\",renderLoader:()=>null});(0,J.xI)(u.A.MEMBER_LIST_ITEM_AVATAR_DECORATION_PADDING);let el=s.memo(function(e){let{isOwner:t,lostPermissionTooltipText:n,ownerTooltipText:l}=e;return null!=t&&t&&null==n?(0,i.jsx)(c.m,{__unsupportedReactNodeAsText:l??ee.intl.string(ee.t.pclUFJ),children:(0,i.jsx)(d.CrownIcon,{size:\"md\",color:\"currentColor\",className:et.Dd,\"aria-label\":l??ee.intl.string(ee.t.pclUFJ)})}):null}),ei=s.memo(function(e){let{premiumSince:t,onClickPremiumGuildIcon:n}=e;return null==t?null:(0,i.jsx)(c.m,{text:ee.intl.formatToPlainString(ee.t.IWkAq7,{date:t}),asContainer:!0,children:(0,i.jsx)(h.D,{onClick:n,tabIndex:-1,children:(0,i.jsx)(m._,{color:f.A.unsafe_rawColors.GUI",
+   "excerpt": "424265\"),n.e(\"39038\"),n.e(\"806295\"),n.e(\"655602\"),n.e(\"867160\")]).then(n.bind(n,198525)),webpackId:198525,name:\"QuestMembersListPopout\",renderLoader:()=>null});(0,J.xI)(u.A.MEMBER_LIST_ITEM_AVATAR_DECORATION_PADDING);let el=s.memo(function(e){let{isOwner:t,lostPermissionTooltipText:n,ownerTooltipText:l}=e;return null!=t&&t&&null==n?(0,i.jsx)(c.m,{__unsupportedReactNodeAsText:l??ee.intl.string(ee.t.pclUFJ),children:(0,i.jsx)(d.CrownIcon,{size:\"md\",color:\"currentColor\",className:et.Dd,\"aria-label\":l??ee.intl.string(ee.t.pclUFJ)})}):null}),ei=s.memo(function(e){let{premiumSince:t,onClickPremiumGuildIcon:n}=e;return null==t?null:(0,i.jsx)(c.m,{text:ee.intl.formatToPlainString(ee.t.IWkAq7,{date:t}),asContainer:!0,children:(0,i.jsx)(m.D,{onClick:n,tabIndex:-1,children:(0,i.jsx)(h._,{color:p.A.unsafe_rawColors.GUI",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -6579,16 +6706,16 @@
      "span"
     ],
     "exports": [],
-    "structHash": "983cdcd4954c680f"
+    "structHash": "9c8e224c4393c014"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::MemberListDecoratorsAPI::PrivateChannel.renderAvatar": {
    "kind": "patch",
    "plugin": "MemberListDecoratorsAPI",
    "label": "PrivateChannel.renderAvatar",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "715069",
    "excerpt": "f,eM.Zi),\"aria-label\":tc,onAuxClick:e=>(0,e_.A)(e,t),...r,children:(0,i.jsx)(P.A,{ref:ts,avatar:function(){let e=C._3.SIZE_32;if(t.isMultiUserDM())if(t.recipients.length>=2&&null==t.icon)return(0,i.jsx)(ej.A,{\"aria-hidden\":!0,recipients:t.recipients,size:e,isTyping:h,status:j});else return(0,i.jsx)(eb,{...eF,src:(0,H.Y)(t),\"aria-hidden\":!0,size:e,status:h?el.clD.ONLINE:j,isTyping:h});o()(null!=a,\"PrivateChannel.renderAvatar: Invalid prop configuration - no user or channel\");let n=null;return a.isSystemUser()||(n=(0,w.A)(m)?el.clD.STREAMING:j),(0,i.jsx)(eb,{...eF,size:C._3.SIZE_32,src:eB,avatarDecoration:ez,status:n,isMobile:x,isVR:_,isTyping:h,\"aria-label\":a.username,statusTooltip:!0})}(),highlighted:e0&&!eZ,muted:eZ,subText:t.isSystemDM()?(0,i.jsx)(T.E,{variant:\"text-xs/medium\",color:\"none\",className:eM.W$,children",
    "fingerprint": {
@@ -6613,18 +6740,18 @@
      "none"
     ],
     "exports": [],
-    "structHash": "77b90ccccd2a6089"
+    "structHash": "7e8b85e6f7b975af"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::MentionAvatars::.USER_MENTION)": {
    "kind": "patch",
    "plugin": "MentionAvatars",
    "label": ".USER_MENTION)",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "288539",
-   "excerpt": ",async()=>{let{default:e}=await Promise.all([n.e(\"926132\"),n.e(\"146652\"),n.e(\"660829\")]).then(n.bind(n,446828));return n=>(0,l.jsx)(e,{...n,userId:t})})},[t]);return(0,l.jsx)(d.A,{className:s,onClick:o,onContextMenu:u,children:r})}function E(e){let{className:t,userId:c,channelId:E,parsedUserId:I,content:y,inlinePreview:S=!1,viewingChannelId:v}=e,N=i.useRef(null),{analyticsLocations:_}=(0,u.Ay)(o.A.USER_MENTION),j=(0,r.bG)([g.default],()=>g.default.getUser(c)),b=(0,r.bG)([m.A],()=>m.A.getChannel(E)),T=null!=b?b.getGuildId():null,R=S||null==j||null==E||null==b?void 0:e=>{null!=T?(0,a.L3)(e,async()=>{let{default:e}=await Promise.all([n.e(\"403382\"),n.e(\"207322\"),n.e(\"622936\"),n.e(\"216947\"),n.e(\"463317\"),n.e(\"326692\"),n.e(\"834552\"),n.e(\"708757\"),n.e(\"993103\"),n.e(\"585968\"),n.e(\"893190\"),n.e(\"21921\"),n.e(\"676",
+   "excerpt": ",async()=>{let{default:e}=await Promise.all([n.e(\"926132\"),n.e(\"146652\"),n.e(\"660829\")]).then(n.bind(n,446828));return n=>(0,l.jsx)(e,{...n,userId:t})})},[t]);return(0,l.jsx)(d.A,{className:s,onClick:o,onContextMenu:u,children:r})}function E(e){let{className:t,userId:c,channelId:E,parsedUserId:I,content:y,inlinePreview:S=!1,viewingChannelId:v}=e,N=i.useRef(null),{analyticsLocations:_}=(0,u.Ay)(o.A.USER_MENTION),j=(0,r.bG)([g.default],()=>g.default.getUser(c)),b=(0,r.bG)([h.A],()=>h.A.getChannel(E)),T=null!=b?b.getGuildId():null,R=S||null==j||null==E||null==b?void 0:e=>{null!=T?(0,a.L3)(e,async()=>{let{default:e}=await Promise.all([n.e(\"403382\"),n.e(\"597981\"),n.e(\"622936\"),n.e(\"216947\"),n.e(\"463317\"),n.e(\"326692\"),n.e(\"993103\"),n.e(\"834552\"),n.e(\"708757\"),n.e(\"585968\"),n.e(\"893190\"),n.e(\"21921\"),n.e(\"571",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -6632,16 +6759,16 @@
      "right"
     ],
     "exports": [],
-    "structHash": "10b9b178b4de7f66"
+    "structHash": "8ac7ec393f5a1fdc"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::MessageAccessoriesAPI::.faHmO3": {
    "kind": "patch",
    "plugin": "MessageAccessoriesAPI",
    "label": ".faHmO3",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "230797",
    "excerpt": "lText:X.intl.string(X.t[\"ETE/oC\"]),onCancel:()=>this.setState({showRemoveAttachmentModal:!1,attachmentToDelete:null}),onConfirm:()=>{let i=t.attachments.filter(e=>e.id!==n.id);x.A.patchMessageAttachments(e.id,t.id,i),this.setState({showRemoveAttachmentModal:!1,attachmentToDelete:null})},children:(0,s.jsx)(A.E,{variant:\"text-md/normal\",color:\"text-default\",className:d5.IX,children:X.intl.string(X.t.faHmO3)})})}renderInteractionPremiumUpsell(e){let t=e.applicationId;return e.type!==d.l.INTERACTION_PREMIUM_UPSELL||null==t?null:(0,s.jsx)(dY,{applicationId:t,guildId:this.props.channel.guild_id})}renderEmbeddedApplicationInstanceEmbed(e){let{application:t,activityInstance:n}=e;return null==t||null==n?null:(0,s.jsx)(e6.c,{contentClassification:t.content_classification,channel:this.props.channel,variant:",
    "fingerprint": {
@@ -6675,7 +6802,7 @@
      ",children:t})]}),eY.p5&&(0,s.jsx)(eM.K,{",
      ":X.intl.string(X.t.WqhZss),icon:()=>(0,s.jsx)(eL.LinkIcon,{size:",
      "}),size:",
-     ",onClick:()=>{(0,eY.C)(l,()=>{(0,eO.P0)((0,eP.o)(X.intl.string(X.t[",
+     ",onClick:()=>{(0,eY.C)(l,()=>{(0,eO.P)((0,eP.o)(X.intl.string(X.t[",
      "]),eD.Ck.SUCCESS)),o()})},variant:",
      "})]}),(0,s.jsxs)(",
      ",{className:e$.Qs,children:[(0,s.jsxs)(",
@@ -6688,18 +6815,18 @@
      "ChannelFollowingBumpChannels"
     ],
     "exports": [],
-    "structHash": "1eaa8d9761744452"
+    "structHash": "1790cd4f63cf617b"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::MessageDecorationsAPI::[\"AeYyL+\"]": {
    "kind": "patch",
    "plugin": "MessageDecorationsAPI",
    "label": "[\"AeYyL+\"]",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "622868",
-   "excerpt": "r7.SUPPRESS_NOTIFICATIONS)&&e.push((0,t.jsx)(eP,{},\"suppress-notifications\")),!a&&C&&k&&(0,o.Lt)(n.flags,Q.pr7.IS_SCHEDULED)&&e.push((0,t.jsx)(eO,{},\"scheduled\")),e},[n,a,k,C]),D=(0,eF.d$)(n,p),L=(0,eF.xl)(n),V=v?`${D}`:`${D} ${L}`,H=l?.state===ey.a.LOADED?(0,eF.nS)(n):void 0;return(0,t.jsx)(e9,{message:n,avatar:S,username:(0,t.jsxs)(t.Fragment,{children:[_&&(0,t.jsx)(h.m,{text:en.intl.string(en.t[\"AeYyL+\"]),children:(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(m.g,{size:\"xxs\",color:\"currentColor\",className:a?e6.EI:e6.bu}),(0,t.jsx)(g.A,{children:en.intl.string(en.t.AmHag5)})]})}),(0,t.jsx)(e5,{...e,message:n,channel:I,compact:a,roleIconProps:j,renderPopout:E,preview:b,subscribeToGroupId:p,hideGuildTag:f})]}),usernameSpanId:(0,eF.d$)(n,p),usernameClassName:s()(e6.TK,{[e6.yF]:0!==O||G,[e6.hB]:null!=w||",
+   "excerpt": "r7.SUPPRESS_NOTIFICATIONS)&&e.push((0,t.jsx)(eP,{},\"suppress-notifications\")),!a&&C&&k&&(0,o.Lt)(n.flags,Q.pr7.IS_SCHEDULED)&&e.push((0,t.jsx)(eO,{},\"scheduled\")),e},[n,a,k,C]),D=(0,eF.d$)(n,p),L=(0,eF.xl)(n),V=v?`${D}`:`${D} ${L}`,H=l?.state===ey.a.LOADED?(0,eF.nS)(n):void 0;return(0,t.jsx)(e9,{message:n,avatar:S,username:(0,t.jsxs)(t.Fragment,{children:[_&&(0,t.jsx)(h.m,{text:en.intl.string(en.t[\"AeYyL+\"]),children:(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(m.g,{size:\"xxs\",color:\"currentColor\",className:a?e2.EI:e2.bu}),(0,t.jsx)(g.A,{children:en.intl.string(en.t.AmHag5)})]})}),(0,t.jsx)(e4,{...e,message:n,channel:I,compact:a,roleIconProps:j,renderPopout:E,preview:b,subscribeToGroupId:p,hideGuildTag:f})]}),usernameSpanId:(0,eF.d$)(n,p),usernameClassName:s()(e2.TK,{[e2.yF]:0!==O||G,[e2.hB]:null!=w||",
    "fingerprint": {
     "strings": [
      "GuildRoleConnectionEligibilityStore",
@@ -6747,15 +6874,15 @@
     "structHash": "f4ffab350494a853"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::MessageLatency::showCommunicationDisabledStyles": {
    "kind": "patch",
    "plugin": "MessageLatency",
    "label": "showCommunicationDisabledStyles",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "622868",
-   "excerpt": "children:i})}),(0,t.jsx)(_.E,{variant:\"text-sm/normal\",children:r})]})]}),(0,t.jsx)(eA.$,{size:\"sm\",variant:\"secondary\",text:en.intl.string(en.t[\"H930+H\"]),onClick:d,icon:eW._,fullWidth:!0,autoFocus:!0})]})})})};var e7=l(812299),e2=l(109054),e6=l(318626);function e3(e){let{avatarSrc:n,avatarDecorationSrc:l,compact:i,onClick:a,onContextMenu:r,onMouseDown:o,onMouseEnter:c,onMouseLeave:d,onKeyDown:u,showCommunicationDisabledStyles:h=!1,className:m,avatarImgRef:g}=e;return(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(\"img\",{ref:g,onClick:a,onContextMenu:r,onKeyDown:u,onMouseDown:o,onMouseEnter:c,onMouseLeave:d,src:n,\"aria-hidden\":!0,className:s()(m,e6.my,{[e6.oE]:i,[e6.vk]:null!=a,[e6.uU]:h}),alt:\" \"}),null==l||i?null:(0,t.jsx)(\"img\",{className:e6.M,src:l,alt:\" \",\"aria-hidden\":!0})]})}let e5=i.memo(function(e){let{message:n,au",
+   "excerpt": "children:i})}),(0,t.jsx)(_.E,{variant:\"text-sm/normal\",children:r})]})]}),(0,t.jsx)(eA.$,{size:\"sm\",variant:\"secondary\",text:en.intl.string(en.t[\"H930+H\"]),onClick:d,icon:eW._,fullWidth:!0,autoFocus:!0})]})})})};var e6=l(812299),e7=l(109054),e2=l(318626);function e3(e){let{avatarSrc:n,avatarDecorationSrc:l,compact:i,onClick:a,onContextMenu:r,onMouseDown:o,onMouseEnter:c,onMouseLeave:d,onKeyDown:u,showCommunicationDisabledStyles:h=!1,className:m,avatarImgRef:g}=e;return(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(\"img\",{ref:g,onClick:a,onContextMenu:r,onKeyDown:u,onMouseDown:o,onMouseEnter:c,onMouseLeave:d,src:n,\"aria-hidden\":!0,className:s()(m,e2.my,{[e2.oE]:i,[e2.vk]:null!=a,[e2.uU]:h}),alt:\" \"}),null==l||i?null:(0,t.jsx)(\"img\",{className:e2.M,src:l,alt:\" \",\"aria-hidden\":!0})]})}let e4=i.memo(function(e){let{message:n,au",
    "fingerprint": {
     "strings": [
      "GuildRoleConnectionEligibilityStore",
@@ -6803,7 +6930,7 @@
     "structHash": "f4ffab350494a853"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::MessageLogger::\"MessageStore\"": {
    "kind": "patch",
@@ -6842,21 +6969,21 @@
    "kind": "patch",
    "plugin": "MessageLogger",
    "label": ".C8sXIM",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "861986",
-   "excerpt": "NT=0]=\"WITH_CONTENT\",s[s.AFTER_ACCESSORIES=1]=\"AFTER_ACCESSORIES\",s);function c(t){let{message:e,compact:n,location:s}=t;return e.isEdited()&&null!=e.editedTimestamp?s!==(n||null!=e.content&&0!==e.content.length?0:1)?null:(0,i.jsxs)(i.Fragment,{children:[\" \",(0,i.jsx)(a.A,{timestamp:e.editedTimestamp,isEdited:!0,isInline:!1,children:(0,i.jsxs)(\"span\",{className:r.oh,children:[\"(\",l.intl.string(l.t.C8sXIM),\")\"]})})]}):null}}",
+   "excerpt": "NT=0]=\"WITH_CONTENT\",s[s.AFTER_ACCESSORIES=1]=\"AFTER_ACCESSORIES\",s);function m(t){let{message:e,compact:n,location:s}=t;return e.isEdited()&&null!=e.editedTimestamp?s!==(n||null!=e.content&&0!==e.content.length?0:1)?null:(0,i.jsxs)(i.Fragment,{children:[\" \",(0,i.jsx)(a.A,{timestamp:e.editedTimestamp,isEdited:!0,isInline:!1,children:(0,i.jsxs)(\"span\",{className:l.oh,children:[\"(\",r.intl.string(r.t.C8sXIM),\")\"]})})]}):null}}",
    "fingerprint": {
     "strings": [
      "WITH_CONTENT",
      "AFTER_ACCESSORIES",
      "span",
-     ",l.intl.string(l.t.C8sXIM),"
+     ",r.intl.string(r.t.C8sXIM),"
     ],
     "exports": [],
     "structHash": "cd4f09aa7cc0c9d0"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::MessageLogger::this.truncateTop": {
    "kind": "patch",
@@ -6883,15 +7010,15 @@
    "kind": "patch",
    "plugin": "MessagePopoverAPI",
    "label": ".Lv7LxN),children",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
-   "moduleId": "105165",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "891496",
    "excerpt": "=function(e){let{channel:t,message:n}=e;return n.state===eu.cmJ.SEND_FAILED?(0,a.jsx)(nm,{channel:t,message:n}):null}(e),o=function(e){let{message:t}=e;return t.state!==eu.cmJ.SEND_FAILED?(0,a.jsx)(nh,{...e}):null}(e);return s||null==r&&null==o?null:(0,a.jsx)(\"div\",{className:c()(e.className,{[nr.kL]:!0,[nr.gN]:l,[nr.nK]:i}),onClick:nc,onContextMenu:nc,role:\"group\",\"aria-label\":eL.intl.string(eL.t.Lv7LxN),children:(0,a.jsxs)(nt.Ay,{className:e.innerClassName,children:[r,o]})})});var nf=n(13673),nC=n(622868),nx=n(606049),nE=n(10364);let nS=r.memo(function(e){let{message:t,channel:n,compact:l=!1,groupId:i,isGroupStart:s,usernameProfile:o,avatarProfile:c,setPopout:d,author:u,repliedMessage:h,roleIcon:m}=e,g=(0,tt.r4)(t.author.id,n.id),p=(0,tt.m)(t,n,o,d),A=(0,tt.Jo)(c,d),f=r.useCallback(()=>{d({usernameProfil",
    "fingerprint": {
     "strings": [
      "<typeof window?m.t:window.ResizeObserver??m.t,S=(s=c()(x.qZ,x.Vl),l=new Map,i=",
      "container",
      "content",
-     ",{ref:_,className:c()(u,x.Qs),children:[n,v&&(0,a.jsx)(",
+     ",{ref:v,className:c()(u,x.Qs),children:[n,_&&(0,a.jsx)(",
      "useConversationScroll must be used inside <ConversationScrollProvider>",
      "user",
      "2021-12_inferno_spam_redaction",
@@ -6910,7 +7037,7 @@
      "),h=s.size>0,m=s.has(",
      ",{className:ek.oO,children:[(0,a.jsxs)(",
      ",{className:ek.wx,children:[(0,a.jsxs)(",
-     ",{className:ek.TK,children:[(0,a.jsx)(e_.D,{variant:",
+     ",{className:ek.TK,children:[(0,a.jsx)(ev.D,{variant:",
      ",color:",
      ",children:eL.intl.string(eD.default.C3suOL)}),(0,a.jsx)(ey.E,{variant:",
      ",className:ek.VA,children:eL.intl.string(eD.default[",
@@ -6930,18 +7057,18 @@
      "positive"
     ],
     "exports": [],
-    "structHash": "b9e56ccac4c3bee4"
+    "structHash": "b6ee91a0943caa06"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::MessageUpdaterAPI::}renderStickersAccessories(": {
    "kind": "patch",
    "plugin": "MessageUpdaterAPI",
    "label": "}renderStickersAccessories(",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "230797",
-   "excerpt": "is.props;return i?null:(0,s.jsx)(dV.A,{channel:t,message:e,hideParty:!1,hideInviteEmbedBanner:n})}renderPublishBump(e){return this.props.channel.type!==W.rbe.GUILD_ANNOUNCEMENT||this.props.isMessageSnapshot?null:(0,s.jsx)(tg,{channelId:e.channel_id,messageId:e.id})}renderEphemeralAccessories(e){return(0,a0.ec)(e)?(0,s.jsx)(rI.A,{message:e,onDeleteMessage:()=>{x.A.dismissAutomatedMessage(e)}}):null}renderStickersAccessories(e){let t=(0,lz.o6)(e),{channel:n,isInteracting:i}=this.props;return 0===t.length?null:t.map(e=>(0,s.jsx)(aa,{channel:n,isInteracting:i,renderableSticker:e},e.id))}renderThreadAccessories(e){if(e.hasFlag(W.pr7.HAS_THREAD)&&!1!==this.props.renderThreadAccessory)return(0,s.jsx)(aj,{message:e,compact:this.props.compact})}renderThreadRoleMentionWarning(e){if(e.hasFlag(W.pr7.FAILED_TO_MENTION_SOME_ROLES",
+   "excerpt": "is.props;return i?null:(0,s.jsx)(dV.A,{channel:t,message:e,hideParty:!1,hideInviteEmbedBanner:n})}renderPublishBump(e){return this.props.channel.type!==W.rbe.GUILD_ANNOUNCEMENT||this.props.isMessageSnapshot?null:(0,s.jsx)(tg,{channelId:e.channel_id,messageId:e.id})}renderEphemeralAccessories(e){return(0,a0.ec)(e)?(0,s.jsx)(rI.A,{message:e,onDeleteMessage:()=>{x.A.dismissAutomatedMessage(e)}}):null}renderStickersAccessories(e){let t=(0,lJ.o6)(e),{channel:n,isInteracting:i}=this.props;return 0===t.length?null:t.map(e=>(0,s.jsx)(ar,{channel:n,isInteracting:i,renderableSticker:e},e.id))}renderThreadAccessories(e){if(e.hasFlag(W.pr7.HAS_THREAD)&&!1!==this.props.renderThreadAccessory)return(0,s.jsx)(aj,{message:e,compact:this.props.compact})}renderThreadRoleMentionWarning(e){if(e.hasFlag(W.pr7.FAILED_TO_MENTION_SOME_ROLES",
    "fingerprint": {
     "strings": [
      "text-xs/normal",
@@ -6973,7 +7100,7 @@
      ",children:t})]}),eY.p5&&(0,s.jsx)(eM.K,{",
      ":X.intl.string(X.t.WqhZss),icon:()=>(0,s.jsx)(eL.LinkIcon,{size:",
      "}),size:",
-     ",onClick:()=>{(0,eY.C)(l,()=>{(0,eO.P0)((0,eP.o)(X.intl.string(X.t[",
+     ",onClick:()=>{(0,eY.C)(l,()=>{(0,eO.P)((0,eP.o)(X.intl.string(X.t[",
      "]),eD.Ck.SUCCESS)),o()})},variant:",
      "})]}),(0,s.jsxs)(",
      ",{className:e$.Qs,children:[(0,s.jsxs)(",
@@ -6986,24 +7113,24 @@
      "ChannelFollowingBumpChannels"
     ],
     "exports": [],
-    "structHash": "1eaa8d9761744452"
+    "structHash": "1790cd4f63cf617b"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::MoreQuickReactions::.Lv7LxN),children": {
    "kind": "patch",
    "plugin": "MoreQuickReactions",
    "label": ".Lv7LxN),children",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
-   "moduleId": "105165",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "891496",
    "excerpt": "=function(e){let{channel:t,message:n}=e;return n.state===eu.cmJ.SEND_FAILED?(0,a.jsx)(nm,{channel:t,message:n}):null}(e),o=function(e){let{message:t}=e;return t.state!==eu.cmJ.SEND_FAILED?(0,a.jsx)(nh,{...e}):null}(e);return s||null==r&&null==o?null:(0,a.jsx)(\"div\",{className:c()(e.className,{[nr.kL]:!0,[nr.gN]:l,[nr.nK]:i}),onClick:nc,onContextMenu:nc,role:\"group\",\"aria-label\":eL.intl.string(eL.t.Lv7LxN),children:(0,a.jsxs)(nt.Ay,{className:e.innerClassName,children:[r,o]})})});var nf=n(13673),nC=n(622868),nx=n(606049),nE=n(10364);let nS=r.memo(function(e){let{message:t,channel:n,compact:l=!1,groupId:i,isGroupStart:s,usernameProfile:o,avatarProfile:c,setPopout:d,author:u,repliedMessage:h,roleIcon:m}=e,g=(0,tt.r4)(t.author.id,n.id),p=(0,tt.m)(t,n,o,d),A=(0,tt.Jo)(c,d),f=r.useCallback(()=>{d({usernameProfil",
    "fingerprint": {
     "strings": [
      "<typeof window?m.t:window.ResizeObserver??m.t,S=(s=c()(x.qZ,x.Vl),l=new Map,i=",
      "container",
      "content",
-     ",{ref:_,className:c()(u,x.Qs),children:[n,v&&(0,a.jsx)(",
+     ",{ref:v,className:c()(u,x.Qs),children:[n,_&&(0,a.jsx)(",
      "useConversationScroll must be used inside <ConversationScrollProvider>",
      "user",
      "2021-12_inferno_spam_redaction",
@@ -7022,7 +7149,7 @@
      "),h=s.size>0,m=s.has(",
      ",{className:ek.oO,children:[(0,a.jsxs)(",
      ",{className:ek.wx,children:[(0,a.jsxs)(",
-     ",{className:ek.TK,children:[(0,a.jsx)(e_.D,{variant:",
+     ",{className:ek.TK,children:[(0,a.jsx)(ev.D,{variant:",
      ",color:",
      ",children:eL.intl.string(eD.default.C3suOL)}),(0,a.jsx)(ey.E,{variant:",
      ",className:ek.VA,children:eL.intl.string(eD.default[",
@@ -7042,10 +7169,10 @@
      "positive"
     ],
     "exports": [],
-    "structHash": "b9e56ccac4c3bee4"
+    "structHash": "b6ee91a0943caa06"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::NoBlockedMessages::\"MessageStore\"": {
    "kind": "patch",
@@ -7084,9 +7211,9 @@
    "kind": "patch",
    "plugin": "NoBlockedMessages",
    "label": "\"ReadStateStore\"",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "573163",
-   "excerpt": "85),M=n(622794);let P=new Map;var U=n(970278),w=n(152007),G=n(882733),x=n(607508),k=n(617617),F=n(95701),B=n(799422),V=n(927813),H=n(403362),j=n(935208),W=n(761640),Y=n(734057),K=n(72314),$=n(919638),z=n(71393),X=n(885576),q=n(232835),Z=n(576705),Q=n(994500),J=n(309010),ee=n(543465),et=n(287809),en=n(531685),ei=n(652215),er=n(5867),ea=n(746080),es=n(988794),el=n(790782),eo=n(37411);let ed=new f.A(\"ReadStateStore\");__OVERLAY__&&(i=n(184809).default);let ec=()=>!1;!__OVERLAY__&&b.O&&({isOverlayChannelVisible:ec}=n(267355));let eu=ei.hVb.VIEW_CHANNEL|ei.hVb.READ_MESSAGE_HISTORY,e_=J.Ay.getChannelId(),eE=null,eA=null,eh=new Set,eI=!1,ef=[],ep=!1,eT=null,em=new class{channelWindowIds={};addWindowId(e,t){null==this.channelWindowIds[e]&&(this.channelWindowIds[e]=new Set),this.channelWindowIds[e].add(t)}hasWindow",
+   "excerpt": "85),M=n(622794);let P=new Map;var U=n(970278),w=n(152007),G=n(882733),x=n(607508),k=n(617617),F=n(95701),B=n(799422),V=n(927813),H=n(403362),j=n(935208),W=n(761640),Y=n(734057),K=n(72314),$=n(919638),z=n(71393),X=n(885576),q=n(232835),Z=n(576705),Q=n(994500),J=n(309010),ee=n(543465),et=n(287809),en=n(531685),ei=n(652215),er=n(5867),ea=n(746080),es=n(988794),el=n(790782),eo=n(37411);let ed=new f.A(\"ReadStateStore\");__OVERLAY__&&(i=n(309913).default);let ec=()=>!1;!__OVERLAY__&&b.O&&({isOverlayChannelVisible:ec}=n(267355));let eu=ei.hVb.VIEW_CHANNEL|ei.hVb.READ_MESSAGE_HISTORY,e_=J.Ay.getChannelId(),eE=null,eA=null,eh=new Set,eI=!1,ef=[],ep=!1,eT=null,em=new class{channelWindowIds={};addWindowId(e,t){null==this.channelWindowIds[e]&&(this.channelWindowIds[e]=new Set),this.channelWindowIds[e].add(t)}hasWindow",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -7120,24 +7247,24 @@
      "GUILD_FEATURE_ACK"
     ],
     "exports": [],
-    "structHash": "6757e3364afc4e21"
+    "structHash": "9aaf23d502542a77"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::NoBlockedMessages::.__invalid_blocked,": {
    "kind": "patch",
    "plugin": "NoBlockedMessages",
    "label": ".__invalid_blocked,",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
-   "moduleId": "105165",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "891496",
    "excerpt": "psedReason:s,canUncollapse:o},\"collapsed-message-item\"),u?t.content.map((e,s)=>{if(e.type===eu.TZK.DIVIDER&&s>0){let e=t.content[s+1]?.isGroupStart??!1;return(0,a.jsx)(nZ.A,{isUnread:!0,isBeforeGroup:e,id:i},\"divider\")}if(e.type===eu.TZK.MESSAGE||e.type===eu.TZK.THREAD_STARTER_MESSAGE){let t=e.type===eu.TZK.THREAD_STARTER_MESSAGE?nH:nV;return(0,a.jsx)(t,{id:(0,e3.j)(n.id,e.content.id),className:nY.__invalid_blocked,compact:l,channel:n,message:e.content,groupId:e.groupId,flashKey:e.flashKey,isLastItem:!1,renderContentOnly:!1},e.content.id)}}):null]})});var n0=n(114212),n1=n(248432);function n2(e){let{isCollapsed:t,children:n}=e;return(0,a.jsx)(\"div\",{className:c()(n1.dU,t&&n1.yZ),children:(0,a.jsx)(\"div\",{className:n1.JN,children:n})})}let n3=r.memo(function(e){let{isOnTopic:t,isCollapsed:n,children:l}=e;retu",
    "fingerprint": {
     "strings": [
      "<typeof window?m.t:window.ResizeObserver??m.t,S=(s=c()(x.qZ,x.Vl),l=new Map,i=",
      "container",
      "content",
-     ",{ref:_,className:c()(u,x.Qs),children:[n,v&&(0,a.jsx)(",
+     ",{ref:v,className:c()(u,x.Qs),children:[n,_&&(0,a.jsx)(",
      "useConversationScroll must be used inside <ConversationScrollProvider>",
      "user",
      "2021-12_inferno_spam_redaction",
@@ -7156,7 +7283,7 @@
      "),h=s.size>0,m=s.has(",
      ",{className:ek.oO,children:[(0,a.jsxs)(",
      ",{className:ek.wx,children:[(0,a.jsxs)(",
-     ",{className:ek.TK,children:[(0,a.jsx)(e_.D,{variant:",
+     ",{className:ek.TK,children:[(0,a.jsx)(ev.D,{variant:",
      ",color:",
      ",children:eL.intl.string(eD.default.C3suOL)}),(0,a.jsx)(ey.E,{variant:",
      ",className:ek.VA,children:eL.intl.string(eD.default[",
@@ -7176,16 +7303,16 @@
      "positive"
     ],
     "exports": [],
-    "structHash": "b9e56ccac4c3bee4"
+    "structHash": "b6ee91a0943caa06"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::NoF1::,\"f1\"],comboKeysBindGlobal:": {
    "kind": "patch",
    "plugin": "NoF1",
    "label": ",\"f1\"],comboKeysBindGlobal:",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "696760",
    "excerpt": "t&&null!=n&&(n.type===ei.r.GUILD_VOICE||i))return el.A.updateChatOpen(t,!es.A.getChatOpen(t)),!1;if(null!=t&&null!=n&&n.type===ei.r.DM){let e=ed.Ay.getSection(t,n?.isDM()),i=(0,eo.AP)(n.getRecipientId()),l=e===U.YvQ.PROFILE;return(0,ea.am)({displayProfile:i,isProfileOpen:!l}),er.A.toggleUserProfileSidebarSection(),!1}return er.A.toggleMembersSection(),!1}},[U.IWg.TOGGLE_HELP]:{binds:[\"mod+shift+h\",\"f1\"],comboKeysBindGlobal:!0,action:()=>(window.open($.C),!1)},[U.IWg.VIBE_WITH_WUMPUS]:{binds:[\"mod+alt+shift+w\"],comboKeysBindGlobal:!0,action:()=>((0,eu.A)({source:eA.y.KEYBIND}),!1)},[U.IWg.TOGGLE_MUTE]:q.VT,[U.IWg.TOGGLE_DEAFEN]:q.rR,[U.IWg.TOGGLE_CATEGORY_COLLAPSED]:Q.y,[U.IWg.SEARCH_SOUNDBOARD]:{binds:[\"mod+shift+b\"],comboKeysBindGlobal:!0,action:()=>(R._.dispatch(U.jej.TOGGLE_SOUNDBOARD),!1)},[U.IWg.SCROLL_UP]:W.U5",
    "fingerprint": {
@@ -7232,18 +7359,18 @@
      "contextmenu"
     ],
     "exports": [],
-    "structHash": "02f6c7e3ed9c7b1e"
+    "structHash": "7fee548fa0b2c388"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::NoMaskedUrlPaste::.selection,preventEmojiSurrogates:": {
    "kind": "patch",
    "plugin": "NoMaskedUrlPaste",
    "label": ".selection,preventEmojiSurrogates:",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "683167",
-   "excerpt": "){let t=p.ZF.toPoint(e.selection);if(null!=t){let l=p.VW.after(e,t,{unit:n});if(null!=l){let n=p.e0.getLineEnd(e,t,!1);null!=n&&p.Kh.isBefore(n,l)?f.b.delete(e,{at:{anchor:n,focus:t}}):f.b.delete(e,{at:{anchor:l,focus:t}});return}}}s(n)},e}(C,!0===u)).setFragmentData=e=>{if(null!=t.selection&&!p.Kh.equals(t.selection.anchor,t.selection.focus)){let n=(0,R.WO)(p.VW.richValue(t),{mode:\"plain\",range:t.selection,preventEmojiSurrogates:!0});e.setData(\"text/plain\",n)}},t.insertData=e=>{t.insertTextData(e)},t.insertFragmentData=e=>!1,t.insertTextData=e=>{let n=e.getData(\"text/plain\");if(0===n.length)return!1;if(null!=t.selection&&p.ZF.isExpanded(t.selection)){let e=s.KE.string(t,t.selection),l=(0,T.W1)(n),i=(0,T.W1)(e);if(null!=l&&null==i){let[e,n]=p.ZF.edges(t.selection);return p.VW.withoutNormalizing(t,()=>{f.b.select(t,e),t.ins",
+   "excerpt": "){let t=f.ZF.toPoint(e.selection);if(null!=t){let l=f.VW.after(e,t,{unit:n});if(null!=l){let n=f.e0.getLineEnd(e,t,!1);null!=n&&f.Kh.isBefore(n,l)?p.b.delete(e,{at:{anchor:n,focus:t}}):p.b.delete(e,{at:{anchor:l,focus:t}});return}}}s(n)},e}(C,!0===u)).setFragmentData=e=>{if(null!=t.selection&&!f.Kh.equals(t.selection.anchor,t.selection.focus)){let n=(0,R.WO)(f.VW.richValue(t),{mode:\"plain\",range:t.selection,preventEmojiSurrogates:!0});e.setData(\"text/plain\",n)}},t.insertData=e=>{t.insertTextData(e)},t.insertFragmentData=e=>!1,t.insertTextData=e=>{let n=e.getData(\"text/plain\");if(0===n.length)return!1;if(null!=t.selection&&f.ZF.isExpanded(t.selection)){let e=s.KE.string(t,t.selection),l=(0,T.W1)(n),i=(0,T.W1)(e);if(null!=l&&null==i){let[e,n]=f.ZF.edges(t.selection);return f.VW.withoutNormalizing(t,()=>{p.b.select(t,e),t.ins",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -7253,7 +7380,7 @@
      "gameMentionInput",
      "timestampMentionInput",
      "applicationCommandOption",
-     "))<0?l.length:i)>0&&f.b.delete(e,{distance:s,unit:",
+     "))<0?l.length:i)>0&&p.b.delete(e,{distance:s,unit:",
      ",reverse:n})}function N(e){return{type:",
      "block",
      "MacIntel",
@@ -7283,7 +7410,7 @@
     "structHash": "a872e17fd83c3058"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::NoMirroredCamera::bStreamId:this.props.streamId": {
    "kind": "patch",
@@ -7409,7 +7536,7 @@
    "kind": "patch",
    "plugin": "NoPendingCount",
    "label": "showProgressBadge:",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "24594",
    "excerpt": "urrentColor\",width:24,height:24});return null!=i&&r?(0,a.jsx)(nc.A,{id:i.id,size:n_.N8.SIZE_48}):s}var nA=n(531260),nh=n(411976),nI=n(912309),nf=n(400492),np=n(354670),nT=n(619921),nm=n(340829),ng=n(966846),nS=n(674378),nN=n(394953),nC=n(202541),nO=n(235079),nR=n(222219);let nL={origin:{x:-16,y:0},targetWidth:48,targetHeight:48,offset:{x:0,y:0}};function ny(e){let{selected:t,user:n,badge:i,link:r,showProgressBadge:l}=e,[o,d]=s.useState(!1),[c,u]=s.useState(!1),[E,A]=s.useState(null),[h,I]=s.useState(0),f=(0,_.Vd)(\"home\"),p=(0,nl.fy)().activePanel===nl.HP.APP_ICON;function T(){A(null),I(0),clearTimeout(E)}if(null==n)return null;let m=es.intl.string(es.t.YUU0RF);c&&(m=nr.w.get(eS.wqg)?es.intl.string(es.t[\"nkq1l+\"]):es.intl.string(es.t.Be8Q5E));let g=null;!t&&l&&(g=(0,a.jsx)(na.A,{className:nR.Cp,determineOwnV",
    "fingerprint": {
@@ -7456,10 +7583,10 @@
      "scale"
     ],
     "exports": [],
-    "structHash": "1e700328bbe9d951"
+    "structHash": "85e9c13ad0e64d7f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::NoProfileThemes::hasThemeColors(){": {
    "kind": "patch",
@@ -7543,7 +7670,7 @@
    "kind": "patch",
    "plugin": "NoSystemBadge",
    "label": ",setSystemTrayApplications",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "19575",
    "excerpt": "\")},getDispatch(){return this.requireModule(\"discord_dispatch\")},setBadge(e){if(\"darwin\"===(0,f.getPlatformName)()){let t=\"\";-1===e?t=\"\\u2022\":e>0&&(t=`${e}`),g.app.dock.setBadge(t)}else\"win32\"===(0,f.getPlatformName)()?this.sendIPC(c.APP_BADGE_SET,e):\"linux\"===(0,f.getPlatformName)()&&g.app.setBadgeCount(e>=0?e:0)},setSystemTrayIcon(e){f.isPlatformEmbedded&&this.sendIPC(c.SYSTEM_TRAY_SET_ICON,e)},setSystemTrayApplications(e){f.isPlatformEmbedded&&this.sendIPC(c.SYSTEM_TRAY_SET_APPLICATIONS,e)},setSystemTrayStates(e){Y(c.SYSTEM_TRAY_SET_STATES,e)},setSystemTrayStrings(e){Y(c.SYSTEM_TRAY_SET_STRINGS,e)},setThumbarButtons(e){f.isPlatformEmbedded&&g.thumbar?.setThumbarButtons?.(e,this.isSystemDarkMode())},bounceDock(e){if(f.isPlatformEmbedded){let t=g.app;if(null!=t.dock){let n=t.dock.bounce(e);return async()=>{let e=",
    "fingerprint": {
@@ -7590,18 +7717,18 @@
      "DISCORD_CHECK_FOR_UPDATES"
     ],
     "exports": [],
-    "structHash": "d8440609a3e5b541"
+    "structHash": "fd32929442f86b0b"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::NoTrack::.METRICS_V2": {
    "kind": "patch",
    "plugin": "NoTrack",
    "label": ".METRICS_V2",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "807393",
-   "excerpt": ",n=this._getMetricWithDefaults(e,\"count\");this._metrics.push(n),(t||this._metrics.length>=100)&&this._flush()}distribution(e,t){let n=arguments.length>2&&void 0!==arguments[2]&&arguments[2],i={...this._getMetricWithDefaults(e,\"distribution\"),value:t};this._metrics.push(i),(n||this._metrics.length>=100)&&this._flush()}_flush(){if(this._metrics.length>0){let e=[...this._metrics];r.Bo.post({url:o.Rsh.METRICS_V2,body:{metrics:e,client_info:{built_at:\"1790752812470\",build_number:\"625378\"}},retries:1,rejectWithError:!0}).catch(t=>{this._metrics.length+e.length<100&&(this._metrics=[...this._metrics,...e])})}this._metrics=[]}_metrics;_intervalId}}",
+   "excerpt": ",n=this._getMetricWithDefaults(e,\"count\");this._metrics.push(n),(t||this._metrics.length>=100)&&this._flush()}distribution(e,t){let n=arguments.length>2&&void 0!==arguments[2]&&arguments[2],i={...this._getMetricWithDefaults(e,\"distribution\"),value:t};this._metrics.push(i),(n||this._metrics.length>=100)&&this._flush()}_flush(){if(this._metrics.length>0){let e=[...this._metrics];r.Bo.post({url:o.Rsh.METRICS_V2,body:{metrics:e,client_info:{built_at:\"1790839210213\",build_number:\"626571\"}},retries:1,rejectWithError:!0}).catch(t=>{this._metrics.length+e.length<100&&(this._metrics=[...this._metrics,...e])})}this._metrics=[]}_metrics;_intervalId}}",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -7624,10 +7751,10 @@
      "distribution"
     ],
     "exports": [],
-    "structHash": "820902c3534dea37"
+    "structHash": "88fd074889640ca1"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::NoTrack::AnalyticsActionHandlers.handle": {
    "kind": "patch",
@@ -7694,7 +7821,7 @@
    "kind": "patch",
    "plugin": "NoticesAPI",
    "label": "\"NoticeStore\"",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "177141",
    "excerpt": "let{currentUser:t,selectedGuildId:n}=e;return(0,_.Jz)({currentUser:t,selectedGuildId:n,platformTypes:[eA.fg2.RIOT_GAMES,eA.fg2.LEAGUE_OF_LEGENDS],dismissibleContent:o.M.RIOT_CONNECTION_DEPRECATION_ADMIN_DISABLE,noticeType:eA.kqX.RIOT_CONNECTION_DEPRECATION_ADMIN})}},[eA.kqX.BATTLENET_MIGRATION]:{predicate:()=>{let e=d.A.get(eA.fg2.BATTLENET);return!(!e.migrationData?.getMigrationExperimentEnabled(\"NoticeStore\")||null==es.A.getAccount(null,eA.fg2.BATTLENET)||te(eA.kqX.BATTLENET_MIGRATION)||(0,I.k8)(o.M.BATTLENET_CONNECTION_DEPRECATION_DISABLE))}},[eA.kqX.BATTLENET_LINKED_ROLE_DEPRECATION]:{predicate:e=>{let{currentUser:t,selectedGuildId:n}=e;return(0,_.Jz)({currentUser:t,selectedGuildId:n,platformTypes:[eA.fg2.BATTLENET],dismissibleContent:o.M.BATTLENET_CONNECTION_DEPRECATION_LINKED_ROLES_DISABLE,notice",
    "fingerprint": {
@@ -7734,10 +7861,10 @@
      "NoticeStore"
     ],
     "exports": [],
-    "structHash": "a2e05d8c10c23682"
+    "structHash": "bb43942013ab02f4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::NotificationVolume::ensureAudio(){": {
    "kind": "patch",
@@ -8046,9 +8173,9 @@
    "kind": "patch",
    "plugin": "Recovery",
    "label": ".tx8CkI",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "670735",
-   "excerpt": ")}componentDidMount(){null==window.DiscordErrors&&(window.DiscordErrors={softCrash:e=>{this.triggerSoftCrash(e)}},this.discordErrorsSet=!0)}componentWillUnmount(){this.discordErrorsSet&&(window.DiscordErrors=null,this.discordErrorsSet=!1)}render(){let{children:e,renderCustomMessage:t}=this.props;if(null!==this.state.error){let e=(0,r.jsxs)(\"div\",{children:[(0,r.jsx)(\"p\",{children:N.intl.string(N.t.tx8CkI)}),(0,r.jsx)(\"p\",{children:N.intl.string(N.t.CvQlAH)})]}),n=(0,r.jsxs)(g.e,{children:[(0,r.jsx)(f.$,{variant:\"primary\",size:\"md\",text:N.intl.string(N.t[\"+hivLW\"]),onClick:this._handleSubmitReport}),(0,r.jsx)(_,{})]});return(0,r.jsx)(C.A,{title:N.intl.string(N.t[\"3h+n+8\"]),note:null!=t?t():e,action:n,className:O.W,illustration:(0,r.jsx)(\"div\",{className:O.b,children:(0,r.jsx)(h.e,{alt:\"\",ariaHidde",
+   "excerpt": ")}componentDidMount(){null==window.DiscordErrors&&(window.DiscordErrors={softCrash:e=>{this.triggerSoftCrash(e)}},this.discordErrorsSet=!0)}componentWillUnmount(){this.discordErrorsSet&&(window.DiscordErrors=null,this.discordErrorsSet=!1)}render(){let{children:e,renderCustomMessage:t}=this.props;if(null!==this.state.error){let e=(0,r.jsxs)(\"div\",{children:[(0,r.jsx)(\"p\",{children:N.intl.string(N.t.tx8CkI)}),(0,r.jsx)(\"p\",{children:N.intl.string(N.t.CvQlAH)})]}),n=(0,r.jsxs)(p.e,{children:[(0,r.jsx)(f.$,{variant:\"primary\",size:\"md\",text:N.intl.string(N.t[\"+hivLW\"]),onClick:this._handleSubmitReport}),(0,r.jsx)(_,{})]});return(0,r.jsx)(C.A,{title:N.intl.string(N.t[\"3h+n+8\"]),note:null!=t?t():e,action:n,className:O.W,illustration:(0,r.jsx)(\"div\",{className:O.b,children:(0,r.jsx)(h.e,{alt:\"\",ariaHidde",
    "fingerprint": {
     "strings": [
      "primary",
@@ -8062,13 +8189,13 @@
     "structHash": "16781f24b9e96b06"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::RelationshipNotifier::async leaveGuild(": {
    "kind": "patch",
    "plugin": "RelationshipNotifier",
    "label": "async leaveGuild(",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "468689",
    "excerpt": "incode(e){let r=arguments.length>1&&void 0!==arguments[1]&&arguments[1];return A.A.put({url:p.Rsh.GUILD_PINCODE(e),oldFormErrors:!0,trackedActionData:{event:n.NetworkActionNames.GUILD_TRANSFER_OWNERSHIP_SEND_CODE,properties:{guild_id:e,is_resend:r}},rejectWithError:(0,l.fT)()})},deleteGuild:e=>l.Bo.post({url:p.Rsh.GUILD_DELETE(e),oldFormErrors:!0,rejectWithError:(0,l.fT)()}).then(()=>{N.close()}),async leaveGuild(e){let r=arguments.length>1&&void 0!==arguments[1]&&arguments[1],t=S.A.isLurking(e);await l.Bo.del({url:p.Rsh.GUILD_LEAVE(e),body:{lurking:t||h.Ay.isCurrentUserGuest(e)},oldFormErrors:!0,rejectWithError:(0,l.fT)()}).then(()=>{i.O.announce(U.intl.string(U.t[\"7iPyVW\"]))}),N.close(),r&&t&&(0,c.pX)(p.BVt.GUILD_DISCOVERY)},async updateMemberRoles(e,r,t,n,i){I.A.isFullServerPreview(e)&&r===G.default.get",
    "fingerprint": {
@@ -8097,10 +8224,10 @@
      "GUILD_SETTINGS_SLOWMODE_PERMISSION_MIGRATED"
     ],
     "exports": [],
-    "structHash": "f5589734590c353d"
+    "structHash": "bcfe21b3382cc2d4"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::RelationshipNotifier::removeRelationship:(": {
    "kind": "patch",
@@ -8170,9 +8297,9 @@
    "kind": "patch",
    "plugin": "RevealAllSpoilers",
    "label": ".removeObscurity,",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "302031",
-   "excerpt": ",className:a()(n,y.ur,y.q2,y.Dq,y.OZ,{[y.R]:!f,[y.h5]:o}),role:f?\"presentation\":\"button\",tabIndex:f?-1:0,children:[f?null:(0,i.jsx)(_,{reason:r,isSingleMosaicItem:o}),(0,i.jsx)(\"div\",{\"aria-hidden\":!f,className:y.Qu,children:e(!f)}),c?null:(0,i.jsx)(j,{obscureReason:r,isVisible:h,handleToggleObscurity:this.handleToggleObscurity,obscurityControlClassName:u})]}):(0,i.jsxs)(d.D,{onClick:f?void 0:this.removeObscurity,\"aria-label\":f?void 0:this.ariaLabel,\"aria-expanded\":f,style:l,className:a()(n,y.ur,y.q2,y.Dq,{[y.R]:!f,[y.rP]:!f}),role:f?\"presentation\":\"button\",tabIndex:f?-1:0,children:[f||t?null:(0,i.jsx)(_,{reason:r,isSingleMosaicItem:o}),(0,i.jsx)(\"div\",{\"aria-hidden\":!f,className:y.Qu,children:e(!f)})]})}});return t?this.renderWithTooltip(m):m}renderObscuredEmbed(){let{children:e,className:t,containerStyle",
+   "excerpt": ",className:a()(n,y.ur,y.q2,y.Dq,y.OZ,{[y.R]:!p,[y.h5]:o}),role:p?\"presentation\":\"button\",tabIndex:p?-1:0,children:[p?null:(0,i.jsx)(_,{reason:r,isSingleMosaicItem:o}),(0,i.jsx)(\"div\",{\"aria-hidden\":!p,className:y.Qu,children:e(!p)}),c?null:(0,i.jsx)(j,{obscureReason:r,isVisible:m,handleToggleObscurity:this.handleToggleObscurity,obscurityControlClassName:u})]}):(0,i.jsxs)(d.D,{onClick:p?void 0:this.removeObscurity,\"aria-label\":p?void 0:this.ariaLabel,\"aria-expanded\":p,style:l,className:a()(n,y.ur,y.q2,y.Dq,{[y.R]:!p,[y.rP]:!p}),role:p?\"presentation\":\"button\",tabIndex:p?-1:0,children:[p||t?null:(0,i.jsx)(_,{reason:r,isSingleMosaicItem:o}),(0,i.jsx)(\"div\",{\"aria-hidden\":!p,className:y.Qu,children:e(!p)})]})}});return t?this.renderWithTooltip(h):h}renderObscuredEmbed(){let{children:e,className:t,containerStyle",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -8183,8 +8310,8 @@
      ",color:o.A.colors.WHITE}),n&&(0,i.jsx)(c.E,{variant:",
      ",color:",
      ",{className:a()(y.fA,s),children:(0,i.jsx)(d.D,{className:y.kw,onClick:l,",
-     ":I.intl.string(I.t.ex5G9m),children:n?(0,i.jsx)(m.EyeIcon,{size:",
-     "}):(0,i.jsx)(h.EyeSlashIcon,{size:",
+     ":I.intl.string(I.t.ex5G9m),children:n?(0,i.jsx)(h.EyeIcon,{size:",
+     "}):(0,i.jsx)(m.EyeSlashIcon,{size:",
      "left",
      "aria-label",
      "aria-expanded",
@@ -8198,15 +8325,15 @@
     "structHash": "4133a44487dee305"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::RoleColorEverywhere::.USER_MENTION)": {
    "kind": "patch",
    "plugin": "RoleColorEverywhere",
    "label": ".USER_MENTION)",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "288539",
-   "excerpt": ",async()=>{let{default:e}=await Promise.all([n.e(\"926132\"),n.e(\"146652\"),n.e(\"660829\")]).then(n.bind(n,446828));return n=>(0,l.jsx)(e,{...n,userId:t})})},[t]);return(0,l.jsx)(d.A,{className:s,onClick:o,onContextMenu:u,children:r})}function E(e){let{className:t,userId:c,channelId:E,parsedUserId:I,content:y,inlinePreview:S=!1,viewingChannelId:v}=e,N=i.useRef(null),{analyticsLocations:_}=(0,u.Ay)(o.A.USER_MENTION),j=(0,r.bG)([g.default],()=>g.default.getUser(c)),b=(0,r.bG)([m.A],()=>m.A.getChannel(E)),T=null!=b?b.getGuildId():null,R=S||null==j||null==E||null==b?void 0:e=>{null!=T?(0,a.L3)(e,async()=>{let{default:e}=await Promise.all([n.e(\"403382\"),n.e(\"207322\"),n.e(\"622936\"),n.e(\"216947\"),n.e(\"463317\"),n.e(\"326692\"),n.e(\"834552\"),n.e(\"708757\"),n.e(\"993103\"),n.e(\"585968\"),n.e(\"893190\"),n.e(\"21921\"),n.e(\"676",
+   "excerpt": ",async()=>{let{default:e}=await Promise.all([n.e(\"926132\"),n.e(\"146652\"),n.e(\"660829\")]).then(n.bind(n,446828));return n=>(0,l.jsx)(e,{...n,userId:t})})},[t]);return(0,l.jsx)(d.A,{className:s,onClick:o,onContextMenu:u,children:r})}function E(e){let{className:t,userId:c,channelId:E,parsedUserId:I,content:y,inlinePreview:S=!1,viewingChannelId:v}=e,N=i.useRef(null),{analyticsLocations:_}=(0,u.Ay)(o.A.USER_MENTION),j=(0,r.bG)([g.default],()=>g.default.getUser(c)),b=(0,r.bG)([h.A],()=>h.A.getChannel(E)),T=null!=b?b.getGuildId():null,R=S||null==j||null==E||null==b?void 0:e=>{null!=T?(0,a.L3)(e,async()=>{let{default:e}=await Promise.all([n.e(\"403382\"),n.e(\"597981\"),n.e(\"622936\"),n.e(\"216947\"),n.e(\"463317\"),n.e(\"326692\"),n.e(\"993103\"),n.e(\"834552\"),n.e(\"708757\"),n.e(\"585968\"),n.e(\"893190\"),n.e(\"21921\"),n.e(\"571",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -8214,10 +8341,10 @@
      "right"
     ],
     "exports": [],
-    "structHash": "10b9b178b4de7f66"
+    "structHash": "8ac7ec393f5a1fdc"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::RoleColorEverywhere::[\"pFO/Ph\"])]": {
    "kind": "patch",
@@ -8274,7 +8401,7 @@
    "kind": "patch",
    "plugin": "ServerListAPI",
    "label": ".Be8Q5E",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "24594",
    "excerpt": "y:0}};function ny(e){let{selected:t,user:n,badge:i,link:r,showProgressBadge:l}=e,[o,d]=s.useState(!1),[c,u]=s.useState(!1),[E,A]=s.useState(null),[h,I]=s.useState(0),f=(0,_.Vd)(\"home\"),p=(0,nl.fy)().activePanel===nl.HP.APP_ICON;function T(){A(null),I(0),clearTimeout(E)}if(null==n)return null;let m=es.intl.string(es.t.YUU0RF);c&&(m=nr.w.get(eS.wqg)?es.intl.string(es.t[\"nkq1l+\"]):es.intl.string(es.t.Be8Q5E));let g=null;!t&&l&&(g=(0,a.jsx)(na.A,{className:nR.Cp,determineOwnVisibility:!1}));let S=t||o||p,N=(0,a.jsx)(M.Q,{selected:!0,lowerBadge:i>0?(0,B.wN)(i):null,upperBadge:g,lowerBadgeSize:{width:(0,e9.o6)(i)},children:(0,a.jsx)(P.j,{onMouseEnter:()=>d(!0),onMouseLeave:()=>d(!1),onClick:function(){if(!__OVERLAY__&&(null!=E&&clearTimeout(E),A(setTimeout(T,500)),I(h+1),15===h)){T();let e=!nr.w.get(eS",
    "fingerprint": {
@@ -8321,18 +8448,18 @@
      "scale"
     ],
     "exports": [],
-    "structHash": "1e700328bbe9d951"
+    "structHash": "85e9c13ad0e64d7f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::ServerListAPI::.setGuildsTree(": {
    "kind": "patch",
    "plugin": "ServerListAPI",
    "label": ".setGuildsTree(",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "24594",
-   "excerpt": "ct(()=>{function e(){M.current?.calculateState(),P.current?.calculateState()}return J.default.addChangeListener(e),()=>J.default.removeChangeListener(e)},[]);let{analyticsLocations:$}=(0,L.Ay)(R.A.GUILDS_LIST),z=ru(j);(0,C.u5)(()=>{if(!D.current&&0!==d.size){if(!z){let{scrollTop:e}=ew.A.getGuildListDimensions();K.scrollTo({to:e,animate:!1})}return D.current=!0,()=>b.stop()}}),s.useEffect(()=>{if(K.setGuildsTree(d),D.current||0===d.size)return;let e=V.A.getState().guildId;K.scrollToGuild(e,!1);let t=null;return V.A.subscribe(e=>{let{guildId:n}=e;n!==t&&(t=n,K.scrollToGuild(t,!1))})},[d,K]);let X=s.useCallback(()=>{K.scrollTo({to:0,animate:!1})},[K]);t=K.scrollToGuild,s.useEffect(()=>{let e=null;function n(){let n=ej.A.getGuildId();n!==e&&(e=n??null,t(n??null,!1))}return ej.A.addChangeListener(n),()=>{ej.A",
+   "excerpt": "ct(()=>{function e(){M.current?.calculateState(),P.current?.calculateState()}return J.default.addChangeListener(e),()=>J.default.removeChangeListener(e)},[]);let{analyticsLocations:$}=(0,L.Ay)(R.A.GUILDS_LIST),z=r_(j);(0,C.u5)(()=>{if(!D.current&&0!==d.size){if(!z){let{scrollTop:e}=ew.A.getGuildListDimensions();K.scrollTo({to:e,animate:!1})}return D.current=!0,()=>b.stop()}}),s.useEffect(()=>{if(K.setGuildsTree(d),D.current||0===d.size)return;let e=V.A.getState().guildId;K.scrollToGuild(e,!1);let t=null;return V.A.subscribe(e=>{let{guildId:n}=e;n!==t&&(t=n,K.scrollToGuild(t,!1))})},[d,K]);let X=s.useCallback(()=>{K.scrollTo({to:0,animate:!1})},[K]);t=K.scrollToGuild,s.useEffect(()=>{let e=null;function n(){let n=ej.A.getGuildId();n!==e&&(e=n??null,t(n??null,!1))}return ej.A.addChangeListener(n),()=>{ej.A",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -8377,24 +8504,24 @@
      "scale"
     ],
     "exports": [],
-    "structHash": "1e700328bbe9d951"
+    "structHash": "85e9c13ad0e64d7f"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::ShowAllMessageButtons::.Lv7LxN),children": {
    "kind": "patch",
    "plugin": "ShowAllMessageButtons",
    "label": ".Lv7LxN),children",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
-   "moduleId": "105165",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "891496",
    "excerpt": "=function(e){let{channel:t,message:n}=e;return n.state===eu.cmJ.SEND_FAILED?(0,a.jsx)(nm,{channel:t,message:n}):null}(e),o=function(e){let{message:t}=e;return t.state!==eu.cmJ.SEND_FAILED?(0,a.jsx)(nh,{...e}):null}(e);return s||null==r&&null==o?null:(0,a.jsx)(\"div\",{className:c()(e.className,{[nr.kL]:!0,[nr.gN]:l,[nr.nK]:i}),onClick:nc,onContextMenu:nc,role:\"group\",\"aria-label\":eL.intl.string(eL.t.Lv7LxN),children:(0,a.jsxs)(nt.Ay,{className:e.innerClassName,children:[r,o]})})});var nf=n(13673),nC=n(622868),nx=n(606049),nE=n(10364);let nS=r.memo(function(e){let{message:t,channel:n,compact:l=!1,groupId:i,isGroupStart:s,usernameProfile:o,avatarProfile:c,setPopout:d,author:u,repliedMessage:h,roleIcon:m}=e,g=(0,tt.r4)(t.author.id,n.id),p=(0,tt.m)(t,n,o,d),A=(0,tt.Jo)(c,d),f=r.useCallback(()=>{d({usernameProfil",
    "fingerprint": {
     "strings": [
      "<typeof window?m.t:window.ResizeObserver??m.t,S=(s=c()(x.qZ,x.Vl),l=new Map,i=",
      "container",
      "content",
-     ",{ref:_,className:c()(u,x.Qs),children:[n,v&&(0,a.jsx)(",
+     ",{ref:v,className:c()(u,x.Qs),children:[n,_&&(0,a.jsx)(",
      "useConversationScroll must be used inside <ConversationScrollProvider>",
      "user",
      "2021-12_inferno_spam_redaction",
@@ -8413,7 +8540,7 @@
      "),h=s.size>0,m=s.has(",
      ",{className:ek.oO,children:[(0,a.jsxs)(",
      ",{className:ek.wx,children:[(0,a.jsxs)(",
-     ",{className:ek.TK,children:[(0,a.jsx)(e_.D,{variant:",
+     ",{className:ek.TK,children:[(0,a.jsx)(ev.D,{variant:",
      ",color:",
      ",children:eL.intl.string(eD.default.C3suOL)}),(0,a.jsx)(ey.E,{variant:",
      ",className:ek.VA,children:eL.intl.string(eD.default[",
@@ -8433,10 +8560,10 @@
      "positive"
     ],
     "exports": [],
-    "structHash": "b9e56ccac4c3bee4"
+    "structHash": "b6ee91a0943caa06"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::ShowHiddenThings::,checkElevated:!1}\\),(?:[A-Za-z_$][\\w$]*)\\.(?:[A-Za-z_$][\\w$]*)\\)}(?<=getCurrentUser\\(\\);return.+?)": {
    "kind": "patch",
@@ -8528,9 +8655,9 @@
    "kind": "patch",
    "plugin": "ShowHiddenThings",
    "label": "action:\"PRESS_MOD_VIEW\",icon:",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "727584",
-   "excerpt": "74397),B=l(378570),D=l(280450),K=l(309010),J=l(993401),Y=l(652215),X=l(746080),$=l(486974),Q=l(375708);function Z(e){let{user:i,guildId:l,channelId:n,onClose:r,appContext:o}=e,{newestAnalyticsLocation:t}=(0,f.Ay)(),a=(0,y.aL)(),u=(0,d.bG)([D.default],()=>D.default.getId()===i?.id),c=(0,H.q)(l??null),p=(0,d.bG)([K.Ay],()=>n??K.Ay.getChannelId(l,!0),[n,l]);return null==l||!c||u?null:(0,s.jsx)(J.br,{action:\"PRESS_MOD_VIEW\",icon:W.q,tooltipText:Q.intl.string(Q.t.kj3tz2),onClick:()=>{q.default.close(),null!=p&&(0,B.iN)(p),(0,z.A)(o),a.dispatch(Y.jej.POPOUT_CLOSE),(0,V.z)(l,i.id,p??X.VV.MEMBER_SAFETY,{modViewPanel:$.g.INFO,sourceLocation:t}),r?.()}})}var ee=l(999492),ei=l(983495),el=l(364522),es=l(695366),en=l(922590),er=l(93246),ed=l(994500),eo=l(351906),et=l(158045),ea=l(365607),eu=l(744753),ec=l(559506),ep=l(931481),eA=l",
+   "excerpt": "74397),B=l(378570),D=l(280450),K=l(309010),J=l(993401),Y=l(652215),X=l(746080),$=l(486974),Q=l(375708);function Z(e){let{user:i,guildId:l,channelId:n,onClose:r,appContext:o}=e,{newestAnalyticsLocation:t}=(0,f.Ay)(),a=(0,y.aL)(),u=(0,d.bG)([D.default],()=>D.default.getId()===i?.id),c=(0,H.q)(l??null),p=(0,d.bG)([K.Ay],()=>n??K.Ay.getChannelId(l,!0),[n,l]);return null==l||!c||u?null:(0,s.jsx)(J.br,{action:\"PRESS_MOD_VIEW\",icon:W.q,tooltipText:Q.intl.string(Q.t.kj3tz2),onClick:()=>{q.default.close(),null!=p&&(0,B.iN)(p),(0,z.A)(o),a.dispatch(Y.jej.POPOUT_CLOSE),(0,V.z)(l,i.id,p??X.VV.MEMBER_SAFETY,{modViewPanel:$.g.INFO,sourceLocation:t}),r?.()}})}var ee=l(211031),ei=l(394816),el=l(364522),es=l(695366),en=l(922590),er=l(93246),ed=l(994500),eo=l(351906),et=l(158045),ea=l(365607),eu=l(744753),ec=l(559506),ep=l(931481),eA=l",
    "fingerprint": {
     "strings": [
      "PRESS_MOD_VIEW",
@@ -8549,15 +8676,15 @@
     "structHash": "32d6870a499fee77"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::ShowHiddenThings::showCommunicationDisabledStyles": {
    "kind": "patch",
    "plugin": "ShowHiddenThings",
    "label": "showCommunicationDisabledStyles",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "622868",
-   "excerpt": "children:i})}),(0,t.jsx)(_.E,{variant:\"text-sm/normal\",children:r})]})]}),(0,t.jsx)(eA.$,{size:\"sm\",variant:\"secondary\",text:en.intl.string(en.t[\"H930+H\"]),onClick:d,icon:eW._,fullWidth:!0,autoFocus:!0})]})})})};var e7=l(812299),e2=l(109054),e6=l(318626);function e3(e){let{avatarSrc:n,avatarDecorationSrc:l,compact:i,onClick:a,onContextMenu:r,onMouseDown:o,onMouseEnter:c,onMouseLeave:d,onKeyDown:u,showCommunicationDisabledStyles:h=!1,className:m,avatarImgRef:g}=e;return(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(\"img\",{ref:g,onClick:a,onContextMenu:r,onKeyDown:u,onMouseDown:o,onMouseEnter:c,onMouseLeave:d,src:n,\"aria-hidden\":!0,className:s()(m,e6.my,{[e6.oE]:i,[e6.vk]:null!=a,[e6.uU]:h}),alt:\" \"}),null==l||i?null:(0,t.jsx)(\"img\",{className:e6.M,src:l,alt:\" \",\"aria-hidden\":!0})]})}let e5=i.memo(function(e){let{message:n,au",
+   "excerpt": "children:i})}),(0,t.jsx)(_.E,{variant:\"text-sm/normal\",children:r})]})]}),(0,t.jsx)(eA.$,{size:\"sm\",variant:\"secondary\",text:en.intl.string(en.t[\"H930+H\"]),onClick:d,icon:eW._,fullWidth:!0,autoFocus:!0})]})})})};var e6=l(812299),e7=l(109054),e2=l(318626);function e3(e){let{avatarSrc:n,avatarDecorationSrc:l,compact:i,onClick:a,onContextMenu:r,onMouseDown:o,onMouseEnter:c,onMouseLeave:d,onKeyDown:u,showCommunicationDisabledStyles:h=!1,className:m,avatarImgRef:g}=e;return(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(\"img\",{ref:g,onClick:a,onContextMenu:r,onKeyDown:u,onMouseDown:o,onMouseEnter:c,onMouseLeave:d,src:n,\"aria-hidden\":!0,className:s()(m,e2.my,{[e2.oE]:i,[e2.vk]:null!=a,[e2.uU]:h}),alt:\" \"}),null==l||i?null:(0,t.jsx)(\"img\",{className:e2.M,src:l,alt:\" \",\"aria-hidden\":!0})]})}let e4=i.memo(function(e){let{message:n,au",
    "fingerprint": {
     "strings": [
      "GuildRoleConnectionEligibilityStore",
@@ -8605,7 +8732,7 @@
     "structHash": "f4ffab350494a853"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::ShowMeYourName::=\"SYSTEM_TAG\"": {
    "kind": "patch",
@@ -8640,9 +8767,9 @@
    "kind": "patch",
    "plugin": "ShowTimeoutDuration",
    "label": "[\"AeYyL+\"]",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "622868",
-   "excerpt": "r7.SUPPRESS_NOTIFICATIONS)&&e.push((0,t.jsx)(eP,{},\"suppress-notifications\")),!a&&C&&k&&(0,o.Lt)(n.flags,Q.pr7.IS_SCHEDULED)&&e.push((0,t.jsx)(eO,{},\"scheduled\")),e},[n,a,k,C]),D=(0,eF.d$)(n,p),L=(0,eF.xl)(n),V=v?`${D}`:`${D} ${L}`,H=l?.state===ey.a.LOADED?(0,eF.nS)(n):void 0;return(0,t.jsx)(e9,{message:n,avatar:S,username:(0,t.jsxs)(t.Fragment,{children:[_&&(0,t.jsx)(h.m,{text:en.intl.string(en.t[\"AeYyL+\"]),children:(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(m.g,{size:\"xxs\",color:\"currentColor\",className:a?e6.EI:e6.bu}),(0,t.jsx)(g.A,{children:en.intl.string(en.t.AmHag5)})]})}),(0,t.jsx)(e5,{...e,message:n,channel:I,compact:a,roleIconProps:j,renderPopout:E,preview:b,subscribeToGroupId:p,hideGuildTag:f})]}),usernameSpanId:(0,eF.d$)(n,p),usernameClassName:s()(e6.TK,{[e6.yF]:0!==O||G,[e6.hB]:null!=w||",
+   "excerpt": "r7.SUPPRESS_NOTIFICATIONS)&&e.push((0,t.jsx)(eP,{},\"suppress-notifications\")),!a&&C&&k&&(0,o.Lt)(n.flags,Q.pr7.IS_SCHEDULED)&&e.push((0,t.jsx)(eO,{},\"scheduled\")),e},[n,a,k,C]),D=(0,eF.d$)(n,p),L=(0,eF.xl)(n),V=v?`${D}`:`${D} ${L}`,H=l?.state===ey.a.LOADED?(0,eF.nS)(n):void 0;return(0,t.jsx)(e9,{message:n,avatar:S,username:(0,t.jsxs)(t.Fragment,{children:[_&&(0,t.jsx)(h.m,{text:en.intl.string(en.t[\"AeYyL+\"]),children:(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(m.g,{size:\"xxs\",color:\"currentColor\",className:a?e2.EI:e2.bu}),(0,t.jsx)(g.A,{children:en.intl.string(en.t.AmHag5)})]})}),(0,t.jsx)(e4,{...e,message:n,channel:I,compact:a,roleIconProps:j,renderPopout:E,preview:b,subscribeToGroupId:p,hideGuildTag:f})]}),usernameSpanId:(0,eF.d$)(n,p),usernameClassName:s()(e2.TK,{[e2.yF]:0!==O||G,[e2.hB]:null!=w||",
    "fingerprint": {
     "strings": [
      "GuildRoleConnectionEligibilityStore",
@@ -8690,7 +8817,7 @@
     "structHash": "f4ffab350494a853"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::SilentTyping::.dispatch({type:\"TYPING_START_LOCAL\"": {
    "kind": "patch",
@@ -8831,9 +8958,9 @@
    "kind": "patch",
    "plugin": "SuperReactionTweaks",
    "label": ",BURST_REACTION_EFFECT_PLAY",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "900210",
-   "excerpt": "et o={},s={},u={};function c(e,t){let n=null!=t.id?t.id:t.name;return`${e}:${n}`}class d extends l.Ay.Store{static displayName=\"BurstReactionEffectsStore\";getReactionPickerAnimation(e,t,n){return o[`${e}:${t}:${n??\"\"}`]}getEffectForEmojiId(e,t,n){let i=c(t,n);return s[e]?.[i]}}let m=new d(a.h,{BURST_REACTION_EFFECT_CLEAR:function(e){let{channelId:t,messageId:n,emoji:i}=e,l=c(n,i);delete s[t]?.[l]},BURST_REACTION_EFFECT_PLAY:function(e){let{channelId:t,messageId:n,emoji:i,key:l}=e,a=c(n,i);if(function(e,t){let n;switch(e){case\"HOVER\":n=\"HOVER\";break;case\"RANDOM\":n=\"RANDOM\";break;default:n=\"EXTERNAL\"}let i=Object.fromEntries(Object.entries(s[t]??{}).filter(e=>{let[,t]=e;return t===n}));if(Object.keys(i).length>=5&&\"EXTERNAL\"===e){for(let e in i)if(null==u[t]||null==u[t][e]){delete s[t][e],delete i[e];break}}return Obj",
+   "excerpt": "et r={},s={},c={};function u(e,t){let n=null!=t.id?t.id:t.name;return`${e}:${n}`}class d extends l.Ay.Store{static displayName=\"BurstReactionEffectsStore\";getReactionPickerAnimation(e,t,n){return r[`${e}:${t}:${n??\"\"}`]}getEffectForEmojiId(e,t,n){let i=u(t,n);return s[e]?.[i]}}let m=new d(o.h,{BURST_REACTION_EFFECT_CLEAR:function(e){let{channelId:t,messageId:n,emoji:i}=e,l=u(n,i);delete s[t]?.[l]},BURST_REACTION_EFFECT_PLAY:function(e){let{channelId:t,messageId:n,emoji:i,key:l}=e,o=u(n,i);if(function(e,t){let n;switch(e){case\"HOVER\":n=\"HOVER\";break;case\"RANDOM\":n=\"RANDOM\";break;default:n=\"EXTERNAL\"}let i=Object.fromEntries(Object.entries(s[t]??{}).filter(e=>{let[,t]=e;return t===n}));if(Object.keys(i).length>=5&&\"EXTERNAL\"===e){for(let e in i)if(null==c[t]||null==c[t][e]){delete s[t][e],delete i[e];break}}return Obj",
    "fingerprint": {
     "strings": [
      "HOVER",
@@ -8846,15 +8973,15 @@
     "structHash": "9cf3421d5bd7ef20"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::SuperReactionTweaks::.EMOJI_PICKER_CONSTANTS_EMOJI_CONTAINER_PADDING_HORIZONTAL)": {
    "kind": "patch",
    "plugin": "SuperReactionTweaks",
    "label": ".EMOJI_PICKER_CONSTANTS_EMOJI_CONTAINER_PADDING_HORIZONTAL)",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "267889",
-   "excerpt": "eN.Ay.getTierDisplayNameByPlanId(a.planId),endsAt:u.toDate()})}),(0,s.jsx)(\"div\",{children:(0,s.jsx)(nz.Anchor,{onClick:()=>{(0,ed.xf)(n),t(),(0,nJ.openUserSettings)(nq.X.NITRO_PANEL)},children:et.intl.string(et.t.W3aavh)})})]}),(0,s.jsx)(H.D,{onClick:()=>{nK.w.set(nQ,c),n0=c,i(!0)},children:(0,s.jsx)(B.P,{size:\"md\",color:\"currentColor\",className:nX.YF})})]})};var n2=n(148361);let n3=(0,ec.xI)(f.A.EMOJI_PICKER_CONSTANTS_EMOJI_CONTAINER_PADDING_HORIZONTAL),n8=(0,ec.xI)(f.A.EMOJI_PICKER_CONSTANTS_EMOJI_LIST_PADDING_LEFT);function n5(e){return e.stopPropagation()}function n7(e,t){P.Om.setInspectedExpressionPosition(e,t,U.t.GRID_NAVIGATOR_EVENT)}let n6=c()(ed.bo,200),n4=c()(ed.Wi,200),n9={section:void 0,openPopoutType:void 0,popoutLocation:void 0},le=r.memo(r.forwardRef(function(e,t){let n,l,{pickerIntention:i,channel:a,guildId:u,closePopout:c,emojiSi",
+   "excerpt": "eN.Ay.getTierDisplayNameByPlanId(a.planId),endsAt:u.toDate()})}),(0,s.jsx)(\"div\",{children:(0,s.jsx)(nz.Anchor,{onClick:()=>{(0,ed.xf)(n),t(),(0,nJ.openUserSettings)(nq.X.NITRO_PANEL)},children:et.intl.string(et.t.W3aavh)})})]}),(0,s.jsx)(B.D,{onClick:()=>{nK.w.set(nQ,c),n0=c,i(!0)},children:(0,s.jsx)(H.P,{size:\"md\",color:\"currentColor\",className:nX.YF})})]})};var n2=n(148361);let n3=(0,ec.xI)(p.A.EMOJI_PICKER_CONSTANTS_EMOJI_CONTAINER_PADDING_HORIZONTAL),n5=(0,ec.xI)(p.A.EMOJI_PICKER_CONSTANTS_EMOJI_LIST_PADDING_LEFT);function n8(e){return e.stopPropagation()}function n6(e,t){P.Om.setInspectedExpressionPosition(e,t,U.t.GRID_NAVIGATOR_EVENT)}let n7=c()(ed.bo,200),n4=c()(ed.Wi,200),n9={section:void 0,openPopoutType:void 0,popoutLocation:void 0},le=r.memo(r.forwardRef(function(e,t){let n,l,{pickerIntention:i,channel:a,guildId:u,closePopout:c,emojiSi",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -8862,8 +8989,8 @@
      "weeks",
      ",{className:en.kL,children:[(0,s.jsx)(",
      ",{className:en.Tp}),(0,s.jsxs)(",
-     ",{className:en.Qs,children:[(0,s.jsx)(H.D,{className:en.b,",
-     ":et.intl.string(et.t.cpT0Cq),onClick:l,children:(0,s.jsx)(B.P,{size:",
+     ",{className:en.Qs,children:[(0,s.jsx)(B.D,{className:en.b,",
+     ":et.intl.string(et.t.cpT0Cq),onClick:l,children:(0,s.jsx)(H.P,{size:",
      ",color:",
      "aria-label",
      ",{alt:",
@@ -8882,7 +9009,7 @@
      "PREMIUM",
      "ROLE_SUBSCRIPTION",
      "expression-guild-",
-     ",{className:e4.a$,children:(0,s.jsx)(eD.A,{hovered:m,selected:g,size:",
+     ",{className:e4.a$,children:(0,s.jsx)(eD.A,{hovered:h,selected:g,size:",
      "custom",
      ",{className:e4.ny},",
      "shortcut",
@@ -8895,49 +9022,53 @@
      "Osi/uy",
      "5cRA/b",
      ",title:I,body:E,asset:(0,s.jsx)(eI.t,{size:",
-     "}),assetSize:20,forceOpen:p,children:(0,s.jsx)(H.D,{innerRef:l,",
+     "}),assetSize:20,forceOpen:f,children:(0,s.jsx)(B.D,{innerRef:l,",
      "aria-pressed"
     ],
     "exports": [],
-    "structHash": "947b517878990856"
+    "structHash": "74f74098ca311c8a"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::TypingIndicator::M0 15H2c0 1.6569": {
    "kind": "patch",
    "plugin": "TypingIndicator",
    "label": "M0 15H2c0 1.6569",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
-   "moduleId": "889119",
-   "excerpt": "l,channel:t}):null,o?(0,s.jsx)(lZ,{mentionsCount:i,isMentionLowImportance:r}):null]}):null}function l0(e){let{style:t,withGuildIcon:n,inverted:l}=e,i={className:eK()(lJ.GI,{[lJ.a7]:n},{[lJ.BJ]:l}),style:t},{density:r}=(0,C.wR)();switch(r){case\"cozy\":return(0,s.jsxs)(\"svg\",{...i,width:\"10\",height:\"20\",viewBox:\"0 0 10 20\",fill:\"none\",xmlns:\"http://www.w3.org/2000/svg\",children:[(0,s.jsx)(\"path\",{d:\"M0 15H2c0 1.6569 1.3432 3 3 3v2c-2.7614 0-5-2.2386-5-7ZM0 4H2V15H0V4ZM2 4H0C0 3.4477.4477 3 1 3c.5523 0 1 .4477 1 1Z\",fill:\"currentColor\"}),(0,s.jsx)(\"path\",{d:\"M6 20V18H9v2H6Zm3 0V18s1 0 1 1-1 1-.989 1.004ZM6 18v2H5V18H6Z\",fill:\"currentColor\"})]});case\"compact\":return(0,s.jsxs)(\"svg\",{...i,width:\"10\",height:\"19\",viewBox:\"0 0 10 19\",fill:\"none\",xmlns:\"http://www.w3.org/2000/svg\",children:[(0,s.jsx)(\"path\",{d:\"M0 ",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "268090",
+   "excerpt": "channel:t}):null,o?(0,s.jsx)(ik.A,{mentionsCount:l,isMentionLowImportance:r}):null]}):null}function iK(e){let{style:t,withGuildIcon:n,inverted:i}=e,l={className:eO()(iF.GI,{[iF.a7]:n},{[iF.BJ]:i}),style:t},{density:r}=(0,C.wR)();switch(r){case\"cozy\":return(0,s.jsxs)(\"svg\",{...l,width:\"10\",height:\"20\",viewBox:\"0 0 10 20\",fill:\"none\",xmlns:\"http://www.w3.org/2000/svg\",children:[(0,s.jsx)(\"path\",{d:\"M0 15H2c0 1.6569 1.3432 3 3 3v2c-2.7614 0-5-2.2386-5-7ZM0 4H2V15H0V4ZM2 4H0C0 3.4477.4477 3 1 3c.5523 0 1 .4477 1 1Z\",fill:\"currentColor\"}),(0,s.jsx)(\"path\",{d:\"M6 20V18H9v2H6Zm3 0V18s1 0 1 1-1 1-.989 1.004ZM6 18v2H5V18H6Z\",fill:\"currentColor\"})]});case\"compact\":return(0,s.jsxs)(\"svg\",{...l,width:\"10\",height:\"19\",viewBox:\"0 0 10 19\",fill:\"none\",xmlns:\"http://www.w3.org/2000/svg\",children:[(0,s.jsx)(\"path\",{d:\"M0 ",
    "fingerprint": {
     "strings": [
      "DRAGGABLE_GUILD_CHANNEL",
-     ",{className:ef.c,children:[(0,s.jsx)(",
-     ",children:(0,s.jsx)(es.D,{onClick:c,",
-     ":em.intl.string(em.t.fgq1gs),children:(0,s.jsx)(er.P,{size:",
+     "no-permission",
+     "opt-in-channels",
+     "pinned-channel",
+     ",{className:es.c,children:[(0,s.jsx)(",
+     ",children:(0,s.jsx)(X.D,{onClick:c,",
+     ":el.intl.string(el.t.fgq1gs),children:(0,s.jsx)(q.P,{size:",
      ",color:",
-     ",className:ep.gE})})})}),o&&(0,s.jsx)(",
+     ",className:er.gE})})})}),o&&(0,s.jsx)(",
      ",className:e,color:",
-     ",className:e}),text:em.intl.string(em.t[",
-     "]),selected:n,onClick:c,trailing:o?(0,s.jsx)(eM.E,{type:",
      ",variant:",
-     "}):null}),o?(0,s.jsx)(eL.A,{targetElementRef:d,title:em.intl.string(eO.default[",
-     "]),body:em.intl.string(eO.default[",
-     "]),graphic:{type:",
-     ",rive:eU.f,aspectRatio:",
-     ",props:{dataBinding:{on:!0},withReducedMotion:",
-     ",fit:",
-     "}},actions:[{text:em.intl.string(em.t.RzWDqY),variant:",
-     ",onClick:u}],shouldShow:!0,position:",
-     ",align:",
+     "}):null,f=u?(0,s.jsxs)(",
+     ",{className:ej.c,children:[(0,s.jsx)(",
+     ",children:(0,s.jsx)(X.D,{onClick:g,",
+     ":el.intl.string(el.t.R9GHya),children:(0,s.jsx)(q.P,{size:",
+     ",className:er.gE})})})}),null!=A?(0,s.jsx)(",
+     ",className:e}),text:el.intl.string(el.t[",
+     "+OEqVQ",
+     "rive",
+     "halt",
+     "contain",
+     "primary",
+     "right",
      ",alignmentStrategy:",
      ",caretConfig:{align:",
      "},scrollBehavior:",
      "guildBoostTabBanner",
      "}),background:x&&(0,s.jsx)(",
-     ",{className:e3.Fi,children:(0,s.jsx)(eY.t,{nextScene:null==N?",
+     ",{className:eX.Fi,children:(0,s.jsx)(ew.t,{nextScene:null==N?",
      "LOOP",
      "xMidYMid slice",
      "span",
@@ -8945,20 +9076,16 @@
      "PremiumGuildProgressBarPersistedStore",
      "calc(0% - 0px)",
      "respect-motion-settings",
-     ",{ref:t,className:td.hQ,children:[(0,s.jsx)(",
-     ",{className:td.FS,children:[(0,s.jsxs)(",
-     ",{className:td.Ui,children:[(0,s.jsx)(e4.E,{className:td.Qq,variant:",
-     "text-xs/semibold",
-     "\\uD83C\\uDF89",
-     ",{className:td.Ui,children:[(0,s.jsx)(e4.E,{className:eK()(td.Qq,td.ue),variant:",
-     ",children:o?em.intl.formatToPlainString(e1.default[",
-     "],{appliedBoostCount:n}):em.intl.formatToPlainString(e1.default["
+     ",{ref:t,className:tt.hQ,children:[(0,s.jsx)(",
+     ",{className:tt.FS,children:[(0,s.jsxs)(",
+     ",{className:tt.Ui,children:[(0,s.jsx)(e0.E,{className:tt.Qq,variant:",
+     "text-xs/semibold"
     ],
     "exports": [],
-    "structHash": "c9a4816ad29d3672"
+    "structHash": "8eacdac9148f97a2"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::TypingIndicator::UNREAD_IMPORTANT:": {
    "kind": "patch",
@@ -9209,9 +9336,9 @@
    "kind": "patch",
    "plugin": "ValidUser",
    "label": "\"@here\"===",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "937767",
-   "excerpt": "\"343116\"),n.e(\"139103\"),n.e(\"470314\"),n.e(\"774021\"),n.e(\"70515\"),n.e(\"404524\"),n.e(\"654148\"),n.e(\"830221\"),n.e(\"666939\"),n.e(\"324240\"),n.e(\"221879\"),n.e(\"717334\"),n.e(\"184841\")]).then(n.bind(n,107632));return n=>(0,l.jsx)(t,{...n,user:e,channel:o,guildId:s})})},react(e,t,n){let{userId:i,channelId:a,parsedUserId:o,roleId:u,roleName:c,viewingChannelId:d}=e;return null==i&&(null!=u||\"@everyone\"===c||\"@here\"===c)?(0,l.jsx)(s.A,{inlinePreview:n.noStyleAndInteraction,...e,children:t(e.content,n)},n.key):(0,l.jsx)(r.A,{className:\"mention\",userId:i,channelId:a,viewingChannelId:d,parsedUserId:o,content:t(e.content,n),inlinePreview:n.noStyleAndInteraction},n.key)}}}",
+   "excerpt": "\"713708\"),n.e(\"139103\"),n.e(\"470314\"),n.e(\"774021\"),n.e(\"70515\"),n.e(\"404524\"),n.e(\"654148\"),n.e(\"830221\"),n.e(\"666939\"),n.e(\"324240\"),n.e(\"221879\"),n.e(\"717334\"),n.e(\"184841\")]).then(n.bind(n,107632));return n=>(0,l.jsx)(t,{...n,user:e,channel:o,guildId:s})})},react(e,t,n){let{userId:i,channelId:a,parsedUserId:o,roleId:u,roleName:c,viewingChannelId:d}=e;return null==i&&(null!=u||\"@everyone\"===c||\"@here\"===c)?(0,l.jsx)(s.A,{inlinePreview:n.noStyleAndInteraction,...e,children:t(e.content,n)},n.key):(0,l.jsx)(r.A,{className:\"mention\",userId:i,channelId:a,viewingChannelId:d,parsedUserId:o,content:t(e.content,n),inlinePreview:n.noStyleAndInteraction},n.key)}}}",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -9220,10 +9347,10 @@
      "mention"
     ],
     "exports": [],
-    "structHash": "93534aa3ed1c6039"
+    "structHash": "b803c1a65fb9d4e8"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::ValidUser::unknownUserMentionPlaceholder:": {
    "kind": "patch",
@@ -9258,36 +9385,40 @@
    "kind": "patch",
    "plugin": "VoiceChatDoubleClick",
    "label": ".handleClickChat",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
-   "moduleId": "889119",
-   "excerpt": "ld_id,closePopout:this.closeGuildVerificationPopout});throw Error(\"VoiceChannel.renderPopout: There must always be something to render\")};renderOpenChatButton=()=>{let{channel:e,locked:t,forceShowButtons:n}=this.props;if(!t)return(0,s.jsx)(ei.m,{asContainer:!0,text:em.intl.string(em.t.ZXxLQg),children:(0,s.jsx)(es.D,{className:eK()(ep.Xs,n?ep.Tf:null),onClick:()=>{l9.A.updateChatOpen(e.id,!0),this.handleClickChat()},\"aria-label\":em.intl.string(em.t.ZXxLQg),children:(0,s.jsx)(lL.ChatIcon,{size:\"xs\",color:\"currentColor\",className:ep.gE})})})};renderChannelInfo(){let{channelInfo:e}=this.props;return null==e?null:(0,s.jsx)(\"div\",{className:ep.yW,children:e})}getTooltipText=()=>{let{connected:e}=this.props;return this.isFull()&&!e?em.intl.string(em.t.rZfiNq):null};renderSubtitle=()=>{let e=this.props.stageInst",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "268090",
+   "excerpt": "uild_id,closePopout:this.closeGuildVerificationPopout});throw Error(\"VoiceChannel.renderPopout: There must always be something to render\")};renderOpenChatButton=()=>{let{channel:e,locked:t,forceShowButtons:n}=this.props;if(!t)return(0,s.jsx)(Y.m,{asContainer:!0,text:el.intl.string(el.t.ZXxLQg),children:(0,s.jsx)(X.D,{className:eO()(er.Xs,n?er.Tf:null),onClick:()=>{iq.A.updateChatOpen(e.id,!0),this.handleClickChat()},\"aria-label\":el.intl.string(el.t.ZXxLQg),children:(0,s.jsx)(iS.ChatIcon,{size:\"xs\",color:\"currentColor\",className:er.gE})})})};renderChannelInfo(){let{channelInfo:e}=this.props;return null==e?null:(0,s.jsx)(\"div\",{className:er.yW,children:e})}getTooltipText=()=>{let{connected:e}=this.props;return this.isFull()&&!e?el.intl.string(el.t.rZfiNq):null};renderSubtitle=()=>{let e=this.props.stageInst",
    "fingerprint": {
     "strings": [
      "DRAGGABLE_GUILD_CHANNEL",
-     ",{className:ef.c,children:[(0,s.jsx)(",
-     ",children:(0,s.jsx)(es.D,{onClick:c,",
-     ":em.intl.string(em.t.fgq1gs),children:(0,s.jsx)(er.P,{size:",
+     "no-permission",
+     "opt-in-channels",
+     "pinned-channel",
+     ",{className:es.c,children:[(0,s.jsx)(",
+     ",children:(0,s.jsx)(X.D,{onClick:c,",
+     ":el.intl.string(el.t.fgq1gs),children:(0,s.jsx)(q.P,{size:",
      ",color:",
-     ",className:ep.gE})})})}),o&&(0,s.jsx)(",
+     ",className:er.gE})})})}),o&&(0,s.jsx)(",
      ",className:e,color:",
-     ",className:e}),text:em.intl.string(em.t[",
-     "]),selected:n,onClick:c,trailing:o?(0,s.jsx)(eM.E,{type:",
      ",variant:",
-     "}):null}),o?(0,s.jsx)(eL.A,{targetElementRef:d,title:em.intl.string(eO.default[",
-     "]),body:em.intl.string(eO.default[",
-     "]),graphic:{type:",
-     ",rive:eU.f,aspectRatio:",
-     ",props:{dataBinding:{on:!0},withReducedMotion:",
-     ",fit:",
-     "}},actions:[{text:em.intl.string(em.t.RzWDqY),variant:",
-     ",onClick:u}],shouldShow:!0,position:",
-     ",align:",
+     "}):null,f=u?(0,s.jsxs)(",
+     ",{className:ej.c,children:[(0,s.jsx)(",
+     ",children:(0,s.jsx)(X.D,{onClick:g,",
+     ":el.intl.string(el.t.R9GHya),children:(0,s.jsx)(q.P,{size:",
+     ",className:er.gE})})})}),null!=A?(0,s.jsx)(",
+     ",className:e}),text:el.intl.string(el.t[",
+     "+OEqVQ",
+     "rive",
+     "halt",
+     "contain",
+     "primary",
+     "right",
      ",alignmentStrategy:",
      ",caretConfig:{align:",
      "},scrollBehavior:",
      "guildBoostTabBanner",
      "}),background:x&&(0,s.jsx)(",
-     ",{className:e3.Fi,children:(0,s.jsx)(eY.t,{nextScene:null==N?",
+     ",{className:eX.Fi,children:(0,s.jsx)(ew.t,{nextScene:null==N?",
      "LOOP",
      "xMidYMid slice",
      "span",
@@ -9295,28 +9426,24 @@
      "PremiumGuildProgressBarPersistedStore",
      "calc(0% - 0px)",
      "respect-motion-settings",
-     ",{ref:t,className:td.hQ,children:[(0,s.jsx)(",
-     ",{className:td.FS,children:[(0,s.jsxs)(",
-     ",{className:td.Ui,children:[(0,s.jsx)(e4.E,{className:td.Qq,variant:",
-     "text-xs/semibold",
-     "\\uD83C\\uDF89",
-     ",{className:td.Ui,children:[(0,s.jsx)(e4.E,{className:eK()(td.Qq,td.ue),variant:",
-     ",children:o?em.intl.formatToPlainString(e1.default[",
-     "],{appliedBoostCount:n}):em.intl.formatToPlainString(e1.default["
+     ",{ref:t,className:tt.hQ,children:[(0,s.jsx)(",
+     ",{className:tt.FS,children:[(0,s.jsxs)(",
+     ",{className:tt.Ui,children:[(0,s.jsx)(e0.E,{className:tt.Qq,variant:",
+     "text-xs/semibold"
     ],
     "exports": [],
-    "structHash": "c9a4816ad29d3672"
+    "structHash": "8eacdac9148f97a2"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::VoiceChatDoubleClick::className:\"channelMention\",children:[null!=": {
    "kind": "patch",
    "plugin": "VoiceChatDoubleClick",
    "label": "className:\"channelMention\",children:[null!=",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "556300",
-   "excerpt": "(0,i.closeAllModals)()},g=m.noStyleAndInteraction||null==t.channelId||null==f&&null==t.originalLink?d.tEg:e=>{(0,s.L3)(e,async()=>{let{default:e}=await Promise.all([n.e(\"343266\"),n.e(\"404391\")]).then(n.bind(n,254106));return n=>(0,l.jsx)(e,{...n,channel:f,channelId:f?.id??t.channelId,originalLink:t.originalLink,messageId:t.messageId})})};return(0,l.jsxs)(r.A,{role:\"link\",onClick:p,onContextMenu:g,className:\"channelMention\",children:[null!=t.inContent?h(t.inContent,m):null,null!=t.inContent?(0,l.jsx)(a.A,{}):null,(0,c.t)(t,h,m)]},m.key)}}}}",
+   "excerpt": "(0,i.closeAllModals)()},g=h.noStyleAndInteraction||null==t.channelId||null==p&&null==t.originalLink?d.tEg:e=>{(0,s.L3)(e,async()=>{let{default:e}=await Promise.all([n.e(\"343266\"),n.e(\"404391\")]).then(n.bind(n,254106));return n=>(0,l.jsx)(e,{...n,channel:p,channelId:p?.id??t.channelId,originalLink:t.originalLink,messageId:t.messageId})})};return(0,l.jsxs)(r.A,{role:\"link\",onClick:f,onContextMenu:g,className:\"channelMention\",children:[null!=t.inContent?m(t.inContent,h):null,null!=t.inContent?(0,l.jsx)(a.A,{}):null,(0,c.t)(t,m,h)]},h.key)}}}}",
    "fingerprint": {
     "strings": [
      "use strict",
@@ -9327,27 +9454,27 @@
     "structHash": "0832f22803b1a14a"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::VoiceDownload::.LgCPMt": {
    "kind": "patch",
    "plugin": "VoiceDownload",
    "label": ".LgCPMt",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
-   "moduleId": "85935",
-   "excerpt": "O,_]),s.useEffect(()=>{if(O)return e4._.dispatch(eq.jej.VOICE_MESSAGE_PLAYBACK_STARTED,{src:n}),e4._.subscribe(eq.jej.VOICE_MESSAGE_PLAYBACK_STARTED,e),()=>{e4._.unsubscribe(eq.jej.VOICE_MESSAGE_PLAYBACK_STARTED,e)};function e(e){let{src:t}=e;n!==t&&M(!1)}},[n,O,M]);let ei=O?e1.PauseIcon:e2.PlayIcon,es=O?em.intl.string(em.t[\"3XohGn\"]):em.intl.string(em.t.AlHqHT),er=em.intl.formatToPlainString(em.t.LgCPMt,{playbackRate:y}),ea=`${y.toString().replace(/^0/,\"\")}X`;t=\"Safari\"===platform.name?(0,i.jsx)(s.Suspense,{children:(0,i.jsx)(tC,{ref:E,className:tA.Zn,src:n,preload:D,playing:O&&!L,onEnded:Z,onLoadedMetadata:W,onError:q,muted:T,volume:V,playbackRate:y})}):(0,i.jsx)(e7,{ref:E,className:tA.Zn,controls:!1,preload:D,onEnded:Z,onLoadedMetadata:W,onError:q,muted:T,volume:V,playbackRate:y,playing:O&&!L,",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
+   "moduleId": "684519",
+   "excerpt": "O,_]),s.useEffect(()=>{if(O)return e7._.dispatch(eY.jej.VOICE_MESSAGE_PLAYBACK_STARTED,{src:n}),e7._.subscribe(eY.jej.VOICE_MESSAGE_PLAYBACK_STARTED,e),()=>{e7._.unsubscribe(eY.jej.VOICE_MESSAGE_PLAYBACK_STARTED,e)};function e(e){let{src:t}=e;n!==t&&L(!1)}},[n,O,L]);let ei=O?e0.PauseIcon:e1.PlayIcon,es=O?ec.intl.string(ec.t[\"3XohGn\"]):ec.intl.string(ec.t.AlHqHT),er=ec.intl.formatToPlainString(ec.t.LgCPMt,{playbackRate:y}),ea=`${y.toString().replace(/^0/,\"\")}X`;t=\"Safari\"===platform.name?(0,i.jsx)(s.Suspense,{children:(0,i.jsx)(tA,{ref:E,className:tx.Zn,src:n,preload:D,playing:O&&!M,onEnded:Z,onLoadedMetadata:W,onError:q,muted:T,volume:V,playbackRate:y})}):(0,i.jsx)(e8,{ref:E,className:tx.Zn,controls:!1,preload:D,onEnded:Z,onLoadedMetadata:W,onError:q,muted:T,volume:V,playbackRate:y,playing:O&&!M,",
    "fingerprint": {
     "strings": [
      "use strict",
      "IMAGE",
      "LazyImageZoomable",
-     "user",
+     "utf-8",
      "markdown",
      "mkdown",
      "PlaintextFileMarkdownPreview",
      ",variant:",
      ",onClick:()=>n?.(!t),",
-     ",{className:ef.VI,children:[(0,i.jsx)(",
+     ",{className:eh.VI,children:[(0,i.jsx)(",
      "text-sm/normal",
      "text-default",
      "text-xs/normal",
@@ -9355,7 +9482,7 @@
      "LanguageSelect",
      "left",
      "aria-label",
-     ",{className:ef.md,children:(0,i.jsxs)(q.iS,{selectionMode:",
+     ",{className:eh.md,children:(0,i.jsxs)(q.iS,{selectionMode:",
      ",color:",
      ",align:",
      ",renderPopout:e=>{let{closePopout:s}=e;return(0,i.jsx)($.W,{",
@@ -9367,23 +9494,23 @@
      "render-markdown",
      "UKOtz+",
      "0PQYk3",
-     "),E=C?.length??0,I=r?100:6,S=0===x,v=m&&f&&ep.has(u),N=",
-     "+em.intl.formatToPlainString(em.t.DQnFp2,{lines:E-I}):N+=",
-     "+em.intl.formatToPlainString(em.t[",
-     "],{formattedBytes:(0,eu.up)(x)}));let _=C?.slice(0,I).join(",
-     ",j=r||I<E;return(0,i.jsxs)(",
-     ",{className:ef.qr,role:",
-     ",{className:ef.Kb}),(0,i.jsx)(eE,{language:u,setLanguage:c,align:",
+     "),C=A?.length??0,E=r?100:6,I=0===f,S=h&&ep.has(u),v=",
+     "+ec.intl.formatToPlainString(ec.t.DQnFp2,{lines:C-E}):v+=",
+     "+ec.intl.formatToPlainString(ec.t[",
+     "],{formattedBytes:(0,eo.up)(f)}));let N=A?.slice(0,E).join(",
+     ",_=r||E<C;return(0,i.jsxs)(",
+     ",{className:eh.qr,role:",
+     ",{className:eh.Kb}),(0,i.jsx)(eC,{language:u,setLanguage:c,align:",
      "1+gGcK",
      ";return s.useEffect(()=>{function e(e){if((e.metaKey||e.ctrlKey)&&",
      "keydown",
      "qxQjc+"
     ],
     "exports": [],
-    "structHash": "b6aa0aa4ac859555"
+    "structHash": "46d8f03db48b6254"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   },
   "patch::VolumeBooster::.m7TNdF": {
    "kind": "patch",
@@ -9496,9 +9623,9 @@
    "kind": "patch",
    "plugin": "WhoReacted",
    "label": ",reactionRef:",
-   "buildHash": "ca2fcf2f7e54e979cdec009f6ac21320903bfde5",
+   "buildHash": "222f262f506dcb82f5282d658a3d843f2ba4e44d",
    "moduleId": "831688",
-   "excerpt": "id,emoji:x,startPosition:et,targetPosition:eW}),eF&&(0,i.jsx)(eV,{count:T,emoji:x,channelId:j.getChannelId(),messageId:j.id,useChatFontScaling:V,color:n,emojiSize:e_.x.NORMAL})]}):null,(0,i.jsx)(g.A,{className:r()({[eU.hideEmoji]:el}),emojiId:x.id,emojiName:x.name,size:C,animated:x.animated})]}),b?null:(0,i.jsx)(E.A,{className:eU.reactionCount,value:e$,color:t,digitWidth:eD}),(0,i.jsx)(z,{count:e$,reactionRef:ep})]})})})})})})}",
+   "excerpt": "id,emoji:T,startPosition:et,targetPosition:eV}),eW&&(0,i.jsx)(eG,{count:x,emoji:T,channelId:j.getChannelId(),messageId:j.id,useChatFontScaling:G,color:n,emojiSize:e_.x.NORMAL})]}):null,(0,i.jsx)(h.A,{className:a()({[eU.hideEmoji]:el}),emojiId:T.id,emojiName:T.name,size:S,animated:T.animated})]}),v?null:(0,i.jsx)(E.A,{className:eU.reactionCount,value:ez,color:t,digitWidth:eH}),(0,i.jsx)(J,{count:ez,reactionRef:eg})]})})})})})})}",
    "fingerprint": {
     "strings": [
      "static",
@@ -9510,12 +9637,12 @@
      "none",
      ",color:",
      "string",
-     ",{className:r()(eI.h7,eI.j9),children:[R&&(0,i.jsx)(K.t,{size:",
+     ",{className:a()(eI.h7,eI.j9),children:[b&&(0,i.jsx)(K.t,{size:",
      ",className:eI.eH,color:Q.k0.PREMIUM_TIER_2}),(0,i.jsx)(Z.E,{variant:",
-     ",className:eI.Of,children:ep.intl.string(ep.t.ZbNJXn)})]}):R?(0,i.jsxs)(",
-     ",{className:r()(eI.h7,eI.j9,eI.rL),children:[(0,i.jsx)(K.t,{size:",
+     ",className:eI.Of,children:eg.intl.string(eg.t.ZbNJXn)})]}):b?(0,i.jsxs)(",
+     ",{className:a()(eI.h7,eI.j9,eI.rL),children:[(0,i.jsx)(K.t,{size:",
      "super reaction tooltip cta",
-     ",{className:r()(eI.h7,eI.j9),children:(0,i.jsxs)(",
+     ",{className:a()(eI.h7,eI.j9),children:(0,i.jsxs)(",
      ",{children:[(0,i.jsx)(Z.E,{variant:",
      "super reaction tooltip upsell",
      "0GBwVR",
@@ -9527,7 +9654,7 @@
      "focus",
      ",align:",
      ",children:()=>(0,i.jsx)(",
-     ",{onMouseEnter:eM,onMouseLeave:eP,ref:ep,children:(0,i.jsx)(",
+     ",{onMouseEnter:eM,onMouseLeave:eP,ref:eg,children:(0,i.jsx)(",
      "aria-disabled",
      "aria-pressed"
     ],
@@ -9535,7 +9662,7 @@
     "structHash": "c597bca3d9cdcbe0"
    },
    "shape": null,
-   "updatedAt": "2026-10-01T13:38:07.991Z"
+   "updatedAt": "2026-10-01T22:03:11.268Z"
   }
  }
 }
