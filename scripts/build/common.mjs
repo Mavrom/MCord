@@ -7,12 +7,14 @@
 import { execSync } from "node:child_process";
 import { readdirSync, readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
-import { dirname, isAbsolute, join, relative } from "node:path";
+import { dirname, isAbsolute, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const SRC = join(ROOT, "src");
-export const DIST = join(ROOT, "dist");
+// `MCORD_DIST`: scanner reporter build'ini kendi klasörüne yazar; kullanıcının gerçek
+// `dist/`'i (inject/installer'ın kullandığı) ezilmez. Verilmezse davranış aynı.
+export const DIST = process.env.MCORD_DIST ? resolve(process.env.MCORD_DIST) : join(ROOT, "dist");
 
 export const PackageJson = JSON.parse(readFileSync(join(ROOT, "package.json"), "utf-8"));
 
