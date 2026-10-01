@@ -208,10 +208,13 @@ export function getModuleSource(moduleId: PropertyKey): string {
     return source;
 }
 
+/** `describeFilter`'ın meta taşımayan filtreler için döndürdüğü yer tutucu. */
+export const ANONYMOUS_FILTER_LABEL = "<anonim filtre>";
+
 /** Bir filtrenin insan okunabilir tanımı (reporter için). */
 export function describeFilter(filter: ModuleFilter): string {
     const meta = filter[FilterSymbol] ?? filter.__originalFilter?.[FilterSymbol];
-    if (!meta) return "<anonim filtre>";
+    if (!meta) return ANONYMOUS_FILTER_LABEL;
 
     const args = meta.args
         .map(arg => (typeof arg === "function" ? describeFilter(arg as ModuleFilter) : JSON.stringify(arg)))

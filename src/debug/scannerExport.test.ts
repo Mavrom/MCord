@@ -6,7 +6,9 @@
 
 import { describe, expect, it } from "vitest";
 
-import { chunkModules, collectModules, serializePat, shapeOf } from "./scannerExport";
+import { ANONYMOUS_FILTER_LABEL } from "../webpack/filters";
+import type { ModuleFilter } from "../webpack/types";
+import { chunkModules, collectModules, serializePat, shapeOf, stableFilterLabel } from "./scannerExport";
 
 describe("scannerExport yardımcıları", () => {
     it("serializePat string ve regex'i ayırır", () => {
@@ -43,5 +45,30 @@ describe("scannerExport yardımcıları", () => {
         const out = collectModules({ 123: proxied });
         expect(out["123"]).toContain("ORIJINAL_GOVDE");
         expect(out["123"]).not.toContain("[native code]");
+    });
+});
+
+describe("stableFilterLabel", () => {
+    const a = ((m: any) => m?.getCurrentUser) as unknown as ModuleFilter;
+    const b = ((m: any) => m?.get && m?.post) as unknown as ModuleFilter;
+
+    it("anonim filtreleri kaynağa göre ayrı etiketler", () => {
+        const la = stableFilterLabel(ANONYMOUS_FILTER_LABEL, a);
+        const lb = stableFilterLabel(ANONYMOUS_FILTER_LABEL, b);
+        expect(la).not.toBe(lb);
+        expect(la).toMatch(/^<anonim filtre [0-9a-f]{8}: .+>$/);
+    });
+    it("aynı kaynak için kararlı", () => {
+        const same = ((m: any) => m?.getCurrentUser) as unknown as ModuleFilter;
+        expect(stableFilterLabel(ANONYMOUS_FILTER_LABEL, a)).toBe(stableFilterLabel(ANONYMOUS_FILTER_LABEL, same));
+    });
+    it("açıklamalı etiketi değiştirmez", () => {
+        expect(stableFilterLabel('byKeys("a")', a)).toBe('byKeys("a")');
+    });
+    it("kaynağı boşlukları sıkıştırıp 60 karaktere kırpar", () => {
+        const long = Object.assign(() => 0, { toString: () => "x".repeat(100) + "\n\n  y" }) as unknown as ModuleFilter;
+        expect(stableFilterLabel(ANONYMOUS_FILTER_LABEL, long)).toMatch(/^<anonim filtre [0-9a-f]{8}: x{60}>$/);
+        const spaced = Object.assign(() => 0, { toString: () => "a\n\n   b" }) as unknown as ModuleFilter;
+        expect(stableFilterLabel(ANONYMOUS_FILTER_LABEL, spaced)).toMatch(/: a b>$/);
     });
 });

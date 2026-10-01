@@ -15,7 +15,7 @@
  */
 
 import { getBuildNumber, patchTrace } from "../webpack/codePatcher";
-import { byStoreName, describeFilter } from "../webpack/filters";
+import { ANONYMOUS_FILTER_LABEL, byStoreName, describeFilter } from "../webpack/filters";
 import { find, findModuleId } from "../webpack/finder";
 import { lazyWebpackSearchHistory, setRecordSearchHistory, wreq } from "../webpack/intercept";
 import { resolveStore } from "../webpack/stores";
@@ -76,6 +76,29 @@ function collectPatches() {
     });
 }
 
+/** FNV-1a 32-bit; renderer'da node crypto yok. Çıktı 8 haneli hex. */
+function shortHash(text: string): string {
+    let h = 0x811c9dc5;
+    for (let i = 0; i < text.length; i++) {
+        h ^= text.charCodeAt(i);
+        h = Math.imul(h, 0x01000193);
+    }
+    return (h >>> 0).toString(16).padStart(8, "0");
+}
+
+/**
+ * Scanner taban çizgisi anahtarı etiketten türer. Açıklamasız (anonim) filtreler
+ * tek anahtarda çakışıp ilgisiz finder'ları kıyaslatmasın diye, anonim etiketi
+ * filtrenin kendi kaynağından türeyen sabit bir etikete çevirir. Açıklamalı
+ * filtrelerin etiketi değişmez.
+ */
+export function stableFilterLabel(label: string, filter: ModuleFilter): string {
+    if (label !== ANONYMOUS_FILTER_LABEL) return label;
+    const source = String(filter);
+    const compact = source.replace(/\s+/g, " ").trim();
+    return `<anonim filtre ${shortHash(source)}: ${compact.slice(0, 60)}>`;
+}
+
 /** Kaç aramada bir olay döngüsüne yer açılıp kalp atışı gönderilir. */
 const FIND_YIELD_EVERY = 20;
 
@@ -106,7 +129,7 @@ async function collectFinds(sink: Sink) {
                 if (typeof filter !== "function") continue;
                 const value = find(filter, { silent: true });
                 const id = findModuleId(filter, { silent: true });
-                const label = describeFilter(filter);
+                const label = stableFilterLabel(describeFilter(filter), filter);
                 out.push({ kind, label, moduleId: id == null ? null : String(id), shape: shapeOf(value), ok: value != null, envLimited: isEnvironmentLimitedLabel(label) });
             } catch (err) {
                 out.push({ kind, label: `${kind}: doğrulama hata verdi — ${String(err)}`, moduleId: null, shape: null, ok: false, envLimited: false });
