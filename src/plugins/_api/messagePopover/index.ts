@@ -15,10 +15,14 @@ export default definePlugin({
     required: true,
 
     patches: [{
-        find: "#{intl::MESSAGE_UTILITIES_A11Y_LABEL}",
+        // Anahtar artık bağlam menüsü modülünde de geçiyor; `),children` yalnız
+        // hover araç çubuğunun `aria-label`'ında (Vencord ile aynı).
+        find: "#{intl::MESSAGE_UTILITIES_A11Y_LABEL}),children",
         reason: "Mesaj hover düğmeleri, dışarıdan erişilemeyen yerel bir children dizisinde oluşturuluyor.",
         replacement: {
-            match: /(?<=\]\}\)),(.{0,40}togglePopout:.+?\}\))\]\}\):null,(?<=\((\i),\{label:.+?:null,(\i)\?\(0,\i\.jsxs?\)\(\i\.Fragment.+?message:(\i).+?)/,
+            // Düğme bileşeni artık modül üyesi (`x.y`) olarak çağrılıyor: `(\i\.\i|\i)`
+            // ikisini de kabul ediyor (Vencord ile aynı).
+            match: /(?<=\]\}\)),(.{0,40}togglePopout:.+?\}\))\]\}\):null,(?<=\((\i\.\i|\i),\{label:.+?:null,(\i)\?\(0,\i\.jsxs?\)\(\i\.Fragment.+?message:(\i).+?)/,
             replace: (_match, reactionButton, ButtonComponent, showReaction, message) =>
                 `]}):null,$self.build(${ButtonComponent},${message}),${showReaction}?${reactionButton}:null,`
         }
