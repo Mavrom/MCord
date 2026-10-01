@@ -17,7 +17,11 @@ export default definePlugin({
         find: "#{intl::ONBOARDING_COVER_WELCOME_SUBTITLE}",
         reason: "Karşılama ekranının sabit üç saniyelik gecikmesi yalnızca modül yüklenirken değiştirilebilir.",
         replacement: {
-            match: /(?<=setTimeout\([^,]{1,500},)3e3/,
+            // Geri çağırma artık virgüllü bir ok fonksiyonu (`()=>{a=!0,b()}`):
+            // `[^,]` gövdeyi aşamıyordu. Modülde tek `3e3` var (Vencord düz
+            // "3e3" kullanıyor); yanlış yere oturmasın diye yine setTimeout'un
+            // süre argümanına sabitliyoruz.
+            match: /(?<=setTimeout\(\(\)=>\{[^{}]{0,200}\},)3e3(?=\))/,
             replace: "0"
         }
     }]
