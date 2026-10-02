@@ -32,7 +32,7 @@ const style = `
 export default definePlugin({
     name: "BlurNSFW",
     description: "NSFW kanallarındaki görsel eklerini üzerine gelene kadar bulanıklaştırır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["gizlilik", "görünüm"],
     settings,
     managedStyle: style,

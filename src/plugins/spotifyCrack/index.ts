@@ -26,7 +26,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "SpotifyCrack",
     description: "Birlikte dinlemeyi açar, otomatik duraklatmayı ve idle gizlemeyi kontrol eder",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["spotify", "medya"],
     settings,
 

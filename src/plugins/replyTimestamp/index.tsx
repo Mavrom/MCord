@@ -15,7 +15,7 @@ function asDate(value: any): Date | null {
 export default definePlugin({
     name: "ReplyTimestamp",
     description: "Yanıtlanan mesaj önizlemesine tarih ve saat ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "görünüm"],
 
     patches: [{

@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoRoleIcons",
     description: "Mesajlardaki ve üye listesindeki rol simgelerini gizler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui"],
     requiresRestart: false,
 

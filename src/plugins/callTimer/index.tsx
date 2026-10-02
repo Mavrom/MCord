@@ -48,7 +48,7 @@ function Timer({ channelId }: { channelId?: string }) {
 export default definePlugin({
     name: "CallTimer",
     description: "Ses bağlantısı paneline geçen süre sayacı ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ses", "yardımcı"],
     settings,
 

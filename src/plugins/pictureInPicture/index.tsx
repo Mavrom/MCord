@@ -50,7 +50,7 @@ async function openPictureInPicture(event: MouseEvent<HTMLButtonElement>): Promi
 export default definePlugin({
     name: "PictureInPicture",
     description: "Video araçlarına pencere içinde pencere düğmesi ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["medya", "video"],
     settings,
 

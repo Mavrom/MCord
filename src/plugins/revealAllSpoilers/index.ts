@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "RevealAllSpoilers",
     description: "Ctrl+tıklamayla mesajdaki, Ctrl+Shift+tıklamayla sohbetteki tüm spoilerları açar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["erişilebilirlik", "mesaj"],
 
     patches: [{

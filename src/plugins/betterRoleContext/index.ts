@@ -85,7 +85,7 @@ const menu: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "BetterRoleContext",
     description: "Rol menüsüne düzenleme, renk kopyalama ve simge açma işlemleri ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["rol", "sunucu"],
     dependencies: ["ContextMenuAPI", "UserSettingsAPI"],
     settings,

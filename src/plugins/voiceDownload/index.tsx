@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "VoiceDownload",
     description: "Sesli mesaj oynatıcısına indirme bağlantısı ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ses", "medya"],
 
     patches: [{

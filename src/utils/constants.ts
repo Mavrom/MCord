@@ -6,9 +6,9 @@
 
 import type { Author } from "./types";
 
-/** Katkıda bulunanlar. `authors: [Devs.Berk]` şeklinde kullanılıyor. */
+/** Katkıda bulunanlar. `authors: [Devs.Mavrom]` şeklinde kullanılıyor. */
 export const Devs = Object.freeze({
-    Berk: { name: "Berk", id: 0n },
+    Mavrom: { name: "Mavrom", id: 0n },
     MCord: { name: "MCord", id: 0n }
 } satisfies Record<string, Author>);
 

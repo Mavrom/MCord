@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoModalBackdropBlur",
     description: "Modal arkaplanındaki bulanıklığı kaldırır (yalnızca karartma kalır)",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui","performans"],
     requiresRestart: false,
 

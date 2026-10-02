@@ -30,7 +30,7 @@ const HANG_STATUS = 6;
 export default definePlugin({
     name: "NoDefaultHangStatus",
     description: "Yeni 'takılıyor' (hang) durumunun otomatik seçilmesini engeller",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["gizlilik"],
     startAt: StartAt.WebpackReady,
     requiresRestart: false,

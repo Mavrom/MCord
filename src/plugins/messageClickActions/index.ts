@@ -70,7 +70,7 @@ function canDelete(isOwn: boolean, channel: any): boolean {
 export default definePlugin({
     name: "MessageClickActions",
     description: "Çift tıklamayla düzenleme/yanıtlama ve Backspace+tıklamayla silme",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "kısayol"],
     dependencies: ["MessageEventsAPI"],
     settings,

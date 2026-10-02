@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "HideMemberListButton",
     description: "Kanal başlığındaki üye listesi aç/kapa düğmesini gizler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui"],
     requiresRestart: false,
 

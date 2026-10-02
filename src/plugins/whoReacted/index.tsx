@@ -48,7 +48,7 @@ function Users({ message, emoji, type }: { message: any; emoji: any; type: numbe
 export default definePlugin({
     name: "WhoReacted",
     description: "Her reaksiyonun yanında reaksiyon veren kullanıcıların avatarlarını gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["reaksiyon", "görünüm"],
 
     patches: [{

@@ -25,7 +25,7 @@ function timestamp(id: string): number | null {
 export default definePlugin({
     name: "MessageLatency",
     description: "Gönderilmesi belirlenen eşikten uzun süren mesajlara gecikme göstergesi ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "yardımcı"],
     settings,
 

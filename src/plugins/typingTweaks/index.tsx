@@ -100,7 +100,7 @@ function renderTypingUsers(props: any, children: any): any {
 export default definePlugin({
     name: "TypingTweaks",
     description: "Yazma göstergesine avatar ve rol renkli kullanıcı adları ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["görünüm", "yazıyor"],
     settings,
 

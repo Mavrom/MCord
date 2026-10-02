@@ -26,7 +26,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "AlwaysTrust",
     description: "Bağlantı alan adı ve şüpheli dosya indirme onay pencerelerini atlar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["bağlantı", "kullanışlılık"],
     settings,
 

@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoNewThreadNotice",
     description: "Yeni konu (thread) oluşturuldu sistem mesajlarını gizler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui"],
     requiresRestart: false,
 

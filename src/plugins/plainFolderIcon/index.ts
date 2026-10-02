@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "PlainFolderIcon",
     description: "Sunucu klasörü simgelerini sade (Discord varsayılanı öncesi) haline getirir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui"],
     requiresRestart: false,
 

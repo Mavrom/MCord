@@ -16,7 +16,7 @@ const logger = new Logger("GifPaste", "#a6d189");
 export default definePlugin({
     name: "GifPaste",
     description: "GIF seçince anında göndermek yerine bağlantısını sohbet kutusuna ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["gif", "mesaj"],
 
     patches: [{

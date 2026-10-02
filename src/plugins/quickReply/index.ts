@@ -69,7 +69,7 @@ function keydown(event: KeyboardEvent): void {
 export default definePlugin({
     name: "QuickReply",
     description: "Ctrl+Yukarı/Aşağı ile yanıt, Ctrl+Shift+Yukarı/Aşağı ile düzenleme seçer",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "kısayol"],
     settings,
     requiresRestart: false,

@@ -43,7 +43,7 @@ const patch: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "PauseInvitesForever",
     description: "Sunucu menüsüne davetleri süresiz duraklatma seçeneği ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["sunucu", "davet"],
     dependencies: ["ContextMenuAPI"],
     requiresRestart: false,

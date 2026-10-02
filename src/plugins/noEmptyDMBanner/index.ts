@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoEmptyDmBanner",
     description: "Boş DM'lerdeki büyük tanıtım afişini küçültür",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui"],
     requiresRestart: false,
 

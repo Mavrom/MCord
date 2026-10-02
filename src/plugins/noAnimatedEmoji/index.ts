@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoAnimatedEmoji",
     description: "Hareketli emojileri durdurur (ilk kare)",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["performans","ui"],
     requiresRestart: false,
 

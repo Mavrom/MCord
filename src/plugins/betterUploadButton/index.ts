@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "BetterUploadButton",
     description: "Dosya yüklemeyi sol tıkla açar, ek seçenek menüsünü sağ tıkla gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["dosya", "kısayol"],
 
     patches: [{

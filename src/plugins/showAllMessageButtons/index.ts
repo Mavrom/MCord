@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "ShowAllMessageButtons",
     description: "Shift tuşuna gerek kalmadan tüm mesaj işlem düğmelerini gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "görünüm"],
 
     patches: [{

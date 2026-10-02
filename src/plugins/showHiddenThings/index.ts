@@ -44,7 +44,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "ShowHiddenThings",
     description: "İzinden bağımsız olarak gizli ve yalnız-moderatör öğelerini gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["sunucu", "gelistirici"],
     settings,
     requiresRestart: true,

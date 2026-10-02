@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "ImageLink",
     description: "Tek başına gönderilen görsel bağlantısını embed oluşsa bile görünür tutar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["medya", "bağlantı"],
 
     patches: [{

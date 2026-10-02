@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoNowPlayingCard",
     description: "Kullanıcı panelindeki 'şimdi çalıyor' Spotify kartını gizler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui"],
     requiresRestart: false,
 

@@ -19,7 +19,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "ImageFilename",
     description: "Görsellerin üzerine gelince dosya adını araç ipucu olarak gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["medya", "kullanışlılık"],
     settings,
 

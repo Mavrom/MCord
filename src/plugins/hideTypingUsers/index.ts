@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "HideTypingUsers",
     description: "'... yazıyor' göstergesindeki kullanıcı adlarını gizler, sadece '.. yazıyor' kalır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui", "gizlilik"],
     requiresRestart: false,
 

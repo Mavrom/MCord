@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "HideVoiceActivity",
     description: "Sunucu ve DM listelerinde ’oyun oynuyor / dinliyor’ göstergelerini gizler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui","gizlilik"],
     requiresRestart: false,
 

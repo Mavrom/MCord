@@ -61,7 +61,7 @@ const messageMenu: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "GreetStickerPicker",
     description: "Katılım mesajında rastgele seçim yerine istediğin karşılama çıkartmasını gönderir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["çıkartma", "sunucu"],
     dependencies: ["ContextMenuAPI"],
     contextMenus: { message: messageMenu },

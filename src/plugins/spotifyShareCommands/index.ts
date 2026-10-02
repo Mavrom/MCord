@@ -36,7 +36,7 @@ const commands = [
 export default definePlugin({
     name: "SpotifyShareCommands",
     description: "Dinlenen Spotify parçası, albümü veya sanatçısını komutla paylaşır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["spotify", "komut"],
     dependencies: ["CommandsAPI"],
     commands

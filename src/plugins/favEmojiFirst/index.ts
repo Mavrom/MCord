@@ -13,7 +13,7 @@ const EmojiStore = findStoreLazy("EmojiStore");
 export default definePlugin({
     name: "FavoriteEmojiFirst",
     description: "Emoji otomatik tamamlamasında favori emojileri listenin başına taşır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["emoji", "kullanışlılık"],
 
     patches: [

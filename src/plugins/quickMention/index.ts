@@ -46,7 +46,7 @@ const patch: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "QuickMention",
     description: "Mesaj menüsünden yazara hızlıca bahsetmeyi sağlar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "kalite-yasam"],
     dependencies: ["ContextMenuAPI"],
     requiresRestart: false,

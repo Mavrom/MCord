@@ -29,7 +29,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "NoReplyMention",
     description: "Bir mesaja yanıt verirken karşı tarafı varsayılan olarak etiketlemez",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "gizlilik"],
     settings,
     requiresRestart: true,

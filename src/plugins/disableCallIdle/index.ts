@@ -19,7 +19,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "DisableCallIdle",
     description: "Aramada hareketsiz kalınca otomatik atılma/AFK kanalına taşınmayı engeller",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ses"],
     requiresRestart: true,
 

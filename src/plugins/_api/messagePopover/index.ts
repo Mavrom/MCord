@@ -11,7 +11,7 @@ import { definePlugin } from "../../../utils/types";
 export default definePlugin({
     name: "MessagePopoverAPI",
     description: "Plugin'lerin mesaj hover araç çubuğuna düğme eklemesini sağlar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     required: true,
 
     patches: [{

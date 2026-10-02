@@ -42,7 +42,7 @@ function reset(): void {
 export default definePlugin({
     name: "ImageZoom",
     description: "Ctrl+fare tekeriyle Discord görsellerini imleç çevresinde yakınlaştırır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["medya", "erişilebilirlik"],
     settings,
     requiresRestart: false,

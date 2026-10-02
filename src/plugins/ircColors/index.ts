@@ -28,7 +28,7 @@ function colorFor(id: string | undefined): string | undefined {
 export default definePlugin({
     name: "IrcColors",
     description: "IRC istemcilerindeki gibi kullanıcılara kimliğinden sabit ve benzersiz ad rengi verir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["görünüm", "renk"],
     settings,
 

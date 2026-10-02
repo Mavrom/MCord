@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "ILoveSpam",
     description: "Discord'un 'muhtemel spamcı' işaretli mesajları gizlemesini engeller",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "görünürlük"],
 
     patches: [{

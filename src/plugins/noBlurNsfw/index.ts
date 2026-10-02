@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoBlurNsfw",
     description: "Spoiler ve NSFW ekli görsellerdeki bulanıklığı kaldırır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["medya"],
     requiresRestart: false,
 

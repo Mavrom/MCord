@@ -166,7 +166,7 @@ function MentionWrapper({ data, UserMention, RoleMention, parse, props }: Mentio
 export default definePlugin({
     name: "ValidUser",
     description: "Önbellekte olmayan kullanıcıların bahsetmeleri '<@id>' olarak görünmesin (düzeltmek için bahsetmenin üstüne gel)",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["bahsetme", "düzeltme"],
 
     patches: [

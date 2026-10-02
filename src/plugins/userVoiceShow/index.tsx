@@ -104,7 +104,7 @@ function VoiceIndicator({ userId, small }: { userId: string; small?: boolean }) 
 export default definePlugin({
     name: "UserVoiceShow",
     description: "Bir kullanıcının hangi ses kanalında olduğunu isim yanında etiket olarak gösterir; tıklayınca kanalı açar (sese katılmaz)",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ses", "mesaj", "görünüm"],
     dependencies: ["MessageDecorationsAPI", "MemberListDecoratorsAPI"],
     settings,

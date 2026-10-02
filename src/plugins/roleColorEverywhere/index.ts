@@ -19,7 +19,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "RoleColorEverywhere",
     description: "Kullanıcının en üst rol rengini bahsetmelere ve ses listesine uygular",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["rol", "görünüm"],
     settings,
 

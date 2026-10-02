@@ -29,3 +29,6 @@ codebase-map.md
 scanner/
 # scanner baseline'ının atomik yazım ara dosyası
 baselines/*.tmp
+
+# yerel plan/tasarım notları (GitHub'a gitmez)
+docs/

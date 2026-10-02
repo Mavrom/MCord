@@ -42,7 +42,7 @@ function closeTransientUi(): void {
 export default definePlugin({
     name: "CrashHandler",
     description: "Discord beklenmeyen hata ekranına düştüğünde açık katmanları kapatıp bir kez toparlanmayı dener",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["güvenilirlik", "yardımcı"],
     settings,
 

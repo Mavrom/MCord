@@ -32,7 +32,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "SuperReactionTweaks",
     description: "Süper Reaksiyon varsayılanını ve eşzamanlı animasyon sınırını özelleştirir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["reaksiyon", "emoji"],
     settings,
 

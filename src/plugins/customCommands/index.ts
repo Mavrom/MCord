@@ -106,7 +106,7 @@ const managementCommands: Command[] = [
 export default definePlugin({
     name: "CustomCommands",
     description: "Kalıcı ve argüman destekli özel slash komutları oluşturur",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["komut", "özelleştirme"],
     dependencies: ["CommandsAPI"],
     commands: managementCommands,

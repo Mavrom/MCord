@@ -63,7 +63,7 @@ const commands: Command[] = [
 export default definePlugin({
     name: "FriendInvites",
     description: "Eğik çizgi komutlarıyla arkadaş davetlerini oluşturur ve yönetir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["arkadaşlar", "komut"],
     dependencies: ["CommandsAPI"],
     commands

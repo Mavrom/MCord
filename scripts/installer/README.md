@@ -71,5 +71,3 @@ pnpm --filter mcord-installer package    # + pkg → dist/MCordInstaller.exe
 | Dosya kilidi | Discord açıkken `app.asar` kilitli; `tasklist`/`taskkill` ile kontrollü kapatma |
 | `pkg` + ESM | `pkg` dinamik `import`/top-level await'i çalıştıramaz → önce esbuild ile tek CJS'e bundle edilir |
 | Antivirüs | İmzasız binary yanlış pozitif verebilir; release'de imzalama adımı (sertifika varsa) + `SHA256SUMS.txt` |
-
-Elle QA: [`docs/installer-manual-qa.md`](../../docs/installer-manual-qa.md)

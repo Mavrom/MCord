@@ -20,7 +20,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "NotificationVolume",
     description: "Bildirim sesleri için ana çıkıştan ayrı ses düzeyi belirler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["bildirim", "ses"],
     settings,
 

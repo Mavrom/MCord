@@ -80,7 +80,7 @@ const patch: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "CopyEmojiMarkdown",
     description: "Emoji menüsüne Discord markdown biçimini kopyalama seçeneği ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["emoji", "kalite-yasam"],
     dependencies: ["ContextMenuAPI"],
     requiresRestart: false,

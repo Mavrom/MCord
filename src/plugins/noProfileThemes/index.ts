@@ -11,7 +11,7 @@ import { UserStore } from "../../webpack/common";
 export default definePlugin({
     name: "NoProfileThemes",
     description: "Kendi profilin dışında Nitro profil temalarını devre dışı bırakır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["profil", "görünüm"],
 
     patches: [{

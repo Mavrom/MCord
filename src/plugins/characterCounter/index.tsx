@@ -27,7 +27,7 @@ function counterColor(ratio: number): string {
 export default definePlugin({
     name: "CharacterCounter",
     description: "Sohbet kutusuna kullanılan ve azami karakter sayısını ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "yardımcı"],
     settings,
 

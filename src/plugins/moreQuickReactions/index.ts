@@ -20,7 +20,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "MoreQuickReactions",
     description: "Mesaj hızlı reaksiyon menüsünde gösterilen emoji sayısını artırır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["reaksiyon", "emoji"],
     settings,
 

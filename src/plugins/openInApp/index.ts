@@ -33,7 +33,7 @@ function nativeUrl(url: string): string | null {
 export default definePlugin({
     name: "OpenInApp",
     description: "Desteklenen müzik ve mağaza bağlantılarını ilgili Windows uygulamasında açar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["bağlantı", "windows"],
     settings,
 

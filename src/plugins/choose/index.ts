@@ -23,7 +23,7 @@ const commands: Command[] = [{
 export default definePlugin({
     name: "Choose",
     description: "`/choose` — Verilenlerden birini rastgele seç (virgülle ayır)",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["komut"],
     dependencies: ["CommandsAPI"],
     commands

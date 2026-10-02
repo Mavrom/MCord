@@ -30,7 +30,7 @@ const command: Command = {
 export default definePlugin({
     name: "StartupTimings",
     description: "MCord başlangıç ölçümlerini /startup-timings komutuyla raporlar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["geliştirici", "performans"],
     dependencies: ["CommandsAPI"],
     commands: [command]

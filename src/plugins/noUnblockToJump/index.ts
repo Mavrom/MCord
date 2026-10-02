@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoUnblockToJump",
     description: "Engellenen veya yok sayılan kullanıcıların mesajlarına engeli kaldırmadan atlar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "kullanışlılık"],
 
     patches: [{

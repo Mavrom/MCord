@@ -13,7 +13,7 @@ const clicks = new Map<string, ReturnType<typeof setTimeout>>();
 export default definePlugin({
     name: "VoiceChatDoubleClick",
     description: "Ses ve sahne kanallarına tek tık yerine çift tıkla katılır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ses", "kısayol"],
 
     patches: [

@@ -42,7 +42,7 @@ const streamMenu: ContextMenuPatch = (children, props) => addPreview(children, p
 export default definePlugin({
     name: "BiggerStreamPreview",
     description: "Kullanıcı ve yayın menüsünden yayın önizlemesini büyük açar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["yayın", "medya"],
     dependencies: ["ContextMenuAPI"],
     requiresRestart: false,

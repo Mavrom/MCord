@@ -86,7 +86,7 @@ const pickerPatch: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "CopyStickerLinks",
     description: "Çıkartma menülerine bağlantıyı kopyalama ve açma seçenekleri ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["emoji", "kalite-yasam"],
     dependencies: ["ContextMenuAPI"],
     requiresRestart: false,

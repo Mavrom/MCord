@@ -84,7 +84,7 @@ const ReadAllButton = () => (
 export default definePlugin({
     name: "ReadAllNotificationsButton",
     description: "Tüm sunucu bildirimlerini tek düğmeyle okundu işaretler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["bildirim", "kısayol"],
     dependencies: ["ServerListAPI"],
     // ServerListAPI kod patch'i host'u memoize'lediği için canlı toggle'da

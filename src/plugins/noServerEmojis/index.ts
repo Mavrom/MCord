@@ -23,7 +23,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "NoServerEmojis",
     description: "Emoji otomatik tamamlamasında diğer sunucuların emojilerini gizler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["emoji", "sunucu"],
     settings,
 

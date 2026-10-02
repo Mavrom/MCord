@@ -67,7 +67,7 @@ const groupMenu: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "ViewIcons",
     description: "Kullanıcı, sunucu ve grup menülerinden simge ve avatarları tam boy açar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["medya", "görünüm"],
     dependencies: ["ContextMenuAPI"],
     settings,

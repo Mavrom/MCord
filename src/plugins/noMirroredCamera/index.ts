@@ -22,7 +22,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoMirroredCamera",
     description: "Kendi kamera önizlemenin ayna (yatay çevrilmiş) gösterimini kapatır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ses"],
 
     patches: [

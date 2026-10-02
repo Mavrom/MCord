@@ -36,7 +36,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "OnePingPerDM",
     description: "Okunmamış bir özel mesaj dizisi için yalnızca ilk bildirim sesini çalar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["bildirim", "dm"],
     settings,
 

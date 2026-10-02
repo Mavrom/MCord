@@ -29,7 +29,7 @@ const menu: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "ReverseImageSearch",
     description: "Görsel menülerine Google Lens, Yandex, SauceNAO ve TinEye araması ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["medya", "arama"],
     dependencies: ["ContextMenuAPI"],
     requiresRestart: false,

@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoSystemBadge",
     description: "Görev çubuğu ve sistem tepsisi okunmamış bildirim rozetini kapatır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["bildirim", "windows"],
 
     patches: [{

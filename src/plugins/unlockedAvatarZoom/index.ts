@@ -21,7 +21,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "UnlockedAvatarZoom",
     description: "Avatar kırpma aracında daha fazla yakınlaştırmaya izin verir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["avatar", "medya"],
     settings,
 

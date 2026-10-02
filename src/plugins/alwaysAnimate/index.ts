@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "AlwaysAnimate",
     description: "Animasyon destekleyen avatar, emoji, rol ve profil öğelerini sürekli oynatır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["animasyon", "görünüm"],
 
     patches: [

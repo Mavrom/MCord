@@ -70,7 +70,7 @@ const menu: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "NewGuildSettings",
     description: "Katıldığın yeni sunuculara seçtiğin bildirim ve susturma ayarlarını otomatik uygular",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["sunucu", "bildirim"],
     dependencies: ["ContextMenuAPI"],
     startAt: StartAt.ConnectionOpen,

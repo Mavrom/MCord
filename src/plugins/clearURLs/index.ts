@@ -27,7 +27,7 @@ function scrub(message: MessageObject): void {
 export default definePlugin({
     name: "ClearURLs",
     description: "Gönderdiğin bağlantılardan izleme parametrelerini (utm_*, fbclid, si …) siler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["gizlilik", "mesaj"],
     settings,
     dependencies: ["MessageEventsAPI"],

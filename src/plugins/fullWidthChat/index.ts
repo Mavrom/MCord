@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "FullWidthChat",
     description: "Sohbeti pencere genişliğine yayar (maksimum genişlik sınırını kaldırır)",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui"],
     requiresRestart: false,
 

@@ -12,7 +12,7 @@ import { unindent } from "./unindent";
 export default definePlugin({
     name: "Unindent",
     description: "Çok satırlı mesajlardaki gereksiz baştaki girintiyi gönderirken kaldırır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "kalite-yasam"],
     dependencies: ["MessageEventsAPI"],
     requiresRestart: false,

@@ -19,7 +19,7 @@ const commands: Command[] = [{
 export default definePlugin({
     name: "Timestamp",
     description: "`/now` — Discord dinamik zaman damgası ekle",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["komut"],
     dependencies: ["CommandsAPI"],
     commands

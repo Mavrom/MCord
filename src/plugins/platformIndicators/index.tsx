@@ -187,7 +187,7 @@ for (const platform of Object.keys(ICON_PATHS)) {
 export default definePlugin({
     name: "PlatformIndicators",
     description: "Kullanıcının Discord'a masaüstü, mobil, web veya konsoldan bağlı olduğunu durum renginde gösterir (mesaj, DM, üye listesi, profil)",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["görünüm", "durum"],
     dependencies: ["MemberListDecoratorsAPI", "MessageDecorationsAPI", "BadgesAPI"],
     settings,

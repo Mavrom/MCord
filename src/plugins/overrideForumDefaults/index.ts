@@ -30,7 +30,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "OverrideForumDefaults",
     description: "Forum kanallarının varsayılan düzen ve sıralamasını değiştirir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["forum", "sunucu"],
     settings,
 

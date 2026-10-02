@@ -39,7 +39,7 @@ function Indicator({ channelId }: { channelId: string }) {
 export default definePlugin({
     name: "TypingIndicator",
     description: "Kanal listesinde biri yazarken hareketli olmayan bir gösterge gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["bildirim", "görünüm"],
     settings,
 

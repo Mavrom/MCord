@@ -40,7 +40,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "NoBlockedMessages",
     description: "Engellenen kullanıcıların mesajlarını ('X engellenmiş mesaj' ayıracı dahil) tamamen gizler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["gizlilik"],
     settings,
     requiresRestart: true,

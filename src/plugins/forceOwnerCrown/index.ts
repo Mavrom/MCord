@@ -11,7 +11,7 @@ import { GuildStore } from "../../webpack/common";
 export default definePlugin({
     name: "ForceOwnerCrown",
     description: "Büyük sunucularda da sunucu sahibinin taç simgesini gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["rol", "sunucu"],
 
     patches: [{

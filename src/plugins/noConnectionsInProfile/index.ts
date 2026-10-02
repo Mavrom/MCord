@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "HideProfileConnections",
     description: "Kullanıcı profilindeki bağlı hesaplar bölümünü gizler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["gizlilik","ui"],
     requiresRestart: false,
 

@@ -101,7 +101,7 @@ const pickerMenu: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "ExpressionCloner",
     description: "Emoji ve çıkartmaları sağ tıklayıp sahibi ya da yetkin olduğun bir sunucuya klonlar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["emoji", "çıkartma", "sunucu"],
     dependencies: ["ContextMenuAPI"],
     requiresRestart: false,

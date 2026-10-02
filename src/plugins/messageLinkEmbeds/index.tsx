@@ -42,7 +42,7 @@ function Embed({ content }: { content: string }) {
 export default definePlugin({
     name: "MessageLinkEmbeds",
     description: "Discord mesaj bağlantılarının altına bağlı mesajın kısa önizlemesini ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "görünüm"],
     dependencies: ["MessageAccessoriesAPI"],
     messageAccessoryPosition: 4,

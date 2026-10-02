@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoDrawerBlur",
     description: "Menü ve çekmece arkasındaki bulanıklık efektini kaldırır (performans)",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui", "performans"],
     requiresRestart: false,
 

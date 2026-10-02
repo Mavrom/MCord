@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoSuggestedFriends",
     description: "Arkadaş listesindeki 'önerilen' bölümünü gizler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui","gizlilik"],
     requiresRestart: false,
 

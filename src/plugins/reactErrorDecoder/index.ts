@@ -15,7 +15,7 @@ let messages: Record<string, string> | null = null;
 export default definePlugin({
     name: "ReactErrorDecoder",
     description: "Minify edilmiş React hata kodlarını okunabilir hata metnine dönüştürür",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["geliştirici", "hata"],
 
     patches: [{

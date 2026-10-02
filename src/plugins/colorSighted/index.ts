@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "ColorSighted",
     description: "Durum simgelerindeki renk körlüğü şekillerini kaldırıp yalnızca renkleri kullanır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["görünüm", "durum"],
 
     patches: [

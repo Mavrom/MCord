@@ -16,7 +16,7 @@ const KEY = "mcord-last-channel";
 export default definePlugin({
     name: "KeepCurrentChannel",
     description: "Discord'u yeniden başlattığında en son açık olduğun kanala geri döner",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["kalite-yasam"],
     startAt: StartAt.ConnectionOpen,
 

@@ -53,7 +53,7 @@ function Countdown({ deadline }: { deadline: number }) {
 export default definePlugin({
     name: "ShowTimeoutDuration",
     description: "Zaman aşımı simgesinin yanında kalan süreyi gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["sunucu", "yardımcı"],
 
     patches: [{

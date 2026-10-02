@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "StickerPaste",
     description: "Sticker seçince anında göndermek yerine sohbet kutusuna ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["sticker", "mesaj"],
 
     patches: [{

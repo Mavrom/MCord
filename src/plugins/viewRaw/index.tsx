@@ -54,7 +54,7 @@ function menu(field: string): ContextMenuPatch {
 export default definePlugin({
     name: "ViewRaw",
     description: "Mesaj, kanal, sunucu ve kullanıcıların ham verisini açar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["geliştirici", "mesaj"],
     dependencies: ["ContextMenuAPI", "MessagePopoverAPI"],
     requiresRestart: false,

@@ -33,7 +33,7 @@ function enhanceDescription(props: any, description: any): any {
 export default definePlugin({
     name: "BetterSessions",
     description: "Cihazlar sayfasındaki oturumlara kesin son kullanım zamanı ve istemci ayrıntısı ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["güvenlik", "ayarlar"],
 
     patches: [{

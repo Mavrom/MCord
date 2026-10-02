@@ -16,7 +16,7 @@ function pauseOnF8(event: KeyboardEvent): void {
 export default definePlugin({
     name: "F8Break",
     description: "Geliştirici araçları açıkken F8 ile istemci yürütmesini duraklatır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["geliştirici", "kısayol"],
     requiresRestart: false,
 

@@ -17,7 +17,7 @@ const style = ".mcord-mention-avatar{width:1em!important;height:1em;border-radiu
 export default definePlugin({
     name: "MentionAvatars",
     description: "Kullanıcı bahsetmelerinin içine küçük avatar ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["görünüm", "bahsetme"],
     settings,
     managedStyle: style,

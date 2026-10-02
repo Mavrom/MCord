@@ -34,7 +34,7 @@ function PreviewButton(props: Record<string, any>) {
 export default definePlugin({
     name: "PreviewMessage",
     description: "Göndermeden önce taslak mesajı ayrı bir önizlemede açar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "yardımcı"],
     dependencies: ["ChatComponentsAPI"],
     requiresRestart: false,

@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "BetterGifPicker",
     description: "GIF seçicisini varsayılan olarak Favoriler kategorisinde açar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["gif", "kullanışlılık"],
 
     patches: [{

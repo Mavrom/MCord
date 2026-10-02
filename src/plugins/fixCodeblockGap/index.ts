@@ -12,7 +12,7 @@ const CODE_BLOCK_PATTERN = String.raw`/^${"```"}(?:([a-z0-9_+\-.#]+?)\n)?\n*([^\
 export default definePlugin({
     name: "FixCodeblockGap",
     description: "Kod bloklarıyla altındaki metin arasındaki gereksiz boşluğu kaldırır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["görünüm", "mesaj"],
 
     patches: [{

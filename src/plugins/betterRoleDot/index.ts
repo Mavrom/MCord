@@ -28,7 +28,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "BetterRoleDot",
     description: "Rol rengini kopyalar ve rol noktasıyla renkli adı birlikte gösterebilir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["rol", "görünüm"],
     settings,
 

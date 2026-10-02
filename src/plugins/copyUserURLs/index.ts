@@ -34,7 +34,7 @@ const patch: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "CopyUserURLs",
     description: "Kullanıcı menüsüne Discord profil bağlantısını kopyalama seçeneği ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui", "kalite-yasam"],
     dependencies: ["ContextMenuAPI"],
     requiresRestart: false,

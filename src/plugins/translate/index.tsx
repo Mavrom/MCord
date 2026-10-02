@@ -50,7 +50,7 @@ function TranslateIcon() {
 export default definePlugin({
     name: "Translate",
     description: "Mesajları Google Translate ile çevirir ve isteğe bağlı olarak gönderileni çevrilmiş yollar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "çeviri"],
     dependencies: ["ContextMenuAPI", "MessageAccessoriesAPI", "MessagePopoverAPI", "MessageUpdaterAPI"],
     settings,

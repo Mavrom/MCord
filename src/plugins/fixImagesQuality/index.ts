@@ -21,7 +21,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "FixImagesQuality",
     description: "Ek görsellerini daha yüksek veya özgün çözünürlükte yükler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["medya", "kalite"],
     settings,
 

@@ -23,7 +23,7 @@ const commands: Command[] = [{
 export default definePlugin({
     name: "RateThis",
     description: "`/rate` — Bir şeye 0-100 arası (deterministik) puan ver",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["komut"],
     dependencies: ["CommandsAPI"],
     commands

@@ -43,7 +43,7 @@ function Count() {
 export default definePlugin({
     name: "MemberCount",
     description: "Üye listesinin üstünde çevrimiçi ve toplam sunucu üyesi sayısını gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["sunucu", "bilgi"],
 
     patches: [{

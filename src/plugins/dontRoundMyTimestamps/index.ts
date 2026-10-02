@@ -16,7 +16,7 @@ let previousRounding: ((value: number) => number) | undefined;
 export default definePlugin({
     name: "DontRoundMyTimestamps",
     description: "Göreli zamanları en yakın sayıya değil aşağı doğru yuvarlar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["görünüm", "zaman"],
     requiresRestart: false,
 

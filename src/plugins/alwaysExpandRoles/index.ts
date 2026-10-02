@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "AlwaysExpandRoles",
     description: "Profil açılır pencerelerindeki rol listesini daima açık gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["rol", "profil"],
 
     patches: [{

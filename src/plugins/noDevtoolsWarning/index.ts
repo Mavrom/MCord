@@ -15,7 +15,7 @@ import { definePlugin, StartAt } from "../../utils/types";
 export default definePlugin({
     name: "NoDevtoolsWarning",
     description: "Geliştirici konsolundaki 'Dur!' self-XSS uyarısını kaldırır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["gelistirici"],
     startAt: StartAt.Init,
     requiresRestart: false,

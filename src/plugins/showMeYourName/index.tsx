@@ -25,7 +25,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "ShowMeYourName",
     description: "Mesajlarda kullanıcı adı ile sunucu takma adını birlikte gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["görünüm", "mesaj"],
     settings,
 

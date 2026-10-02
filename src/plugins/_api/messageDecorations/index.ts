@@ -16,7 +16,7 @@ const style = `
 export default definePlugin({
     name: "MessageDecorationsAPI",
     description: "Plugin'lerin mesaj yazar adının yanına dekorasyon eklemesini sağlar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     required: true,
     managedStyle: style,
 

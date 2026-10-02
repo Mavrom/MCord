@@ -46,7 +46,7 @@ function setActive(value: boolean): void {
 export default definePlugin({
     name: "SilentMessage",
     description: "Mesajı bildirim göndermeden (@silent) yollamak için sohbet çubuğuna düğme ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "gizlilik"],
     settings,
     dependencies: ["MessageEventsAPI", "ChatComponentsAPI"],

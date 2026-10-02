@@ -34,7 +34,7 @@ function MediaIcon() {
 export default definePlugin({
     name: "HideAttachments",
     description: "Seçilen mesajların eklerini, gömmelerini, çıkartmalarını ve bileşenlerini gizler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "görünüm"],
     dependencies: ["MessageAccessoriesAPI", "MessagePopoverAPI", "MessageUpdaterAPI"],
 

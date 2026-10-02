@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoModalAnimation",
     description: "Modal ve pop-out açılış/kapanış animasyonlarını kaldırır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui", "performans"],
     requiresRestart: false,
 

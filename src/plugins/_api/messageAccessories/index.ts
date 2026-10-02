@@ -11,7 +11,7 @@ import { definePlugin } from "../../../utils/types";
 export default definePlugin({
     name: "MessageAccessoriesAPI",
     description: "Plugin'lerin mesaj gövdesinin altına aksesuar eklemesini sağlar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     required: true,
 
     patches: [{

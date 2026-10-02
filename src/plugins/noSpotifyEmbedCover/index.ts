@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoSpotifyEmbedCover",
     description: "Spotify yerleşik oynatıcısını daralt: sadece kontroller",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui", "medya"],
     requiresRestart: false,
 

@@ -38,7 +38,7 @@ const patch: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "ServerInfo",
     description: "Sunucu menüsünden kimlik, sahip, üye sayısı ve oluşturulma bilgisini gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["sunucu", "bilgi"],
     dependencies: ["ContextMenuAPI"],
     requiresRestart: false,

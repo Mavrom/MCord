@@ -38,7 +38,7 @@ async function updateStatus(value: string): Promise<void> {
 export default definePlugin({
     name: "AutoDNDWhilePlaying",
     description: "Oyun açıldığında seçilen çevrimiçi duruma geçer, oyun kapanınca önceki durumu geri yükler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["aktivite", "durum"],
     dependencies: ["UserSettingsAPI"],
     settings,

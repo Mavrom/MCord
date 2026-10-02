@@ -38,7 +38,7 @@ const commands: Command[] = [{
 export default definePlugin({
     name: "UrbanDictionary",
     description: "`/urban` — Urban Dictionary tanımı getirir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["komut"],
     dependencies: ["CommandsAPI"],
     commands

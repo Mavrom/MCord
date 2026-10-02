@@ -50,7 +50,7 @@ function Controls() {
 export default definePlugin({
     name: "SpotifyControls",
     description: "Sohbet çubuğuna Spotify önceki, oynat/duraklat ve sonraki denetimleri ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["spotify", "medya"],
     dependencies: ["ChatComponentsAPI"],
     requiresRestart: false,

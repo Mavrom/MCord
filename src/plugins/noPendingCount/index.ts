@@ -34,7 +34,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "NoPendingCount",
     description: "Arkadaşlık, mesaj isteği ve Nitro tekliflerinin kırmızı sayaçlarını gizler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["bildirim", "görünüm"],
     settings,
 

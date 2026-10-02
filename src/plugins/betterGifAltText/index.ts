@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "BetterGifAltText",
     description: "GIF alternatif metnine dosya adından okunabilir bir açıklama ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["erişilebilirlik", "medya"],
 
     patches: [

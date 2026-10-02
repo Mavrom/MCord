@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoOnboardingDelay",
     description: "Sunucu karşılama ekranındaki yapay bekleme süresini kaldırır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["sunucu", "hız"],
 
     patches: [{

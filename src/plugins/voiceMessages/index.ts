@@ -115,7 +115,7 @@ const menu: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "VoiceMessages",
     description: "Dosya yükleme menüsünden Ogg/Opus ses dosyalarını Discord sesli mesajı olarak gönderir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ses", "mesaj"],
     dependencies: ["ContextMenuAPI"],
     requiresRestart: false,

@@ -148,7 +148,7 @@ const MANAGED_STYLE = `
 export default definePlugin({
     name: "GameActivityToggle",
     description: "Mikrofon ve kulaklık düğmelerinin yanına oyun etkinliği paylaşımını açıp kapatan bir düğme ekler. Sağ tıkla Spotify etkinliğini değiştir.",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["aktivite", "kısayol"],
     dependencies: ["UserSettingsAPI"],
     settings,

@@ -22,7 +22,7 @@ const patch: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "CopyMessageText",
     description: "Bağlam menüsüne kopyalama seçeneği ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui", "kalite-yasam"],
     dependencies: ["ContextMenuAPI"],
     requiresRestart: false,

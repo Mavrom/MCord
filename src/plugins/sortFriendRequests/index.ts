@@ -11,7 +11,7 @@ import { RelationshipStore } from "../../webpack/common";
 export default definePlugin({
     name: "SortFriendRequests",
     description: "Gelen ve giden arkadaşlık isteklerini tarihe göre sıralar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["arkadaşlar", "düzen"],
 
     patches: [{

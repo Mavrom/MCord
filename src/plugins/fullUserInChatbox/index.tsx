@@ -14,7 +14,7 @@ const UserMention = findByCodeLazy(".USER_MENTION)");
 export default definePlugin({
     name: "FullUserInChatbox",
     description: "Sohbet kutusundaki kullanıcı bahsetmelerine profil ve bağlam menüsü davranışı kazandırır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["bahsetme", "kısayol"],
 
     patches: [{

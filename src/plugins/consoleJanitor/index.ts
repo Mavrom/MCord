@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "ConsoleJanitor",
     description: "Discord konsolundaki tekrarlanan ve işlevsiz uyarıları susturur",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["geliştirici", "konsol"],
 
     patches: [

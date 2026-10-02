@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoMosaic",
     description: "Birden fazla resmi ızgara (mozaik) yerine ayrı ayrı gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ui", "medya"],
     requiresRestart: false,
 

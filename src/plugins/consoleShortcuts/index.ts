@@ -31,7 +31,7 @@ function defineShortcut(name: string, value: unknown, getter = false): void {
 export default definePlugin({
     name: "ConsoleShortcuts",
     description: "Discord geliştirici konsoluna sık kullanılan MCord ve webpack kısayollarını ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["geliştirici", "konsol"],
 
     start() {

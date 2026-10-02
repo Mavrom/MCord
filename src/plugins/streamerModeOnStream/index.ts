@@ -17,7 +17,7 @@ function setStreamerMode(event: any, enabled: boolean): void {
 export default definePlugin({
     name: "StreamerModeOnStream",
     description: "Discord'da yayın başlatınca yayıncı modunu otomatik açar, bitince kapatır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["gizlilik", "yayın"],
     requiresRestart: false,
 

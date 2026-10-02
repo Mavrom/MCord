@@ -47,7 +47,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "LoadingQuotes",
     description: "Discord yükleme ekranına MCord ve kişisel sözler ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["görünüm"],
     settings,
 

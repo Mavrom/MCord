@@ -34,7 +34,7 @@ function CopyButton({ fileContents, bytesLeft = 0 }: { fileContents?: string; by
 export default definePlugin({
     name: "CopyFileContents",
     description: "Metin dosyası önizlemelerine içeriği kopyalama düğmesi ekler",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["dosya", "yardımcı"],
 
     patches: [{

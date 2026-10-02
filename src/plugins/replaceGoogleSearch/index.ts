@@ -59,7 +59,7 @@ const patch: ContextMenuPatch = children => {
 export default definePlugin({
     name: "ReplaceGoogleSearch",
     description: "Seçili metin için Google menü öğesini seçtiğin arama motoruyla değiştirir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["arama", "kullanışlılık"],
     dependencies: ["ContextMenuAPI"],
     settings,

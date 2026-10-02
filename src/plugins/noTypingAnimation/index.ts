@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoTypingAnimation",
     description: "Yazıyor göstergesindeki hareketli üç nokta animasyonunu durdurur",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["performans", "görünüm"],
 
     patches: [{

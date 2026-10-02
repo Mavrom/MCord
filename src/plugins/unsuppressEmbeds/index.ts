@@ -54,7 +54,7 @@ const patchMenu: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "UnsuppressEmbeds",
     description: "Mesaj menüsünden gömülü içerikleri gizler veya yeniden gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "medya"],
     dependencies: ["ContextMenuAPI"],
     requiresRestart: false,

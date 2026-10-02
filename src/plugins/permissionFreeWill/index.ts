@@ -26,7 +26,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "PermissionFreeWill",
     description: "Kanal izin düzenleyicisindeki istemci tarafı koruma engellerini kaldırır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["izin", "sunucu"],
     settings,
 

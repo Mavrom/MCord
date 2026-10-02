@@ -50,7 +50,7 @@ const userMenu: ContextMenuPatch = (children, props) => {
 export default definePlugin({
     name: "PermissionsViewer",
     description: "Kanal izin bit alanını ve kullanıcının sunucu rollerini menüden gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["izin", "sunucu"],
     dependencies: ["ContextMenuAPI"],
     requiresRestart: false,

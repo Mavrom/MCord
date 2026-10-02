@@ -14,7 +14,7 @@ const localRemovals = new Set<string>();
 export default definePlugin({
     name: "RelationshipNotifier",
     description: "Bir arkadaş, grup konuşması veya sunucu seni kaldırdığında bildirim gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["arkadaşlar", "bildirim"],
 
     patches: [

@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoF1",
     description: "F1 tuşunun Discord yardım sayfasını açmasını engeller",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["kısayol"],
 
     patches: [{

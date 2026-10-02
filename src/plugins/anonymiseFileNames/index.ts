@@ -34,7 +34,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "AnonymiseFileNames",
     description: "Yüklenen dosyaların özgün adını göndermeden önce anonimleştirir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["gizlilik", "dosya"],
     settings,
 

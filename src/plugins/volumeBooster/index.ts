@@ -39,7 +39,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "VolumeBooster",
     description: "Kullanıcı ve yayın sesini varsayılan üst sınırın üstüne çıkarmanı sağlar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["ses"],
     settings,
     requiresRestart: true,

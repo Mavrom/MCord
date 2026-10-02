@@ -56,7 +56,7 @@ const channelMenu: ContextMenuPatch = (children, { channel }) => {
 export default definePlugin({
     name: "MessageLogger",
     description: "Silinen mesajları yerelde görünür tutar; düzenleme geçmişini mesajın yanında gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "kalite-yasam"],
     settings,
     dependencies: ["ContextMenuAPI", "MessageAccessoriesAPI"],

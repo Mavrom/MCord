@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "Experiments",
     description: "Discord'un deney ve geliştirici ayar sayfalarına erişimi açar",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["geliştirici", "deneysel"],
 
     patches: [

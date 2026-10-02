@@ -85,7 +85,7 @@ function Indicator() {
 export default definePlugin({
     name: "ServerListIndicators",
     description: "Sunucu listesinin üstünde çevrimiçi arkadaş veya sunucu sayısını gösterir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["sunucu", "görünüm"],
     dependencies: ["ServerListAPI"],
     settings,

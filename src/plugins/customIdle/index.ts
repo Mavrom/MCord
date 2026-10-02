@@ -28,7 +28,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "CustomIdle",
     description: "Discord'un otomatik boşa geçme süresini değiştirir veya kapatır",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["durum", "özelleştirme"],
     dependencies: ["NoticesAPI"],
     settings,

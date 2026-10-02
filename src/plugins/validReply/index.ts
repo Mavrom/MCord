@@ -17,7 +17,7 @@ let replyStore: any = null;
 export default definePlugin({
     name: "ValidReply",
     description: "Yüklenemedi görünen yanıtlanan mesajı üzerine gelince yeniden getirir",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "yardımcı"],
 
     patches: [

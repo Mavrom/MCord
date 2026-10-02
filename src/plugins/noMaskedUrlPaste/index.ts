@@ -10,7 +10,7 @@ import { definePlugin } from "../../utils/types";
 export default definePlugin({
     name: "NoMaskedUrlPaste",
     description: "Seçili metnin üstüne bağlantı yapıştırınca maskeli bağlantı oluşturulmasını engeller",
-    authors: [Devs.Berk],
+    authors: [Devs.Mavrom],
     tags: ["mesaj", "bağlantı"],
 
     patches: [{
