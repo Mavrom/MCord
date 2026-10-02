@@ -1,22 +1,55 @@
 name: Release
 
+# main'e kod değişikliği gelince otomatik yayın. Sürüm scripts/nextVersion.mjs
+# ile hesaplanır: son etiketin patch'i +1; minor/major için package.json'u
+# elle yükselt. Etiketi bu workflow kendisi oluşturur — elle etiket push'lama.
 on:
   push:
-    tags:
-      - "v*"
+    branches: [main]
+    paths-ignore:
+      - "docs/**"
+      - "baselines/**"
+      - "metrics/**"
+      - "**.md"
+      - "LICENSE"
   workflow_dispatch:
-    inputs:
-      tag:
-        description: Yayınlanacak etiket (örn. v1.0.0)
-        required: true
-        type: string
 
 permissions:
   contents: write
 
+# Yayınlar sırayla — iki koşu aynı sürümü hesaplamasın.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
+  version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Bu commit zaten yayınlandıysa (yeniden koşu) sürüm boş kalır, yayın atlanır.
+      - name: Determine version
+        id: version
+        run: |
+          if git tag --points-at HEAD | grep -q '^v'; then
+            echo "HEAD zaten etiketli: $(git tag --points-at HEAD) — atlanıyor"
+            exit 0
+          fi
+          v=$(node scripts/nextVersion.mjs)
+          echo "Yayınlanacak sürüm: v$v"
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+
   release:
+    needs: version
+    if: needs.version.outputs.version != ''
     runs-on: windows-latest
+    env:
+      MCORD_VERSION: ${{ needs.version.outputs.version }}
     steps:
       - uses: actions/checkout@v4
 
@@ -26,6 +59,14 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
+
+      # VERSION sabiti build'de package.json'dan okunuyor; updater bunu
+      # etiketle karşılaştırdığı için ikisi aynı olmalı.
+      - name: Set version
+        run: |
+          npm pkg set version=$env:MCORD_VERSION
+          cd scripts/installer
+          npm pkg set version=$env:MCORD_VERSION
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -75,7 +116,8 @@ jobs:
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ inputs.tag || github.ref_name }}
+          tag_name: v${{ env.MCORD_VERSION }}
+          target_commitish: ${{ github.sha }}
           generate_release_notes: true
           files: |
             dist/MCordInstaller.exe
