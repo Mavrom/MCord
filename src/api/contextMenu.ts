@@ -85,6 +85,13 @@ export function removeGlobalContextMenuPatch(patch: ContextMenuPatch): boolean {
     return globalPatches.delete(patch);
 }
 
+/**
+ * Patch'lenmiş çocuk dizileri. Menü hem `openContextMenu` yolundan hem de
+ * `Menu` bileşeninin kendisinden (sunucu adı menüsü gibi popout'lar) geçebilir
+ * ve `Menu` her render'da çalışır; aynı diziye ikinci kez öğe eklenmesin.
+ */
+const patchedChildren = new WeakSet<object>();
+
 /** `ContextMenuAPI` plugin'i tarafından çağrılır. */
 export function _patchContextMenu(props: Record<string, any>): void {
     const navId = props.navId;
@@ -93,6 +100,8 @@ export function _patchContextMenu(props: Record<string, any>): void {
         logger.warn(`"${String(navId)}" bağlam menüsünün çocukları dizi değil; patch atlandı.`);
         return;
     }
+    if (patchedChildren.has(children)) return;
+    patchedChildren.add(children);
 
     const menuItemType = findMenuItemType(children);
 

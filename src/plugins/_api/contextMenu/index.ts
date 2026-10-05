@@ -8,6 +8,7 @@ import { _patchContextMenu } from "../../../api/contextMenu";
 import { Devs } from "../../../utils/constants";
 import { Logger } from "../../../utils/logger";
 import { definePlugin } from "../../../utils/types";
+import { GuildStore, SelectedGuildStore } from "../../../webpack/common";
 import { bySource } from "../../../webpack/filters";
 import { requireModule } from "../../../webpack/finder";
 import { factoryListeners, wreq } from "../../../webpack/intercept";
@@ -81,6 +82,34 @@ export default definePlugin({
     description: "Plugin'lerin Discord bağlam menülerine öğe eklemesini sağlar",
     authors: [Devs.MCord],
     required: true,
+
+    patches: [{
+        find: "Menu API only allows Items",
+        reason: "Sunucu adı menüsü gibi popout'lar `openContextMenu` yerine `Menu` bileşenini doğrudan çiziyor; oradan geçen menüler de patch'lenmeli.",
+        replacement: {
+            match: /(?<=function \i\((\i)\)\{)(?=let\{navId:)/,
+            replace: (_m: string, props: string) => `$self.patchMenuProps(${props});`
+        }
+    }],
+
+    /**
+     * `Menu` bileşeninden çağrılır. Popout menülerin `guild` gibi kaynak
+     * özellikleri yok; sunucu adı menüsü için seçili sunucuyu ekliyoruz.
+     */
+    patchMenuProps(props: Record<string, any>): void {
+        try {
+            if (typeof props?.navId !== "string" || !Array.isArray(props.children)) return;
+
+            const menuProps = { ...props };
+            if (props.navId === "guild-header-popout" || props.navId === "favorites-header-popout") {
+                const guildId = SelectedGuildStore?.getGuildId?.();
+                menuProps.guild = guildId != null ? GuildStore?.getGuild?.(guildId) : undefined;
+            }
+            _patchContextMenu(menuProps);
+        } catch (err) {
+            logger.error("Menü bileşeni patch'i uygulanamadı:\n", err);
+        }
+    },
 
     start() {
         let bound = false;
