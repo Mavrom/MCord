@@ -81,28 +81,38 @@ function guildHasHiddenChannels(guildId: string): boolean {
     return Object.values<any>(channels).some(channel => plugin.isHiddenChannel(channel));
 }
 
-const guildMenu: ContextMenuPatch = (children, props) => {
-    const guildId: string | undefined = props?.guild?.id;
-    if (!guildId || !guildHasHiddenChannels(guildId)) return;
-
-    const enabled = !isGuildDisabled(guildId);
+/**
+ * Onay kutusu öğesi. Discord popout menünün çocuk listesini önbellekte tutabiliyor;
+ * bu yüzden tıklama açılıştaki değil **canlı** ayara bakıyor ve öğe, durum
+ * değişince listedeki yerinde güncelleniyor (yoksa kutu eski işaretle kalıyordu).
+ */
+function makeToggleItem(guildId: string, container: any[]): React.ReactElement {
     const item = (
         <Menu.MenuCheckboxItem
             id="mcord-shc-toggle"
             key="mcord-shc-toggle"
             label="Gizli Kanalları Göster"
-            checked={enabled}
+            checked={!isGuildDisabled(guildId)}
             action={() => {
-                setGuildEnabled(guildId, !enabled);
+                setGuildEnabled(guildId, isGuildDisabled(guildId));
+
+                const index = container.indexOf(item);
+                if (index !== -1) container[index] = makeToggleItem(guildId, container);
+
                 ContextMenuApi?.closeContextMenu?.();
             }}
         />
     );
+    return item;
+}
+
+const guildMenu: ContextMenuPatch = (children, props) => {
+    const guildId: string | undefined = props?.guild?.id;
+    if (!guildId || !guildHasHiddenChannels(guildId)) return;
 
     // "Sust. Kanalları Gizle" ile aynı grupta, altına.
-    const group = findGroupChildrenByChildId("hide-muted-channels", children);
-    if (group) group.push(item);
-    else children.push(item);
+    const container = findGroupChildrenByChildId("hide-muted-channels", children) ?? children;
+    container.push(makeToggleItem(guildId, container));
 };
 
 function hasPermission(permission: bigint | undefined, channel: any): boolean {
