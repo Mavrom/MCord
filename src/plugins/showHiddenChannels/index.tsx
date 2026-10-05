@@ -4,11 +4,12 @@
  * SPDX-License-Identifier: PolyForm-Strict-1.0.0
  */
 
+import { type ContextMenuPatch, findGroupChildrenByChildId } from "../../api/contextMenu";
 import { definePluginSettings } from "../../api/settings";
 import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin, OptionType } from "../../utils/types";
-import { ChannelStore, PermissionsBits, PermissionStore } from "../../webpack/common";
+import { ChannelStore, ContextMenuApi, getFluxDispatcher, Menu, PermissionsBits, PermissionStore } from "../../webpack/common";
 import { findLazy } from "../../webpack/lazy";
 
 const logger = new Logger("ShowHiddenChannels", "#a6d189");
@@ -36,6 +37,11 @@ function getIconClass(): string | undefined {
 const VOICE_TYPES = new Set([2, 13]);
 
 const settings = definePluginSettings({
+    disabledGuilds: {
+        type: OptionType.CUSTOM,
+        description: "Gizli kanalların gösterilmediği sunucuların kimlikleri",
+        default: [] as string[]
+    },
     showVoiceChannels: {
         type: OptionType.BOOLEAN,
         description: "Gizli ses kanallarını da göster",
@@ -48,6 +54,56 @@ const settings = definePluginSettings({
         restartNeeded: true
     }
 });
+
+function isGuildDisabled(guildId: string): boolean {
+    const list = settings.store.disabledGuilds;
+    return Array.isArray(list) && list.includes(guildId);
+}
+
+/** Bu sunucuda gizli kanalları aç/kapat ve kanal listesini yeniden hesaplat. */
+function setGuildEnabled(guildId: string, enabled: boolean): void {
+    const current: string[] = Array.isArray(settings.store.disabledGuilds) ? settings.store.disabledGuilds : [];
+    const next = current.filter(id => id !== guildId);
+    if (!enabled) next.push(guildId);
+    settings.store.disabledGuilds = next;
+
+    // Kanal listesi (ChannelListStore) yalnız Flux olaylarında yeniden kuruluyor;
+    // sunucunun kanal satırlarını geçersiz kılmak için aynı kayıtla CHANNEL_UPDATES gönder.
+    const channels = ChannelStore.getMutableGuildChannelsForGuild?.(guildId);
+    const first = channels ? Object.values<any>(channels)[0] : null;
+    if (first) getFluxDispatcher()?.dispatch({ type: "CHANNEL_UPDATES", channels: [first] });
+}
+
+/** Sunucuda, kullanıcının göremediği en az bir kanal var mı. */
+function guildHasHiddenChannels(guildId: string): boolean {
+    const channels = ChannelStore.getMutableGuildChannelsForGuild?.(guildId);
+    if (!channels) return false;
+    return Object.values<any>(channels).some(channel => plugin.isHiddenChannel(channel));
+}
+
+const guildMenu: ContextMenuPatch = (children, props) => {
+    const guildId: string | undefined = props?.guild?.id;
+    if (!guildId || !guildHasHiddenChannels(guildId)) return;
+
+    const enabled = !isGuildDisabled(guildId);
+    const item = (
+        <Menu.MenuCheckboxItem
+            id="mcord-shc-toggle"
+            key="mcord-shc-toggle"
+            label="Gizli Kanalları Göster"
+            checked={enabled}
+            action={() => {
+                setGuildEnabled(guildId, !enabled);
+                ContextMenuApi?.closeContextMenu?.();
+            }}
+        />
+    );
+
+    // "Sust. Kanalları Gizle" ile aynı grupta, altına.
+    const group = findGroupChildrenByChildId("hide-muted-channels", children);
+    if (group) group.push(item);
+    else children.push(item);
+};
 
 function hasPermission(permission: bigint | undefined, channel: any): boolean {
     return permission != null && PermissionStore.can(permission, channel);
@@ -91,13 +147,15 @@ function HiddenChannelNotice({ channel }: { channel: any }) {
  * ya hiç listelenmiyor ya da adsız geliyordu. Vencord gibi render seviyesi
  * hesabına ve etrafındaki tüketicilere kod patch'i atıyoruz.
  */
-export default definePlugin({
+const plugin = definePlugin({
     name: "ShowHiddenChannels",
     description: "Görme iznin olmayan kanalların adını ve sırasını kanal listesinde gösterir",
     authors: [Devs.Mavrom],
     tags: ["ui", "kanal"],
     settings,
     requiresRestart: true,
+    dependencies: ["ContextMenuAPI"],
+    contextMenus: { "guild-context": guildMenu, "guild-header-popout": guildMenu },
 
     patches: [
         {
@@ -335,10 +393,14 @@ export default definePlugin({
         }
     ],
 
-    /** Yalnız ses gizleme ayarı kapalıyken gizli ses/sahne kanallarını listeden tamamen çıkarır. */
+    /**
+     * Gizli kanalı listeden tamamen çıkarır: sunucuda gizli kanallar kapatıldıysa
+     * ya da ses gizleme ayarı kapalıyken ses/sahne kanalıysa.
+     */
     shouldSkipChannel(channel: any): boolean {
-        if (settings.store.showVoiceChannels) return false;
-        return this.isHiddenChannel(channel) && VOICE_TYPES.has(channel.type);
+        if (!this.isHiddenChannel(channel)) return false;
+        if (channel.guild_id != null && isGuildDisabled(channel.guild_id)) return true;
+        return !settings.store.showVoiceChannels && VOICE_TYPES.has(channel.type);
     },
 
     isHiddenChannel(channel: any, checkConnect = false): boolean {
@@ -401,3 +463,5 @@ export default definePlugin({
 function isUncategorized(objChannel: { channel: any; comparator: number; }): boolean {
     return objChannel.channel.id === "null" && objChannel.channel.name === "Uncategorized" && objChannel.comparator === -1;
 }
+
+export default plugin;

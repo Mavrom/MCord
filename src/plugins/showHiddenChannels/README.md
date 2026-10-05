@@ -22,6 +22,12 @@ gizli kanalları hiç listelemiyordu). Bu sürüm:
 > Sunucu bir kanalın adını hiç göndermiyorsa istemci bunu gösteremez; plugin
 > yalnız istemci tarafı gizlemeyi kaldırır.
 
+## Sunucu başına aç/kapat
+
+Görme iznin olmayan kanalı bulunan sunucularda, sunucu adına basınca (ya da sunucu
+sağ tık menüsünde) **Gizli Kanalları Göster** onay kutusu çıkar. Ayar her sunucu
+için ayrıdır (`disabledGuilds`); birinde kapatmak diğerlerini etkilemez.
+
 ## Ayarlar (değişince yeniden başlatma gerekir)
 
 | Ayar | Tür | Varsayılan | Açıklama |
