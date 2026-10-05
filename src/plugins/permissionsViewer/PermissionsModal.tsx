@@ -5,7 +5,7 @@
  */
 
 import { c, radius, s, shadow, space } from "../../components/theme";
-import { ChannelStore, GuildMemberStore, GuildRoleStore, PermissionsBits, PermissionStore, UserStore } from "../../webpack/common";
+import { ChannelStore, GuildMemberStore, GuildRoleStore, GuildStore, PermissionsBits, PermissionStore, UserStore, UserUtils } from "../../webpack/common";
 import { getReactDOMClient, React } from "../../webpack/react";
 import {
     listPermissions,
@@ -24,8 +24,12 @@ export type View =
 
 const ALL_BITS = (): Record<string, bigint> => (PermissionsBits ?? {}) as Record<string, bigint>;
 
+/** Discord'un güncel `GuildRoleStore`'unda `getRoles` yok; `getUnsafeMutableRoles` var. */
 function getRoles(guildId: string): RoleLike[] {
-    const roles = GuildRoleStore?.getRoles?.(guildId) ?? {};
+    const roles = GuildRoleStore?.getUnsafeMutableRoles?.(guildId)
+        ?? GuildRoleStore?.getRoles?.(guildId)
+        ?? GuildStore?.getRoles?.(guildId)
+        ?? {};
     return Object.values<any>(roles);
 }
 
@@ -97,6 +101,41 @@ function RoleTag({ role }: { role: RoleLike }) {
     );
 }
 
+/** Üye etiketi: önbellekte yoksa kullanıcıyı Discord'dan çekip yeniden çizer. */
+function UserTag({ userId, guildId }: { userId: string; guildId: string }) {
+    const [user, setUser] = React.useState<any>(() => UserStore.getUser(userId));
+
+    React.useEffect(() => {
+        if (user != null) return;
+        let cancelled = false;
+        void Promise.resolve(UserUtils.getUser(userId))
+            .then(fetched => { if (!cancelled) setUser(fetched); })
+            .catch(() => undefined);
+        return () => { cancelled = true; };
+    }, [userId]);
+
+    const nick = GuildMemberStore?.getMember?.(guildId, userId)?.nick;
+    const name = nick ?? user?.globalName ?? user?.username ?? `Bilinmeyen üye (${userId})`;
+
+    return (
+        <span
+            style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+                padding: "2px 8px",
+                borderRadius: radius.pill,
+                fontSize: "12px",
+                color: c.text,
+                border: `1px solid ${c.border}`,
+                background: c.surfaceRaised
+            }}
+        >
+            👤 {name}
+        </span>
+    );
+}
+
 function Wrap({ children }: { children: React.ReactNode }) {
     return <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>{children}</div>;
 }
@@ -126,10 +165,9 @@ function ChannelView({ channelId }: { channelId: string }) {
     const entries = Object.values(overwrites)
         .map(overwrite => {
             const role = overwrite.type === 0 ? roles.find(r => r.id === overwrite.id) : undefined;
-            const user = overwrite.type === 1 ? UserStore.getUser(overwrite.id) : undefined;
             return {
                 overwrite,
-                label: role?.name ?? (overwrite.id === guildId ? "@everyone" : user?.username ?? overwrite.id),
+                label: role?.name ?? (overwrite.id === guildId ? "@everyone" : `Silinmiş rol (${overwrite.id})`),
                 kind: overwrite.type === 1 ? "Üye" : "Rol",
                 role
             };
@@ -151,9 +189,7 @@ function ChannelView({ channelId }: { channelId: string }) {
                         <Wrap>
                             {viewers.roles.map(role => <RoleTag key={role.id} role={role} />)}
                             {memberViewers.map(overwrite => (
-                                <span key={overwrite.id} style={{ ...s.muted, fontSize: "12px" }}>
-                                    👤 {UserStore.getUser(overwrite.id)?.username ?? overwrite.id}
-                                </span>
+                                <UserTag key={overwrite.id} userId={overwrite.id} guildId={guildId} />
                             ))}
                             {viewers.roles.length === 0 && memberViewers.length === 0 && (
                                 <span style={s.muted}>Yalnızca yöneticiler.</span>
@@ -182,7 +218,11 @@ function ChannelView({ channelId }: { channelId: string }) {
                             style={{ display: "flex", flexDirection: "column", gap: "6px", padding: space.md, borderRadius: radius.md, background: c.surfaceRaised }}
                         >
                             <div style={{ color: c.heading, fontWeight: 600, display: "flex", gap: space.sm, alignItems: "center" }}>
-                                {role ? <RoleTag role={role} /> : label}
+                                {role
+                                    ? <RoleTag role={role} />
+                                    : overwrite.type === 1
+                                        ? <UserTag userId={overwrite.id} guildId={guildId} />
+                                        : label}
                                 <span style={{ ...s.faint }}>{kind}</span>
                             </div>
                             <Wrap>
