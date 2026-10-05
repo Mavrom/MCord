@@ -9,12 +9,28 @@ import { Devs } from "../../utils/constants";
 import { Logger } from "../../utils/logger";
 import { definePlugin, OptionType } from "../../utils/types";
 import { ChannelStore, PermissionsBits, PermissionStore } from "../../webpack/common";
-import { findByPropsLazy } from "../../webpack/lazy";
+import { findLazy } from "../../webpack/lazy";
 
 const logger = new Logger("ShowHiddenChannels", "#a6d189");
 
-/** Kanal listesi satırının hashed CSS sınıfları (`icon` kilit ikonu için). */
-const ChannelListClasses: any = findByPropsLazy("modeSelected", "modeMuted", "unread", "icon");
+/**
+ * Kanal listesi satırının hashed CSS sınıfları (`icon__xxxx` kilit ikonu için).
+ *
+ * Export anahtarları küçültülmüş (`Kk`, `J1`…), sınıf adları **değer** olarak
+ * duruyor; bu yüzden değerlere göre aranıyor. Bulunamazsa ikon sınıfsız çizilir.
+ */
+const ChannelListClasses = findLazy((m: any) =>
+    m != null && typeof m === "object"
+    && Object.values(m).some(v => typeof v === "string" && v.startsWith("modeSelected__")));
+
+function getIconClass(): string | undefined {
+    try {
+        return Object.values(ChannelListClasses as object)
+            .find((v): v is string => typeof v === "string" && v.startsWith("icon__"));
+    } catch {
+        return undefined;
+    }
+}
 
 /** Ses/sahne kanalı tipleri (GUILD_VOICE, GUILD_STAGE_VOICE). */
 const VOICE_TYPES = new Set([2, 13]);
@@ -370,7 +386,7 @@ export default definePlugin({
 
     LockIcon: () => (
         <svg
-            className={ChannelListClasses?.icon}
+            className={getIconClass()}
             height="18"
             width="20"
             viewBox="0 0 24 24"

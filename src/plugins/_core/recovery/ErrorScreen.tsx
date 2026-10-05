@@ -83,6 +83,23 @@ export function ErrorScreen(props: ErrorScreenProps) {
 
     const stack = `${error?.stack ?? String(error)}\n\nComponent stack:${componentStack}`;
 
+    const [copied, setCopied] = React.useState(false);
+    const copyError = async () => {
+        const report = [
+            `MCord ${VERSION} (${COMMIT_HASH})`,
+            attribution.plugins.length > 0
+                ? `Muhtemel sorumlu: ${attribution.plugins.join(", ")} (${attribution.source})`
+                : null,
+            "",
+            stack
+        ].filter(line => line != null).join("\n");
+
+        if (await copyText(report)) {
+            setCopied(true);
+            window.setTimeout(() => setCopied(false), 2000);
+        }
+    };
+
     return (
         <div style={styles.panel}>
             <strong>MCord bir render hatası yakaladı.</strong>
@@ -102,6 +119,9 @@ export function ErrorScreen(props: ErrorScreenProps) {
                 >
                     {expanded ? "Detayları Gizle" : "Hata Detayları"}
                 </button>
+                <button style={{ ...styles.button, ...styles.secondary }} onClick={() => void copyError()}>
+                    {copied ? "Kopyalandı ✓" : "Hatayı Kopyala"}
+                </button>
                 <button
                     style={{ ...styles.button, ...styles.secondary }}
                     onClick={() => void openExternal(buildIssueUrl(error, attribution))}
@@ -118,6 +138,31 @@ export function ErrorScreen(props: ErrorScreenProps) {
             )}
         </div>
     );
+}
+
+/**
+ * Panoya yazar. `navigator.clipboard` odak/izin yüzünden reddedilebiliyor
+ * (hata ekranında sayfa odağı genelde yok); o zaman gizli textarea + `execCommand`.
+ */
+async function copyText(text: string): Promise<boolean> {
+    try {
+        await navigator.clipboard.writeText(text);
+        return true;
+    } catch {
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.style.position = "fixed";
+        area.style.opacity = "0";
+        document.body.appendChild(area);
+        area.select();
+        try {
+            return document.execCommand("copy");
+        } catch {
+            return false;
+        } finally {
+            area.remove();
+        }
+    }
 }
 
 /** Ön doldurulmuş GitHub issue'su (plan §8.4). */
