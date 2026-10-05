@@ -1,38 +1,34 @@
 # ShowHiddenChannels
 
-Görme iznin olmayan kanalları kanal listesinde gösterir.
+Görme iznin olmayan kanalların **adını ve sırasını** kanal listesinde gösterir.
+Kanalın içeriği yüklenmez; açınca kilit ikonlu sade bir bilgi ekranı görünür.
 
 ## Nasıl çalışır
 
-**Kod patch'i kullanmaz.** Kanal listesi görünürlüğü `PermissionStore.can`
-sonucuna bağlıdır; bu fonksiyon webpack üzerinden erişilebilir olduğundan
-`after` patch'i yeterli (plan §5.1 — varsayılan fonksiyon patch'i).
+Vencord'un `ShowHiddenChannels` plugin'inin portudur (kilit ekranı sadeleştirildi).
 
-`VIEW_CHANNEL` (1 << 10) izni için `false` dönen çağrılarda `true` döndürülür ve
-kanal kimliği oturum içi bir sete kaydedilir.
+Güncel Discord kanal listesini `ChannelListStore` içindeki `renderLevel`
+hesabından üretiyor ve izin kontrolü orada kod seviyesinde yapılıyor.
+`PermissionStore.can` sonucunu değiştirmek bu yüzden yetmiyordu (eski sürüm
+gizli kanalları hiç listelemiyordu). Bu sürüm:
 
-`blockNavigation` açıkken gizli bir kanala tıklamak `selectChannel` üzerinde
-`instead` patch'i ile engellenir; sunucu 403 döndürüp arayüzü bozmaz.
+- `renderLevel` hesabındaki izin dallarını kaldırır → kanallar kendi sırasında listelenir;
+- listede kilit ikonu gösterir, okunmamış göstergesini gizler;
+- gizli kanala bağlanmayı / mesaj çekmeyi (403) / kısayolla atlamayı engeller;
+- gizli kanalın sayfasında içerik yerine bilgi ekranı çizer;
+- Discord'un özel kanal adlarını istemcide gizleyen deneyini
+  (`2026-02-private-channel-hiding`) kapatır.
 
-## Bilinçli kapsam dışı
+> Sunucu bir kanalın adını hiç göndermiyorsa istemci bunu gösteremez; plugin
+> yalnız istemci tarafı gizlemeyi kaldırır.
 
-**Kilit ikonu, gri stil ve izin listesi paneli** bu sürümde yok. Bunlar kanal
-listesi bileşenine kod patch'i gerektiriyor; plan §5.1'in
-"kod patch'i sadece fonksiyon patch'inin yetmediği yerde" kuralı gereği ve
-"az ve sağlam" küratörlük ilkesi (plan §6.6) uyarınca v1'de eklenmedi.
-
-Pratik sonuç: gizli kanallar listede normal kanallar gibi görünür, ama
-tıklandığında uyarı verilir.
-
-## Ayarlar
+## Ayarlar (değişince yeniden başlatma gerekir)
 
 | Ayar | Tür | Varsayılan | Açıklama |
 |---|---|---|---|
 | `showVoiceChannels` | BOOLEAN | `true` | Gizli ses kanallarını da göster |
-| `blockNavigation` | BOOLEAN | `true` | Gizli kanala girmeyi engelle |
+| `hideUnreads` | BOOLEAN | `true` | Gizli kanallarda okunmamış göstergesini gizle |
 
 ## Reporter testi
 
-`findByKeys("can", "canWithPartialContext")` ve
-`findByKeys("selectChannel", "selectVoiceChannel")` aramaları reporter'ın
-**Bad Webpack Finds** doğrulamasına girer.
+Tüm patch'ler reporter'ın **Bad Patches** doğrulamasına girer.
